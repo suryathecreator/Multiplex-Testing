@@ -78,6 +78,8 @@ import zmq
 from fastapi.responses import ORJSONResponse
 from packaging import version as pkg_version
 from PIL import Image
+
+from sglang.srt.runtime_compat import cpu_has_amx_support as runtime_cpu_has_amx_support
 from starlette.routing import Mount
 from torch import nn
 from torch.func import functional_call
@@ -214,7 +216,7 @@ except:
 
 
 def cpu_has_amx_support():
-    return torch._C._cpu._is_amx_tile_supported() and is_intel_amx_backend_available
+    return runtime_cpu_has_amx_support(torch, is_intel_amx_backend_available)
 
 
 def use_intel_amx_backend(layer):

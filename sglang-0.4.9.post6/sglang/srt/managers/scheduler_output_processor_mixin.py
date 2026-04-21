@@ -143,7 +143,11 @@ class SchedulerOutputProcessorMixin:
                     # ==========
                     # begin of soft thinking
                     # ==========
-                    if self.enable_soft_thinking:
+                    if (
+                        req.enable_soft_thinking
+                        and logits_output.topk_probs is not None
+                        and logits_output.topk_indices is not None
+                    ):
                         req.update_topk_info(logits_output, i)   
                     # ==========
                     # end of soft thinking
@@ -298,7 +302,11 @@ class SchedulerOutputProcessorMixin:
             # ==========
             # begin of soft thinking
             # ==========
-            if self.enable_soft_thinking:
+            if (
+                req.enable_soft_thinking
+                and logits_output.topk_probs is not None
+                and logits_output.topk_indices is not None
+            ):
                 req.update_topk_info(logits_output, i)
             # ==========
             # end of soft thinking
@@ -692,7 +700,7 @@ class SchedulerOutputProcessorMixin:
                 # ==========
                 # begin of soft thinking
                 # ==========
-                if self.enable_soft_thinking:
+                if req.enable_soft_thinking:
                     topk_probs = req.get_output_topk_prob_list()
                     topk_indices = req.get_output_topk_idx_list()
 

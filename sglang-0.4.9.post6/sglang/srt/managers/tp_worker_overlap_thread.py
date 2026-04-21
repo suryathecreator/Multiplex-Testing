@@ -34,6 +34,7 @@ from sglang.srt.managers.io_struct import (
 )
 from sglang.srt.managers.schedule_batch import ModelWorkerBatch
 from sglang.srt.managers.tp_worker import TpModelWorker
+from sglang.srt.layers.vocab_parallel_embedding import MultiplexFidelityViolation
 from sglang.srt.server_args import ServerArgs
 from sglang.srt.utils import DynamicGradMode, get_compiler_backend
 from sglang.utils import get_exception_traceback
@@ -87,6 +88,43 @@ def resolve_future_topk_info(
 # end of soft thinking
 # ==========
 
+
+def resolve_think_end_token_id(
+    think_end_str: Optional[str],
+    primary_tokenizer,
+    fallback_tokenizer=None,
+) -> int:
+    if not think_end_str:
+        return -1
+
+    for tokenizer in (primary_tokenizer, fallback_tokenizer):
+        if tokenizer is None:
+            continue
+        encode = getattr(tokenizer, "encode", None)
+        if not callable(encode):
+            continue
+        try:
+            token_ids = encode(think_end_str, add_special_tokens=False)
+        except Exception as exc:
+            logger.warning(
+                "Failed to tokenize think_end_str=%r with %s: %s",
+                think_end_str,
+                type(tokenizer).__name__,
+                exc,
+            )
+            continue
+        if token_ids:
+            # Match scheduler/session code paths, which consistently use the last
+            # token of think_end_str when multi-token encodings occur.
+            return token_ids[-1]
+
+    logger.warning(
+        "Soft thinking is enabled but think_end_str=%r could not be tokenized; "
+        "post-thinking transition detection is disabled for this worker.",
+        think_end_str,
+    )
+    return -1
+
 class TpModelWorkerClient:
     """A tensor parallel model worker."""
 
@@ -132,8 +170,11 @@ class TpModelWorkerClient:
             self.enable_replacement = server_args.enable_replacement
             self.enable_gumbel_after_thinking = server_args.enable_gumbel_after_thinking
             self.think_end_str = server_args.think_end_str
-            # Tokenize think_end_str to get think_end_token_id
-            self.think_end_token_id = self.worker.model_runner.tokenizer.encode(self.think_end_str, add_special_tokens=False)[0] if self.think_end_str else -1
+            self.think_end_token_id = resolve_think_end_token_id(
+                self.think_end_str,
+                self.worker.tokenizer,
+                getattr(self.worker.model_runner, "tokenizer", None),
+            )
             self.after_thinking_temperature = server_args.after_thinking_temperature
             self.after_thinking_top_p = server_args.after_thinking_top_p
             self.after_thinking_top_k = server_args.after_thinking_top_k
@@ -203,6 +244,9 @@ class TpModelWorkerClient:
         try:
             with torch.get_device_module(self.device).stream(self.forward_stream):
                 self.forward_thread_func_()
+        except MultiplexFidelityViolation as exc:
+            logger.error("Multiplex fidelity violation in worker thread: %s", exc)
+            self.output_queue.put(exc)
         except Exception:
             traceback = get_exception_traceback()
             logger.error(f"TpModelWorkerClient hit an exception: {traceback}")
@@ -252,9 +296,15 @@ class TpModelWorkerClient:
                     # Reset soft_thinking_modes for matching sequences
                     sampling_info.soft_thinking_modes[update_mask] = False
                     
-                    # Reinitialize topk_probs and topk_indices as one-hot for matching sequences
-                    topk_probs[update_mask] = float('nan')
-                    topk_indices[update_mask] = -1
+                    # Transition out of multiplex mode by converting the emitted
+                    # </think> token into an explicit one-hot discrete decode state.
+                    # The old NaN/-1 sentinel path was never resolved anywhere in
+                    # this codebase, so it leaked invalid top-k tensors into the
+                    # next decode step and triggered downstream CUDA asserts.
+                    topk_probs[update_mask] = 0.0
+                    topk_indices[update_mask] = 0
+                    topk_probs[update_mask, 0] = 1.0
+                    topk_indices[update_mask, 0] = input_ids[update_mask].long()
             # ==========
             # end of soft thinking
             # ==========
@@ -299,9 +349,10 @@ class TpModelWorkerClient:
         This function is called to resolve the last batch result and
         wait for the current batch to be launched. Used in overlap mode.
         """
-        copy_done, logits_output, next_token_ids, can_run_cuda_graph = (
-            self.output_queue.get()
-        )
+        result = self.output_queue.get()
+        if isinstance(result, Exception):
+            raise result
+        copy_done, logits_output, next_token_ids, can_run_cuda_graph = result
 
         if launch_done is not None:
             launch_done.wait()

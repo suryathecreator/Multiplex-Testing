@@ -76,6 +76,8 @@ from sglang.srt.managers.io_struct import (
     EmbeddingReqInput,
     ExpertDistributionReq,
     ExpertDistributionReqOutput,
+    ForkReqInput,
+    ForkReqOutput,
     FlushCacheReqInput,
     FlushCacheReqOutput,
     GenerateReqInput,
@@ -169,6 +171,7 @@ class ReqState:
     # For soft thinking topk accumulation
     output_topk_probs_chunks: List = dataclasses.field(default_factory=list)
     output_topk_indices_chunks: List = dataclasses.field(default_factory=list)
+    last_output_topk_completion_tokens: int = 0
     input_token_ids_logprobs_idx: List = dataclasses.field(default_factory=list)
     output_token_ids_logprobs_val: List = dataclasses.field(default_factory=list)
     output_token_ids_logprobs_idx: List = dataclasses.field(default_factory=list)
@@ -372,6 +375,12 @@ class TokenizerManager:
         self.slow_down_communicator = _Communicator(
             self.send_to_scheduler, server_args.dp_size
         )
+        self.open_session_communicator = _Communicator(
+            self.send_to_scheduler, server_args.dp_size
+        )
+        self.fork_request_communicator = _Communicator(
+            self.send_to_scheduler, server_args.dp_size
+        )
         self.flush_cache_communicator = _Communicator(
             self.send_to_scheduler, server_args.dp_size
         )
@@ -404,6 +413,10 @@ class TokenizerManager:
                 ),
                 (AbortReq, self._handle_abort_req),
                 (OpenSessionReqOutput, self._handle_open_session_req_output),
+                (
+                    ForkReqOutput,
+                    self.fork_request_communicator.handle_recv,
+                ),
                 (
                     UpdateWeightFromDiskReqOutput,
                     self._handle_update_weights_from_disk_req_output,
@@ -1197,20 +1210,42 @@ class TokenizerManager:
 
         if obj.session_id is None:
             obj.session_id = uuid.uuid4().hex
-        elif obj.session_id in self.session_futures:
+        results = await self.open_session_communicator(obj)
+        if not results:
             return None
-
-        self.send_to_scheduler.send_pyobj(obj)
-
-        self.session_futures[obj.session_id] = asyncio.Future()
-        session_id = await self.session_futures[obj.session_id]
-        del self.session_futures[obj.session_id]
-        return session_id
+        if all(result.success for result in results):
+            return results[0].session_id
+        return None
 
     async def close_session(
         self, obj: CloseSessionReqInput, request: Optional[fastapi.Request] = None
     ):
         await self.send_to_scheduler.send_pyobj(obj)
+
+    async def fork_request(
+        self, obj: ForkReqInput, request: Optional[fastapi.Request] = None
+    ) -> ForkReqOutput:
+        self.auto_create_handle_loop()
+        results = await self.fork_request_communicator(obj)
+        if not results:
+            raise ValueError("No scheduler response received for fork_request.")
+
+        successful = [result for result in results if result.success]
+        if not successful:
+            return results[0]
+
+        first = successful[0]
+        for other in successful[1:]:
+            if (
+                other.branch_input_ids != first.branch_input_ids
+                or other.cacheable_input_ids != first.cacheable_input_ids
+                or other.uncached_tail_input_ids != first.uncached_tail_input_ids
+            ):
+                raise ValueError(
+                    "Inconsistent successful fork_request results across data-parallel ranks."
+                )
+
+        return first
 
     async def get_internal_state(self) -> List[Dict[Any, Any]]:
         req = GetInternalStateReq()
@@ -1492,22 +1527,37 @@ class TokenizerManager:
                 topk_probs = getattr(recv_obj, "output_topk_probs_list", None)
                 topk_indices = getattr(recv_obj, "output_topk_indices_list", None)
                 if topk_probs is not None and topk_indices is not None:
-                    cur_output_len = len(recv_obj.output_token_logprobs_val[i])
-                    # Append this incremental chunk to accumulated state
-                    state.output_topk_probs_chunks.append(
-                        topk_probs[i, :cur_output_len]
+                    output_token_logprobs_val = self._batch_entry_or_empty(
+                        getattr(recv_obj, "output_token_logprobs_val", None),
+                        i,
                     )
-                    state.output_topk_indices_chunks.append(
-                        topk_indices[i, :cur_output_len]
+                    cur_output_len = len(output_token_logprobs_val)
+                    completion_tokens = self._get_recv_obj_completion_tokens(
+                        recv_obj, i
                     )
-                    # Concatenate all chunks to get full history
-                    import torch
-                    meta_info["output_topk_probs_list"] = torch.cat(
-                        state.output_topk_probs_chunks, dim=0
-                    )
-                    meta_info["output_topk_indices_list"] = torch.cat(
-                        state.output_topk_indices_chunks, dim=0
-                    )
+                    if cur_output_len == 0:
+                        cur_output_len = max(
+                            completion_tokens
+                            - state.last_output_topk_completion_tokens,
+                            0,
+                        )
+                    state.last_output_topk_completion_tokens = completion_tokens
+                    # Append this incremental chunk to accumulated state.
+                    if cur_output_len > 0:
+                        state.output_topk_probs_chunks.append(
+                            topk_probs[i, :cur_output_len]
+                        )
+                        state.output_topk_indices_chunks.append(
+                            topk_indices[i, :cur_output_len]
+                        )
+                    if state.output_topk_probs_chunks and state.output_topk_indices_chunks:
+                        # Concatenate all chunks to get full history.
+                        meta_info["output_topk_probs_list"] = torch.cat(
+                            state.output_topk_probs_chunks, dim=0
+                        )
+                        meta_info["output_topk_indices_list"] = torch.cat(
+                            state.output_topk_indices_chunks, dim=0
+                        )
             # ==========
             # end of soft thinking topk handling
             # ==========
@@ -1559,6 +1609,23 @@ class TokenizerManager:
             if self.crash_dump_folder and state.finished and state.obj.log_metrics:
                 self.record_request_for_crash_dump(state, out_dict)
 
+    @staticmethod
+    def _batch_entry_or_empty(batch_values, recv_obj_index: int):
+        if batch_values is None:
+            return []
+        value = batch_values[recv_obj_index]
+        return [] if value is None else value
+
+    @staticmethod
+    def _get_recv_obj_completion_tokens(
+        recv_obj: Union[BatchStrOut, BatchTokenIDOut], recv_obj_index: int
+    ) -> int:
+        completion_tokens = getattr(recv_obj, "completion_tokens", None)
+        if completion_tokens is None:
+            return 0
+        value = completion_tokens[recv_obj_index]
+        return 0 if value is None else value
+
     def convert_logprob_style(
         self,
         meta_info: dict,
@@ -1569,22 +1636,24 @@ class TokenizerManager:
         recv_obj: BatchStrOut,
         recv_obj_index: int,
     ):
-        if recv_obj.input_token_logprobs_val is None:
-            return
+        input_token_logprobs_val = self._batch_entry_or_empty(
+            recv_obj.input_token_logprobs_val, recv_obj_index
+        )
+        input_token_logprobs_idx = self._batch_entry_or_empty(
+            recv_obj.input_token_logprobs_idx, recv_obj_index
+        )
+        output_token_logprobs_val = self._batch_entry_or_empty(
+            recv_obj.output_token_logprobs_val, recv_obj_index
+        )
+        output_token_logprobs_idx = self._batch_entry_or_empty(
+            recv_obj.output_token_logprobs_idx, recv_obj_index
+        )
 
-        if len(recv_obj.input_token_logprobs_val) > 0:
-            state.input_token_logprobs_val.extend(
-                recv_obj.input_token_logprobs_val[recv_obj_index]
-            )
-            state.input_token_logprobs_idx.extend(
-                recv_obj.input_token_logprobs_idx[recv_obj_index]
-            )
-        state.output_token_logprobs_val.extend(
-            recv_obj.output_token_logprobs_val[recv_obj_index]
-        )
-        state.output_token_logprobs_idx.extend(
-            recv_obj.output_token_logprobs_idx[recv_obj_index]
-        )
+        if input_token_logprobs_val:
+            state.input_token_logprobs_val.extend(input_token_logprobs_val)
+            state.input_token_logprobs_idx.extend(input_token_logprobs_idx)
+        state.output_token_logprobs_val.extend(output_token_logprobs_val)
+        state.output_token_logprobs_idx.extend(output_token_logprobs_idx)
         meta_info["input_token_logprobs"] = self.detokenize_logprob_tokens(
             state.input_token_logprobs_val,
             state.input_token_logprobs_idx,
@@ -1597,19 +1666,23 @@ class TokenizerManager:
         )
 
         if top_logprobs_num > 0:
-            if len(recv_obj.input_top_logprobs_val) > 0:
-                state.input_top_logprobs_val.extend(
-                    recv_obj.input_top_logprobs_val[recv_obj_index]
-                )
-                state.input_top_logprobs_idx.extend(
-                    recv_obj.input_top_logprobs_idx[recv_obj_index]
-                )
-            state.output_top_logprobs_val.extend(
-                recv_obj.output_top_logprobs_val[recv_obj_index]
+            input_top_logprobs_val = self._batch_entry_or_empty(
+                recv_obj.input_top_logprobs_val, recv_obj_index
             )
-            state.output_top_logprobs_idx.extend(
-                recv_obj.output_top_logprobs_idx[recv_obj_index]
+            input_top_logprobs_idx = self._batch_entry_or_empty(
+                recv_obj.input_top_logprobs_idx, recv_obj_index
             )
+            output_top_logprobs_val = self._batch_entry_or_empty(
+                recv_obj.output_top_logprobs_val, recv_obj_index
+            )
+            output_top_logprobs_idx = self._batch_entry_or_empty(
+                recv_obj.output_top_logprobs_idx, recv_obj_index
+            )
+            if input_top_logprobs_val:
+                state.input_top_logprobs_val.extend(input_top_logprobs_val)
+                state.input_top_logprobs_idx.extend(input_top_logprobs_idx)
+            state.output_top_logprobs_val.extend(output_top_logprobs_val)
+            state.output_top_logprobs_idx.extend(output_top_logprobs_idx)
             meta_info["input_top_logprobs"] = self.detokenize_top_logprobs_tokens(
                 state.input_top_logprobs_val,
                 state.input_top_logprobs_idx,
@@ -1622,18 +1695,30 @@ class TokenizerManager:
             )
 
         if token_ids_logprob is not None:
-            if len(recv_obj.input_token_ids_logprobs_val) > 0:
+            input_token_ids_logprobs_val = self._batch_entry_or_empty(
+                recv_obj.input_token_ids_logprobs_val, recv_obj_index
+            )
+            input_token_ids_logprobs_idx = self._batch_entry_or_empty(
+                recv_obj.input_token_ids_logprobs_idx, recv_obj_index
+            )
+            output_token_ids_logprobs_val = self._batch_entry_or_empty(
+                recv_obj.output_token_ids_logprobs_val, recv_obj_index
+            )
+            output_token_ids_logprobs_idx = self._batch_entry_or_empty(
+                recv_obj.output_token_ids_logprobs_idx, recv_obj_index
+            )
+            if input_token_ids_logprobs_val:
                 state.input_token_ids_logprobs_val.extend(
-                    recv_obj.input_token_ids_logprobs_val[recv_obj_index]
+                    input_token_ids_logprobs_val
                 )
                 state.input_token_ids_logprobs_idx.extend(
-                    recv_obj.input_token_ids_logprobs_idx[recv_obj_index]
+                    input_token_ids_logprobs_idx
                 )
             state.output_token_ids_logprobs_val.extend(
-                recv_obj.output_token_ids_logprobs_val[recv_obj_index]
+                output_token_ids_logprobs_val
             )
             state.output_token_ids_logprobs_idx.extend(
-                recv_obj.output_token_ids_logprobs_idx[recv_obj_index]
+                output_token_ids_logprobs_idx
             )
             meta_info["input_token_ids_logprobs"] = self.detokenize_top_logprobs_tokens(
                 state.input_token_ids_logprobs_val,
@@ -1794,9 +1879,13 @@ class TokenizerManager:
         state.event.set()
 
     def _handle_open_session_req_output(self, recv_obj):
-        self.session_futures[recv_obj.session_id].set_result(
-            recv_obj.session_id if recv_obj.success else None
-        )
+        if self.open_session_communicator._result_event is not None:
+            self.open_session_communicator.handle_recv(recv_obj)
+            return
+        if recv_obj.session_id in self.session_futures:
+            self.session_futures[recv_obj.session_id].set_result(
+                recv_obj.session_id if recv_obj.success else None
+            )
 
     def _handle_update_weights_from_disk_req_output(self, recv_obj):
         if self.server_args.dp_size == 1:

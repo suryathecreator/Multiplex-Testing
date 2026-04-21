@@ -454,6 +454,11 @@ class GenerateReqInput:
             log_metrics=self.log_metrics,
             modalities=self.modalities[i] if self.modalities else None,
             lora_path=self.lora_path[i] if self.lora_path is not None else None,
+            session_params=(
+                self.session_params[i]
+                if isinstance(self.session_params, list)
+                else self.session_params
+            ),
             custom_logit_processor=(
                 self.custom_logit_processor[i]
                 if self.custom_logit_processor is not None
@@ -1014,6 +1019,37 @@ class CloseSessionReqInput:
 class OpenSessionReqOutput:
     session_id: Optional[str]
     success: bool
+
+
+@dataclass
+class ForkReqInput:
+    session_id: str
+    parent_rid: str
+    child_count: int
+    child_rids: Optional[List[str]] = None
+    child_seeds: Optional[List[int]] = None
+    target_dp_rank: Optional[int] = None
+    allow_non_eot_branch: bool = False
+
+
+@dataclass
+class ForkReqOutput:
+    success: bool
+    message: str
+    session_id: str
+    parent_rid: str
+    child_count: int
+    child_rids: List[str]
+    child_seeds: List[int]
+    target_dp_rank: Optional[int]
+    branch_input_ids: List[int]
+    cacheable_input_ids: List[int]
+    uncached_tail_input_ids: List[int]
+    prompt_token_count: int
+    response_token_count: int
+    eot_token_id: Optional[int]
+    eot_output_index: int
+    cacheable_token_count: int
 
 
 @dataclass

@@ -49,20 +49,30 @@ def apply_torchao_config_to_model(
         quantize the model, e.g. int4wo-128 means int4 weight only quantization with group_size
         128
     """
-    # Lazy import to suppress some warnings
-    from torchao.quantization import (
-        float8_dynamic_activation_float8_weight,
-        float8_weight_only,
-        int4_weight_only,
-        int8_dynamic_activation_int8_weight,
-        int8_weight_only,
-        quantize_,
-    )
-    from torchao.quantization.observer import PerRow, PerTensor
-
     if torchao_config == "" or torchao_config is None:
         return model
-    elif "int8wo" in torchao_config:
+
+    # Lazy import to suppress some warnings and keep the default non-quantized path
+    # independent of optional torchao installation.
+    try:
+        from torchao.quantization import (
+            float8_dynamic_activation_float8_weight,
+            float8_weight_only,
+            int4_weight_only,
+            int8_dynamic_activation_int8_weight,
+            int8_weight_only,
+            quantize_,
+        )
+        from torchao.quantization.observer import PerRow, PerTensor
+    except ModuleNotFoundError as exc:
+        if exc.name and exc.name.split(".", 1)[0] == "torchao":
+            raise RuntimeError(
+                "torchao_config was requested but the optional 'torchao' package is not installed. "
+                "Either install torchao or leave torchao_config unset."
+            ) from exc
+        raise
+
+    if "int8wo" in torchao_config:
         quantize_(model, int8_weight_only(), filter_fn=filter_fn)
     elif "int8dq" in torchao_config:
         quantize_(model, int8_dynamic_activation_int8_weight(), filter_fn=filter_fn)

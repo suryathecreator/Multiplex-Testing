@@ -14,6 +14,7 @@ __pycache__/
 .Python
 build/
 slurm_logs/
+final_eval_outputs/
 develop-eggs/
 dist/
 downloads/
@@ -193,3 +194,7 @@ local-eval2/*
 .amltignore
 .vscode/
 .history/
+
+# Local scratch / research artifacts
+.codex
+2601.08808v1.pdf

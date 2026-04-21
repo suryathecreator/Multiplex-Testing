@@ -31,6 +31,45 @@ _is_cpu = is_cpu()
 
 logger = logging.getLogger(__name__)
 
+
+class MultiplexFidelityViolation(RuntimeError):
+    """Raised when multiplex state is internally inconsistent.
+
+    These runs should be aborted rather than silently repaired because
+    fidelity is more important than salvaging partial output.
+    """
+
+
+def validate_weighted_topk_inputs(
+    topk_probs: torch.Tensor,
+    topk_indices: torch.Tensor,
+    max_index: int,
+) -> torch.Tensor:
+    """Validate weighted top-k inputs before embedding lookup.
+
+    The multiplex path must not silently repair malformed rows. If invalid
+    top-k state appears, abort the run cleanly so the caller can skip the
+    entire evaluation rather than produce compromised results.
+    """
+
+    prob_sums = topk_probs.sum(dim=-1, keepdim=True)
+    invalid_rows = (
+        ~torch.isfinite(topk_probs).all(dim=-1)
+        | ~torch.isfinite(prob_sums.squeeze(-1))
+        | (prob_sums.squeeze(-1) <= 0)
+        | (topk_probs < 0).any(dim=-1)
+        | ((topk_indices < 0) | (topk_indices > max_index)).any(dim=-1)
+    )
+
+    if torch.any(invalid_rows):
+        invalid_count = int(invalid_rows.sum().item())
+        raise MultiplexFidelityViolation(
+            f"Detected {invalid_count} malformed weighted top-k row(s) before embedding lookup. "
+            "Aborting this run to preserve multiplex fidelity."
+        )
+
+    return topk_probs / torch.clamp(prob_sums, min=1e-8)
+
 def pad_vocab_size(vocab_size: int, pad_to: int = DEFAULT_VOCAB_PADDING_SIZE) -> int:
     """Pad the vocab size to the given value."""
     return ((vocab_size + pad_to - 1) // pad_to) * pad_to
@@ -500,12 +539,13 @@ class VocabParallelEmbedding(torch.nn.Module):
         # Validate inputs
         assert topk_probs is not None and topk_indices is not None, "topk_probs and topk_indices cannot be None"
         assert topk_probs.shape == topk_indices.shape, "topk_probs and topk_indices must have same shape."
- 
+
+        topk_probs = validate_weighted_topk_inputs(
+            topk_probs,
+            topk_indices,
+            self.num_embeddings - 1,
+        )
         topk_embeddings = self.quant_method.embedding(self, topk_indices.long())  # [B, K, D]
-        # Normalize probs to sum to 1.0 along last dim.
-        prob_sums = topk_probs.sum(dim=-1, keepdim=True)
-        prob_sums = torch.clamp(prob_sums, min=1e-8)
-        topk_probs = topk_probs / prob_sums # do norm here
         hidden_states = torch.sum(topk_probs.unsqueeze(-1) * topk_embeddings, dim=1, dtype=topk_embeddings.dtype)  # [B, D]
         return hidden_states
 
@@ -522,17 +562,18 @@ class VocabParallelEmbedding(torch.nn.Module):
         # Validate inputs
         assert topk_probs is not None and topk_indices is not None, "topk_probs and topk_indices cannot be None"
         assert topk_probs.shape == topk_indices.shape, "topk_probs and topk_indices must have same shape."
-        
+
+        topk_probs = validate_weighted_topk_inputs(
+            topk_probs,
+            topk_indices,
+            self.num_embeddings - 1,
+        )
         masked_indices, input_mask = self.get_masked_indices_and_mask(
             topk_indices,
             self.shard_indices.org_vocab_start_index,
             self.shard_indices.org_vocab_end_index,
         )
         topk_embeddings = self.quant_method.embedding(self, masked_indices.long())  # [B, K, D]
-        # Normalize probs to sum to 1.0 along last dim.
-        prob_sums = topk_probs.sum(dim=-1, keepdim=True)
-        prob_sums = torch.clamp(prob_sums, min=1e-8)
-        topk_probs = topk_probs / prob_sums # do norm here
         # Apply mask to embeddings
         topk_embeddings.masked_fill_(input_mask.unsqueeze(-1), 0)
         # Weighted sum

@@ -75,6 +75,13 @@ class Sampler(nn.Module):
             if crash_on_warnings():
                 raise ValueError("Detected errors during sampling! NaN in the logits.")
 
+        soft_thinking_active = (
+            enable_soft_thinking
+            and sampling_info.enable_soft_thinking
+            and sampling_info.soft_thinking_modes is not None
+            and bool(torch.any(sampling_info.soft_thinking_modes).item())
+        )
+
         if sampling_info.is_all_greedy:
             # Use torch.argmax if all requests use greedy sampling
             batch_next_token_ids = torch.argmax(logits, -1)
@@ -83,7 +90,7 @@ class Sampler(nn.Module):
             # ==========
             # begin of soft thinking
             # ==========
-            if enable_soft_thinking:
+            if soft_thinking_active:
                 raise ValueError("Soft thinking is not supported in greedy mode")
             # ==========
             # end of soft thinking
@@ -97,7 +104,7 @@ class Sampler(nn.Module):
                     # ==========
                     # begin of soft thinking
                     # ==========
-                    if enable_soft_thinking:
+                    if soft_thinking_active:
                         if sampling_info.enable_max_topk:  # deterministic: use torch.topk to select top-K tokens
                             soft_mask = sampling_info.soft_thinking_modes # Shape (B,)
                             top_ps = torch.where(soft_mask, sampling_info.top_ps, sampling_info.after_thinking_top_p)
@@ -234,68 +241,69 @@ class Sampler(nn.Module):
                                     min_p_mask = probs < min_p_thresholds
                                     probs.masked_fill_(min_p_mask, 0.0)
                                     probs = probs / probs.sum(dim=-1, keepdim=True)
-                                    # Slow path with Dirichlet / Gumbel noise
-                                    # Dirichlet
-                                    if not sampling_info.is_all_no_noise:
-                                        conc = probs[soft_mask] * dirichlet_alpha
-                                        conc = torch.clamp(conc, min=torch.finfo(conc.dtype).min)
-                                        gamma_dist = torch.distributions.Gamma(conc, torch.ones_like(conc))
-                                        gamma_samples = gamma_dist.sample()
-                                        probs_new = gamma_samples / gamma_samples.sum(dim=-1, keepdim=True)
-                                        probs[soft_mask] = probs_new
 
-                                    # Apply Gumbel-Softmax trick selectively
-                                    if enable_gumbel:
-                                        if enable_gumbel_after_thinking:
-                                            uniform_noise = torch.rand_like(logits)
-                                        else:
-                                            uniform_noise = torch.rand_like(logits[soft_mask])
-                                        uniform_noise.clamp_(min=1e-20, max=1.0 - 1e-7)
-                                        uniform_noise.log_()
-                                        uniform_noise.mul_(-1.0)
-                                        uniform_noise.log_()
-                                        uniform_noise.mul_(-1.0)
-                                        gumbel_noise = uniform_noise
-                                        del uniform_noise
+                                # Slow path with Dirichlet / Gumbel noise
+                                # Dirichlet
+                                if not sampling_info.is_all_no_noise:
+                                    conc = probs[soft_mask] * dirichlet_alpha
+                                    conc = torch.clamp(conc, min=torch.finfo(conc.dtype).min)
+                                    gamma_dist = torch.distributions.Gamma(conc, torch.ones_like(conc))
+                                    gamma_samples = gamma_dist.sample()
+                                    probs_new = gamma_samples / gamma_samples.sum(dim=-1, keepdim=True)
+                                    probs[soft_mask] = probs_new
 
-                                        if enable_gumbel_after_thinking:
-                                            log_probs = torch.log(torch.clamp(probs, min=1e-20))
-                                            gumbel_logits = (gumbel_noise + log_probs) / gumbel_tau
-                                        else:
-                                            log_probs = torch.log(torch.clamp(probs[soft_mask], min=1e-20))
-                                            gumbel_logits = (gumbel_noise + log_probs) / gumbel_tau
+                                # Apply Gumbel-Softmax trick selectively
+                                if enable_gumbel:
+                                    if enable_gumbel_after_thinking:
+                                        uniform_noise = torch.rand_like(logits)
+                                    else:
+                                        uniform_noise = torch.rand_like(logits[soft_mask])
+                                    uniform_noise.clamp_(min=1e-20, max=1.0 - 1e-7)
+                                    uniform_noise.log_()
+                                    uniform_noise.mul_(-1.0)
+                                    uniform_noise.log_()
+                                    uniform_noise.mul_(-1.0)
+                                    gumbel_noise = uniform_noise
+                                    del uniform_noise
 
-                                        gumbel_probs = torch.softmax(gumbel_logits, dim=-1)
+                                    if enable_gumbel_after_thinking:
+                                        log_probs = torch.log(torch.clamp(probs, min=1e-20))
+                                        gumbel_logits = (gumbel_noise + log_probs) / gumbel_tau
+                                    else:
+                                        log_probs = torch.log(torch.clamp(probs[soft_mask], min=1e-20))
+                                        gumbel_logits = (gumbel_noise + log_probs) / gumbel_tau
 
-                                        if enable_gumbel_after_thinking:
-                                            del probs
-                                            probs = gumbel_probs
-                                        else:
-                                            probs[soft_mask] = gumbel_probs
+                                    gumbel_probs = torch.softmax(gumbel_logits, dim=-1)
 
-                                    assert sampling_info.used_topk == sampling_info.max_topk
-                                    topk_indices = torch.multinomial(probs, num_samples=sampling_info.max_topk, replacement=enable_replacement)  # (B, k)
-                                    topk_probs = torch.gather(probs, dim=1, index=topk_indices)  # (B, k)
-                                    if enable_unweighting:
-                                        topk_probs = torch.ones_like(topk_probs,dtype=topk_probs.dtype,device=topk_probs.device)
-                                    topk_probs = topk_probs / topk_probs.sum(dim=-1, keepdim=True)
+                                    if enable_gumbel_after_thinking:
+                                        del probs
+                                        probs = gumbel_probs
+                                    else:
+                                        probs[soft_mask] = gumbel_probs
 
-                                    # orginal sampling (after thinking)
-                                    non_soft_mask = ~soft_mask
-                                    if torch.any(non_soft_mask):
-                                        try:
-                                            sampled_token_ids = torch.multinomial(probs, num_samples=1, dim=-1)
-                                        except TypeError:
-                                            sampled_token_ids = torch.multinomial(probs, num_samples=1)
+                                assert sampling_info.used_topk == sampling_info.max_topk
+                                topk_indices = torch.multinomial(probs, num_samples=sampling_info.max_topk, replacement=enable_replacement)  # (B, k)
+                                topk_probs = torch.gather(probs, dim=1, index=topk_indices)  # (B, k)
+                                if enable_unweighting:
+                                    topk_probs = torch.ones_like(topk_probs,dtype=topk_probs.dtype,device=topk_probs.device)
+                                topk_probs = topk_probs / topk_probs.sum(dim=-1, keepdim=True)
 
-                                        topk_probs[non_soft_mask] = 0.0
-                                        topk_indices[non_soft_mask] = 0
-                                        topk_probs[non_soft_mask, 0] = 1.0
-                                        topk_indices[non_soft_mask, 0] = sampled_token_ids[non_soft_mask].view(-1)
+                                # orginal sampling (after thinking)
+                                non_soft_mask = ~soft_mask
+                                if torch.any(non_soft_mask):
+                                    try:
+                                        sampled_token_ids = torch.multinomial(probs, num_samples=1, dim=-1)
+                                    except TypeError:
+                                        sampled_token_ids = torch.multinomial(probs, num_samples=1)
 
-                                    logits_output.topk_probs = topk_probs
-                                    logits_output.topk_indices = topk_indices
-                                    batch_next_token_ids = topk_indices[:, 0].to(torch.int32)
+                                    topk_probs[non_soft_mask] = 0.0
+                                    topk_indices[non_soft_mask] = 0
+                                    topk_probs[non_soft_mask, 0] = 1.0
+                                    topk_indices[non_soft_mask, 0] = sampled_token_ids[non_soft_mask].view(-1)
+
+                                logits_output.topk_probs = topk_probs
+                                logits_output.topk_indices = topk_indices
+                                batch_next_token_ids = topk_indices[:, 0].to(torch.int32)
                         # ==========
                         # end of soft thinking
                         # ==========
@@ -314,14 +322,86 @@ class Sampler(nn.Module):
                             check_nan=self.use_nan_detection,
                         )
                 elif global_server_args_dict["sampling_backend"] == "pytorch":
-                    # A slower fallback implementation with torch native operations.
-                    batch_next_token_ids = top_k_top_p_min_p_sampling_from_probs_torch(
-                        probs,
-                        sampling_info.top_ks,
-                        sampling_info.top_ps,
-                        sampling_info.min_ps,
-                        sampling_info.need_min_p_sampling,
-                    )
+                    # A slower fallback implementation with torch native
+                    # operations. When soft thinking is active we still need to
+                    # materialize multiplex top-k state, not just a single
+                    # sampled token, otherwise the next decode step falls back
+                    # to stale/synthetic top-k rows and can violate fidelity.
+                    if soft_thinking_active:
+                        soft_mask = sampling_info.soft_thinking_modes
+                        top_ps = torch.where(
+                            soft_mask,
+                            sampling_info.top_ps,
+                            sampling_info.after_thinking_top_p,
+                        )
+                        top_ks = torch.where(
+                            soft_mask,
+                            sampling_info.top_ks,
+                            sampling_info.after_thinking_top_k,
+                        )
+                        min_ps = torch.where(
+                            soft_mask,
+                            sampling_info.min_ps,
+                            sampling_info.after_thinking_min_p,
+                        )
+                        enable_unweighting = sampling_info.enable_unweighting
+                        enable_replacement = sampling_info.enable_replacement
+
+                        probs = top_k_renorm_prob(probs, top_ks)
+                        probs = top_p_renorm_prob(probs, top_ps)
+
+                        if (
+                            sampling_info.need_min_p_sampling
+                            or sampling_info.need_after_thinking_min_p_sampling
+                        ):
+                            max_prob = probs.max(dim=-1, keepdim=True).values
+                            min_p_thresholds = max_prob * min_ps.view(-1, 1)
+                            min_p_mask = probs < min_p_thresholds
+                            probs.masked_fill_(min_p_mask, 0.0)
+                            probs = probs / probs.sum(dim=-1, keepdim=True)
+
+                        assert sampling_info.used_topk == sampling_info.max_topk
+                        topk_indices = torch.multinomial(
+                            probs,
+                            num_samples=sampling_info.max_topk,
+                            replacement=enable_replacement,
+                        )
+                        topk_probs = torch.gather(probs, dim=1, index=topk_indices)
+                        if enable_unweighting:
+                            topk_probs = torch.ones_like(
+                                topk_probs,
+                                dtype=topk_probs.dtype,
+                                device=topk_probs.device,
+                            )
+                        topk_probs = topk_probs / topk_probs.sum(dim=-1, keepdim=True)
+
+                        non_soft_mask = ~soft_mask
+                        if torch.any(non_soft_mask):
+                            sampled_token_ids = top_k_top_p_min_p_sampling_from_probs_torch(
+                                probs,
+                                top_ks,
+                                top_ps,
+                                min_ps,
+                                sampling_info.need_after_thinking_min_p_sampling,
+                            )
+                            topk_probs[non_soft_mask] = 0.0
+                            topk_indices[non_soft_mask] = 0
+                            topk_probs[non_soft_mask, 0] = 1.0
+                            topk_indices[non_soft_mask, 0] = sampled_token_ids[
+                                non_soft_mask
+                            ].long()
+
+                        logits_output.topk_probs = topk_probs
+                        logits_output.topk_indices = topk_indices
+                        batch_next_token_ids = topk_indices[:, 0].to(torch.int32)
+                    else:
+                        batch_next_token_ids = top_k_top_p_min_p_sampling_from_probs_torch(
+                            probs,
+                            sampling_info.top_ks,
+                            sampling_info.top_ps,
+                            sampling_info.min_ps,
+                            sampling_info.need_min_p_sampling,
+                        )
                 else:
                     raise ValueError(
                         f"Invalid sampling backend: {global_server_args_dict['sampling_backend']}"

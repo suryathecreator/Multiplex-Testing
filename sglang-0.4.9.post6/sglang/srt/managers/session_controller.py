@@ -65,7 +65,12 @@ class Session:
         self.capacity_of_str_len = capacity_of_str_len
         self.req_nodes: Dict[str, SessionReqNode] = {}
 
-    def create_req(self, req: TokenizedGenerateReqInput, tokenizer):
+    def create_req(
+        self,
+        req: TokenizedGenerateReqInput,
+        tokenizer,
+        req_init_kwargs: Optional[dict] = None,
+    ):
         assert req.session_params is not None
         session_params = req.session_params
 
@@ -144,6 +149,7 @@ class Session:
             return_logprob=req.return_logprob,
             top_logprobs_num=req.top_logprobs_num,
             token_ids_logprob=req.token_ids_logprob,
+            **(req_init_kwargs or {}),
         )
         if last_req is not None:
             new_req.multimodal_inputs = last_req.multimodal_inputs
@@ -156,3 +162,9 @@ class Session:
             self.req_nodes[req.rid] = new_req_node
 
         return new_req
+
+    def get_req(self, rid: str) -> Optional[Req]:
+        req_node = self.req_nodes.get(rid)
+        if req_node is None:
+            return None
+        return req_node.req

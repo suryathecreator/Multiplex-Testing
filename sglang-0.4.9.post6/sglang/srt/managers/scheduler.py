@@ -73,6 +73,8 @@ from sglang.srt.managers.io_struct import (
     CloseSessionReqInput,
     ExpertDistributionReq,
     ExpertDistributionReqOutput,
+    ForkReqInput,
+    ForkReqOutput,
     FlushCacheReqInput,
     FlushCacheReqOutput,
     GetInternalStateReq,
@@ -549,6 +551,7 @@ class Scheduler(
                 (AbortReq, self.abort_request),
                 (OpenSessionReqInput, self.open_session),
                 (CloseSessionReqInput, self.close_session),
+                (ForkReqInput, self.fork_request),
                 (UpdateWeightFromDiskReqInput, self.update_weights_from_disk),
                 (InitWeightsUpdateGroupReqInput, self.init_weights_update_group),
                 (
@@ -1148,6 +1151,12 @@ class Scheduler(
         self,
         recv_req: TokenizedGenerateReqInput,
     ):
+        custom_params = recv_req.sampling_params.custom_params
+        disable_soft_thinking = isinstance(custom_params, dict) and custom_params.get(
+            "__disable_soft_thinking__", False
+        )
+        req_enable_soft_thinking = self.enable_soft_thinking and not disable_soft_thinking
+
         # Create a new request
         if (
             recv_req.session_params is None
@@ -1186,7 +1195,7 @@ class Scheduler(
                 # ==========
                 # begin of soft thinking
                 # ==========
-                enable_soft_thinking=self.enable_soft_thinking,
+                enable_soft_thinking=req_enable_soft_thinking,
                 max_topk=self.max_topk,
                 used_topk=self.used_topk,
                 enable_entropy_mask=self.enable_entropy_mask,
@@ -1231,7 +1240,39 @@ class Scheduler(
         else:
             # Create a new request from a previous session
             session = self.sessions[recv_req.session_params.id]
-            req = session.create_req(recv_req, self.tokenizer)
+            req = session.create_req(
+                recv_req,
+                self.tokenizer,
+                req_init_kwargs={
+                    "eos_token_ids": self.model_config.hf_eos_token_id,
+                    "data_parallel_rank": recv_req.data_parallel_rank,
+                    "vocab_size": self.model_config.vocab_size,
+                    "enable_soft_thinking": req_enable_soft_thinking,
+                    "max_topk": self.max_topk,
+                    "used_topk": self.used_topk,
+                    "enable_entropy_mask": self.enable_entropy_mask,
+                    "entropy_mask_threshold": self.entropy_mask_threshold,
+                    "early_stopping_entropy_threshold": self.early_stopping_entropy_threshold,
+                    "early_stopping_length_threshold": self.early_stopping_length_threshold,
+                    "dirichlet_alpha": self.dirichlet_alpha,
+                    "enable_gumbel": self.enable_gumbel,
+                    "enable_max_topk": self.enable_max_topk,
+                    "gumbel_tau": self.gumbel_tau,
+                    "enable_replacement": self.enable_replacement,
+                    "enable_gumbel_after_thinking": self.enable_gumbel_after_thinking,
+                    "enable_unweighting": self.enable_unweighting,
+                    "think_end_str": self.think_end_str,
+                    "think_end_token_id": (
+                        self.tokenizer.encode(self.think_end_str, add_special_tokens=False)[-1]
+                        if self.enable_soft_thinking and self.tokenizer is not None
+                        else None
+                    ),
+                    "after_thinking_temperature": self.after_thinking_temperature,
+                    "after_thinking_top_p": self.after_thinking_top_p,
+                    "after_thinking_top_k": self.after_thinking_top_k,
+                    "after_thinking_min_p": self.after_thinking_min_p,
+                },
+            )
             if isinstance(req.finished_reason, FINISH_ABORT):
                 self._add_request_to_queue(req)
                 return
@@ -2037,8 +2078,32 @@ class Scheduler(
     ):
         if batch.forward_mode.is_decode():
             self.process_batch_result_decode(batch, result, launch_done)
-            if self.server_args.enable_soft_thinking:
-                    batch.sampling_info.soft_thinking_modes = torch.stack([req.sampling_params.soft_thinking_mode for req in batch.reqs], dim=0)
+            if (
+                self.server_args.enable_soft_thinking
+                and batch.sampling_info is not None
+                and batch.sampling_info.soft_thinking_modes is not None
+            ):
+                device = batch.sampling_info.soft_thinking_modes.device
+                batch.sampling_info.soft_thinking_modes = torch.stack(
+                    [
+                        (
+                            req.sampling_params.soft_thinking_mode.to(
+                                device=device, dtype=torch.bool
+                            )
+                            if isinstance(req.sampling_params.soft_thinking_mode, torch.Tensor)
+                            else torch.tensor(
+                                bool(
+                                    req.enable_soft_thinking
+                                    and req.sampling_params.soft_thinking_mode
+                                ),
+                                dtype=torch.bool,
+                                device=device,
+                            )
+                        )
+                        for req in batch.reqs
+                    ],
+                    dim=0,
+                )
         elif batch.forward_mode.is_extend():
             self.process_batch_result_prefill(batch, result, launch_done)
         elif batch.forward_mode.is_idle():
@@ -2964,6 +3029,231 @@ class Scheduler(
             logger.warning(f"session id {session_id} does not exist, cannot delete.")
         else:
             del self.sessions[session_id]
+
+    def fork_request(self, recv_req: ForkReqInput):
+        session = self.sessions.get(recv_req.session_id)
+        if session is None:
+            return ForkReqOutput(
+                success=False,
+                message=f"session id {recv_req.session_id} does not exist",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=0,
+                response_token_count=0,
+                eot_token_id=None,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        parent_req = session.get_req(recv_req.parent_rid)
+        if parent_req is None:
+            return ForkReqOutput(
+                success=False,
+                message=f"parent rid {recv_req.parent_rid} does not exist in session {recv_req.session_id}",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=0,
+                response_token_count=0,
+                eot_token_id=None,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        if not parent_req.finished():
+            return ForkReqOutput(
+                success=False,
+                message=f"parent rid {recv_req.parent_rid} has not finished yet",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=parent_req.think_end_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        if recv_req.child_count <= 0:
+            return ForkReqOutput(
+                success=False,
+                message="child_count must be positive",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=parent_req.think_end_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        eot_token_id = parent_req.think_end_token_id
+        if eot_token_id is None or len(parent_req.output_ids) == 0:
+            return ForkReqOutput(
+                success=False,
+                message="parent request has no completed thinking trace to branch from",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=eot_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        if parent_req.output_ids[-1] != eot_token_id and not recv_req.allow_non_eot_branch:
+            return ForkReqOutput(
+                success=False,
+                message=(
+                    f"parent rid {recv_req.parent_rid} did not stop at the configured think-end token"
+                ),
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=eot_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        if recv_req.target_dp_rank is not None and not (
+            0 <= recv_req.target_dp_rank < self.dp_size
+        ):
+            return ForkReqOutput(
+                success=False,
+                message=f"target_dp_rank must be in [0, {self.dp_size - 1}]",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=eot_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        child_rids = recv_req.child_rids or [
+            f"{recv_req.parent_rid}-child-{i}" for i in range(recv_req.child_count)
+        ]
+        if len(child_rids) != recv_req.child_count:
+            return ForkReqOutput(
+                success=False,
+                message="child_rids length must match child_count when provided",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=eot_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        child_seeds = recv_req.child_seeds or []
+        if child_seeds and len(child_seeds) != recv_req.child_count:
+            return ForkReqOutput(
+                success=False,
+                message="child_seeds length must match child_count when provided",
+                session_id=recv_req.session_id,
+                parent_rid=recv_req.parent_rid,
+                child_count=recv_req.child_count,
+                child_rids=[],
+                child_seeds=[],
+                target_dp_rank=recv_req.target_dp_rank,
+                branch_input_ids=[],
+                cacheable_input_ids=[],
+                uncached_tail_input_ids=[],
+                prompt_token_count=len(parent_req.origin_input_ids),
+                response_token_count=len(parent_req.output_ids),
+                eot_token_id=eot_token_id,
+                eot_output_index=-1,
+                cacheable_token_count=0,
+            )
+
+        branch_input_ids = parent_req.origin_input_ids + parent_req.output_ids
+        cacheable_input_ids = branch_input_ids[:-1]
+        uncached_tail_input_ids = branch_input_ids[-1:]
+        if recv_req.allow_non_eot_branch and parent_req.output_ids[-1] != eot_token_id:
+            message = (
+                "Branch prefix prepared from the finished parent request without requiring a think-end token. "
+                "Child requests can reuse the cached radix prefix and only extend the uncached tail."
+            )
+        else:
+            message = (
+                "Branch prefix prepared from the finished parent request. "
+                "Child requests can reuse the cached radix prefix and only extend the uncached tail."
+            )
+
+        return ForkReqOutput(
+            success=True,
+            message=message,
+            session_id=recv_req.session_id,
+            parent_rid=recv_req.parent_rid,
+            child_count=recv_req.child_count,
+            child_rids=child_rids,
+            child_seeds=child_seeds,
+            target_dp_rank=recv_req.target_dp_rank,
+            branch_input_ids=branch_input_ids,
+            cacheable_input_ids=cacheable_input_ids,
+            uncached_tail_input_ids=uncached_tail_input_ids,
+            prompt_token_count=len(parent_req.origin_input_ids),
+            response_token_count=len(parent_req.output_ids),
+            eot_token_id=eot_token_id,
+            eot_output_index=len(parent_req.output_ids) - 1,
+            cacheable_token_count=len(cacheable_input_ids),
+        )
 
     def get_print_prefix(self):
         prefix = ""

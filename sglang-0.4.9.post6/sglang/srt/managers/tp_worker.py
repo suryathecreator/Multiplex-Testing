@@ -93,8 +93,12 @@ class TpModelWorker:
             req_to_token_pool=req_to_token_pool,
             token_to_kv_pool_allocator=token_to_kv_pool_allocator,
         )
+        # Initialize tokenizer/processor attributes eagerly so text-only and
+        # multimodal paths share the same attribute contract.
+        self.tokenizer = None
+        self.processor = None
         if server_args.skip_tokenizer_init:
-            self.tokenizer = self.processor = None
+            pass
         else:
             if self.model_config.is_multimodal:
                 self.processor = get_processor(
@@ -111,6 +115,10 @@ class TpModelWorker:
                     trust_remote_code=server_args.trust_remote_code,
                     revision=server_args.revision,
                 )
+        # Keep tokenizer ownership on the worker, but expose it on model_runner too for
+        # compatibility with downstream paths that still reach through model_runner.
+        self.model_runner.tokenizer = getattr(self, "tokenizer", None)
+        self.model_runner.processor = getattr(self, "processor", None)
         self.device = self.model_runner.device
 
         # Init nccl groups

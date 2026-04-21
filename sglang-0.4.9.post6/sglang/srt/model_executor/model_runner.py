@@ -1540,7 +1540,18 @@ class ModelRunner:
         # ==========
         # begin of soft thinking
         # ==========
-        if self.enable_soft_thinking:
+        batch_soft_thinking_active = (
+            self.enable_soft_thinking
+            and forward_batch.sampling_info is not None
+            and getattr(forward_batch.sampling_info, "soft_thinking_modes", None)
+            is not None
+            and bool(torch.any(forward_batch.sampling_info.soft_thinking_modes).item())
+        )
+        if (
+            batch_soft_thinking_active
+            and forward_batch.topk_probs is not None
+            and forward_batch.topk_indices is not None
+        ):
             return self.model.forward(
                 None, 
                 forward_batch.positions, 
