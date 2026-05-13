@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "944",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "There exists a unique positive integer $a$ for which the sum \\[U=\\sum_{n=1}^{2023}\\left\\lfloor\\dfrac{n^{2}-na}{5}\\right\\rfloor\\] is an integer strictly between $-1000$ and $1000$. For that unique $a$, find $a+U$.\n (Note that $\\lfloor x\\rfloor$ denotes the greatest integer that is less than or equal to $x$.)",
+      "problem_id": "aime-train-2023-I-10",
+      "problem_number": 10,
+      "prompt_index": 954,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 954,
+      "year": 2023
+    },
+    {
+      "aime_number": 2,
+      "answer": "024",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Let $\\omega = \\cos\\frac{2\\pi}{7} + i \\cdot \\sin\\frac{2\\pi}{7},$ where $i = \\sqrt{-1}.$ Find the value of the product\\[\\prod_{k=0}^6 \\left(\\omega^{3k} + \\omega^k + 1\\right).\\]",
+      "problem_id": "aime-train-2023-II-08",
+      "problem_number": 8,
+      "prompt_index": 967,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 967,
+      "year": 2023
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    954,
+    967
+  ],
+  "selection_seed": 4096
+}

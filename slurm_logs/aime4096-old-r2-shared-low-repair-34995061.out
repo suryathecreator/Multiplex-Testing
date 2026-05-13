@@ -1,0 +1,508 @@
+[cuda-smoke] loaded compiler module gcc/13.2.0
+[cuda-smoke] gcc=/sw/gcc/13.2.0/bin/gcc
+gcc (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] g++=/sw/gcc/13.2.0/bin/g++
+g++ (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] nvcc=/sw/cuda/12.8.1/bin/nvcc
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+[cuda-smoke] CUDA_HOME=/sw/cuda/12.8.1
+[cuda-smoke] CUDAHOSTCXX=/sw/gcc/13.2.0/bin/g++
+[cuda-smoke] NVCC_PREPEND_FLAGS=--compiler-bindir=/sw/gcc/13.2.0/bin 
+[cuda-smoke] FLASHINFER_WORKSPACE_BASE=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/flashinfer
+[cuda-smoke] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02/bundle_shared_low
+[cuda-smoke] fallback_configs=16:1:2:aggressive;16:1:2:aggressive;16:1:2:aggressive;16:1:2:aggressive
+[fallback] attempt=1 config=16:1:2:aggressive request_batch_size=16 prompts_per_rank=1 max_concurrent_prompts=2 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34995061.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validation failed
+[runtime] reason=failed to import managed runtime package 'tensordict':
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 48, in <module>
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py", line 6, in <module>
+    import tensordict._reductions
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_reductions.py", line 11, in <module>
+    from tensordict._lazy import LazyStackedTensorDict
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_lazy.py", line 38, in <module>
+    from tensordict._td import _SubTensorDict, _TensorDictKeysView, TensorDict
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_td.py", line 37, in <module>
+    from tensordict.base import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/base.py", line 59, in <module>
+    from tensordict._datasets import to_mds
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_datasets.py", line 12, in <module>
+    from tensordict.utils import is_non_tensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/utils.py", line 2511, in <module>
+    _lock_warn = assume_constant_result(_lock_warn)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/compiler/__init__.py", line 226, in assume_constant_result
+    import torch._dynamo
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/__init__.py", line 13, in <module>
+    from . import config, convert_frame, eval_frame, resume_execution
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/convert_frame.py", line 52, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/symbolic_convert.py", line 57, in <module>
+    from . import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/trace_rules.py", line 32, in <module>
+    from .variables import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/__init__.py", line 19, in <module>
+    from .base import VariableTracker
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/base.py", line 581, in <module>
+    from . import builder
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/builder.py", line 86, in <module>
+    from ..side_effects import SideEffects
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/side_effects.py", line 21, in <module>
+    from .codegen import PyCodegen
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/codegen.py", line 43, in <module>
+    from .variables.functions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/functions.py", line 71, in <module>
+    from torch.distributed.fsdp._fully_shard import _fsdp_param_group
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/__init__.py", line 1, in <module>
+    from ._flat_param import FlatParameter as FlatParameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_flat_param.py", line 33, in <module>
+    from ._fsdp_extensions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_fsdp_extensions.py", line 6, in <module>
+    from torch.distributed._shard.sharded_tensor.api import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/__init__.py", line 1, in <module>
+    from .api import _shard_tensor, load_with_process_group, shard_module, shard_parameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/api.py", line 9, in <module>
+    from torch.distributed._shard.sharded_tensor import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/__init__.py", line 8, in <module>
+    from .api import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/api.py", line 32, in <module>
+    from .reshard import reshard_local_shard, reshuffle_local_shard
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/reshard.py", line 13, in <module>
+    from torch.distributed.nn.functional import all_to_all, all_to_all_single
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/__init__.py", line 7, in <module>
+    from .api.remote_module import RemoteModule
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/api/remote_module.py", line 30, in <module>
+    instantiator.instantiate_non_scriptable_remote_module_template()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 156, in instantiate_non_scriptable_remote_module_template
+    return _do_instantiate_remote_module_template(generated_module_name, str_dict, True)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 90, in _do_instantiate_remote_module_template
+    _write(out_path, generated_code_text)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 74, in _write
+    with open(out_path, "w") as f:
+OSError: [Errno 122] Disk quota exceeded
+
+[runtime] provisioning or repairing scratch-managed runtime
+[runtime] pip_install=torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch==2.7.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (29 kB)
+Collecting torchvision==0.22.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torchvision-0.22.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (6.1 kB)
+Collecting torchaudio==2.7.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torchaudio-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting filelock (from torch==2.7.1)
+  Using cached filelock-3.25.2-py3-none-any.whl.metadata (2.0 kB)
+Collecting typing-extensions>=4.10.0 (from torch==2.7.1)
+  Using cached https://download.pytorch.org/whl/typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting sympy>=1.13.3 (from torch==2.7.1)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx (from torch==2.7.1)
+  Using cached networkx-3.4.2-py3-none-any.whl.metadata (6.3 kB)
+Collecting jinja2 (from torch==2.7.1)
+  Using cached https://download.pytorch.org/whl/jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting fsspec (from torch==2.7.1)
+  Using cached fsspec-2026.2.0-py3-none-any.whl.metadata (10 kB)
+ERROR: Could not install packages due to an OSError: ("Connection broken: OSError(122, 'Disk quota exceeded')", OSError(122, 'Disk quota exceeded'))
+
+Exception ignored in: <function _TemporaryFileCloser.__del__ at 0x14e3fb9caf80>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 466, in __del__
+    self.close()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 459, in close
+    self.file.close()
+OSError: [Errno 122] Disk quota exceeded
+[runtime] grouped install failed; retrying package-by-package for torch,torchvision,torchaudio: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-42568/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1', 'torchvision==0.22.1', 'torchaudio==2.7.1']' returned non-zero exit status 1.
+[runtime] pip_install=torch==2.7.1
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch==2.7.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (29 kB)
+Collecting filelock (from torch==2.7.1)
+  Using cached filelock-3.25.2-py3-none-any.whl.metadata (2.0 kB)
+Collecting typing-extensions>=4.10.0 (from torch==2.7.1)
+  Using cached https://download.pytorch.org/whl/typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting sympy>=1.13.3 (from torch==2.7.1)
+  Using cached sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+Collecting networkx (from torch==2.7.1)
+  Using cached networkx-3.4.2-py3-none-any.whl.metadata (6.3 kB)
+ERROR: Could not install packages due to an OSError: ("Connection broken: OSError(122, 'Disk quota exceeded')", OSError(122, 'Disk quota exceeded'))
+
+Exception ignored in: <function _TemporaryFileCloser.__del__ at 0x14fbeddf6f80>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 466, in __del__
+    self.close()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 459, in close
+    self.file.close()
+OSError: [Errno 122] Disk quota exceeded
+[runtime] removing failed managed runtime build root: /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-42568
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1180, in install_runtime_group_with_fallback
+    run_pip_install(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1143, in run_pip_install
+    subprocess.run(command, check=True)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-42568/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1986, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1784, in main
+    provision_managed_runtime(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1223, in provision_managed_runtime
+    install_runtime_group_with_fallback(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1192, in install_runtime_group_with_fallback
+    raise RuntimeError(
+RuntimeError: [runtime] unable to provision managed package 'torch' after pip install fallback: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-42568/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1']' returned non-zero exit status 1.
+[fallback] attempt=1 failed with exit_status=1; trying next fallback config if available
+[fallback] attempt=2 config=16:1:2:aggressive request_batch_size=16 prompts_per_rank=1 max_concurrent_prompts=2 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34995061.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1986, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1812, in main
+    log(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1663, in log
+    with log_file.open("a", encoding="utf-8") as fp:
+OSError: [Errno 122] Disk quota exceeded
+[fallback] attempt=2 failed with exit_status=1; trying next fallback config if available
+[fallback] attempt=3 config=16:1:2:aggressive request_batch_size=16 prompts_per_rank=1 max_concurrent_prompts=2 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34995061.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validation failed
+[runtime] reason=failed to import managed runtime package 'tensordict':
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 48, in <module>
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py", line 6, in <module>
+    import tensordict._reductions
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_reductions.py", line 11, in <module>
+    from tensordict._lazy import LazyStackedTensorDict
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_lazy.py", line 38, in <module>
+    from tensordict._td import _SubTensorDict, _TensorDictKeysView, TensorDict
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_td.py", line 37, in <module>
+    from tensordict.base import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/base.py", line 59, in <module>
+    from tensordict._datasets import to_mds
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/_datasets.py", line 12, in <module>
+    from tensordict.utils import is_non_tensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/utils.py", line 2511, in <module>
+    _lock_warn = assume_constant_result(_lock_warn)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/compiler/__init__.py", line 226, in assume_constant_result
+    import torch._dynamo
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/__init__.py", line 13, in <module>
+    from . import config, convert_frame, eval_frame, resume_execution
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/convert_frame.py", line 52, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/symbolic_convert.py", line 57, in <module>
+    from . import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/trace_rules.py", line 32, in <module>
+    from .variables import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/__init__.py", line 19, in <module>
+    from .base import VariableTracker
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/base.py", line 581, in <module>
+    from . import builder
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/builder.py", line 86, in <module>
+    from ..side_effects import SideEffects
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/side_effects.py", line 21, in <module>
+    from .codegen import PyCodegen
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/codegen.py", line 43, in <module>
+    from .variables.functions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/functions.py", line 71, in <module>
+    from torch.distributed.fsdp._fully_shard import _fsdp_param_group
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/__init__.py", line 1, in <module>
+    from ._flat_param import FlatParameter as FlatParameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_flat_param.py", line 33, in <module>
+    from ._fsdp_extensions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_fsdp_extensions.py", line 6, in <module>
+    from torch.distributed._shard.sharded_tensor.api import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/__init__.py", line 1, in <module>
+    from .api import _shard_tensor, load_with_process_group, shard_module, shard_parameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/api.py", line 9, in <module>
+    from torch.distributed._shard.sharded_tensor import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/__init__.py", line 8, in <module>
+    from .api import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/api.py", line 32, in <module>
+    from .reshard import reshard_local_shard, reshuffle_local_shard
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/reshard.py", line 13, in <module>
+    from torch.distributed.nn.functional import all_to_all, all_to_all_single
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/__init__.py", line 7, in <module>
+    from .api.remote_module import RemoteModule
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/api/remote_module.py", line 30, in <module>
+    instantiator.instantiate_non_scriptable_remote_module_template()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 156, in instantiate_non_scriptable_remote_module_template
+    return _do_instantiate_remote_module_template(generated_module_name, str_dict, True)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 90, in _do_instantiate_remote_module_template
+    _write(out_path, generated_code_text)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 74, in _write
+    with open(out_path, "w") as f:
+OSError: [Errno 122] Disk quota exceeded
+
+[runtime] provisioning or repairing scratch-managed runtime
+[runtime] pip_install=torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch==2.7.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (29 kB)
+ERROR: Could not install packages due to an OSError: [Errno 122] Disk quota exceeded
+
+[runtime] grouped install failed; retrying package-by-package for torch,torchvision,torchaudio: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-53065/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1', 'torchvision==0.22.1', 'torchaudio==2.7.1']' returned non-zero exit status 1.
+[runtime] pip_install=torch==2.7.1
+Looking in indexes: https://download.pytorch.org/whl/cu128
+Collecting torch==2.7.1
+  Using cached https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp310-cp310-manylinux_2_28_x86_64.whl.metadata (29 kB)
+ERROR: Could not install packages due to an OSError: ("Connection broken: OSError(122, 'Disk quota exceeded')", OSError(122, 'Disk quota exceeded'))
+
+Exception ignored in: <function _TemporaryFileCloser.__del__ at 0x14c92ebe6f80>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 466, in __del__
+    self.close()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/tempfile.py", line 459, in close
+    self.file.close()
+OSError: [Errno 122] Disk quota exceeded
+[runtime] removing failed managed runtime build root: /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-53065
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1180, in install_runtime_group_with_fallback
+    run_pip_install(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1143, in run_pip_install
+    subprocess.run(command, check=True)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-53065/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1986, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1784, in main
+    provision_managed_runtime(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1223, in provision_managed_runtime
+    install_runtime_group_with_fallback(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1192, in install_runtime_group_with_fallback
+    raise RuntimeError(
+RuntimeError: [runtime] unable to provision managed package 'torch' after pip install fallback: Command '['/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/bin/python', '-m', 'pip', 'install', '--upgrade', '--target', '/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/.py310-torch2_7_1_cu128-e97e9d3f4ecd.build-53065/site-packages', '--index-url', 'https://download.pytorch.org/whl/cu128', 'torch==2.7.1']' returned non-zero exit status 1.
+[fallback] attempt=3 failed with exit_status=1; trying next fallback config if available
+[fallback] attempt=4 config=16:1:2:aggressive request_batch_size=16 prompts_per_rank=1 max_concurrent_prompts=2 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34995061.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+[runtime] package=triton version=3.3.1 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton-3.3.1.dist-info
+[runtime] package=tensordict version=0.10.0 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict-0.10.0.dist-info
+[runtime] package=sgl-kernel version=0.2.8 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel-0.2.8.dist-info
+[runtime] package=flashinfer-python version=0.2.9rc2 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer_python-0.2.9rc2.dist-info
+[runtime] local_import=sglang origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[runtime] local_import=verl origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest/verl/__init__.py
+[runtime] local_import=transformers origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34995061/runtime-manifest.json
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1986, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1943, in main
+    installed_lightweight_requirements = bootstrap_runtime(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/bootstrap_runtime_overlay.py", line 1530, in bootstrap_runtime
+    raise RuntimeError(
+RuntimeError: [bootstrap] import preflight failed with a dependency/version/metadata error while importing 'sglang.srt.managers.tokenizer_manager', and no compatible repair requirement was inferred.
+Candidates tried: []
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 75, in <module>
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 54, in <module>
+    from sglang.srt.configs.model_config import ModelConfig
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/configs/__init__.py", line 3, in <module>
+    from sglang.srt.configs.deepseekvl2 import DeepseekVL2Config
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/configs/deepseekvl2.py", line 8, in <module>
+    from transformers import (
+  File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/import_utils.py", line 2276, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/import_utils.py", line 2306, in _get_module
+    raise e
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/import_utils.py", line 2304, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/auto/processing_auto.py", line 27, in <module>
+    from ...image_processing_utils import ImageProcessingMixin
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/image_processing_utils.py", line 22, in <module>
+    from .image_transforms import center_crop, normalize, rescale
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/image_transforms.py", line 22, in <module>
+    from .image_utils import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/image_utils.py", line 59, in <module>
+    from torchvision.transforms import InterpolationMode
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py", line 10, in <module>
+    from torchvision import _meta_registrations, datasets, io, models, ops, transforms, utils  # usort:skip
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/models/__init__.py", line 2, in <module>
+    from .convnext import *
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/models/convnext.py", line 8, in <module>
+    from ..ops.misc import Conv2dNormActivation, Permute
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/ops/__init__.py", line 23, in <module>
+    from .poolers import MultiScaleRoIAlign
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/ops/poolers.py", line 10, in <module>
+    from .roi_align import roi_align
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/ops/roi_align.py", line 7, in <module>
+    from torch._dynamo.utils import is_compile_supported
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/__init__.py", line 13, in <module>
+    from . import config, convert_frame, eval_frame, resume_execution
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/convert_frame.py", line 52, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/symbolic_convert.py", line 57, in <module>
+    from . import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/trace_rules.py", line 32, in <module>
+    from .variables import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/__init__.py", line 19, in <module>
+    from .base import VariableTracker
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/base.py", line 581, in <module>
+    from . import builder
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/builder.py", line 86, in <module>
+    from ..side_effects import SideEffects
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/side_effects.py", line 21, in <module>
+    from .codegen import PyCodegen
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/codegen.py", line 43, in <module>
+    from .variables.functions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/_dynamo/variables/functions.py", line 71, in <module>
+    from torch.distributed.fsdp._fully_shard import _fsdp_param_group
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/__init__.py", line 1, in <module>
+    from ._flat_param import FlatParameter as FlatParameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_flat_param.py", line 33, in <module>
+    from ._fsdp_extensions import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/fsdp/_fsdp_extensions.py", line 6, in <module>
+    from torch.distributed._shard.sharded_tensor.api import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/__init__.py", line 1, in <module>
+    from .api import _shard_tensor, load_with_process_group, shard_module, shard_parameter
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/api.py", line 9, in <module>
+    from torch.distributed._shard.sharded_tensor import ShardedTensor
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/__init__.py", line 8, in <module>
+    from .api import (
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/api.py", line 32, in <module>
+    from .reshard import reshard_local_shard, reshuffle_local_shard
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/_shard/sharded_tensor/reshard.py", line 13, in <module>
+    from torch.distributed.nn.functional import all_to_all, all_to_all_single
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/__init__.py", line 7, in <module>
+    from .api.remote_module import RemoteModule
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/api/remote_module.py", line 30, in <module>
+    instantiator.instantiate_non_scriptable_remote_module_template()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 156, in instantiate_non_scriptable_remote_module_template
+    return _do_instantiate_remote_module_template(generated_module_name, str_dict, True)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 90, in _do_instantiate_remote_module_template
+    _write(out_path, generated_code_text)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/distributed/nn/jit/instantiator.py", line 74, in _write
+    with open(out_path, "w") as f:
+OSError: [Errno 122] Disk quota exceeded
+
+[fallback] attempt=4 failed with exit_status=1; trying next fallback config if available
+[fallback] all configs failed; final_exit_status=1

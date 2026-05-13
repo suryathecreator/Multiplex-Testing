@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "20",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Suppose that $|x_i| < 1$ for $i = 1, 2, \\dots, n$. Suppose further that $|x_1| + |x_2| + \\dots + |x_n| = 19 + |x_1 + x_2 + \\dots + x_n|.$ What is the smallest possible value of $n$?",
+      "problem_id": "aime-train-1988-I-04",
+      "problem_number": 4,
+      "prompt_index": 78,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 78,
+      "year": 1988
+    },
+    {
+      "aime_number": 1,
+      "answer": "142",
+      "difficulty": 2.5,
+      "order_index": 1,
+      "problem": "It is possible to place positive integers into the vacant twenty-one squares of the $5 \\times 5$ square shown below so that the numbers in each row and column form arithmetic sequences. Find the number that must occupy the vacant square marked by the asterisk (*).",
+      "problem_id": "aime-train-1988-I-06",
+      "problem_number": 6,
+      "prompt_index": 80,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 80,
+      "year": 1988
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    78,
+    80
+  ],
+  "selection_seed": 4096
+}

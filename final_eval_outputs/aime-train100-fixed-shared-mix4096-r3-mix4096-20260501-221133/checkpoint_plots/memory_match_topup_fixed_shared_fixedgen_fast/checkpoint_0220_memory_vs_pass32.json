@@ -1,0 +1,65 @@
+{
+  "checkpoint_prompt_rows": 220,
+  "summary_rows": [
+    {
+      "color": "#4C78A8",
+      "condition": "Fixed",
+      "marker": "o",
+      "mean_accuracy": 0.7906340288924558,
+      "mean_cost_tokens": 211736.07128678437,
+      "mean_prompt_rows_per_repeat": 73.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.042794655541520954,
+      "std_cost_tokens": 2472.8679787967703,
+      "total_prompt_rows": 220
+    },
+    {
+      "color": "#54A24B",
+      "condition": "Shared",
+      "marker": "^",
+      "mean_accuracy": 0.6231050472623506,
+      "mean_cost_tokens": 84256.54788211164,
+      "mean_prompt_rows_per_repeat": 73.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.03817155154945406,
+      "std_cost_tokens": 6504.363201576955,
+      "total_prompt_rows": 220
+    },
+    {
+      "color": "#E45756",
+      "condition": "Fixed + Shared",
+      "marker": "D",
+      "mean_accuracy": 0.7488764044943821,
+      "mean_cost_tokens": 150110.08334135902,
+      "mean_prompt_rows_per_repeat": 73.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.051694552192890035,
+      "std_cost_tokens": 3779.821712875654,
+      "total_prompt_rows": 220
+    },
+    {
+      "color": "#72B7B2",
+      "condition": "Shared + fixed top-up",
+      "marker": "v",
+      "mean_accuracy": 0.7587141073657927,
+      "mean_cost_tokens": 215131.98102639557,
+      "mean_prompt_rows_per_repeat": 73.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.012738286006627509,
+      "std_cost_tokens": 2370.49486505864,
+      "total_prompt_rows": 220
+    },
+    {
+      "color": "#B279A2",
+      "condition": "Fixed + Shared + fixed top-up",
+      "marker": "P",
+      "mean_accuracy": 0.780206884251828,
+      "mean_cost_tokens": 215099.04811574818,
+      "mean_prompt_rows_per_repeat": 73.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.036195769832063955,
+      "std_cost_tokens": 2610.884968242539,
+      "total_prompt_rows": 220
+    }
+  ]
+}

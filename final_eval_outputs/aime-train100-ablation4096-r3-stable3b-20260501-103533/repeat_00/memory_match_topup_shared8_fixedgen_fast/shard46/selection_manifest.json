@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "510",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "For integers $a,b,c$ and $d,$ let $f(x)=x^2+ax+b$ and $g(x)=x^2+cx+d.$ Find the number of ordered triples $(a,b,c)$ of integers with absolute values not exceeding $10$ for which there is an integer $d$ such that $g(f(2))=g(f(4))=0.$",
+      "problem_id": "aime-train-2020-I-11",
+      "problem_number": 11,
+      "prompt_index": 865,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 865,
+      "year": 2020
+    },
+    {
+      "aime_number": 2,
+      "answer": "103",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "The value of $x$ that satisfies $\\log_{2^x} 3^{20} = \\log_{2^{x+3}} 3^{2020}$ can be written as $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+      "problem_id": "aime-train-2020-II-03",
+      "problem_number": 3,
+      "prompt_index": 872,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 872,
+      "year": 2020
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    865,
+    872
+  ],
+  "selection_seed": 4096
+}

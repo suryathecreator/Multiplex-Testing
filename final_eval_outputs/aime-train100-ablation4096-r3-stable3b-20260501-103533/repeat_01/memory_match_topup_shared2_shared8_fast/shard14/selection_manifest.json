@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "495",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "Every positive integer $k$ has a unique factorial base expansion $(f_1,f_2,f_3,\\ldots,f_m)$, meaning that $k=1!\\cdot f_1+2!\\cdot f_2+3!\\cdot f_3+\\cdots+m!\\cdot f_m$, where each $f_i$ is an integer, $0\\le f_i\\le i$, and $0<f_m$. Given that $(f_1,f_2,f_3,\\ldots,f_j)$ is the factorial base expansion of $16!-32!+48!-64!+\\cdots+1968!-1984!+2000!$, find the value of $f_1-f_2+f_3-f_4+\\cdots+(-1)^{j+1}f_j$.",
+      "problem_id": "aime-train-2000-II-14",
+      "problem_number": 14,
+      "prompt_index": 283,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 283,
+      "year": 2000
+    },
+    {
+      "aime_number": 1,
+      "answer": "291",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "In triangle $ABC$, angles $A$ and $B$ measure $60$ degrees and $45$ degrees, respectively. The bisector of angle $A$ intersects $\\overline{BC}$ at $T$, and $AT=24$. The area of triangle $ABC$ can be written in the form $a+b\\sqrt{c}$, where $a$, $b$, and $c$ are positive integers, and $c$ is not divisible by the square of any prime. Find $a+b+c$.",
+      "problem_id": "aime-train-2001-I-04",
+      "problem_number": 4,
+      "prompt_index": 288,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 288,
+      "year": 2001
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    283,
+    288
+  ],
+  "selection_seed": 4096
+}

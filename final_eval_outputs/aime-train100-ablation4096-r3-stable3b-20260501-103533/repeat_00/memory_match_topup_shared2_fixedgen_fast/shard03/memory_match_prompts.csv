@@ -1,0 +1,5 @@
+group_size,topup_generator,topup_group_size,prompt_index,problem_id,target_cost_tokens,target_correct,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,completed_at_unix,compact_jsonl
+2,fixed,2,87,aime-train-1988-I-13,199544.0,True,157741.0,202992.0,True,True,7,39,True,completed,,1778075446.448373,True
+2,fixed,2,120,aime-train-1991-I-01,150583.0,True,86542.0,152340.0,True,True,14,46,True,completed,,1778077178.9839578,
+2,fixed,2,89,aime-train-1988-I-15,176335.0,False,110149.0,179288.0,False,False,13,45,True,completed,,1778077266.7879696,
+2,fixed,2,123,aime-train-1991-I-04,191790.0,True,122447.0,192713.0,True,True,11,43,True,completed,,1778078553.605408,

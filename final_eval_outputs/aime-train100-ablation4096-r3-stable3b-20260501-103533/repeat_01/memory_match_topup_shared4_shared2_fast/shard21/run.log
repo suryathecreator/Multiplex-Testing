@@ -1,0 +1,21 @@
+2026-05-10 02:58:22,976 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 02:58:22,977 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 02:58:22,977 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-10 02:58:25,207 INFO [setup] Restricted run to prompt indices: [390, 393]
+2026-05-10 02:58:27,197 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 02:58:27,198 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 02:58:27,281 INFO [setup] Starting the local SGLang server on 127.0.0.1:47121.
+2026-05-10 02:59:35,591 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-10 02:59:36,524 INFO [scheduler] Dispatching prompt 390 to DP rank 0.
+2026-05-10 02:59:36,525 INFO [scheduler] Dispatching prompt 393 to DP rank 1.
+2026-05-10 06:55:48,312 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 06:55:48,326 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 06:55:48,326 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-10 06:55:50,877 INFO [setup] Restricted run to prompt indices: [390, 393]
+2026-05-10 06:55:53,330 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 06:55:53,330 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 06:55:53,405 INFO [setup] Starting the local SGLang server on 127.0.0.1:47121.
+2026-05-10 06:57:13,813 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-10 06:57:15,272 INFO [scheduler] Dispatching prompt 390 to DP rank 0.
+2026-05-10 06:57:15,274 INFO [scheduler] Dispatching prompt 393 to DP rank 1.
+2026-05-10 07:12:15,973 INFO [setup] Finished memory-match top-up in 0:16:29 (989.1s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared4_shared2_fast/shard21/summary_memory_match.md.

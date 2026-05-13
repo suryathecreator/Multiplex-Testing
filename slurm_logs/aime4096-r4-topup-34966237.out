@@ -1,0 +1,293 @@
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34966237.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+[runtime] package=triton version=3.3.1 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton-3.3.1.dist-info
+[runtime] package=tensordict version=0.10.0 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict-0.10.0.dist-info
+[runtime] package=sgl-kernel version=0.2.8 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel-0.2.8.dist-info
+[runtime] package=flashinfer-python version=0.2.9rc2 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer_python-0.2.9rc2.dist-info
+[runtime] local_import=sglang origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[runtime] local_import=verl origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest/verl/__init__.py
+[runtime] local_import=transformers origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/runtime-manifest.json
+[bootstrap] runtime import preflight succeeded
+[runtime-tool] linked executable ninja from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja to /mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/bin/ninja
+[bootstrap] no additional lightweight packages were needed
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/runtime-manifest.json
+[setup] runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[setup] runtime_manifest=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/runtime-manifest.json
+[setup] runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[setup] job_overlay_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/job-overlay
+[setup] job_bin_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/bin
+[setup] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[setup] flashinfer_workspace_base=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/flashinfer
+[setup] job_overlay_bin=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34966237/job-overlay/bin
+[setup] lightweight_overlay_bin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin
+[setup] ninja_path=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja
+/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[setup] import=torch version=2.7.1+cu128 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py
+[setup] import=tensordict version=0.10.0 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py
+[setup] import=sglang version=0.4.9.post6 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[setup] import=transformers version=4.54.0 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[setup] optional_import=verl status=missing
+[setup] scratch_cache_root=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking
+[setup] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04/memory_match_topup
+[setup] run_tag=aime4096-r4-topup
+[setup] slurm_job_gpus=6,7
+[setup] cuda_visible_devices=0,1
+[setup] requested_launch_config experiment_mode=memory_match_topup benchmark=deepscaler_aime_train methods=baseline,shared_trace seed=409604 port=31044 dp_size=2 tp_size=1 max_k=32 max_prompts=100 prompt_indices=all max_new_tokens=8192 reasoning_prefix_token_values=256,512,1024,2048,4096,6144 branch_ablation_reasoning_prefix_tokens=4096 branch_ablation_group_sizes=2,4,8,16,32 branch_ablation_no_baseline=1 adaptive_ablation_shared_counts=2,4,6,8,10,12,14,16 adaptive_confidence_threshold=0.75 memory_match_source_root=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04 memory_match_shared_groups=2,4,8,16,32 hyperparam_reasoning_prefix_tokens=1024 hyperparam_top_p_values=0.75,0.85,0.90,0.95,1.00 hyperparam_temperature_values=0.4,0.6,0.8,1.0,1.2 checkpoint_matched_prompts_step=5 compact_jsonl=1 request_batch_size=32 resource_profile=auto throughput_profile=aggressive max_concurrent_prompts=4 prompts_per_rank=2 rank_scheduler=dynamic
+[setup] starting compare_passk_aime.py
+2026-05-01 00:05:39,584 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 00:05:39,584 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 00:05:39,584 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 00:05:39,586 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-05-01 00:05:45,169 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 00:05:45,169 INFO [setup] probing runtime candidate safe_current
+[2026-05-01 00:05:45] server_args=ServerArgs(model_path='Qwen/Qwen3-4B', tokenizer_path='Qwen/Qwen3-4B', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=False, context_length=None, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', host='127.0.0.1', port=31044, skip_server_warmup=True, warmups=None, nccl_port=None, dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', mem_fraction_static=0.778, max_running_requests=32, max_queued_requests=9223372036854775807, max_total_tokens=None, chunked_prefill_size=2048, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, hybrid_kvcache_ratio=None, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, device='cuda', tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=409604, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, sleep_on_idle=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, crash_dump_folder=None, show_time_cost=False, enable_metrics=False, enable_metrics_for_all_schedulers=False, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key='multiplex-local', served_model_name='Qwen/Qwen3-4B', chat_template=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser='qwen3', tool_call_parser=None, dp_size=2, load_balance_method='round_robin', dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, enable_lora=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend='triton', decode_attention_backend='triton', prefill_attention_backend='triton', sampling_backend='flashinfer', grammar_backend='none', mm_attention_backend=None, speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, ep_size=1, enable_ep_moe=False, enable_deepep_moe=False, enable_flashinfer_cutlass_moe=False, enable_flashinfer_trtllm_moe=False, enable_flashinfer_allreduce_fusion=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm='static', init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through_selective', hicache_io_backend='', hicache_storage_backend=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, cuda_graph_max_bs=None, cuda_graph_bs=None, disable_cuda_graph=True, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=False, enable_mscclpp=False, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_two_batch_overlap=False, enable_torch_compile=False, torch_compile_max_bs=32, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, enable_soft_thinking=True, think_end_str='</think>', max_topk=3, used_topk=3, enable_entropy_mask=False, entropy_mask_threshold=0.0, early_stopping_entropy_threshold=0.0, early_stopping_length_threshold=256, dirichlet_alpha=1e+20, enable_gumbel=False, enable_max_topk=False, gumbel_tau=1.0, enable_replacement=True, enable_gumbel_after_thinking=False, enable_unweighting=False, after_thinking_temperature=0.6, after_thinking_top_p=0.95, after_thinking_top_k=-1, after_thinking_min_p=0.0, flashinfer_mla_disable_ragged=False, disable_shared_experts_fusion=False, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, enable_return_hidden_states=False, enable_triton_kernel_moe=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, debug_tensor_dump_prefill_only=False, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_decode_tp=None, disaggregation_decode_dp=None, disaggregation_prefill_pp=1, disaggregation_ib_device=None, num_reserved_decode_tokens=512, pdlb_url=None, custom_weight_loader=[], weight_loader_disable_mmap=False, enable_pdmux=False, sm_group_num=3)
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-01 00:05:52] Launch DP0 starting at GPU #0.
+[2026-05-01 00:05:52] Launch DP1 starting at GPU #1.
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-01 00:05:59 DP0] Init torch distributed begin.
+[2026-05-01 00:05:59 DP1] Init torch distributed begin.
+[2026-05-01 00:06:00 DP0] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-01 00:06:00 DP1] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-01 00:06:01 DP1] Load weight begin. avail mem=44.11 GB
+[2026-05-01 00:06:01 DP0] Load weight begin. avail mem=44.11 GB
+[2026-05-01 00:06:03 DP1] Using model weights format ['*.safetensors']
+[2026-05-01 00:06:03 DP0] Using model weights format ['*.safetensors']
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:10<00:20, 10.02s/it]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:10<00:20, 10.24s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:10<00:04,  4.54s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:10<00:04,  4.63s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:21<00:00,  7.29s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:21<00:00,  7.34s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:21<00:00,  7.09s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:21<00:00,  7.17s/it]
+
+[2026-05-01 00:06:25 DP0] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-01 00:06:25 DP1] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-01 00:06:25 DP0] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-01 00:06:25 DP1] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-01 00:06:25 DP0] Memory pool end. avail mem=9.65 GB
+[2026-05-01 00:06:25 DP1] Memory pool end. avail mem=9.65 GB
+[2026-05-01 00:06:29 DP1] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=9.63 GB
+[2026-05-01 00:06:29 DP0] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=9.63 GB
+[2026-05-01 00:06:29] INFO:     Started server process [8111]
+[2026-05-01 00:06:29] INFO:     Waiting for application startup.
+[2026-05-01 00:06:29] The server is fired up and ready to roll!
+[2026-05-01 00:06:29] INFO:     Application startup complete.
+[2026-05-01 00:06:29] INFO:     Uvicorn running on http://127.0.0.1:31044 (Press CTRL+C to quit)
+[2026-05-01 00:06:29 DP0] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:06:34] INFO:     127.0.0.1:60106 - "GET /health_generate HTTP/1.1" 200 OK
+[2026-05-01 00:06:34 DP0] Cache flushed successfully!
+[2026-05-01 00:06:34 DP1] Cache flushed successfully!
+[2026-05-01 00:06:34] INFO:     127.0.0.1:60106 - "GET /flush_cache HTTP/1.1" 200 OK
+[2026-05-01 00:06:34] INFO:     127.0.0.1:43082 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-05-01 00:06:34 DP0] Prefill batch. #new-seq: 1, #new-token: 43, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:06:37] INFO:     127.0.0.1:43082 - "POST /generate HTTP/1.1" 200 OK
+2026-05-01 00:06:37,996 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38] INFO:     127.0.0.1:43082 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:38 DP0] Prefill batch. #new-seq: 3, #new-token: 27, #cached-token: 102, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:06:38 DP0] Prefill batch. #new-seq: 13, #new-token: 13, #cached-token: 546, token usage: 0.00, #running-req: 3, #queue-req: 0, 
+[2026-05-01 00:06:39 DP0] Decode batch. #running-req: 16, #token: 571, token usage: 0.00, cuda graph: False, gen throughput (token/s): 53.54, #queue-req: 0, 
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /generate HTTP/1.1" 200 OK
+/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/fastapi/routing.py:328: FastAPIDeprecationWarning: ORJSONResponse is deprecated, FastAPI now serializes data directly to JSON bytes via Pydantic when a return type or response model is set, which is faster and doesn't need a custom response class. Read more in the FastAPI docs: https://fastapi.tiangolo.com/advanced/custom-response/#orjson-or-response-model and https://fastapi.tiangolo.com/tutorial/response-model/
+  return await dependant.call(**values)
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40] INFO:     127.0.0.1:43082 - "POST /fork_request HTTP/1.1" 200 OK
+[2026-05-01 00:06:40 DP0] Prefill batch. #new-seq: 3, #new-token: 6, #cached-token: 318, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:06:40 DP0] Prefill batch. #new-seq: 13, #new-token: 26, #cached-token: 1378, token usage: 0.00, #running-req: 3, #queue-req: 0, 
+[2026-05-01 00:06:40 DP0] Decode batch. #running-req: 16, #token: 771, token usage: 0.00, cuda graph: False, gen throughput (token/s): 484.21, #queue-req: 0, 
+[2026-05-01 00:06:41 DP0] Decode batch. #running-req: 16, #token: 1411, token usage: 0.01, cuda graph: False, gen throughput (token/s): 600.95, #queue-req: 0, 
+[2026-05-01 00:06:42 DP0] Decode batch. #running-req: 13, #token: 1675, token usage: 0.01, cuda graph: False, gen throughput (token/s): 553.72, #queue-req: 0, 
+[2026-05-01 00:06:43 DP0] Decode batch. #running-req: 7, #token: 1237, token usage: 0.01, cuda graph: False, gen throughput (token/s): 327.82, #queue-req: 0, 
+[2026-05-01 00:06:45 DP0] Decode batch. #running-req: 6, #token: 1314, token usage: 0.01, cuda graph: False, gen throughput (token/s): 263.07, #queue-req: 0, 
+[2026-05-01 00:06:46 DP0] Decode batch. #running-req: 6, #token: 1554, token usage: 0.01, cuda graph: False, gen throughput (token/s): 225.97, #queue-req: 0, 
+[2026-05-01 00:06:47 DP0] Decode batch. #running-req: 6, #token: 1794, token usage: 0.01, cuda graph: False, gen throughput (token/s): 227.86, #queue-req: 0, 
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /generate HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47] INFO:     127.0.0.1:43082 - "POST /close_session HTTP/1.1" 200 OK
+[2026-05-01 00:06:47 DP1] Prefill batch. #new-seq: 10, #new-token: 430, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:06:48 DP1] Prefill batch. #new-seq: 6, #new-token: 6, #cached-token: 252, token usage: 0.00, #running-req: 10, #queue-req: 0, 
+[2026-05-01 00:06:50 DP1] Decode batch. #running-req: 16, #token: 683, token usage: 0.00, cuda graph: False, gen throughput (token/s): 30.50, #queue-req: 0, 
+[2026-05-01 00:06:51 DP1] Decode batch. #running-req: 16, #token: 1323, token usage: 0.01, cuda graph: False, gen throughput (token/s): 598.72, #queue-req: 0, 
+[2026-05-01 00:06:52 DP1] Decode batch. #running-req: 16, #token: 1963, token usage: 0.01, cuda graph: False, gen throughput (token/s): 609.93, #queue-req: 0, 
+[2026-05-01 00:06:53 DP1] Decode batch. #running-req: 16, #token: 2603, token usage: 0.01, cuda graph: False, gen throughput (token/s): 608.90, #queue-req: 0, 
+[2026-05-01 00:06:54 DP1] Decode batch. #running-req: 16, #token: 3243, token usage: 0.02, cuda graph: False, gen throughput (token/s): 613.28, #queue-req: 0, 
+[2026-05-01 00:06:55 DP1] Decode batch. #running-req: 16, #token: 3883, token usage: 0.02, cuda graph: False, gen throughput (token/s): 610.67, #queue-req: 0, 
+[2026-05-01 00:06:56] INFO:     127.0.0.1:43082 - "POST /generate HTTP/1.1" 200 OK
+2026-05-01 00:06:56,230 INFO [setup] selected runtime candidate safe_current (424.82 tok/s during startup probe)
+2026-05-01 00:06:56,230 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 00:06:56,230 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 00:06:56,230 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 00:06:56,551 INFO [setup] Starting the local SGLang server on 127.0.0.1:31044.
+[2026-05-01 00:06:56] server_args=ServerArgs(model_path='Qwen/Qwen3-4B', tokenizer_path='Qwen/Qwen3-4B', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=False, context_length=None, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', host='127.0.0.1', port=31044, skip_server_warmup=True, warmups=None, nccl_port=None, dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', mem_fraction_static=0.778, max_running_requests=32, max_queued_requests=9223372036854775807, max_total_tokens=None, chunked_prefill_size=2048, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, hybrid_kvcache_ratio=None, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, device='cuda', tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=409604, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, sleep_on_idle=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, crash_dump_folder=None, show_time_cost=False, enable_metrics=False, enable_metrics_for_all_schedulers=False, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key='multiplex-local', served_model_name='Qwen/Qwen3-4B', chat_template=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser='qwen3', tool_call_parser=None, dp_size=2, load_balance_method='round_robin', dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, enable_lora=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend='triton', decode_attention_backend='triton', prefill_attention_backend='triton', sampling_backend='flashinfer', grammar_backend='none', mm_attention_backend=None, speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, ep_size=1, enable_ep_moe=False, enable_deepep_moe=False, enable_flashinfer_cutlass_moe=False, enable_flashinfer_trtllm_moe=False, enable_flashinfer_allreduce_fusion=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm='static', init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through_selective', hicache_io_backend='', hicache_storage_backend=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, cuda_graph_max_bs=None, cuda_graph_bs=None, disable_cuda_graph=True, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=False, enable_mscclpp=False, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_two_batch_overlap=False, enable_torch_compile=False, torch_compile_max_bs=32, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, enable_soft_thinking=True, think_end_str='</think>', max_topk=3, used_topk=3, enable_entropy_mask=False, entropy_mask_threshold=0.0, early_stopping_entropy_threshold=0.0, early_stopping_length_threshold=256, dirichlet_alpha=1e+20, enable_gumbel=False, enable_max_topk=False, gumbel_tau=1.0, enable_replacement=True, enable_gumbel_after_thinking=False, enable_unweighting=False, after_thinking_temperature=0.6, after_thinking_top_p=0.95, after_thinking_top_k=-1, after_thinking_min_p=0.0, flashinfer_mla_disable_ragged=False, disable_shared_experts_fusion=False, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, enable_return_hidden_states=False, enable_triton_kernel_moe=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, debug_tensor_dump_prefill_only=False, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_decode_tp=None, disaggregation_decode_dp=None, disaggregation_prefill_pp=1, disaggregation_ib_device=None, num_reserved_decode_tokens=512, pdlb_url=None, custom_weight_loader=[], weight_loader_disable_mmap=False, enable_pdmux=False, sm_group_num=3)
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-01 00:07:07] Launch DP0 starting at GPU #0.
+[2026-05-01 00:07:07] Launch DP1 starting at GPU #1.
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-01 00:07:15 DP1] Init torch distributed begin.
+[2026-05-01 00:07:15 DP0] Init torch distributed begin.
+[2026-05-01 00:07:15 DP0] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-01 00:07:15 DP1] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-01 00:07:16 DP1] Load weight begin. avail mem=44.11 GB
+[2026-05-01 00:07:16 DP0] Load weight begin. avail mem=44.11 GB
+[2026-05-01 00:07:16 DP0] Using model weights format ['*.safetensors']
+[2026-05-01 00:07:16 DP1] Using model weights format ['*.safetensors']
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:05,  2.80s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.21s/it]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:05,  2.76s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.20s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.94s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.90s/it]
+
+[2026-05-01 00:07:22 DP0] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-01 00:07:22 DP0] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-01 00:07:22 DP0] Memory pool end. avail mem=9.65 GB
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.91s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.87s/it]
+
+[2026-05-01 00:07:22 DP1] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-01 00:07:22 DP1] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-01 00:07:22 DP1] Memory pool end. avail mem=9.65 GB
+[2026-05-01 00:07:23 DP0] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=9.63 GB
+[2026-05-01 00:07:23 DP1] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=9.63 GB
+[2026-05-01 00:07:23] INFO:     Started server process [26900]
+[2026-05-01 00:07:23] INFO:     Waiting for application startup.
+[2026-05-01 00:07:23] The server is fired up and ready to roll!
+[2026-05-01 00:07:23] INFO:     Application startup complete.
+[2026-05-01 00:07:23] INFO:     Uvicorn running on http://127.0.0.1:31044 (Press CTRL+C to quit)
+[2026-05-01 00:07:24 DP0] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:07:26] INFO:     127.0.0.1:55948 - "GET /health_generate HTTP/1.1" 200 OK
+[2026-05-01 00:07:26 DP0] Cache flushed successfully!
+[2026-05-01 00:07:26 DP1] Cache flushed successfully!
+[2026-05-01 00:07:26] INFO:     127.0.0.1:55948 - "GET /flush_cache HTTP/1.1" 200 OK
+[2026-05-01 00:07:26] INFO:     127.0.0.1:55958 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-05-01 00:07:26 DP0] Prefill batch. #new-seq: 1, #new-token: 43, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-01 00:07:27] INFO:     127.0.0.1:55958 - "POST /generate HTTP/1.1" 200 OK
+2026-05-01 00:07:27,303 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 00:07:27,490 ERROR [setup] Run aborted to preserve fidelity: Could not find condition directory 'shared_every_02' under /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9544, in main
+    experiment_summary = run_memory_match_topup_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 7270, in run_memory_match_topup_experiment
+    group_dir = find_condition_dir(source_root, f"shared_every_{group_size:02d}")
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6884, in find_condition_dir
+    raise FileNotFoundError(f"Could not find condition directory {condition_dir_name!r} under {root}")
+FileNotFoundError: Could not find condition directory 'shared_every_02' under /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04
+2026-05-01 00:07:27,637 INFO [setup] Run aborted cleanly after 0:01:50. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04/memory_match_topup/manifest.json.
+[setup] final summary: /gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r5-20260430-231233/repeat_04/memory_match_topup/summary_overall.md

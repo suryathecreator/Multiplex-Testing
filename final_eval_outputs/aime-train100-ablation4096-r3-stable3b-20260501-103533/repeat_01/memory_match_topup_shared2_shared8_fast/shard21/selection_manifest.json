@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "592",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "A chord of a circle is perpendicular to a radius at the midpoint of the radius. The ratio of the area of the larger of the two regions into which the chord divides the circle to the smaller can be expressed in the form $\\frac{a\\pi+b\\sqrt{c}}{d\\pi-e\\sqrt{f}},$ where $a, b, c, d, e,$ and $f$ are positive integers, $a$ and $e$ are relatively prime, and neither $c$ nor $f$ is divisible by the square of any prime. Find the remainder when the product $abcdef$ is divided by 1000.",
+      "problem_id": "aime-train-2004-II-01",
+      "problem_number": 1,
+      "prompt_index": 390,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 390,
+      "year": 2004
+    },
+    {
+      "aime_number": 2,
+      "answer": "927",
+      "difficulty": 2.375,
+      "order_index": 1,
+      "problem": "How many positive integers less than 10,000 have at most two different digits?",
+      "problem_id": "aime-train-2004-II-04",
+      "problem_number": 4,
+      "prompt_index": 393,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 393,
+      "year": 2004
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    390,
+    393
+  ],
+  "selection_seed": 4096
+}

@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": false,
+      "after_cost_tokens": 260597.0,
+      "before_correct": false,
+      "before_cost_tokens": 195053.0,
+      "completed_at_unix": 1778082071.7561705,
+      "effective_k": 40,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2012-I-13",
+      "prompt_index": 627,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": false,
+      "target_cost_tokens": 256799.0,
+      "topup_count": 8,
+      "topup_generator": "fixed",
+      "topup_group_size": 2
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 218407.0,
+      "before_correct": true,
+      "before_cost_tokens": 144266.0,
+      "completed_at_unix": 1778082172.1271956,
+      "effective_k": 42,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2012-I-09",
+      "prompt_index": 623,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 218338.0,
+      "topup_count": 10,
+      "topup_generator": "fixed",
+      "topup_group_size": 2
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 180996.0,
+      "before_correct": true,
+      "before_cost_tokens": 135143.0,
+      "completed_at_unix": 1778082632.2685888,
+      "effective_k": 41,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2012-II-05",
+      "prompt_index": 634,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 178117.0,
+      "topup_count": 9,
+      "topup_generator": "fixed",
+      "topup_group_size": 2
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 195598.0,
+      "before_correct": true,
+      "before_cost_tokens": 129126.0,
+      "completed_at_unix": 1778082715.3869128,
+      "effective_k": 44,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2012-II-03",
+      "prompt_index": 632,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 190331.0,
+      "topup_count": 12,
+      "topup_generator": "fixed",
+      "topup_group_size": 2
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T15:51:55.537906+00:00",
+    "finished_at_unix": 1778082715.5379064,
+    "started_at": "2026-05-06T15:29:37.364336+00:00",
+    "started_at_unix": 1778081377.3643358,
+    "wall_clock_hms": "0:22:18",
+    "wall_clock_seconds": 1338.1735706329346
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 0.75,
+      "after_cost_tokens": 213899.5,
+      "before_accuracy": 0.75,
+      "before_cost_tokens": 150897.0,
+      "effective_k": 41.75,
+      "group_size": 2,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 210896.25,
+      "topup_count": 9.75
+    }
+  ]
+}

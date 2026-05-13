@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "923",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Triangle $ABC$ has $AB=21$, $AC=22$ and $BC=20$. Points $D$ and $E$ are located on $\\overline{AB}$ and $\\overline{AC}$, respectively, such that $\\overline{DE}$ is parallel to $\\overline{BC}$ and contains the center of the inscribed circle of triangle $ABC$. Then $DE=m/n$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+      "problem_id": "aime-train-2001-I-07",
+      "problem_number": 7,
+      "prompt_index": 291,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 291,
+      "year": 2001
+    },
+    {
+      "aime_number": 1,
+      "answer": "315",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "Call a positive integer $N$ a 7-10 double if the digits of the base-$7$ representation of $N$ form a base-$10$ number that is twice $N$. For example, $51$ is a 7-10 double because its base-$7$ representation is $102$. What is the largest 7-10 double?",
+      "problem_id": "aime-train-2001-I-08",
+      "problem_number": 8,
+      "prompt_index": 292,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 292,
+      "year": 2001
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    291,
+    292
+  ],
+  "selection_seed": 4096
+}

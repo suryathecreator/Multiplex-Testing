@@ -1,0 +1,84 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "108",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "Consider a string of $n$ $7$'s, $7777\\cdots77,$ into which $+$ signs are inserted to produce an arithmetic expression. For example, $7+77+777+7+7=875$ could be obtained from eight $7$'s in this way. For how many values of $n$ is it possible to insert $+$ signs so that the resulting expression has value $7000$?",
+      "problem_id": "aime-train-2004-II-14",
+      "problem_number": 14,
+      "prompt_index": 403,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 403,
+      "year": 2004
+    },
+    {
+      "aime_number": 2,
+      "answer": "125",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "Let $x=\\frac{4}{(\\sqrt{5}+1)(\\sqrt[4]{5}+1)(\\sqrt[8]{5}+1)(\\sqrt[16]{5}+1)}.$ Find $(x+1)^{48}$.",
+      "problem_id": "aime-train-2005-II-07",
+      "problem_number": 7,
+      "prompt_index": 426,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 426,
+      "year": 2005
+    },
+    {
+      "aime_number": 2,
+      "answer": "250",
+      "difficulty": 4.0,
+      "order_index": 2,
+      "problem": "For how many positive integers $n$ less than or equal to $1000$ is $(\\sin t + i \\cos t)^n = \\sin nt + i \\cos nt$ true for all real $t$?",
+      "problem_id": "aime-train-2005-II-09",
+      "problem_number": 9,
+      "prompt_index": 428,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 428,
+      "year": 2005
+    },
+    {
+      "aime_number": 2,
+      "answer": "418",
+      "difficulty": 6.0,
+      "order_index": 3,
+      "problem": "Let $P(x)$ be a polynomial with integer coefficients that satisfies $P(17)=10$ and $P(24)=17.$ Given that $P(n)=n+3$ has two distinct integer solutions $n_1$ and $n_2,$ find the product $n_1\\cdot n_2.$",
+      "problem_id": "aime-train-2005-II-13",
+      "problem_number": 13,
+      "prompt_index": 432,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 432,
+      "year": 2005
+    },
+    {
+      "aime_number": 2,
+      "answer": "462",
+      "difficulty": 4.0,
+      "order_index": 4,
+      "problem": "Let $(a_1,a_2,a_3,\\ldots,a_{12})$ be a permutation of $(1,2,3,\\ldots,12)$ for which\n$a_1>a_2>a_3>a_4>a_5>a_6 \\mathrm{\\ and \\ } a_6<a_7<a_8<a_9<a_{10}<a_{11}<a_{12}.$\n An example of such a permutation is $(6,5,4,3,2,1,7,8,9,10,11,12).$ Find the number of such permutations.",
+      "problem_id": "aime-train-2006-II-04",
+      "problem_number": 4,
+      "prompt_index": 453,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 453,
+      "year": 2006
+    }
+  ],
+  "selected_count": 5,
+  "selected_source_indices": [
+    403,
+    426,
+    428,
+    432,
+    453
+  ],
+  "selection_seed": 4096
+}

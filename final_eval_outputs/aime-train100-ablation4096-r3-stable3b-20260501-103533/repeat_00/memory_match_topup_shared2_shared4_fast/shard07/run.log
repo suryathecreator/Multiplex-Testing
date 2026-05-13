@@ -1,0 +1,13 @@
+2026-05-06 08:51:46,002 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-06 08:51:46,002 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 08:51:46,004 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-06 08:51:49,071 INFO [setup] Restricted run to prompt indices: [283, 288, 291, 292]
+2026-05-06 08:51:51,945 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-06 08:51:51,945 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 08:51:52,071 INFO [setup] Starting the local SGLang server on 127.0.0.1:42007.
+2026-05-06 08:53:39,930 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-06 08:53:40,701 INFO [scheduler] Dispatching prompt 283 to DP rank 0.
+2026-05-06 08:53:40,703 INFO [scheduler] Dispatching prompt 288 to DP rank 1.
+2026-05-06 08:53:40,704 INFO [scheduler] Dispatching prompt 291 to DP rank 0.
+2026-05-06 08:53:40,705 INFO [scheduler] Dispatching prompt 292 to DP rank 1.
+2026-05-06 09:01:35,707 INFO [setup] Finished memory-match top-up in 0:09:51 (591.4s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_00/memory_match_topup_shared2_shared4_fast/shard07/summary_memory_match.md.

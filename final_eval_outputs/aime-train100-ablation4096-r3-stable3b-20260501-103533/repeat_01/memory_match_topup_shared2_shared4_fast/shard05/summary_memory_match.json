@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": false,
+      "after_cost_tokens": 272529.0,
+      "before_correct": false,
+      "before_cost_tokens": 190605.0,
+      "completed_at_unix": 1778085094.146608,
+      "effective_k": 48,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1995-I-01",
+      "prompt_index": 180,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": false,
+      "target_cost_tokens": 256761.0,
+      "topup_count": 16,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 250832.0,
+      "before_correct": true,
+      "before_cost_tokens": 177895.0,
+      "completed_at_unix": 1778085100.6270237,
+      "effective_k": 48,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1994-I-09",
+      "prompt_index": 173,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 241778.0,
+      "topup_count": 16,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 190374.0,
+      "before_correct": true,
+      "before_cost_tokens": 121612.0,
+      "completed_at_unix": 1778085325.6379373,
+      "effective_k": 60,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1998-I-15",
+      "prompt_index": 239,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 183722.0,
+      "topup_count": 28,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 265527.0,
+      "before_correct": true,
+      "before_cost_tokens": 160526.0,
+      "completed_at_unix": 1778085365.462096,
+      "effective_k": 56,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1995-I-08",
+      "prompt_index": 187,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 251248.0,
+      "topup_count": 24,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T16:36:05.527472+00:00",
+    "finished_at_unix": 1778085365.5274725,
+    "started_at": "2026-05-06T16:18:00.711089+00:00",
+    "started_at_unix": 1778084280.7110894,
+    "wall_clock_hms": "0:18:05",
+    "wall_clock_seconds": 1084.8163831233978
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 0.75,
+      "after_cost_tokens": 244815.5,
+      "before_accuracy": 0.75,
+      "before_cost_tokens": 162659.5,
+      "effective_k": 53.0,
+      "group_size": 2,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 233377.25,
+      "topup_count": 21.0
+    }
+  ]
+}

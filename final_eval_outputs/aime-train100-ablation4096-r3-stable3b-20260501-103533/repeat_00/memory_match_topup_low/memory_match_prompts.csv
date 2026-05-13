@@ -1,0 +1,16 @@
+group_size,prompt_index,problem_id,target_cost_tokens,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,compact_jsonl
+2,18,aime-train-1984-I-04,164423.0,94910.0,166124.0,True,True,14,46,True,completed,,True
+2,8,aime-train-1983-I-09,232248.0,148863.0,238765.0,True,True,15,47,True,completed,,True
+2,19,aime-train-1984-I-05,144115.0,82201.0,145411.0,True,True,14,46,True,completed,,True
+2,34,aime-train-1985-I-05,180052.0,109897.0,183519.0,True,True,14,46,True,completed,,True
+2,40,aime-train-1985-I-11,181907.0,114867.0,186990.0,True,True,13,45,True,completed,,True
+2,42,aime-train-1985-I-13,180258.0,110629.0,180530.0,True,True,13,45,True,completed,,True
+2,46,aime-train-1986-I-02,180533.0,111691.0,187459.0,True,True,13,45,True,completed,,True
+2,54,aime-train-1986-I-10,194026.0,122764.0,197092.0,True,True,11,43,True,completed,,True
+2,75,aime-train-1988-I-01,141232.0,75968.0,142145.0,True,True,15,47,True,completed,,True
+2,58,aime-train-1986-I-14,256861.0,182084.0,263057.0,True,True,11,43,True,completed,,True
+2,78,aime-train-1988-I-04,167387.0,99378.0,170207.0,True,True,14,46,True,completed,,True
+2,80,aime-train-1988-I-06,190971.0,125743.0,197563.0,False,False,12,44,True,completed,,True
+2,87,aime-train-1988-I-13,199544.0,157741.0,202574.0,True,True,7,39,True,completed,,True
+2,120,aime-train-1991-I-01,150583.0,86542.0,152340.0,True,True,14,46,True,completed,,
+2,89,aime-train-1988-I-15,176335.0,110149.0,179288.0,False,False,13,45,True,completed,,

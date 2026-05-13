@@ -1,0 +1,7 @@
+# Memory-Matched Top-Up
+
+- duration: 0:10:00
+
+| Shared Group | Before Acc. | After Acc. | Before Memory | After Memory | Target Memory | Effective k |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2 | 0.0000 | 0.5000 | 175916.5 | 251469.5 | 238451.0 | 52.00 |

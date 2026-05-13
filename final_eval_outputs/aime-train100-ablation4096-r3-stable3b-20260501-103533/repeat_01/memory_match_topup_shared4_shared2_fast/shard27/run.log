@@ -1,0 +1,11 @@
+2026-05-10 03:09:20,616 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 03:09:20,616 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 03:09:20,618 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-10 03:09:23,638 INFO [setup] Restricted run to prompt indices: [506, 509]
+2026-05-10 03:09:26,129 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 03:09:26,129 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 03:09:26,207 INFO [setup] Starting the local SGLang server on 127.0.0.1:47127.
+2026-05-10 03:11:04,097 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-10 03:11:05,043 INFO [scheduler] Dispatching prompt 506 to DP rank 0.
+2026-05-10 03:11:05,044 INFO [scheduler] Dispatching prompt 509 to DP rank 1.
+2026-05-10 03:26:30,689 INFO [setup] Finished memory-match top-up in 0:17:12 (1031.6s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared4_shared2_fast/shard27/summary_memory_match.md.

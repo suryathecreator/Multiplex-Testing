@@ -1,0 +1,7 @@
+method,k,num_prompts,pass_at_k,avg_cost_tokens,num_failures
+baseline_independent,1,40,0.475,6723.05,0
+baseline_independent,2,40,0.55,13468.65,0
+baseline_independent,4,40,0.625,26317.45,0
+baseline_independent,8,40,0.725,52731.75,0
+baseline_independent,16,40,0.8,105380.975,0
+baseline_independent,32,40,0.825,210472.55,0

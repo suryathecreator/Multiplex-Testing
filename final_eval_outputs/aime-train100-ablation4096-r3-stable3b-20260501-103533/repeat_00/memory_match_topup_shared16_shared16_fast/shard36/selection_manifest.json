@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "32",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Let $S$ be the increasing sequence of positive integers whose binary representation has exactly $8$ ones. Let $N$ be the 1000th number in $S$. Find the remainder when $N$ is divided by $1000$.",
+      "problem_id": "aime-train-2012-II-07",
+      "problem_number": 7,
+      "prompt_index": 636,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 636,
+      "year": 2012
+    },
+    {
+      "aime_number": 2,
+      "answer": "958",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "For a positive integer $p$, define the positive integer $n$ to be $p$-safe if $n$ differs in absolute value by more than $2$ from all multiples of $p$. For example, the set of $10$-safe numbers is $\\{ 3, 4, 5, 6, 7, 13, 14, 15, 16, 17, 23, \\ldots\\}$. Find the number of positive integers less than or equal to $10,000$ which are simultaneously $7$-safe, $11$-safe, and $13$-safe.",
+      "problem_id": "aime-train-2012-II-12",
+      "problem_number": 12,
+      "prompt_index": 641,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 641,
+      "year": 2012
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    636,
+    641
+  ],
+  "selection_seed": 4096
+}

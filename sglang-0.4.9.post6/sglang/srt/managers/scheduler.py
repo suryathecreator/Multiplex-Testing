@@ -3134,7 +3134,11 @@ class Scheduler(
                 cacheable_token_count=0,
             )
 
-        if parent_req.output_ids[-1] != eot_token_id and not recv_req.allow_non_eot_branch:
+        if (
+            parent_req.output_ids[-1] != eot_token_id
+            and not recv_req.allow_non_eot_branch
+            and not recv_req.force_think_end
+        ):
             return ForkReqOutput(
                 success=False,
                 message=(
@@ -3222,10 +3226,23 @@ class Scheduler(
                 cacheable_token_count=0,
             )
 
-        branch_input_ids = parent_req.origin_input_ids + parent_req.output_ids
+        branch_output_ids = list(parent_req.output_ids)
+        forced_think_end_token_count = 0
+        forced_think_end_token_id = None
+        if recv_req.force_think_end and branch_output_ids[-1] != eot_token_id:
+            branch_output_ids.append(eot_token_id)
+            forced_think_end_token_count = 1
+            forced_think_end_token_id = eot_token_id
+
+        branch_input_ids = parent_req.origin_input_ids + branch_output_ids
         cacheable_input_ids = branch_input_ids[:-1]
         uncached_tail_input_ids = branch_input_ids[-1:]
-        if recv_req.allow_non_eot_branch and parent_req.output_ids[-1] != eot_token_id:
+        if forced_think_end_token_count:
+            message = (
+                "Branch prefix prepared from the finished parent request with a forced think-end token. "
+                "Child requests can reuse the cached radix prefix and only extend the uncached tail."
+            )
+        elif recv_req.allow_non_eot_branch and parent_req.output_ids[-1] != eot_token_id:
             message = (
                 "Branch prefix prepared from the finished parent request without requiring a think-end token. "
                 "Child requests can reuse the cached radix prefix and only extend the uncached tail."
@@ -3249,10 +3266,12 @@ class Scheduler(
             cacheable_input_ids=cacheable_input_ids,
             uncached_tail_input_ids=uncached_tail_input_ids,
             prompt_token_count=len(parent_req.origin_input_ids),
-            response_token_count=len(parent_req.output_ids),
+            response_token_count=len(branch_output_ids),
             eot_token_id=eot_token_id,
-            eot_output_index=len(parent_req.output_ids) - 1,
+            eot_output_index=len(branch_output_ids) - 1,
             cacheable_token_count=len(cacheable_input_ids),
+            forced_think_end_token_count=forced_think_end_token_count,
+            forced_think_end_token_id=forced_think_end_token_id,
         )
 
     def get_print_prefix(self):

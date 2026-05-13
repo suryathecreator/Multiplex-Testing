@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "88",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "At a certain university, the division of mathematical sciences consists of the departments of mathematics, statistics, and computer science. There are two male and two female professors in each department. A committee of six professors is to contain three men and three women and must also contain two professors from each of the three departments. Find the number of possible committees that can be formed subject to these requirements.",
+      "problem_id": "aime-train-2012-II-03",
+      "problem_number": 3,
+      "prompt_index": 632,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 632,
+      "year": 2012
+    },
+    {
+      "aime_number": 2,
+      "answer": "750",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "In the accompanying figure, the outer square $S$ has side length $40$. A second square $S'$ of side length $15$ is constructed inside $S$ with the same center as $S$ and with sides parallel to those of $S$. From each midpoint of a side of $S$, segments are drawn to the two closest vertices of $S'$. The result is a four-pointed starlike figure inscribed in $S$. The star figure is cut out and then folded to form a pyramid with base $S'$. Find the volume of this pyramid.\n[asy] pair S1 = (20, 20), S2 = (-20, 20), S3 = (-20, -20), S4 = (20, -20); pair M1 = (S1+S2)/2, M2 = (S2+S3)/2, M3=(S3+S4)/2, M4=(S4+S1)/2; pair Sp1 = (7.5, 7.5), Sp2=(-7.5, 7.5), Sp3 = (-7.5, -7.5), Sp4 = (7.5, -7.5); draw(S1--S2--S3--S4--cycle); draw(Sp1--Sp2--Sp3--Sp4--cycle); draw(Sp1--M1--Sp2--M2--Sp3--M3--Sp4--M4--cycle); [/asy]",
+      "problem_id": "aime-train-2012-II-05",
+      "problem_number": 5,
+      "prompt_index": 634,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 634,
+      "year": 2012
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    632,
+    634
+  ],
+  "selection_seed": 4096
+}

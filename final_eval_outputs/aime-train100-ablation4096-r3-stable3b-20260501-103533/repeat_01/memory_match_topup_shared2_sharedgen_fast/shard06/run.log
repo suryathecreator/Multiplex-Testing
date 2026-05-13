@@ -1,0 +1,23 @@
+2026-05-04 21:01:54,091 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-04 21:01:54,092 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-04 21:01:54,138 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-04 21:01:56,873 INFO [setup] Restricted run to prompt indices: [291, 292, 311, 343, 350]
+2026-05-04 21:01:59,423 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-04 21:01:59,423 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-04 21:01:59,507 INFO [setup] Starting the local SGLang server on 127.0.0.1:37106.
+2026-05-04 21:03:30,121 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-04 21:03:30,475 INFO [scheduler] Dispatching prompt 291 to DP rank 0.
+2026-05-04 21:03:30,477 INFO [scheduler] Dispatching prompt 292 to DP rank 1.
+2026-05-04 21:03:30,478 INFO [scheduler] Dispatching prompt 311 to DP rank 0.
+2026-05-04 21:03:30,480 INFO [scheduler] Dispatching prompt 343 to DP rank 1.
+2026-05-04 21:18:02,593 INFO [scheduler] Dispatching prompt 350 to DP rank 1.
+2026-05-04 22:40:34,858 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-04 22:40:34,878 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-04 22:40:34,878 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-04 22:40:37,490 INFO [setup] Restricted run to prompt indices: [291, 292, 311, 343, 350]
+2026-05-04 22:40:39,897 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-04 22:40:39,897 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-04 22:40:40,026 INFO [setup] Starting the local SGLang server on 127.0.0.1:37106.
+2026-05-04 22:41:06,661 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-04 22:41:06,852 INFO [scheduler] Dispatching prompt 350 to DP rank 0.
+2026-05-04 22:59:11,346 INFO [setup] Finished memory-match top-up in 0:18:38 (1118.1s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared2_sharedgen_fast/shard06/summary_memory_match.md.

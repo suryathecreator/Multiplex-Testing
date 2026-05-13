@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "348",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Find the eighth term of the sequence $1440,$ $1716,$ $1848,\\ldots,$ whose terms are formed by multiplying the corresponding terms of two arithmetic sequences.",
+      "problem_id": "aime-train-2003-II-08",
+      "problem_number": 8,
+      "prompt_index": 367,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 367,
+      "year": 2003
+    },
+    {
+      "aime_number": 2,
+      "answer": "15",
+      "difficulty": 6.5,
+      "order_index": 1,
+      "problem": "Let \\[P(x) = 24x^{24} + \\sum_{j = 1}^{23}(24 - j)(x^{24 - j} + x^{24 + j}).\\] Let $z_{1},z_{2},\\ldots,z_{r}$ be the distinct zeros of $P(x),$ and let $z_{k}^{2} = a_{k} + b_{k}i$ for $k = 1,2,\\ldots,r,$ where $a_{k}$ and $b_{k}$ are real numbers. Let\n$\\sum_{k = 1}^{r}|b_{k}| = m + n\\sqrt {p},$\n where $m, n,$ and $p$ are integers and $p$ is not divisible by the square of any prime. Find $m + n + p.$",
+      "problem_id": "aime-train-2003-II-15",
+      "problem_number": 15,
+      "prompt_index": 374,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 374,
+      "year": 2003
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    367,
+    374
+  ],
+  "selection_seed": 4096
+}

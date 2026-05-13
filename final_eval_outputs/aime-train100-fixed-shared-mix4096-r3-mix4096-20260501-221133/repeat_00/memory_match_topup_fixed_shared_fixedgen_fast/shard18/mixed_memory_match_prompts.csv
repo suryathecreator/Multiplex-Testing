@@ -1,0 +1,6 @@
+prompt_index,problem_id,target_cost_tokens,target_correct,shared_before_cost_tokens,shared_before_correct,mixed_before_cost_tokens,mixed_before_correct,shared_after_cost_tokens,shared_after_correct,mixed_after_cost_tokens,mixed_after_correct,shared_topup_count,mixed_topup_count,shared_effective_k,mixed_effective_k,generated_topup_count,shared_reached_target,mixed_reached_target,status,message,completed_at_unix,compact_jsonl
+847,aime-train-2019-II-08,189619.0,True,135169.0,True,166639.0,True,189758.0,True,193478.0,True,9,4,41,36,9,True,True,completed,,1777978590.9680367,True
+831,aime-train-2019-I-07,219437.0,True,135169.0,True,168443.0,True,219834.0,True,220336.0,True,11,7,43,39,11,True,True,completed,,1777980705.5154922,
+865,aime-train-2020-I-11,245479.0,False,85892.0,False,165709.0,False,252540.0,False,247639.0,False,21,10,53,42,21,True,True,completed,,1777982295.3481648,
+872,aime-train-2020-II-03,143193.0,True,20773.0,True,83565.0,True,143848.0,True,143384.0,True,27,13,59,45,27,True,True,completed,,1777983105.4609923,
+910,aime-train-2021-II-11,253329.0,False,114138.0,False,185030.0,False,254625.0,False,254466.0,False,18,9,50,41,18,True,True,completed,,1777985023.3683515,

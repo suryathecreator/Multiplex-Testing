@@ -1,0 +1,65 @@
+{
+  "checkpoint_prompt_rows": 260,
+  "summary_rows": [
+    {
+      "color": "#4C78A8",
+      "condition": "Fixed",
+      "marker": "o",
+      "mean_accuracy": 0.7762635404280157,
+      "mean_cost_tokens": 211756.38879178037,
+      "mean_prompt_rows_per_repeat": 86.66666666666667,
+      "num_repeats": 3,
+      "std_accuracy": 0.03808559607935874,
+      "std_cost_tokens": 1584.9594526256014,
+      "total_prompt_rows": 260
+    },
+    {
+      "color": "#54A24B",
+      "condition": "Shared",
+      "marker": "^",
+      "mean_accuracy": 0.6186895421894226,
+      "mean_cost_tokens": 83396.32807653738,
+      "mean_prompt_rows_per_repeat": 86.66666666666667,
+      "num_repeats": 3,
+      "std_accuracy": 0.03831483624713625,
+      "std_cost_tokens": 6414.628322603776,
+      "total_prompt_rows": 260
+    },
+    {
+      "color": "#E45756",
+      "condition": "Fixed + Shared",
+      "marker": "D",
+      "mean_accuracy": 0.7437509896271551,
+      "mean_cost_tokens": 149558.0776079845,
+      "mean_prompt_rows_per_repeat": 86.66666666666667,
+      "num_repeats": 3,
+      "std_accuracy": 0.04822015361798254,
+      "std_cost_tokens": 3636.168179823302,
+      "total_prompt_rows": 260
+    },
+    {
+      "color": "#72B7B2",
+      "condition": "Shared + fixed top-up",
+      "marker": "v",
+      "mean_accuracy": 0.7577361677289959,
+      "mean_cost_tokens": 215100.37626116016,
+      "mean_prompt_rows_per_repeat": 86.66666666666667,
+      "num_repeats": 3,
+      "std_accuracy": 0.015786287192623608,
+      "std_cost_tokens": 1687.7093235542252,
+      "total_prompt_rows": 260
+    },
+    {
+      "color": "#B279A2",
+      "condition": "Fixed + Shared + fixed top-up",
+      "marker": "P",
+      "mean_accuracy": 0.7703387138003442,
+      "mean_cost_tokens": 215102.94310976297,
+      "mean_prompt_rows_per_repeat": 86.66666666666667,
+      "num_repeats": 3,
+      "std_accuracy": 0.03277068031088472,
+      "std_cost_tokens": 1643.1335813772846,
+      "total_prompt_rows": 260
+    }
+  ]
+}

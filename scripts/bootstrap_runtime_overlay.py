@@ -55,6 +55,7 @@ DEFAULT_IMPORT_TARGETS = [
 LIGHTWEIGHT_STATIC_REQUIREMENTS = [
     "requests",
     "datasets",
+    "pyarrow>=19.0.0",
     "matplotlib==3.10.6",
     "pynvml==12.0.0",
     "latex2sympy2",
@@ -174,12 +175,14 @@ RUNTIME_REQUIRES_PACKAGE_RE = re.compile(
 PIP_INSTALL_HINT_RE = re.compile(r"\bpip(?:3)?\s+install\s+([A-Za-z0-9_.-]+(?:\[[^\]]+\])?)")
 MODULE_LIKE_NAME_RE = re.compile(r"^[A-Za-z0-9_.-]+$")
 NON_INSTALLABLE_REQUIREMENT_KEYS = {"python"}
-ISOLATED_HELPER_TIMEOUT_SECONDS = 300
+ISOLATED_HELPER_TIMEOUT_SECONDS = int(os.environ.get("BOOTSTRAP_HELPER_TIMEOUT_SECONDS", "900"))
 DIST_INFO_NAME_RE = re.compile(r"^(?P<name>.+?)-\d")
 LIGHTWEIGHT_OVERLAY_DIRNAME = "lightweight-overlays"
 OVERLAY_NO_DEPS_REQUIREMENT_KEYS = {"compressed_tensors"}
 BLOCKED_OVERLAY_PREFIX_KEYS = ("cuda", "nvidia")
-OVERLAY_CACHE_MAX_COPY_BYTES = 64 * 1024 * 1024
+OVERLAY_CACHE_MAX_COPY_BYTES = int(
+    os.environ.get("BOOTSTRAP_OVERLAY_CACHE_MAX_COPY_BYTES", str(256 * 1024 * 1024))
+)
 ISOLATED_HELPER_CODE = r"""
 import importlib
 import importlib.util
@@ -1199,43 +1202,60 @@ def provision_managed_runtime(
     runtime_specs: Dict[str, RuntimePackageSpec],
     log: Callable[[str], None],
 ) -> Path:
-    if runtime_root.exists():
-        log(f"[runtime] removing invalid managed runtime root: {runtime_root}")
-        shutil.rmtree(runtime_root)
+    build_root = runtime_root.with_name(f".{runtime_root.name}.build-{os.getpid()}")
+    if build_root.exists():
+        log(f"[runtime] removing stale managed runtime build root: {build_root}")
+        shutil.rmtree(build_root)
+    for stale_build_root in runtime_root.parent.glob(f".{runtime_root.name}.build-*"):
+        if stale_build_root == build_root:
+            continue
+        log(f"[runtime] removing stale managed runtime build root: {stale_build_root}")
+        shutil.rmtree(stale_build_root, ignore_errors=True)
 
-    runtime_site = runtime_site_packages_dir(runtime_root)
+    runtime_site = runtime_site_packages_dir(build_root)
     runtime_site.mkdir(parents=True, exist_ok=True)
 
     torch_family = [runtime_specs[name] for name in ("torch", "torchvision", "torchaudio") if name in runtime_specs]
     extras = [runtime_specs[name] for name in ("triton", "tensordict", "sgl-kernel") if name in runtime_specs]
     flashinfer_specs = [runtime_specs[name] for name in ("flashinfer-python",) if name in runtime_specs]
 
-    install_runtime_group_with_fallback(
-        python_executable=python_executable,
-        runtime_site=runtime_site,
-        specs=torch_family,
-        log=log,
-    )
-    install_runtime_group_with_fallback(
-        python_executable=python_executable,
-        runtime_site=runtime_site,
-        specs=extras,
-        log=log,
-    )
-    run_pip_install(
-        python_executable=python_executable,
-        target_dir=runtime_site,
-        requirements=MANAGED_RUNTIME_SUPPORT_REQUIREMENTS,
-        log=log,
-    )
-    install_runtime_group_with_fallback(
-        python_executable=python_executable,
-        runtime_site=runtime_site,
-        specs=flashinfer_specs,
-        log=log,
-    )
+    try:
+        install_runtime_group_with_fallback(
+            python_executable=python_executable,
+            runtime_site=runtime_site,
+            specs=torch_family,
+            log=log,
+        )
+        install_runtime_group_with_fallback(
+            python_executable=python_executable,
+            runtime_site=runtime_site,
+            specs=extras,
+            log=log,
+        )
+        run_pip_install(
+            python_executable=python_executable,
+            target_dir=runtime_site,
+            requirements=MANAGED_RUNTIME_SUPPORT_REQUIREMENTS,
+            log=log,
+        )
+        install_runtime_group_with_fallback(
+            python_executable=python_executable,
+            runtime_site=runtime_site,
+            specs=flashinfer_specs,
+            log=log,
+        )
+    except Exception:
+        log(f"[runtime] removing failed managed runtime build root: {build_root}")
+        shutil.rmtree(build_root, ignore_errors=True)
+        raise
 
-    return runtime_site
+    if runtime_root.exists():
+        log(f"[runtime] removing invalid managed runtime root: {runtime_root}")
+        shutil.rmtree(runtime_root)
+    log(f"[runtime] promoting managed runtime build root: {build_root} -> {runtime_root}")
+    build_root.rename(runtime_root)
+
+    return runtime_site_packages_dir(runtime_root)
 
 
 def probe_import_targets(

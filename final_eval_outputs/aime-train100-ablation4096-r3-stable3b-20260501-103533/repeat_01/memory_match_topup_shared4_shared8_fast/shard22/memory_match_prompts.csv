@@ -1,0 +1,3 @@
+group_size,topup_generator,topup_group_size,prompt_index,problem_id,target_cost_tokens,target_correct,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,completed_at_unix
+4,shared_group,8,403,aime-train-2004-II-14,243429.0,False,131277.0,265587.0,False,False,32,64,True,completed,,1778417662.4354072
+4,shared_group,8,399,aime-train-2004-II-10,190790.0,True,103223.0,199076.0,True,True,48,80,True,completed,,1778417685.9680727

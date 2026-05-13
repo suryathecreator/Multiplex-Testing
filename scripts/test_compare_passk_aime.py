@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import logging
 import os
 import sys
 import tempfile
+import threading
 import types
 import unittest
 from pathlib import Path
@@ -20,9 +22,25 @@ from compare_passk_aime import (
     MultiplexSelfCheckResult,
     PromptBuildInfo,
     SampleRecord,
+    SchedulerConfig,
+    BENCHMARK_DEEPSCALER_AIME_TRAIN,
+    DEEPSCALER_AIME_TRAIN_SELECTED_INDICES,
+    THROUGHPUT_PROFILE_SAFE,
+    THROUGHPUT_PROFILE_SAFE_AUTO,
+    THROUGHPUT_PROFILE_AGGRESSIVE,
+    RANK_SCHEDULER_DYNAMIC,
+    RANK_SCHEDULER_ROUND_ROBIN,
+    EXPERIMENT_MODE_PASSK_SWEEP,
+    HYPERPARAM_PHASE_DISCRETE,
+    HYPERPARAM_PHASE_THINKING,
+    THINK_END_TAG,
+    apply_sampling_condition_to_args,
+    autotune_runtime_config,
     base_sampling_params,
+    build_runtime_probe_candidates,
     build_local_requests_session,
     build_manifest_payload,
+    build_memory_match_prompt_row,
     build_pass_at_k_values,
     build_prefilled_prompt_ids,
     build_run_timing,
@@ -34,16 +52,23 @@ from compare_passk_aime import (
     fixed_prefix_sampling_params,
     format_wall_clock_seconds,
     load_examples,
+    load_existing_sweep_summaries,
     make_sample_record,
     make_server_args,
     make_target_dp_rank,
+    parse_float_values,
+    parse_positive_int_values,
     parse_reasoning_prefix_token_values,
     resolve_runtime_config,
+    resolve_scheduler_config,
     RESOURCE_PROFILE_AUTO,
     RESOURCE_PROFILE_LEGACY_8GPU,
     RESOURCE_PROFILE_TWO_GPU_SAFE,
+    run_prompt_tasks_concurrently,
     run_baseline_for_prompt,
+    runtime_probe_supported,
     score_response,
+    select_next_rank,
     StructuredEventLogger,
     verify_multiplex_runtime,
     write_summary_md,
@@ -54,8 +79,9 @@ class ComparePassKAimeTests(unittest.TestCase):
     def make_args(self, **overrides):
         values = {
             "model": "Qwen/Qwen3-4B",
+            "experiment_mode": EXPERIMENT_MODE_PASSK_SWEEP,
             "benchmark": "aime2024",
-            "max_k": 16,
+            "max_k": 64,
             "methods": "baseline,shared_trace,standard_generation",
             "seed": 1234,
             "output_dir": "/tmp/out",
@@ -71,9 +97,21 @@ class ComparePassKAimeTests(unittest.TestCase):
             "max_new_tokens": 8192,
             "server_timeout_seconds": 3600,
             "max_prompts": 50,
-            "reasoning_prefix_token_values": "512,1024,2048",
+            "reasoning_prefix_token_values": "256,512,1024,2048,4096,6144",
+            "branch_ablation_reasoning_prefix_tokens": 1024,
+            "branch_ablation_group_sizes": "2,4,8,16",
+            "branch_ablation_no_baseline": False,
+            "memory_match_source_root": "",
+            "memory_match_shared_groups": "2,4,8,16,32",
+            "hyperparam_reasoning_prefix_tokens": 1024,
+            "hyperparam_top_p_values": "0.75,0.85,0.90,0.95,1.00",
+            "hyperparam_temperature_values": "0.4,0.6,0.8,1.0,1.2",
             "checkpoint_matched_prompts_step": 5,
             "mem_fraction_static": None,
+            "throughput_profile": THROUGHPUT_PROFILE_SAFE_AUTO,
+            "max_concurrent_prompts": None,
+            "prompts_per_rank": 1,
+            "rank_scheduler": RANK_SCHEDULER_DYNAMIC,
         }
         values.update(overrides)
         return argparse.Namespace(**values)
@@ -92,11 +130,89 @@ class ComparePassKAimeTests(unittest.TestCase):
     def test_build_pass_at_k_values_appends_non_power_of_two(self):
         self.assertEqual(build_pass_at_k_values(20), [1, 2, 4, 8, 16, 20])
 
+    def test_deepscaler_aime_train_selected_indices_are_fixed(self):
+        self.assertEqual(len(DEEPSCALER_AIME_TRAIN_SELECTED_INDICES), 100)
+        self.assertEqual(DEEPSCALER_AIME_TRAIN_SELECTED_INDICES[:5], (8, 18, 19, 34, 40))
+        self.assertEqual(DEEPSCALER_AIME_TRAIN_SELECTED_INDICES[-5:], (921, 922, 944, 954, 967))
+
+    def test_load_deepscaler_aime_train_uses_selected_source_indices(self):
+        class FakeTokenizer:
+            def apply_chat_template(self, messages, tokenize, add_generation_prompt=False):
+                return [1, 2, 3] if tokenize else "prompt"
+
+        examples, _ = load_examples(
+            FakeTokenizer(),
+            BENCHMARK_DEEPSCALER_AIME_TRAIN,
+            max_prompts=2,
+        )
+        self.assertEqual([example.prompt_index for example in examples], [8, 18])
+        self.assertEqual(examples[0].metadata["source_index"], 8)
+        self.assertTrue(examples[0].problem_id.startswith("aime-train-"))
+
+    def test_memory_match_prompt_row_counts_boundary_crossing_sample(self):
+        row = build_memory_match_prompt_row(
+            group_size=8,
+            prompt_index=17,
+            problem_id="p17",
+            target_cost_tokens=100.0,
+            before_cost_tokens=80.0,
+            before_correct=False,
+            topup_records=[
+                {"sample_index": 32, "prefix_completion_tokens": 5, "completion_tokens": 10, "correct": False},
+                {"sample_index": 33, "prefix_completion_tokens": 5, "completion_tokens": 10, "correct": True},
+            ],
+            base_k=32,
+        )
+        self.assertEqual(row["after_cost_tokens"], 110.0)
+        self.assertTrue(row["after_correct"])
+        self.assertTrue(row["reached_target"])
+        self.assertEqual(row["topup_count"], 2)
+        self.assertEqual(row["effective_k"], 34)
+
     def test_parse_reasoning_prefix_token_values_deduplicates_and_preserves_order(self):
         self.assertEqual(
             parse_reasoning_prefix_token_values("512, 1024,512,2048"),
             [512, 1024, 2048],
         )
+
+    def test_parse_branch_and_hyperparam_grids(self):
+        self.assertEqual(parse_positive_int_values("2,4,2,16", label="group"), [2, 4, 16])
+        self.assertEqual(
+            parse_float_values("0.75,0.85,0.75,1.0", label="top-p"),
+            [0.75, 0.85, 1.0],
+        )
+
+    def test_apply_sampling_condition_to_args_updates_requested_phase_only(self):
+        args = self.make_args()
+        apply_sampling_condition_to_args(
+            args,
+            phase=HYPERPARAM_PHASE_THINKING,
+            parameter_name="top_p",
+            parameter_value=0.75,
+        )
+        thinking_params = base_sampling_params(128, sampling_overrides={
+            "thinking_temperature": args.current_thinking_temperature,
+            "thinking_top_p": args.current_thinking_top_p,
+            "after_thinking_temperature": args.current_after_thinking_temperature,
+            "after_thinking_top_p": args.current_after_thinking_top_p,
+        })
+        self.assertEqual(thinking_params["top_p"], 0.75)
+        self.assertEqual(thinking_params["after_thinking_top_p"], 0.95)
+
+        apply_sampling_condition_to_args(
+            args,
+            phase=HYPERPARAM_PHASE_DISCRETE,
+            parameter_name="temperature",
+            parameter_value=1.2,
+        )
+        child_params = child_sampling_params(128, sampling_overrides={
+            "thinking_temperature": args.current_thinking_temperature,
+            "thinking_top_p": args.current_thinking_top_p,
+            "after_thinking_temperature": args.current_after_thinking_temperature,
+            "after_thinking_top_p": args.current_after_thinking_top_p,
+        })
+        self.assertEqual(child_params["temperature"], 1.2)
+        self.assertEqual(child_params["top_p"], 0.95)
 
     def test_count_visible_gpus_from_env(self):
         self.assertEqual(count_visible_gpus_from_env("0,1"), 2)
@@ -110,8 +226,10 @@ class ComparePassKAimeTests(unittest.TestCase):
             args,
             visible_gpu_count=2,
             per_gpu_memory_gb=48.0,
-            nvcc_path="/tmp/fake-nvcc",
+            nvcc_path=None,
         )
+        runtime.nvcc_path = "/tmp/fake-nvcc"
+        runtime.nvcc_path = "/tmp/fake-nvcc"
         self.assertEqual(runtime.requested_dp_size, 8)
         self.assertEqual(runtime.effective_dp_size, 2)
         self.assertEqual(runtime.resource_profile, RESOURCE_PROFILE_TWO_GPU_SAFE)
@@ -129,6 +247,19 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(runtime.resource_profile, RESOURCE_PROFILE_TWO_GPU_SAFE)
         self.assertEqual(runtime.safe_request_batch_cap, 8)
         self.assertEqual(runtime.request_batch_size, 8)
+
+    def test_resolve_runtime_config_aggressive_allows_batch_above_safe_cap(self):
+        args = self.make_args(request_batch_size=64, throughput_profile=THROUGHPUT_PROFILE_AGGRESSIVE)
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path="/tmp/fake-nvcc",
+        )
+        self.assertEqual(runtime.resource_profile, RESOURCE_PROFILE_TWO_GPU_SAFE)
+        self.assertEqual(runtime.safe_request_batch_cap, 16)
+        self.assertEqual(runtime.request_batch_size, 64)
+        self.assertTrue(any("aggressive throughput profile" in message for message in runtime.clamp_messages))
 
     def test_resolve_runtime_config_legacy_profile_keeps_defaults(self):
         args = self.make_args(
@@ -182,6 +313,98 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertTrue(runtime.disable_cuda_graph)
         self.assertFalse(runtime.disable_radix_cache)
         self.assertTrue(any("forcing Triton attention" in message for message in runtime.clamp_messages))
+
+    def test_resolve_scheduler_config_defaults_to_effective_dp_size(self):
+        args = self.make_args()
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path=None,
+        )
+        scheduler = resolve_scheduler_config(args, runtime)
+        self.assertEqual(scheduler.max_concurrent_prompts, 2)
+        self.assertEqual(scheduler.prompts_per_rank, 1)
+        self.assertEqual(scheduler.rank_scheduler, RANK_SCHEDULER_DYNAMIC)
+
+    def test_resolve_scheduler_config_clamps_requested_concurrency(self):
+        args = self.make_args(max_concurrent_prompts=5, prompts_per_rank=1)
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path=None,
+        )
+        scheduler = resolve_scheduler_config(args, runtime)
+        self.assertEqual(scheduler.max_prompt_capacity, 2)
+        self.assertEqual(scheduler.max_concurrent_prompts, 2)
+        self.assertTrue(any("requested max_concurrent_prompts=5" in msg for msg in scheduler.clamp_messages))
+
+    def test_select_next_rank_dynamic_prefers_less_busy_rank(self):
+        scheduler = SchedulerConfig(
+            requested_max_concurrent_prompts=None,
+            max_concurrent_prompts=2,
+            prompts_per_rank=1,
+            rank_scheduler=RANK_SCHEDULER_DYNAMIC,
+            max_prompt_capacity=2,
+        )
+        rank, rr = select_next_rank(
+            scheduler_config=scheduler,
+            rank_active_counts={0: 1, 1: 0},
+            rank_completed_counts={0: 0, 1: 0},
+            round_robin_cursor=0,
+        )
+        self.assertEqual(rank, 1)
+        self.assertEqual(rr, 0)
+
+    def test_select_next_rank_round_robin_advances_cursor(self):
+        scheduler = SchedulerConfig(
+            requested_max_concurrent_prompts=None,
+            max_concurrent_prompts=2,
+            prompts_per_rank=1,
+            rank_scheduler=RANK_SCHEDULER_ROUND_ROBIN,
+            max_prompt_capacity=2,
+        )
+        rank0, cursor = select_next_rank(
+            scheduler_config=scheduler,
+            rank_active_counts={0: 0, 1: 0},
+            rank_completed_counts={0: 0, 1: 0},
+            round_robin_cursor=0,
+        )
+        rank1, cursor = select_next_rank(
+            scheduler_config=scheduler,
+            rank_active_counts={0: 1, 1: 0},
+            rank_completed_counts={0: 0, 1: 0},
+            round_robin_cursor=cursor,
+        )
+        self.assertEqual(rank0, 0)
+        self.assertEqual(rank1, 1)
+
+    def test_runtime_probe_supported_requires_safe_two_gpu_triton_profile(self):
+        args = self.make_args(throughput_profile=THROUGHPUT_PROFILE_SAFE)
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path="/tmp/fake-nvcc",
+        )
+        enabled, reason = runtime_probe_supported(args, runtime)
+        self.assertFalse(enabled)
+        self.assertEqual(reason, "throughput_profile=safe")
+
+    def test_build_runtime_probe_candidates_include_cuda_graph_variants(self):
+        args = self.make_args()
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path="/tmp/fake-nvcc",
+        )
+        candidates = build_runtime_probe_candidates(runtime)
+        self.assertEqual([name for name, _ in candidates], ["safe_current", "cuda_graph_16", "cuda_graph_16_prefill4k"])
+        self.assertTrue(candidates[0][1].disable_cuda_graph)
+        self.assertFalse(candidates[1][1].disable_cuda_graph)
+        self.assertEqual(candidates[2][1].chunked_prefill_size, 4096)
 
     def test_detect_nvcc_path_prefers_cudacxx_then_cuda_home_then_path(self):
         with mock.patch.dict(
@@ -487,6 +710,7 @@ class ComparePassKAimeTests(unittest.TestCase):
             per_gpu_memory_gb=24.0,
             nvcc_path=None,
         )
+        scheduler = resolve_scheduler_config(args, runtime)
         with mock.patch(
             "compare_passk_aime.make_server_args",
             return_value=argparse.Namespace(dp_size=2, tp_size=1, request_batch_size=8),
@@ -494,6 +718,7 @@ class ComparePassKAimeTests(unittest.TestCase):
             manifest = build_manifest_payload(
                 args=args,
                 runtime_config=runtime,
+                scheduler_config=scheduler,
                 pass_at_ks=[1, 2],
                 examples=[self.make_example()],
                 methods=["baseline_independent"],
@@ -521,7 +746,10 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(manifest["assistant_prefill"], ASSISTANT_THINK_PREFILL)
         self.assertEqual(manifest["prompt_build_mode"], "native_generation_prompt")
         self.assertEqual(manifest["run_status"], "running")
-        self.assertEqual(manifest["reasoning_prefix_token_values"], [512, 1024, 2048])
+        self.assertEqual(manifest["throughput_profile"], THROUGHPUT_PROFILE_SAFE_AUTO)
+        self.assertEqual(manifest["reasoning_prefix_token_values"], [256, 512, 1024, 2048, 4096, 6144])
+        self.assertEqual(manifest["scheduler_config"]["max_concurrent_prompts"], 2)
+        self.assertEqual(manifest["experiment_mode"], EXPERIMENT_MODE_PASSK_SWEEP)
         self.assertTrue(manifest["multiplex_self_check"]["success"])
         self.assertEqual(manifest["summary_metadata"]["exclusion_counts"]["max_new_tokens_reached"], 2)
         self.assertEqual(manifest["run_timing"]["started_at_unix"], 100.0)
@@ -531,10 +759,360 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(manifest["sampling_defaults"]["top_p"], 0.95)
         self.assertIn("512", manifest["fixed_prefix_sampling_defaults"])
 
+    def test_load_existing_sweep_summaries_rehydrates_prior_prefixes_and_standard_generation(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            root = Path(tmpdir)
+            standard_dir = root / "standard_generation"
+            standard_dir.mkdir()
+            (standard_dir / "samples.jsonl").write_text(
+                json.dumps(
+                    {
+                        "method": "standard_generation_independent",
+                        "prompt_index": 0,
+                        "sample_index": 0,
+                        "usable_for_eval": True,
+                        "correct": True,
+                        "score": 1.0,
+                        "completion_tokens": 10,
+                        "discrete_generation_tokens": 10,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (standard_dir / "baseline_prompts.jsonl").write_text(
+                json.dumps(
+                    {
+                        "method": "standard_generation_independent",
+                        "prompt_index": 0,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            prefix_dir = root / "prefix_0256"
+            prefix_dir.mkdir()
+            (prefix_dir / "samples.jsonl").write_text(
+                "\n".join(
+                    [
+                        json.dumps(
+                            {
+                                "method": "baseline_independent",
+                                "prompt_index": 0,
+                                "sample_index": 0,
+                                "usable_for_eval": True,
+                                "correct": True,
+                                "score": 1.0,
+                                "completion_tokens": 5,
+                                "discrete_generation_tokens": 5,
+                                "reasoning_prefix_tokens": 256,
+                            }
+                        ),
+                        json.dumps(
+                            {
+                                "method": "shared_trace_branch_after_prefix",
+                                "prompt_index": 0,
+                                "sample_index": 0,
+                                "usable_for_eval": True,
+                                "correct": True,
+                                "score": 1.0,
+                                "completion_tokens": 4,
+                                "discrete_generation_tokens": 4,
+                                "reasoning_prefix_tokens": 256,
+                            }
+                        ),
+                    ]
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (prefix_dir / "baseline_prompts.jsonl").write_text(
+                json.dumps(
+                    {
+                        "method": "baseline_independent",
+                        "prompt_index": 0,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            (prefix_dir / "shared_trace_parents.jsonl").write_text(
+                json.dumps(
+                    {
+                        "method": "shared_trace_branch_after_prefix",
+                        "prompt_index": 0,
+                        "completion_tokens": 4,
+                        "discrete_generation_tokens": 4,
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            prefix_summaries, standard_summary = load_existing_sweep_summaries(
+                root,
+                pass_at_ks=[1],
+                max_k=1,
+            )
+
+        self.assertEqual(sorted(prefix_summaries), [256])
+        self.assertIsNotNone(standard_summary)
+        self.assertEqual(prefix_summaries[256]["coverage"]["matched_prompts_with_full_k"], 1)
+        self.assertEqual(standard_summary["coverage"]["matched_prompts_with_full_k"], 1)
+
     def test_runner_relies_on_native_generation_prompt_without_manual_think_prefill(self):
         source = (SCRIPT_DIR / "compare_passk_aime.py").read_text(encoding="utf-8")
         self.assertIn('ASSISTANT_THINK_PREFILL = ""', source)
         self.assertIn('prompt_build_mode="native_generation_prompt"', source)
+
+    def test_autotune_runtime_config_selects_fastest_successful_candidate(self):
+        args = self.make_args()
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path=None,
+        )
+        runtime.nvcc_path = "/tmp/fake-nvcc"
+
+        class FakeTokenizer:
+            def apply_chat_template(
+                self,
+                messages,
+                tokenize,
+                add_generation_prompt=False,
+                continue_final_message=False,
+            ):
+                return [1, 2, 3]
+
+        class FakeServerHandle:
+            def __init__(self, server_args, timeout):
+                self.server_args = server_args
+                self.timeout = timeout
+
+            def start(self):
+                return None
+
+            def stop(self):
+                return None
+
+        class FakeClient:
+            def __init__(self, candidate_name):
+                self.candidate_name = candidate_name
+
+            def close(self):
+                return None
+
+        fixed_probe_by_candidate = {
+            "safe_current": {"total_completion_tokens": 100, "wall_clock_seconds": 2.0},
+            "cuda_graph_16": {"total_completion_tokens": 120, "wall_clock_seconds": 1.0},
+            "cuda_graph_16_prefill4k": RuntimeError("prefill unstable"),
+        }
+        standard_probe = {"total_completion_tokens": 100, "wall_clock_seconds": 1.0}
+        current_candidate = {"name": None}
+
+        def fake_make_server_args(_args, candidate_runtime):
+            if candidate_runtime.disable_cuda_graph:
+                candidate_name = "safe_current"
+            elif candidate_runtime.chunked_prefill_size == 4096:
+                candidate_name = "cuda_graph_16_prefill4k"
+            else:
+                candidate_name = "cuda_graph_16"
+            current_candidate["name"] = candidate_name
+            return argparse.Namespace(candidate_name=candidate_name)
+
+        def fake_make_rest_client(**_kwargs):
+            return FakeClient(str(current_candidate["name"]))
+
+        def fake_fixed_prefix_probe(client, args, prompt_ids, target_dp_rank, batch_size):
+            probe = fixed_probe_by_candidate[client.candidate_name]
+            if isinstance(probe, Exception):
+                raise probe
+            return dict(
+                probe,
+                batch_size=batch_size,
+                reasoning_prefix_tokens=64,
+                decode_budget=256,
+                target_dp_rank=target_dp_rank,
+            )
+
+        with mock.patch("compare_passk_aime.SGLangServerHandle", FakeServerHandle), mock.patch(
+            "compare_passk_aime.make_rest_client",
+            side_effect=fake_make_rest_client,
+        ), mock.patch(
+            "compare_passk_aime.verify_multiplex_runtime",
+            return_value=MultiplexSelfCheckResult(
+                success=True,
+                message="ok",
+                attention_backend="triton",
+                enable_soft_thinking=True,
+                has_topk_metadata=True,
+                finish_reason={"type": "stop", "matched": "</think>"},
+                    output_text="ok",
+            ),
+        ), mock.patch(
+            "compare_passk_aime.make_server_args",
+            side_effect=fake_make_server_args,
+        ), mock.patch(
+            "compare_passk_aime.run_fixed_prefix_runtime_probe",
+            side_effect=fake_fixed_prefix_probe,
+        ), mock.patch(
+            "compare_passk_aime.run_standard_generation_runtime_probe",
+            side_effect=lambda client, prompt_ids, target_dp_rank, batch_size: dict(
+                standard_probe,
+                batch_size=batch_size,
+                decode_budget=256,
+                target_dp_rank=target_dp_rank,
+            ),
+        ):
+            with tempfile.TemporaryDirectory() as tmpdir:
+                selected_runtime, metadata = autotune_runtime_config(
+                    args=args,
+                    runtime_config=runtime,
+                    tokenizer=FakeTokenizer(),
+                    logger=logging.getLogger("test"),
+                    event_logger=StructuredEventLogger(Path(tmpdir) / "events.jsonl"),
+                )
+
+        self.assertFalse(selected_runtime.disable_cuda_graph)
+        self.assertEqual(metadata["selected_candidate"], "cuda_graph_16")
+        self.assertEqual(len(metadata["candidates"]), 3)
+        self.assertEqual(metadata["skipped_candidates"], [])
+        self.assertTrue(any(not row["success"] for row in metadata["candidates"]))
+
+    def test_autotune_runtime_config_skips_cuda_graph_candidates_without_nvcc(self):
+        args = self.make_args()
+        runtime = resolve_runtime_config(
+            args,
+            visible_gpu_count=2,
+            per_gpu_memory_gb=48.0,
+            nvcc_path=None,
+        )
+
+        class FakeTokenizer:
+            def apply_chat_template(
+                self,
+                messages,
+                tokenize,
+                add_generation_prompt=False,
+                continue_final_message=False,
+            ):
+                return [1, 2, 3]
+
+        class FakeServerHandle:
+            def __init__(self, server_args, timeout):
+                self.server_args = server_args
+                self.timeout = timeout
+
+            def start(self):
+                return None
+
+            def stop(self):
+                return None
+
+        class FakeClient:
+            def close(self):
+                return None
+
+        with mock.patch("compare_passk_aime.SGLangServerHandle", FakeServerHandle), mock.patch(
+            "compare_passk_aime.make_rest_client",
+            return_value=FakeClient(),
+        ), mock.patch(
+            "compare_passk_aime.make_server_args",
+            return_value=argparse.Namespace(candidate_name="safe_current"),
+        ), mock.patch(
+            "compare_passk_aime.verify_multiplex_runtime",
+            return_value=MultiplexSelfCheckResult(
+                success=True,
+                message="ok",
+                attention_backend="triton",
+                enable_soft_thinking=True,
+                has_topk_metadata=True,
+                finish_reason={"type": "stop", "matched": "</think>"},
+                output_text="ok",
+            ),
+        ), mock.patch(
+            "compare_passk_aime.run_fixed_prefix_runtime_probe",
+            return_value={
+                "batch_size": 16,
+                "reasoning_prefix_tokens": 64,
+                "decode_budget": 256,
+                "total_completion_tokens": 100,
+                "wall_clock_seconds": 1.0,
+                "tokens_per_second": 100.0,
+                "target_dp_rank": 0,
+            },
+        ), mock.patch(
+            "compare_passk_aime.run_standard_generation_runtime_probe",
+            return_value={
+                "batch_size": 16,
+                "decode_budget": 256,
+                "total_completion_tokens": 100,
+                "wall_clock_seconds": 1.0,
+                "tokens_per_second": 100.0,
+                "target_dp_rank": 1,
+            },
+        ):
+            with tempfile.TemporaryDirectory() as tmpdir:
+                selected_runtime, metadata = autotune_runtime_config(
+                    args=args,
+                    runtime_config=runtime,
+                    tokenizer=FakeTokenizer(),
+                    logger=logging.getLogger("test"),
+                    event_logger=StructuredEventLogger(Path(tmpdir) / "events.jsonl"),
+                )
+
+        self.assertTrue(selected_runtime.disable_cuda_graph)
+        self.assertEqual(metadata["selected_candidate"], "safe_current")
+        self.assertEqual(
+            metadata["skipped_candidates"],
+            ["cuda_graph_16", "cuda_graph_16_prefill4k"],
+        )
+        self.assertEqual(len(metadata["candidates"]), 1)
+
+    def test_run_prompt_tasks_concurrently_uses_multiple_ranks(self):
+        scheduler = SchedulerConfig(
+            requested_max_concurrent_prompts=None,
+            max_concurrent_prompts=2,
+            prompts_per_rank=1,
+            rank_scheduler=RANK_SCHEDULER_DYNAMIC,
+            max_prompt_capacity=2,
+        )
+        task_items = [{"example": Example(i, f"id-{i}", "p", "a", [1], "", "mode")} for i in range(4)]
+        dispatch_barrier = threading.Barrier(2)
+        handled = []
+        assignments = []
+
+        def submit_task(task_item, target_dp_rank):
+            prompt_index = task_item["example"].prompt_index
+            assignments.append((prompt_index, target_dp_rank))
+            if prompt_index in (0, 1):
+                dispatch_barrier.wait(timeout=2.0)
+            return {"prompt_index": prompt_index, "target_dp_rank": target_dp_rank}
+
+        def handle_result(result):
+            handled.append(result)
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            metadata = run_prompt_tasks_concurrently(
+                task_items=task_items,
+                scheduler_config=scheduler,
+                effective_dp_size=2,
+                submit_task=submit_task,
+                handle_result=handle_result,
+                logger=logging.getLogger("test"),
+                event_logger=StructuredEventLogger(Path(tmpdir) / "events.jsonl"),
+            )
+
+        used_ranks = {rank for _, rank in assignments[:2]}
+        self.assertEqual(used_ranks, {0, 1})
+        self.assertEqual(len(handled), 4)
+        self.assertEqual(metadata["observed_max_in_flight_prompts"], 2)
+        self.assertEqual(
+            sum(metadata["rank_completed_prompt_counts"].values()),
+            4,
+        )
 
     def test_write_summary_md_includes_wall_clock_section(self):
         summary_rows = [
@@ -647,6 +1225,7 @@ class ComparePassKAimeTests(unittest.TestCase):
                 child_seeds,
                 target_dp_rank,
                 allow_non_eot_branch=False,
+                force_think_end=False,
             ):
                 self.fork_calls.append(
                     {
@@ -657,6 +1236,7 @@ class ComparePassKAimeTests(unittest.TestCase):
                         "child_seeds": child_seeds,
                         "target_dp_rank": target_dp_rank,
                         "allow_non_eot_branch": allow_non_eot_branch,
+                        "force_think_end": force_think_end,
                     }
                 )
                 return {
@@ -666,6 +1246,8 @@ class ComparePassKAimeTests(unittest.TestCase):
                     "cacheable_input_ids": [1, 2],
                     "uncached_tail_input_ids": [102],
                     "cacheable_token_count": 1,
+                    "forced_think_end_token_count": 1,
+                    "forced_think_end_token_id": 151668,
                 }
 
             def generate(self, **kwargs):
@@ -700,10 +1282,13 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(len(client.generate_calls), 2)
         self.assertEqual(len(client.fork_calls), 2)
         self.assertTrue(all(call["allow_non_eot_branch"] for call in client.fork_calls))
+        self.assertTrue(all(call["force_think_end"] for call in client.fork_calls))
         self.assertIsInstance(client.generate_calls[0]["session_params"], list)
-        self.assertEqual(records[0].prefix_completion_tokens, 8)
+        self.assertEqual(records[0].prefix_completion_tokens, 9)
         self.assertEqual(records[0].reasoning_prefix_tokens, 8)
-        self.assertEqual(records[0].text, "prefix-a \\boxed{42}")
+        self.assertEqual(records[0].forced_think_end_tokens, 1)
+        self.assertEqual(records[0].text, f"prefix-a{THINK_END_TAG} \\boxed{{42}}")
+        self.assertEqual(baseline_result.total_completion_tokens_spent, 27)
         self.assertTrue(any('"tag": "baseline_prefix_sample"' in line for line in event_lines))
         self.assertTrue(any('"tag": "baseline_continuation_sample"' in line for line in event_lines))
 
@@ -841,6 +1426,93 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(summary_json["exclusion_counts"]["baseline_independent_no_usable_samples"], 1)
         self.assertEqual(summary_json["exclusion_counts"]["missing_think_end"], 1)
         self.assertEqual(summary_json["coverage"]["matched_prompts_with_full_k"], 0)
+
+    def test_compute_summary_tables_counts_reasoning_for_fixed_and_shared_correctly(self):
+        sample_rows = [
+            {
+                "method": "baseline_independent",
+                "prompt_index": 0,
+                "sample_index": 0,
+                "correct": False,
+                "completion_tokens": 3,
+                "prefix_completion_tokens": 257,
+                "usable_for_eval": True,
+            },
+            {
+                "method": "baseline_independent",
+                "prompt_index": 0,
+                "sample_index": 1,
+                "correct": True,
+                "completion_tokens": 4,
+                "prefix_completion_tokens": 257,
+                "usable_for_eval": True,
+            },
+            {
+                "method": "shared_trace_branch_after_prefix",
+                "prompt_index": 0,
+                "sample_index": 0,
+                "correct": False,
+                "completion_tokens": 3,
+                "prefix_completion_tokens": 0,
+                "usable_for_eval": True,
+            },
+            {
+                "method": "shared_trace_branch_after_prefix",
+                "prompt_index": 0,
+                "sample_index": 1,
+                "correct": True,
+                "completion_tokens": 4,
+                "prefix_completion_tokens": 0,
+                "usable_for_eval": True,
+            },
+            {
+                "method": "shared_trace_group_2",
+                "prompt_index": 0,
+                "sample_index": 0,
+                "correct": False,
+                "completion_tokens": 3,
+                "prefix_completion_tokens": 257,
+                "usable_for_eval": True,
+            },
+            {
+                "method": "shared_trace_group_2",
+                "prompt_index": 0,
+                "sample_index": 1,
+                "correct": True,
+                "completion_tokens": 4,
+                "prefix_completion_tokens": 0,
+                "usable_for_eval": True,
+            },
+        ]
+        baseline_prompts = [
+            {"method": "baseline_independent", "prompt_index": 0, "success": True},
+            {"method": "shared_trace_group_2", "prompt_index": 0, "success": True},
+        ]
+        parent_rows = [
+            {
+                "method": "shared_trace_branch_after_prefix",
+                "prompt_index": 0,
+                "success": True,
+                "completion_tokens": 256,
+                "forced_think_end_tokens": 1,
+                "usable_for_eval": True,
+            }
+        ]
+        _, per_prompt_rows, _ = compute_summary_tables(
+            sample_rows=sample_rows,
+            baseline_prompt_rows=baseline_prompts,
+            parent_rows=parent_rows,
+            attempt_rows=[],
+            pass_at_ks=[1, 2],
+            max_k=2,
+        )
+        by_method = {row["method"]: row for row in per_prompt_rows if row["prompt_index"] == 0}
+        self.assertEqual(by_method["baseline_independent"]["cost_at_1"], 260)
+        self.assertEqual(by_method["baseline_independent"]["cost_at_2"], 521)
+        self.assertEqual(by_method["shared_trace_branch_after_prefix"]["cost_at_1"], 260)
+        self.assertEqual(by_method["shared_trace_branch_after_prefix"]["cost_at_2"], 264)
+        self.assertEqual(by_method["shared_trace_group_2"]["cost_at_1"], 260)
+        self.assertEqual(by_method["shared_trace_group_2"]["cost_at_2"], 264)
 
     def test_compute_summary_tables_caps_shared_prompt_at_minimum_usable_k(self):
         sample_rows = []

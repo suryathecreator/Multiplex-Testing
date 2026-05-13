@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": true,
+      "after_cost_tokens": 249756.0,
+      "before_correct": true,
+      "before_cost_tokens": 148863.0,
+      "completed_at_unix": 1778084373.2166474,
+      "effective_k": 60,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1983-I-09",
+      "prompt_index": 8,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 232248.0,
+      "topup_count": 28,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 170830.0,
+      "before_correct": true,
+      "before_cost_tokens": 94910.0,
+      "completed_at_unix": 1778084442.5916433,
+      "effective_k": 76,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1984-I-04",
+      "prompt_index": 18,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 164423.0,
+      "topup_count": 44,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 185740.0,
+      "before_correct": true,
+      "before_cost_tokens": 109897.0,
+      "completed_at_unix": 1778084862.828237,
+      "effective_k": 60,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1985-I-05",
+      "prompt_index": 34,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 180052.0,
+      "topup_count": 28,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 149068.0,
+      "before_correct": true,
+      "before_cost_tokens": 82201.0,
+      "completed_at_unix": 1778084875.855511,
+      "effective_k": 76,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1984-I-05",
+      "prompt_index": 19,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 144115.0,
+      "topup_count": 44,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T16:27:55.979853+00:00",
+    "finished_at_unix": 1778084875.9798532,
+    "started_at": "2026-05-06T16:10:54.755562+00:00",
+    "started_at_unix": 1778083854.7555616,
+    "wall_clock_hms": "0:17:01",
+    "wall_clock_seconds": 1021.2242915630341
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 1.0,
+      "after_cost_tokens": 188848.5,
+      "before_accuracy": 1.0,
+      "before_cost_tokens": 108967.75,
+      "effective_k": 68.0,
+      "group_size": 2,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 180209.5,
+      "topup_count": 36.0
+    }
+  ]
+}

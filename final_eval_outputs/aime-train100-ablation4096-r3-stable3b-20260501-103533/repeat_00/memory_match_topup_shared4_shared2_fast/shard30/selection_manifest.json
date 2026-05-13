@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "529",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Suppose that $y = \\frac34x$ and $x^y = y^x$. The quantity $x + y$ can be expressed as a rational number $\\frac {r}{s}$, where $r$ and $s$ are relatively prime positive integers. Find $r + s$.",
+      "problem_id": "aime-train-2010-I-03",
+      "problem_number": 3,
+      "prompt_index": 557,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 557,
+      "year": 2010
+    },
+    {
+      "aime_number": 2,
+      "answer": "676",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Two noncongruent integer-sided isosceles triangles have the same perimeter and the same area. The ratio of the lengths of the bases of the two triangles is $8: 7$. Find the minimum possible value of their common perimeter.",
+      "problem_id": "aime-train-2010-II-12",
+      "problem_number": 12,
+      "prompt_index": 581,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 581,
+      "year": 2010
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    557,
+    581
+  ],
+  "selection_seed": 4096
+}

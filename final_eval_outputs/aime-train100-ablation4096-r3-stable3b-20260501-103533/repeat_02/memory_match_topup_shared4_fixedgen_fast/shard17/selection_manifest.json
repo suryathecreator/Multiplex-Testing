@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "348",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "The sum of the areas of all triangles whose vertices are also vertices of a $1$ by $1$ by $1$ cube is $m + \\sqrt{n} + \\sqrt{p},$ where $m, n,$ and $p$ are integers. Find $m + n + p.$",
+      "problem_id": "aime-train-2003-I-06",
+      "problem_number": 6,
+      "prompt_index": 350,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 350,
+      "year": 2003
+    },
+    {
+      "aime_number": 1,
+      "answer": "615",
+      "difficulty": 3.125,
+      "order_index": 1,
+      "problem": "An integer between $1000$ and $9999$, inclusive, is called balanced if the sum of its two leftmost digits equals the sum of its two rightmost digits. How many balanced integers are there?",
+      "problem_id": "aime-train-2003-I-09",
+      "problem_number": 9,
+      "prompt_index": 353,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 353,
+      "year": 2003
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    350,
+    353
+  ],
+  "selection_seed": 4096
+}

@@ -1,0 +1,1962 @@
+2026-05-01 12:59:37,543 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 12:59:37,544 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 12:59:37,544 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 12:59:37,545 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 12:59:42,757 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 12:59:42,758 INFO [setup] probing runtime candidate safe_current
+2026-05-01 13:01:07,615 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:01:26,196 INFO [setup] selected runtime candidate safe_current (413.47 tok/s during startup probe)
+2026-05-01 13:01:26,196 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 13:01:26,196 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:01:26,196 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:01:26,403 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 13:02:41,238 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:05:52,046 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14d466cd34f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14d466cd34f0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14d466cd34f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14d466cd34f0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 13:05:52,294 INFO [setup] Run aborted cleanly after 0:06:16. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 13:08:01,791 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 13:08:01,791 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:08:01,792 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:08:01,862 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 13:08:06,851 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 13:08:06,852 INFO [setup] probing runtime candidate safe_current
+2026-05-01 13:08:52,110 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:09:10,812 INFO [setup] selected runtime candidate safe_current (392.69 tok/s during startup probe)
+2026-05-01 13:09:10,812 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 13:09:10,812 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:09:10,812 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:09:11,031 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 13:10:03,778 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:13:18,487 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14c9592417b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14c9592417b0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14c9592417b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14c9592417b0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 13:13:18,756 INFO [setup] Run aborted cleanly after 0:05:18. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 13:18:09,310 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 13:18:09,322 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:18:09,322 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:18:09,322 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 13:18:14,482 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 13:18:14,483 INFO [setup] probing runtime candidate safe_current
+2026-05-01 13:19:36,152 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:19:55,452 INFO [setup] selected runtime candidate safe_current (398.45 tok/s during startup probe)
+2026-05-01 13:19:55,452 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 13:19:55,452 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:19:55,452 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:19:55,723 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 13:20:24,440 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:23:14,222 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1512b5fcf9a0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1512b5fcf9a0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1512b5fcf9a0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1512b5fcf9a0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 13:23:14,434 INFO [setup] Run aborted cleanly after 0:05:07. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 13:24:53,063 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:24:53,113 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:24:53,114 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-01 13:24:57,964 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 13:24:57,984 INFO [setup] probing runtime candidate safe_current
+2026-05-01 13:25:21,611 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 13:25:39,388 INFO [setup] selected runtime candidate safe_current (432.35 tok/s during startup probe)
+2026-05-01 13:25:39,388 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 13:25:39,388 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 13:25:39,653 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 13:26:04,421 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:14:41,967 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 14:14:41,998 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:14:41,998 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:14:41,998 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 14:14:47,178 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 14:14:47,179 INFO [setup] probing runtime candidate safe_current
+2026-05-01 14:15:22,106 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:15:40,393 INFO [setup] selected runtime candidate safe_current (418.69 tok/s during startup probe)
+2026-05-01 14:15:40,394 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 14:15:40,394 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:15:40,394 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:15:40,492 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 14:16:09,346 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:22:30,807 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14a6cda06fb0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6569, in run_shared_grouped_trace_for_prompt
+    client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14a6cda06fb0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14a6cda06fb0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14a6cda06fb0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 14:22:31,102 INFO [setup] Run aborted cleanly after 0:07:51. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 14:24:28,106 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 14:24:28,125 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:24:28,125 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:24:28,126 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 14:24:33,259 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 14:24:33,259 INFO [setup] probing runtime candidate safe_current
+2026-05-01 14:25:21,024 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:25:38,809 INFO [setup] selected runtime candidate safe_current (432.54 tok/s during startup probe)
+2026-05-01 14:25:38,810 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 14:25:38,810 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:25:38,810 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:25:38,914 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 14:26:14,890 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:29:29,125 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x153b9705a800>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6569, in run_shared_grouped_trace_for_prompt
+    client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x153b9705a800>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x153b9705a800>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x153b9705a800>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 14:29:29,495 INFO [setup] Run aborted cleanly after 0:05:03. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 14:31:32,186 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 14:31:32,186 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:31:32,186 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:31:32,186 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 14:31:38,829 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 14:31:38,830 INFO [setup] probing runtime candidate safe_current
+2026-05-01 14:32:22,203 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:32:39,675 INFO [setup] selected runtime candidate safe_current (440.40 tok/s during startup probe)
+2026-05-01 14:32:39,695 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 14:32:39,695 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:32:39,695 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:32:39,951 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 14:47:55,859 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 14:47:55,873 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:47:55,873 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:47:55,873 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 14:48:01,432 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 14:48:01,432 INFO [setup] probing runtime candidate safe_current
+2026-05-01 14:50:01,951 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:50:21,443 INFO [setup] selected runtime candidate safe_current (377.65 tok/s during startup probe)
+2026-05-01 14:50:21,443 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 14:50:21,443 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 14:50:21,443 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 14:50:21,939 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 14:50:46,692 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 14:57:01,925 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14e2ca3c5030>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6569, in run_shared_grouped_trace_for_prompt
+    client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14e2ca3c5030>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14e2ca3c5030>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14e2ca3c5030>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 14:57:02,163 INFO [setup] Run aborted cleanly after 0:09:08. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 15:01:18,872 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 15:01:18,883 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:01:18,883 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:01:18,884 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 15:01:24,282 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 15:01:24,282 INFO [setup] probing runtime candidate safe_current
+2026-05-01 15:01:47,903 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:02:05,868 INFO [setup] selected runtime candidate safe_current (424.59 tok/s during startup probe)
+2026-05-01 15:02:05,868 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 15:02:05,868 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:02:05,868 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:02:06,120 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 15:02:28,822 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:08:47,550 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15354d4ac6d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x15354d4ac6d0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15354d4ac6d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15354d4ac6d0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 15:08:47,778 INFO [setup] Run aborted cleanly after 0:07:30. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 15:10:33,400 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 15:10:33,400 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:10:33,401 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:10:33,401 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 15:10:38,169 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 15:10:38,170 INFO [setup] probing runtime candidate safe_current
+2026-05-01 15:11:13,763 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:11:31,013 INFO [setup] selected runtime candidate safe_current (427.03 tok/s during startup probe)
+2026-05-01 15:11:31,013 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 15:11:31,013 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:11:31,013 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:11:31,270 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 15:11:57,988 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:32:06,470 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1504b24c26e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6569, in run_shared_grouped_trace_for_prompt
+    client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x1504b24c26e0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1504b24c26e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1504b24c26e0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 15:32:06,683 INFO [setup] Run aborted cleanly after 0:21:35. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 15:33:55,422 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 15:33:55,422 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:33:55,422 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:33:55,422 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 15:34:00,268 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 15:34:00,268 INFO [setup] probing runtime candidate safe_current
+2026-05-01 15:34:36,676 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:34:54,111 INFO [setup] selected runtime candidate safe_current (422.16 tok/s during startup probe)
+2026-05-01 15:34:54,112 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 15:34:54,112 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:34:54,112 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:34:54,328 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 15:35:29,904 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:38:38,722 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14f479c9fdf0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6569, in run_shared_grouped_trace_for_prompt
+    client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14f479c9fdf0>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14f479c9fdf0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14f479c9fdf0>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 15:38:38,966 INFO [setup] Run aborted cleanly after 0:04:45. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 15:40:29,403 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:40:29,403 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:40:29,404 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-01 15:40:34,242 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 15:40:34,278 INFO [setup] probing runtime candidate safe_current
+2026-05-01 15:41:08,895 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 15:41:26,128 INFO [setup] selected runtime candidate safe_current (427.85 tok/s during startup probe)
+2026-05-01 15:41:26,129 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 15:41:26,129 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 15:41:26,328 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 15:42:09,053 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 17:46:38,366 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 17:46:38,406 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 17:46:38,406 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 17:46:38,406 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 17:46:44,126 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 17:46:44,126 INFO [setup] probing runtime candidate safe_current
+2026-05-01 17:47:48,858 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 17:48:07,570 INFO [setup] selected runtime candidate safe_current (395.93 tok/s during startup probe)
+2026-05-01 17:48:07,571 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 17:48:07,571 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 17:48:07,571 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 17:48:07,783 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 17:49:12,602 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 17:58:11,509 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14bae306ba60>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x14bae306ba60>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14bae306ba60>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x14bae306ba60>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 17:58:11,805 INFO [setup] Run aborted cleanly after 0:11:35. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 18:00:40,663 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 18:00:40,713 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:00:40,743 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:00:40,744 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 18:00:46,339 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 18:00:46,340 INFO [setup] probing runtime candidate safe_current
+2026-05-01 18:01:44,067 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 18:02:02,535 INFO [setup] selected runtime candidate safe_current (404.54 tok/s during startup probe)
+2026-05-01 18:02:02,536 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-01 18:02:02,536 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:02:02,536 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:02:02,801 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 18:02:56,507 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 18:09:20,339 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15100f73e620>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x15100f73e620>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15100f73e620>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x15100f73e620>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 18:09:20,570 INFO [setup] Run aborted cleanly after 0:08:41. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 18:11:39,231 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 18:11:39,262 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:11:39,262 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:11:39,291 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-01 18:11:45,180 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 18:11:45,193 INFO [setup] probing runtime candidate safe_current
+2026-05-01 18:12:30,120 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 18:12:50,227 INFO [setup] selected runtime candidate safe_current (376.25 tok/s during startup probe)
+2026-05-01 18:12:50,227 WARNING [setup] aggressive throughput profile allows request_batch_size=24 above the two_gpu_safe safety cap of 16
+2026-05-01 18:12:50,227 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:12:50,227 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=24 request_batch_size=24 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:12:50,544 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 18:14:23,159 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 18:20:30,190 ERROR [setup] Run aborted to preserve fidelity: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x145abee9eb90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6488, in run_shared_grouped_trace_for_prompt
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 553, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 95, in create_connection
+    raise err
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/connection.py", line 85, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 416, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 244, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1303, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1349, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1298, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1058, in _send_output
+    self.send(msg)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 996, in send
+    self.connect()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 205, in connect
+    conn = self._new_conn()
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x145abee9eb90>: Failed to establish a new connection: [Errno 111] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x145abee9eb90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9460, in main
+    experiment_summary = run_branch_ablation_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 9106, in run_branch_ablation_experiment
+    group_summaries[group_size] = run_branch_ablation_group_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6826, in run_branch_ablation_group_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3024, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6788, in submit_task
+    return run_branch_ablation_group_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6701, in run_branch_ablation_group_prompt_task
+    prompt_result, sample_records = run_shared_grouped_trace_for_prompt(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 6630, in run_shared_grouped_trace_for_prompt
+    client.close_session(session_id)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 501, in close_session
+    self._post("/close_session", {"session_id": session_id})
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 465, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=31014): Max retries exceeded with url: /close_session (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x145abee9eb90>: Failed to establish a new connection: [Errno 111] Connection refused'))
+2026-05-01 18:20:30,318 INFO [setup] Run aborted cleanly after 0:08:53. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/manifest.json.
+2026-05-01 18:22:41,212 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:22:41,212 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:22:41,212 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-01 18:22:46,272 INFO [setup] skipping CUDA-graph runtime probe candidates on the no-nvcc path: cuda_graph_16,cuda_graph_16_prefill4k
+2026-05-01 18:22:46,272 INFO [setup] probing runtime candidate safe_current
+2026-05-01 18:23:24,001 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 18:23:41,868 INFO [setup] selected runtime candidate safe_current (431.91 tok/s during startup probe)
+2026-05-01 18:23:41,868 WARNING [setup] nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation
+2026-05-01 18:23:41,868 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=None chunked_prefill_size=2048 max_running_requests=32 nvcc_path=None attention_backend=triton sampling_backend=auto disable_cuda_graph=True disable_radix_cache=False
+2026-05-01 18:23:42,103 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 18:24:10,880 INFO [setup] multiplex self-check passed: attention_backend=triton finish_reason={'type': 'length', 'length': 8}
+2026-05-01 19:36:56,880 INFO [setup] Finished branch ablation in 1:14:17 (4457.4s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/summary_ablation.md.
+2026-05-01 21:28:54,598 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 21:28:54,630 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=48 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-01 21:28:54,630 INFO [setup] scheduler config: requested_max_concurrent_prompts=6 max_concurrent_prompts=6 prompts_per_rank=3 max_prompt_capacity=6 rank_scheduler=dynamic
+2026-05-01 21:29:02,080 WARNING [setup] aggressive throughput profile allows request_batch_size=48 above the two_gpu_safe safety cap of 16
+2026-05-01 21:29:02,080 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=48 request_batch_size=48 resource_profile=two_gpu_safe cuda_graph_max_bs=48 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-01 21:29:02,172 INFO [setup] Starting the local SGLang server on 127.0.0.1:31014.
+2026-05-01 21:30:28,234 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-01 21:30:41,621 INFO [setup] Finished branch ablation in 0:01:49 (108.8s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/bundle_shared_32/summary_ablation.md.

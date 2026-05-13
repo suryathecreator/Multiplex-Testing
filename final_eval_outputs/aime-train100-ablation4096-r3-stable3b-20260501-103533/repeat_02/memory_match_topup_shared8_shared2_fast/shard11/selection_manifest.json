@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "85",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "For how many ordered pairs of positive integers $(x,y),$ with $y<x\\le 100,$ are both $\\frac xy$ and $\\frac{x+1}{y+1}$ integers?",
+      "problem_id": "aime-train-1995-I-08",
+      "problem_number": 8,
+      "prompt_index": 187,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 187,
+      "year": 1995
+    },
+    {
+      "aime_number": 1,
+      "answer": "761",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Define a domino to be an ordered pair of distinct positive integers. A proper sequence of dominos is a list of distinct dominos in which the first coordinate of each pair after the first equals the second coordinate of the immediately preceding pair, and in which $(i,j)$ and $(j,i)$ do not both appear for any $i$ and $j$. Let $D_{40}$ be the set of all dominos whose coordinates are no larger than 40. Find the length of the longest proper sequence of dominos that can be formed using the dominos of $D_{40}.$",
+      "problem_id": "aime-train-1998-I-15",
+      "problem_number": 15,
+      "prompt_index": 239,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 239,
+      "year": 1998
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    187,
+    239
+  ],
+  "selection_seed": 4096
+}

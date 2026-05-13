@@ -1,0 +1,69 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "49",
+      "difficulty": 5.0,
+      "order_index": 0,
+      "problem": "Let $x,$ $y,$ and $z$ be positive real numbers that satisfy \\[2\\log_{x}(2y) = 2\\log_{2x}(4z) = \\log_{2x^4}(8yz) \\ne 0.\\] The value of $xy^5z$ can be expressed in the form $\\frac{1}{2^{p/q}},$ where $p$ and $q$ are relatively prime positive integers. Find $p+q.$",
+      "problem_id": "aime-train-2012-I-09",
+      "problem_number": 9,
+      "prompt_index": 623,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 623,
+      "year": 2012
+    },
+    {
+      "aime_number": 1,
+      "answer": "41",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Three concentric circles have radii $3,$ $4,$ and $5.$ An equilateral triangle with one vertex on each circle has side length $s.$ The largest possible area of the triangle can be written as $a + \\tfrac{b}{c} \\sqrt{d},$ where $a,$ $b,$ $c,$ and $d$ are positive integers, $b$ and $c$ are relatively prime, and $d$ is not divisible by the square of any prime. Find $a+b+c+d.$",
+      "problem_id": "aime-train-2012-I-13",
+      "problem_number": 13,
+      "prompt_index": 627,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 627,
+      "year": 2012
+    },
+    {
+      "aime_number": 2,
+      "answer": "88",
+      "difficulty": 4.0,
+      "order_index": 2,
+      "problem": "At a certain university, the division of mathematical sciences consists of the departments of mathematics, statistics, and computer science. There are two male and two female professors in each department. A committee of six professors is to contain three men and three women and must also contain two professors from each of the three departments. Find the number of possible committees that can be formed subject to these requirements.",
+      "problem_id": "aime-train-2012-II-03",
+      "problem_number": 3,
+      "prompt_index": 632,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 632,
+      "year": 2012
+    },
+    {
+      "aime_number": 2,
+      "answer": "750",
+      "difficulty": 4.0,
+      "order_index": 3,
+      "problem": "In the accompanying figure, the outer square $S$ has side length $40$. A second square $S'$ of side length $15$ is constructed inside $S$ with the same center as $S$ and with sides parallel to those of $S$. From each midpoint of a side of $S$, segments are drawn to the two closest vertices of $S'$. The result is a four-pointed starlike figure inscribed in $S$. The star figure is cut out and then folded to form a pyramid with base $S'$. Find the volume of this pyramid.\n[asy] pair S1 = (20, 20), S2 = (-20, 20), S3 = (-20, -20), S4 = (20, -20); pair M1 = (S1+S2)/2, M2 = (S2+S3)/2, M3=(S3+S4)/2, M4=(S4+S1)/2; pair Sp1 = (7.5, 7.5), Sp2=(-7.5, 7.5), Sp3 = (-7.5, -7.5), Sp4 = (7.5, -7.5); draw(S1--S2--S3--S4--cycle); draw(Sp1--Sp2--Sp3--Sp4--cycle); draw(Sp1--M1--Sp2--M2--Sp3--M3--Sp4--M4--cycle); [/asy]",
+      "problem_id": "aime-train-2012-II-05",
+      "problem_number": 5,
+      "prompt_index": 634,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 634,
+      "year": 2012
+    }
+  ],
+  "selected_count": 4,
+  "selected_source_indices": [
+    623,
+    627,
+    632,
+    634
+  ],
+  "selection_seed": 4096
+}

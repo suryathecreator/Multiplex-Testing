@@ -1,0 +1,7 @@
+method,k,num_prompts,pass_at_k,avg_cost_tokens,num_failures
+shared_trace_group_8,1,70,0.5,6424.685714285714,0
+shared_trace_group_8,2,70,0.5428571428571428,8701.914285714285,0
+shared_trace_group_8,4,70,0.6,13334.142857142857,0
+shared_trace_group_8,8,70,0.6571428571428571,22937.72857142857,0
+shared_trace_group_8,16,70,0.7714285714285715,45172.1,0
+shared_trace_group_8,32,70,0.8285714285714286,91719.04285714286,0

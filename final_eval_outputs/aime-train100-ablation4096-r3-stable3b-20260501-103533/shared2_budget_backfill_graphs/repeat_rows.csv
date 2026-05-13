@@ -1,0 +1,385 @@
+repeat,pass_k,condition,label,pass_mean,cost_mean,extra_generations_mean,effective_k_mean,n_prompts
+0,4,fixed,Fixed,0.61,26275.77,0.0,4.0,100
+0,4,shared2,Shared every 2,0.58,18025.28,0.0,4.0,100
+0,4,shared2_topup,Shared every 2 + shared2 top-up,0.62,29216.81,2.28,6.28,100
+0,4,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.62,24529.37,1.0,5.0,100
+0,4,shared2_fixed_topup,Shared every 2 + fixed top-up,0.62,29216.81,2.28,6.28,100
+0,4,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.59,24501.34,1.0,5.0,100
+0,4,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.62,29216.81,2.28,6.28,100
+0,4,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.62,24603.66,1.0,5.0,100
+0,4,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.62,29216.81,2.28,6.28,100
+0,4,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.61,24457.01,1.0,5.0,100
+0,4,shared4,Shared every 4,0.56,14408.09,0.0,4.0,100
+0,4,shared4_fixed_topup,Shared every 4 + fixed top-up,0.63,28577.67,4.17,8.17,100
+0,4,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.64,34231.66,3.0,7.0,100
+0,4,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.63,28577.67,4.17,8.17,100
+0,4,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.62,23696.59,2.0,6.0,100
+0,4,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.63,28577.67,4.17,8.17,100
+0,4,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.64,23718.28,2.0,6.0,100
+0,4,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.63,28577.67,4.17,8.17,100
+0,4,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.62,27885.59,4.0,8.0,100
+0,4,shared8,Shared every 8,0.6,13372.72,0.0,4.0,100
+0,4,shared8_fixed_topup,Shared every 8 + fixed top-up,0.61,28413.73,6.73,10.73,100
+0,4,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.6,19931.36,1.0,5.0,100
+0,4,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.61,28413.73,6.73,10.73,100
+0,4,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.64,19876.42,1.0,5.0,100
+0,4,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.61,28413.73,6.73,10.73,100
+0,4,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.61,19921.16,1.0,5.0,100
+0,4,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.61,28413.73,6.73,10.73,100
+0,4,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.62,22712.95,2.0,6.0,100
+0,4,shared16,Shared every 16,0.56,13923.9,0.0,4.0,100
+0,4,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.58,28451.74,8.34,12.34,100
+0,4,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.64,22775.4,2.0,6.0,100
+0,4,shared32,Shared every 32,0.58,14010.77,0.0,4.0,100
+0,8,fixed,Fixed,0.68,52380.64,0.0,8.0,100
+0,8,shared2,Shared every 2,0.65,36149.87,0.0,8.0,100
+0,8,shared2_topup,Shared every 2 + shared2 top-up,0.69,54931.72,3.96,11.96,100
+0,8,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.68,51754.45,3.0,11.0,100
+0,8,shared2_fixed_topup,Shared every 2 + fixed top-up,0.69,54931.72,3.96,11.96,100
+0,8,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.66,49230.75,2.0,10.0,100
+0,8,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.69,54931.72,3.96,11.96,100
+0,8,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.67,47916.44,3.0,11.0,100
+0,8,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.69,54931.72,3.96,11.96,100
+0,8,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.68,50355.18,4.0,12.0,100
+0,8,shared4,Shared every 4,0.65,27799.53,0.0,8.0,100
+0,8,shared4_fixed_topup,Shared every 4 + fixed top-up,0.69,54967.05,8.33,16.33,100
+0,8,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.71,54387.24,4.0,12.0,100
+0,8,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.69,54967.05,8.33,16.33,100
+0,8,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.71,52844.92,5.0,13.0,100
+0,8,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.69,54967.05,8.33,16.33,100
+0,8,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.73,53764.51,7.0,15.0,100
+0,8,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.69,54967.05,8.33,16.33,100
+0,8,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.7,57013.23,9.0,17.0,100
+0,8,shared8,Shared every 8,0.61,22555.38,0.0,8.0,100
+0,8,shared8_fixed_topup,Shared every 8 + fixed top-up,0.65,54587.97,11.95,19.95,100
+0,8,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.68,55602.9,5.0,13.0,100
+0,8,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.65,54581.95,11.99,19.99,100
+0,8,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.68,47289.43,5.0,13.0,100
+0,8,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.65,54650.0,12.09,20.09,100
+0,8,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.66,48186.59,7.0,15.0,100
+0,8,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.65,54627.45,12.29,20.29,100
+0,8,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.71,53768.02,9.0,17.0,100
+0,8,shared16,Shared every 16,0.59,23866.18,0.0,8.0,100
+0,8,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.61,54575.15,16.13,24.13,100
+0,8,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.7,52267.44,10.0,18.0,100
+0,8,shared32,Shared every 32,0.65,24152.89,0.0,8.0,100
+0,16,fixed,Fixed,0.72,105518.14,0.0,16.0,100
+0,16,shared2,Shared every 2,0.69,72641.32,0.0,16.0,100
+0,16,shared2_topup,Shared every 2 + shared2 top-up,0.72,108310.07,8.13,24.13,100
+0,16,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.71,90771.39,4.0,20.0,100
+0,16,shared2_fixed_topup,Shared every 2 + fixed top-up,0.72,108310.07,8.13,24.13,100
+0,16,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.72,99017.42,4.0,20.0,100
+0,16,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.72,108310.07,8.13,24.13,100
+0,16,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.73,107785.32,9.0,25.0,100
+0,16,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.72,108310.07,8.13,24.13,100
+0,16,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.71,105934.7,10.0,26.0,100
+0,16,shared4,Shared every 4,0.71,55738.79,0.0,16.0,100
+0,16,shared4_fixed_topup,Shared every 4 + fixed top-up,0.72,108551.09,14.66,30.66,100
+0,16,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.75,95602.62,6.0,22.0,100
+0,16,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.72,108278.67,15.41,31.41,100
+0,16,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.74,71557.11,3.0,19.0,100
+0,16,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.72,108146.62,16.47,32.47,100
+0,16,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.76,90728.16,9.0,25.0,100
+0,16,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.72,107882.82,17.76,33.76,100
+0,16,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.72,84952.49,9.0,25.0,100
+0,16,shared8,Shared every 8,0.64,47840.56,0.0,16.0,100
+0,16,shared8_fixed_topup,Shared every 8 + fixed top-up,0.7,108281.41,17.76,33.76,100
+0,16,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.72,87481.11,6.0,22.0,100
+0,16,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.7,108296.74,19.4,35.4,100
+0,16,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.7,81482.9,7.0,23.0,100
+0,16,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.7,107792.29,21.47,37.47,100
+0,16,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.71,82474.37,9.0,25.0,100
+0,16,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.7,107552.09,24.24,40.24,100
+0,16,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.73,81430.92,10.0,26.0,100
+0,16,shared16,Shared every 16,0.61,43654.88,0.0,16.0,100
+0,16,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.72,107292.3,31.32,47.32,100
+0,16,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.75,135198.66,32.72,48.72,100
+0,16,shared32,Shared every 32,0.66,44328.15,0.0,16.0,100
+0,32,fixed,Fixed,0.74,210957.59,0.0,32.0,100
+0,32,shared2,Shared every 2,0.74,144584.15,0.0,32.0,100
+0,32,shared2_topup,Shared every 2 + shared2 top-up,0.75,213264.93,16.03,48.03,100
+0,32,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.75,160188.73,3.0,35.0,100
+0,32,shared2_fixed_topup,Shared every 2 + fixed top-up,0.78,213835.97,10.87,42.87,100
+0,32,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.75,157665.03,2.0,34.0,100
+0,32,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.77,212700.75,21.63,53.63,100
+0,32,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.75,153825.89,2.0,34.0,100
+0,32,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.76,212578.6,27.21,59.21,100
+0,32,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.75,175413.22,9.0,41.0,100
+0,32,shared4,Shared every 4,0.75,111694.71,0.0,32.0,100
+0,32,shared4_fixed_topup,Shared every 4 + fixed top-up,0.79,214184.35,16.06,48.06,100
+0,32,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.79,214184.35,16.06,48.06,100
+0,32,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.78,213754.46,23.53,55.53,100
+0,32,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.77,139297.39,6.0,38.0,100
+0,32,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.78,213560.67,32.35,64.35,100
+0,32,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.78,160805.39,13.0,45.0,100
+0,32,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.77,212858.1,42.49,74.49,100
+0,32,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.77,164056.86,17.0,49.0,100
+0,32,shared8,Shared every 8,0.7,95691.93,0.0,32.0,100
+0,32,shared8_fixed_topup,Shared every 8 + fixed top-up,0.77,214411.47,18.62,50.62,100
+0,32,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.75,135332.48,6.0,38.0,100
+0,32,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.74,213564.11,27.68,59.68,100
+0,32,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.72,131729.64,8.0,40.0,100
+0,32,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.73,213345.46,37.86,69.86,100
+0,32,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.72,121323.14,7.0,39.0,100
+0,32,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.76,213048.5,48.64,80.64,100
+0,32,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.75,129282.29,10.0,42.0,100
+0,32,shared16,Shared every 16,0.73,86001.9,0.0,32.0,100
+0,32,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.76,212981.4,62.07,94.07,100
+0,32,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.76,167951.15,30.0,62.0,100
+0,32,shared32,Shared every 32,0.67,84561.14,0.0,32.0,100
+1,4,fixed,Fixed,0.62,26458.2,0.0,4.0,100
+1,4,shared2,Shared every 2,0.59,18052.01,0.0,4.0,100
+1,4,shared2_topup,Shared every 2 + shared2 top-up,0.62,28868.77,2.16,6.16,100
+1,4,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.6,24567.13,1.0,5.0,100
+1,4,shared2_fixed_topup,Shared every 2 + fixed top-up,0.62,28868.77,2.16,6.16,100
+1,4,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.61,24547.37,1.0,5.0,100
+1,4,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.62,28868.77,2.16,6.16,100
+1,4,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.6,24546.34,1.0,5.0,100
+1,4,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.62,28868.77,2.16,6.16,100
+1,4,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.61,24547.29,1.0,5.0,100
+1,4,shared4,Shared every 4,0.49,14261.34,0.0,4.0,100
+1,4,shared4_fixed_topup,Shared every 4 + fixed top-up,0.57,28571.48,4.1,8.1,100
+1,4,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.62,34175.4,3.0,7.0,100
+1,4,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.57,28571.48,4.1,8.1,100
+1,4,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.56,23333.5,2.0,6.0,100
+1,4,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.57,28571.48,4.1,8.1,100
+1,4,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.59,23532.31,2.0,6.0,100
+1,4,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.57,28571.48,4.1,8.1,100
+1,4,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.57,27987.58,4.0,8.0,100
+1,4,shared8,Shared every 8,0.57,13926.58,0.0,4.0,100
+1,4,shared8_fixed_topup,Shared every 8 + fixed top-up,0.61,28749.67,6.55,10.55,100
+1,4,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.6,20641.67,1.0,5.0,100
+1,4,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.61,28749.67,6.55,10.55,100
+1,4,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.62,20363.34,1.0,5.0,100
+1,4,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.61,28749.67,6.55,10.55,100
+1,4,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.61,20473.16,1.0,5.0,100
+1,4,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.61,28749.67,6.55,10.55,100
+1,4,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.63,23058.32,2.0,6.0,100
+1,4,shared16,Shared every 16,0.54,13718.6,0.0,4.0,100
+1,4,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.57,28466.61,8.65,12.65,100
+1,4,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.58,22756.75,2.0,6.0,100
+1,4,shared32,Shared every 32,0.58,13598.52,0.0,4.0,100
+1,8,fixed,Fixed,0.68,52841.97,0.0,8.0,100
+1,8,shared2,Shared every 2,0.65,36246.43,0.0,8.0,100
+1,8,shared2_topup,Shared every 2 + shared2 top-up,0.68,55668.36,4.32,12.32,100
+1,8,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.66,51713.07,3.0,11.0,100
+1,8,shared2_fixed_topup,Shared every 2 + fixed top-up,0.68,55668.36,4.32,12.32,100
+1,8,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.68,49189.55,2.0,10.0,100
+1,8,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.68,55668.36,4.32,12.32,100
+1,8,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.67,47467.1,3.0,11.0,100
+1,8,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.68,55668.36,4.32,12.32,100
+1,8,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.66,50001.89,4.0,12.0,100
+1,8,shared4,Shared every 4,0.59,28274.21,0.0,8.0,100
+1,8,shared4_fixed_topup,Shared every 4 + fixed top-up,0.69,55025.22,8.3,16.3,100
+1,8,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.66,54783.18,4.0,12.0,100
+1,8,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.69,55025.22,8.3,16.3,100
+1,8,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.65,52939.49,5.0,13.0,100
+1,8,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.69,55025.22,8.3,16.3,100
+1,8,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.63,54472.44,7.0,15.0,100
+1,8,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.69,55025.22,8.3,16.3,100
+1,8,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.64,58385.54,9.0,17.0,100
+1,8,shared8,Shared every 8,0.61,24001.68,0.0,8.0,100
+1,8,shared8_fixed_topup,Shared every 8 + fixed top-up,0.7,54986.89,12.16,20.16,100
+1,8,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.67,57061.91,5.0,13.0,100
+1,8,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.7,54984.65,12.24,20.24,100
+1,8,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.7,48240.73,5.0,13.0,100
+1,8,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.7,54978.42,12.31,20.31,100
+1,8,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.69,49191.85,7.0,15.0,100
+1,8,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.7,54851.77,12.33,20.33,100
+1,8,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.66,54175.47,9.0,17.0,100
+1,8,shared16,Shared every 16,0.56,23369.26,0.0,8.0,100
+1,8,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.62,54716.22,16.2,24.2,100
+1,8,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.63,52048.75,10.0,18.0,100
+1,8,shared32,Shared every 32,0.61,23099.85,0.0,8.0,100
+1,16,fixed,Fixed,0.71,106246.75,0.0,16.0,100
+1,16,shared2,Shared every 2,0.7,71972.31,0.0,16.0,100
+1,16,shared2_topup,Shared every 2 + shared2 top-up,0.72,109163.99,8.35,24.35,100
+1,16,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.7,89976.67,4.0,20.0,100
+1,16,shared2_fixed_topup,Shared every 2 + fixed top-up,0.72,109163.99,8.35,24.35,100
+1,16,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.71,97975.74,4.0,20.0,100
+1,16,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.72,109163.99,8.35,24.35,100
+1,16,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.71,106255.87,9.0,25.0,100
+1,16,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.72,109163.99,8.35,24.35,100
+1,16,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.7,104256.02,10.0,26.0,100
+1,16,shared4,Shared every 4,0.7,56053.17,0.0,16.0,100
+1,16,shared4_fixed_topup,Shared every 4 + fixed top-up,0.73,108858.24,14.79,30.79,100
+1,16,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.73,95553.99,6.0,22.0,100
+1,16,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.73,108740.66,15.69,31.69,100
+1,16,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.72,71717.9,3.0,19.0,100
+1,16,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.73,108325.88,16.87,32.87,100
+1,16,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.73,91439.03,9.0,25.0,100
+1,16,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.73,108363.98,18.2,34.2,100
+1,16,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.73,86164.5,9.0,25.0,100
+1,16,shared8,Shared every 8,0.7,47638.11,0.0,16.0,100
+1,16,shared8_fixed_topup,Shared every 8 + fixed top-up,0.75,108793.59,17.71,33.71,100
+1,16,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.72,87320.6,6.0,22.0,100
+1,16,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.75,108461.38,19.65,35.65,100
+1,16,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.75,80756.44,7.0,23.0,100
+1,16,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.76,108401.34,22.12,38.12,100
+1,16,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.73,81692.89,9.0,25.0,100
+1,16,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.75,108088.31,24.42,40.42,100
+1,16,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.71,80264.46,10.0,26.0,100
+1,16,shared16,Shared every 16,0.62,42760.28,0.0,16.0,100
+1,16,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.72,108336.97,31.95,47.95,100
+1,16,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.72,133643.5,32.75,48.75,100
+1,16,shared32,Shared every 32,0.61,42093.63,0.0,16.0,100
+1,32,fixed,Fixed,0.73,211516.42,0.0,32.0,100
+1,32,shared2,Shared every 2,0.74,144288.39,0.0,32.0,100
+1,32,shared2_topup,Shared every 2 + shared2 top-up,0.76,214498.32,16.35,48.35,100
+1,32,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.74,159755.03,3.0,35.0,100
+1,32,shared2_fixed_topup,Shared every 2 + fixed top-up,0.76,208946.94,10.18,42.18,100
+1,32,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.75,157231.51,2.0,34.0,100
+1,32,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.75,210109.73,21.26,53.26,100
+1,32,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.74,153178.32,2.0,34.0,100
+1,32,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.74,210954.37,27.32,59.32,100
+1,32,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.74,174108.96,9.0,41.0,100
+1,32,shared4,Shared every 4,0.74,111761.41,0.0,32.0,100
+1,32,shared4_fixed_topup,Shared every 4 + fixed top-up,0.74,207685.69,15.07,47.07,100
+1,32,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.74,214013.57,16.04,48.04,100
+1,32,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.77,208124.08,23.0,55.0,100
+1,32,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.76,138865.28,6.0,38.0,100
+1,32,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.75,208356.49,31.42,63.42,100
+1,32,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.75,161204.73,13.0,45.0,100
+1,32,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.76,209848.35,40.87,72.87,100
+1,32,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.76,165796.8,17.0,49.0,100
+1,32,shared8,Shared every 8,0.75,96384.37,0.0,32.0,100
+1,32,shared8_fixed_topup,Shared every 8 + fixed top-up,0.78,206010.81,17.19,49.19,100
+1,32,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.76,136066.86,6.0,38.0,100
+1,32,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.78,206103.5,26.35,58.35,100
+1,32,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.78,131714.52,8.0,40.0,100
+1,32,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.78,207059.24,36.85,68.85,100
+1,32,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.77,121574.54,7.0,39.0,100
+1,32,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.79,208348.46,46.31,78.31,100
+1,32,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.75,129010.72,10.0,42.0,100
+1,32,shared16,Shared every 16,0.71,86466.3,0.0,32.0,100
+1,32,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.78,207944.24,58.75,90.75,100
+1,32,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.77,168000.85,30.0,62.0,100
+1,32,shared32,Shared every 32,0.64,80111.83,0.0,32.0,100
+2,4,fixed,Fixed,0.59,26504.29,0.0,4.0,100
+2,4,shared2,Shared every 2,0.58,17807.8,0.0,4.0,100
+2,4,shared2_topup,Shared every 2 + shared2 top-up,0.59,29484.56,2.33,6.33,100
+2,4,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.6,24364.73,1.0,5.0,100
+2,4,shared2_fixed_topup,Shared every 2 + fixed top-up,0.59,29484.56,2.33,6.33,100
+2,4,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.63,24245.25,1.0,5.0,100
+2,4,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.59,29484.56,2.33,6.33,100
+2,4,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.61,24456.09,1.0,5.0,100
+2,4,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.59,29484.56,2.33,6.33,100
+2,4,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.63,24251.04,1.0,5.0,100
+2,4,shared4,Shared every 4,0.55,13515.56,0.0,4.0,100
+2,4,shared4_fixed_topup,Shared every 4 + fixed top-up,0.59,29042.0,4.55,8.55,100
+2,4,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.6,32845.03,2.94,6.94,100
+2,4,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.59,29042.0,4.55,8.55,100
+2,4,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.64,22512.65,2.0,6.0,100
+2,4,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.59,29042.0,4.55,8.55,100
+2,4,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.59,22577.66,2.0,6.0,100
+2,4,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.59,29042.0,4.55,8.55,100
+2,4,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.63,27466.69,4.0,8.0,100
+2,4,shared8,Shared every 8,0.58,13536.35,0.0,4.0,100
+2,4,shared8_fixed_topup,Shared every 8 + fixed top-up,0.62,28708.92,6.72,10.72,100
+2,4,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.62,20042.43,1.0,5.0,100
+2,4,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.62,28708.92,6.72,10.72,100
+2,4,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.61,19991.64,1.0,5.0,100
+2,4,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.62,28708.92,6.72,10.72,100
+2,4,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.61,20096.06,1.0,5.0,100
+2,4,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.62,28708.92,6.72,10.72,100
+2,4,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.62,22458.5,2.0,6.0,100
+2,4,shared16,Shared every 16,0.56,13790.12,0.0,4.0,100
+2,4,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.6,28528.27,8.96,12.96,100
+2,4,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.61,22729.38,2.0,6.0,100
+2,4,shared32,Shared every 32,0.55,14273.41,0.0,4.0,100
+2,8,fixed,Fixed,0.64,53312.44,0.0,8.0,100
+2,8,shared2,Shared every 2,0.64,35757.41,0.0,8.0,100
+2,8,shared2_topup,Shared every 2 + shared2 top-up,0.67,56353.35,4.43,12.43,100
+2,8,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.69,51113.7,3.0,11.0,100
+2,8,shared2_fixed_topup,Shared every 2 + fixed top-up,0.67,56353.35,4.43,12.43,100
+2,8,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.67,48736.18,2.0,10.0,100
+2,8,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.67,56353.35,4.43,12.43,100
+2,8,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.66,47467.77,3.0,11.0,100
+2,8,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.67,56353.35,4.43,12.43,100
+2,8,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.67,49201.28,4.0,12.0,100
+2,8,shared4,Shared every 4,0.6,27162.63,0.0,8.0,100
+2,8,shared4_fixed_topup,Shared every 4 + fixed top-up,0.66,56004.66,8.74,16.74,100
+2,8,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.65,52994.51,3.92,11.92,100
+2,8,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.66,56004.66,8.74,16.74,100
+2,8,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.67,51854.19,5.0,13.0,100
+2,8,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.66,56004.66,8.74,16.74,100
+2,8,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.64,52660.09,7.0,15.0,100
+2,8,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.66,56004.66,8.74,16.74,100
+2,8,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.67,57827.84,9.0,17.0,100
+2,8,shared8,Shared every 8,0.59,23092.11,0.0,8.0,100
+2,8,shared8_fixed_topup,Shared every 8 + fixed top-up,0.67,55495.94,12.21,20.21,100
+2,8,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.68,55759.71,5.0,13.0,100
+2,8,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.67,55366.16,12.27,20.27,100
+2,8,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.65,47570.69,5.0,13.0,100
+2,8,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.67,55379.03,12.38,20.38,100
+2,8,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.66,48156.48,7.0,15.0,100
+2,8,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.67,55303.1,12.51,20.51,100
+2,8,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.67,53221.61,9.0,17.0,100
+2,8,shared16,Shared every 16,0.6,23451.0,0.0,8.0,100
+2,8,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.63,55101.87,17.48,25.48,100
+2,8,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.67,51286.17,10.0,18.0,100
+2,8,shared32,Shared every 32,0.59,24376.3,0.0,8.0,100
+2,16,fixed,Fixed,0.72,106424.11,0.0,16.0,100
+2,16,shared2,Shared every 2,0.69,72207.64,0.0,16.0,100
+2,16,shared2_topup,Shared every 2 + shared2 top-up,0.73,109360.9,8.42,24.42,100
+2,16,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.74,89827.8,4.0,20.0,100
+2,16,shared2_fixed_topup,Shared every 2 + fixed top-up,0.73,109336.43,8.42,24.42,100
+2,16,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.72,98392.84,4.0,20.0,100
+2,16,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.73,109369.64,8.42,24.42,100
+2,16,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.71,107370.57,9.0,25.0,100
+2,16,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.73,109336.2,8.42,24.42,100
+2,16,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.74,104157.49,10.0,26.0,100
+2,16,shared4,Shared every 4,0.66,55409.4,0.0,16.0,100
+2,16,shared4_fixed_topup,Shared every 4 + fixed top-up,0.68,109140.0,14.77,30.77,100
+2,16,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.69,94071.76,5.88,21.88,100
+2,16,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.68,109087.64,15.64,31.64,100
+2,16,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.69,71096.07,3.0,19.0,100
+2,16,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.68,108816.98,16.73,32.73,100
+2,16,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.68,90016.47,9.0,25.0,100
+2,16,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.68,108685.96,18.33,34.33,100
+2,16,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.7,86074.61,9.0,25.0,100
+2,16,shared8,Shared every 8,0.68,47189.54,0.0,16.0,100
+2,16,shared8_fixed_topup,Shared every 8 + fixed top-up,0.73,108970.3,18.32,34.32,100
+2,16,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.73,86379.93,6.0,22.0,100
+2,16,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.73,108822.03,20.0,36.0,100
+2,16,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.7,80922.54,7.0,23.0,100
+2,16,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.73,108724.09,22.69,38.69,100
+2,16,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.73,80973.41,9.0,25.0,100
+2,16,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.73,108393.0,25.14,41.14,100
+2,16,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.72,79834.98,10.0,26.0,100
+2,16,shared16,Shared every 16,0.62,42557.02,0.0,16.0,100
+2,16,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.67,108054.99,34.39,50.39,100
+2,16,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.69,132565.44,32.56,48.56,100
+2,16,shared32,Shared every 32,0.59,44486.06,0.0,16.0,100
+2,32,fixed,Fixed,0.77,211980.97,0.0,32.0,100
+2,32,shared2,Shared every 2,0.74,145217.41,0.0,32.0,100
+2,32,shared2_topup,Shared every 2 + shared2 top-up,0.78,213555.16,15.97,47.97,100
+2,32,shared2_accuracy_match,Shared every 2 + shared2 top-up accuracy match,0.75,160573.7,3.0,35.0,100
+2,32,shared2_fixed_topup,Shared every 2 + fixed top-up,0.74,209454.59,10.08,42.08,100
+2,32,shared2_fixed_accuracy_match,Shared every 2 + fixed top-up accuracy match,0.74,158196.18,2.0,34.0,100
+2,32,shared2_shared4_topup,Shared every 2 + shared4 top-up,0.77,210436.41,20.47,52.47,100
+2,32,shared2_shared4_accuracy_match,Shared every 2 + shared4 top-up accuracy match,0.75,154365.23,2.0,34.0,100
+2,32,shared2_shared8_topup,Shared every 2 + shared8 top-up,0.76,211099.57,26.54,58.54,100
+2,32,shared2_shared8_accuracy_match,Shared every 2 + shared8 top-up accuracy match,0.75,174596.05,9.0,41.0,100
+2,32,shared4,Shared every 4,0.68,111610.74,0.0,32.0,100
+2,32,shared4_fixed_topup,Shared every 4 + fixed top-up,0.7,206573.5,14.99,46.99,100
+2,32,shared4_fixed_accuracy_match,Shared every 4 + fixed top-up accuracy match,0.7,212193.71,15.84,47.84,100
+2,32,shared4_shared2_topup,Shared every 4 + shared2 top-up,0.75,208475.93,23.01,55.01,100
+2,32,shared4_shared2_accuracy_match,Shared every 4 + shared2 top-up accuracy match,0.71,138589.63,6.0,38.0,100
+2,32,shared4_shared4_topup,Shared every 4 + shared4 top-up,0.74,209152.51,31.27,63.27,100
+2,32,shared4_shared4_accuracy_match,Shared every 4 + shared4 top-up accuracy match,0.71,160296.25,13.0,45.0,100
+2,32,shared4_shared8_topup,Shared every 4 + shared8 top-up,0.75,210523.73,41.56,73.56,100
+2,32,shared4_shared8_accuracy_match,Shared every 4 + shared8 top-up accuracy match,0.73,166800.37,17.0,49.0,100
+2,32,shared8,Shared every 8,0.73,93708.81,0.0,32.0,100
+2,32,shared8_fixed_topup,Shared every 8 + fixed top-up,0.74,205291.13,17.56,49.56,100
+2,32,shared8_fixed_accuracy_match,Shared every 8 + fixed top-up accuracy match,0.74,132899.2,6.0,38.0,100
+2,32,shared8_shared2_topup,Shared every 8 + shared2 top-up,0.75,205666.51,26.41,58.41,100
+2,32,shared8_shared2_accuracy_match,Shared every 8 + shared2 top-up accuracy match,0.74,129979.26,8.0,40.0,100
+2,32,shared8_shared4_topup,Shared every 8 + shared4 top-up,0.77,206273.61,36.58,68.58,100
+2,32,shared8_shared4_accuracy_match,Shared every 8 + shared4 top-up accuracy match,0.75,118773.18,7.0,39.0,100
+2,32,shared8_shared8_topup,Shared every 8 + shared8 top-up,0.75,207381.96,47.97,79.97,100
+2,32,shared8_shared8_accuracy_match,Shared every 8 + shared8 top-up accuracy match,0.74,126354.25,10.0,42.0,100
+2,32,shared16,Shared every 16,0.67,84633.7,0.0,32.0,100
+2,32,shared16_shared16_topup,Shared every 16 + shared16 top-up,0.71,207680.23,62.32,94.32,100
+2,32,shared16_shared16_accuracy_match,Shared every 16 + shared16 top-up accuracy match,0.71,165389.65,29.86,61.86,100
+2,32,shared32,Shared every 32,0.61,84712.18,0.0,32.0,100

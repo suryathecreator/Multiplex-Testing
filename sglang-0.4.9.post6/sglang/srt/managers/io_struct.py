@@ -1030,6 +1030,7 @@ class ForkReqInput:
     child_seeds: Optional[List[int]] = None
     target_dp_rank: Optional[int] = None
     allow_non_eot_branch: bool = False
+    force_think_end: bool = False
 
 
 @dataclass
@@ -1050,6 +1051,8 @@ class ForkReqOutput:
     eot_token_id: Optional[int]
     eot_output_index: int
     cacheable_token_count: int
+    forced_think_end_token_count: int = 0
+    forced_think_end_token_id: Optional[int] = None
 
 
 @dataclass

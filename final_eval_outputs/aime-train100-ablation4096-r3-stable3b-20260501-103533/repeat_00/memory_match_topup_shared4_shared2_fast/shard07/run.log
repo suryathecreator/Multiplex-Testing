@@ -1,0 +1,26 @@
+2026-05-10 01:54:49,944 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 01:54:50,235 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 01:54:50,235 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-10 01:54:52,421 INFO [setup] Restricted run to prompt indices: [120, 123]
+2026-05-10 01:54:54,548 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-10 01:54:54,548 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 01:54:54,656 INFO [setup] Starting the local SGLang server on 127.0.0.1:47007.
+2026-05-10 02:10:13,354 ERROR [setup] Run aborted to preserve fidelity: Timed out waiting for the SGLang server to become healthy.
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10582, in main
+    server_handle.start()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 591, in start
+    self._wait_healthy()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 628, in _wait_healthy
+    raise TimeoutError("Timed out waiting for the SGLang server to become healthy.")
+TimeoutError: Timed out waiting for the SGLang server to become healthy.
+2026-05-10 02:10:13,443 INFO [setup] Run aborted cleanly after 0:15:25. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_00/memory_match_topup_shared4_shared2_fast/shard07/manifest.json.
+2026-05-10 02:12:37,927 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 02:12:37,928 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-10 02:12:40,273 INFO [setup] Restricted run to prompt indices: [120, 123]
+2026-05-10 02:12:42,231 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.39 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-10 02:12:42,317 INFO [setup] Starting the local SGLang server on 127.0.0.1:47007.
+2026-05-10 02:16:05,554 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-10 02:16:06,931 INFO [scheduler] Dispatching prompt 120 to DP rank 0.
+2026-05-10 02:16:06,932 INFO [scheduler] Dispatching prompt 123 to DP rank 1.
+2026-05-10 02:36:22,014 INFO [setup] Finished memory-match top-up in 0:23:45 (1425.4s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_00/memory_match_topup_shared4_shared2_fast/shard07/summary_memory_match.md.

@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "98",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "A point whose coordinates are both integers is called a lattice point. How many lattice points lie on the hyperbola $x^2 - y^2 = 2000^2$?",
+      "problem_id": "aime-train-2000-II-02",
+      "problem_number": 2,
+      "prompt_index": 271,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 271,
+      "year": 2000
+    },
+    {
+      "aime_number": 2,
+      "answer": "0",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Given that $z$ is a complex number such that $z+\\frac 1z=2\\cos 3^\\circ$, find the least integer that is greater than $z^{2000}+\\frac 1{z^{2000}}$.",
+      "problem_id": "aime-train-2000-II-09",
+      "problem_number": 9,
+      "prompt_index": 278,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 278,
+      "year": 2000
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    271,
+    278
+  ],
+  "selection_seed": 4096
+}

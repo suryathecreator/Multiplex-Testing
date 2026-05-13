@@ -1,0 +1,357 @@
+{
+  "ablation": [
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 1,
+      "mean_cost_tokens": 6530.133333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.48333333333333334,
+      "num_repeats": 3,
+      "std_cost_tokens": 60.14658122730978,
+      "std_pass_at_k": 0.01527525231651948
+    },
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 2,
+      "mean_cost_tokens": 13166.303333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5433333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 112.16543332655226,
+      "std_pass_at_k": 0.023094010767584987
+    },
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 4,
+      "mean_cost_tokens": 26412.753333333334,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6066666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 120.84865424709282,
+      "std_pass_at_k": 0.01527525231651948
+    },
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 8,
+      "mean_cost_tokens": 52845.01666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6666666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 465.90747110701574,
+      "std_pass_at_k": 0.023094010767585053
+    },
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 16,
+      "mean_cost_tokens": 106063.0,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.7166666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 480.12337695638246,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Fixed",
+      "group_size": 1,
+      "k": 32,
+      "mean_cost_tokens": 211484.99333333335,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.7466666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 512.413292795314,
+      "std_pass_at_k": 0.020816659994661344
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 1,
+      "mean_cost_tokens": 6514.5,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5166666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 63.54331672174514,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 2,
+      "mean_cost_tokens": 8950.76,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.54,
+      "num_repeats": 3,
+      "std_cost_tokens": 168.96419058486913,
+      "std_pass_at_k": 0.01732050807568879
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 4,
+      "mean_cost_tokens": 17961.696666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5833333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 133.94685973673748,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 8,
+      "mean_cost_tokens": 36051.23666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6466666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 259.0010442707377,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 16,
+      "mean_cost_tokens": 72273.75666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6933333333333332,
+      "num_repeats": 3,
+      "std_cost_tokens": 339.3702332753075,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Shared every 2",
+      "group_size": 2,
+      "k": 32,
+      "mean_cost_tokens": 144696.65,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.74,
+      "num_repeats": 3,
+      "std_cost_tokens": 474.6174539563381,
+      "std_pass_at_k": 0.0
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 1,
+      "mean_cost_tokens": 6566.599999999999,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.47,
+      "num_repeats": 3,
+      "std_cost_tokens": 150.99518402916036,
+      "std_pass_at_k": 0.01999999999999999
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 2,
+      "mean_cost_tokens": 9108.826666666666,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5,
+      "num_repeats": 3,
+      "std_cost_tokens": 297.2352422464967,
+      "std_pass_at_k": 0.020000000000000018
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 4,
+      "mean_cost_tokens": 14061.663333333334,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5333333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 478.5974599110757,
+      "std_pass_at_k": 0.03785938897200186
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 8,
+      "mean_cost_tokens": 27745.456666666665,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6133333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 557.7593281455114,
+      "std_pass_at_k": 0.03214550253664321
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 16,
+      "mean_cost_tokens": 55733.78666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.69,
+      "num_repeats": 3,
+      "std_cost_tokens": 321.91416283433745,
+      "std_pass_at_k": 0.026457513110645866
+    },
+    {
+      "condition": "Shared every 4",
+      "group_size": 4,
+      "k": 32,
+      "mean_cost_tokens": 111688.95333333334,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.7233333333333334,
+      "num_repeats": 3,
+      "std_cost_tokens": 75.49977902837341,
+      "std_pass_at_k": 0.03785938897200179
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 1,
+      "mean_cost_tokens": 6550.163333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.4533333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 62.23216317414442,
+      "std_pass_at_k": 0.020816659994661323
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 2,
+      "mean_cost_tokens": 9003.18,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5166666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 76.73528588595981,
+      "std_pass_at_k": 0.01527525231651948
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 4,
+      "mean_cost_tokens": 13810.873333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5533333333333333,
+      "num_repeats": 3,
+      "std_cost_tokens": 104.21155470164162,
+      "std_pass_at_k": 0.011547005383792525
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 8,
+      "mean_cost_tokens": 23562.146666666667,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5833333333333334,
+      "num_repeats": 3,
+      "std_cost_tokens": 266.45366901833745,
+      "std_pass_at_k": 0.020816659994661285
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 16,
+      "mean_cost_tokens": 42990.72666666666,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6166666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 584.0833797783782,
+      "std_pass_at_k": 0.005773502691896262
+    },
+    {
+      "condition": "Shared every 16",
+      "group_size": 16,
+      "k": 32,
+      "mean_cost_tokens": 85700.63333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.7033333333333334,
+      "num_repeats": 3,
+      "std_cost_tokens": 952.7207845603753,
+      "std_pass_at_k": 0.0305505046330389
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 1,
+      "mean_cost_tokens": 6574.91,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.49333333333333335,
+      "num_repeats": 3,
+      "std_cost_tokens": 103.10412261398643,
+      "std_pass_at_k": 0.01527525231651948
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 2,
+      "mean_cost_tokens": 9049.103333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.5466666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 189.54845194127435,
+      "std_pass_at_k": 0.011547005383792525
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 4,
+      "mean_cost_tokens": 13960.9,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.57,
+      "num_repeats": 3,
+      "std_cost_tokens": 340.19757597607867,
+      "std_pass_at_k": 0.017320508075688724
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 8,
+      "mean_cost_tokens": 23876.346666666665,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.6166666666666667,
+      "num_repeats": 3,
+      "std_cost_tokens": 681.6805058334395,
+      "std_pass_at_k": 0.03055050463303896
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 16,
+      "mean_cost_tokens": 43635.94666666666,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.62,
+      "num_repeats": 3,
+      "std_cost_tokens": 1338.016971952649,
+      "std_pass_at_k": 0.036055512754639925
+    },
+    {
+      "condition": "Shared every 32",
+      "group_size": 32,
+      "k": 32,
+      "mean_cost_tokens": 83128.38333333333,
+      "mean_num_prompts": 100.0,
+      "mean_pass_at_k": 0.64,
+      "num_repeats": 3,
+      "std_cost_tokens": 2613.5031624303265,
+      "std_pass_at_k": 0.030000000000000027
+    }
+  ],
+  "bundle_group_filter": [
+    [
+      "bundle_fixed",
+      1
+    ],
+    [
+      "bundle_shared_16",
+      16
+    ],
+    [
+      "bundle_shared_32",
+      32
+    ],
+    [
+      "bundle_shared_low",
+      2
+    ],
+    [
+      "bundle_shared_low",
+      4
+    ]
+  ],
+  "root": "/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533"
+}

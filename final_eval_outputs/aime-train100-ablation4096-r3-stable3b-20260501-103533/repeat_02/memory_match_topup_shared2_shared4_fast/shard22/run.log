@@ -1,0 +1,101 @@
+2026-05-06 10:18:50,286 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-06 10:18:50,287 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 10:18:50,289 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-06 10:18:52,852 INFO [setup] Restricted run to prompt indices: [812, 814, 831, 847]
+2026-05-06 10:18:55,432 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-06 10:18:55,432 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 10:18:55,485 INFO [setup] Starting the local SGLang server on 127.0.0.1:42222.
+2026-05-06 10:19:59,216 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-06 10:19:59,598 INFO [scheduler] Dispatching prompt 812 to DP rank 0.
+2026-05-06 10:19:59,600 INFO [scheduler] Dispatching prompt 814 to DP rank 1.
+2026-05-06 10:19:59,601 INFO [scheduler] Dispatching prompt 831 to DP rank 0.
+2026-05-06 10:19:59,603 INFO [scheduler] Dispatching prompt 847 to DP rank 1.
+2026-05-06 10:22:18,457 ERROR [setup] Run aborted to preserve fidelity: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 645, in send
+    resp = conn.urlopen(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 802, in urlopen
+    retries = retries.increment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/util/retry.py", line 552, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/packages/six.py", line 769, in reraise
+    raise value.with_traceback(tb)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 716, in urlopen
+    httplib_response = self._make_request(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 468, in _make_request
+    six.raise_from(e, None)
+  File "<string>", line 3, in raise_from
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/urllib3/connectionpool.py", line 463, in _make_request
+    httplib_response = conn.getresponse()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 1395, in getresponse
+    response.begin()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 323, in begin
+    version, status, reason = self._read_status()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/http/client.py", line 292, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10714, in main
+    experiment_summary = run_memory_match_topup_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 8562, in run_memory_match_topup_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3097, in run_prompt_tasks_concurrently
+    result = future.result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 451, in result
+    return self.__get_result()
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/_base.py", line 403, in __get_result
+    raise self._exception
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 8522, in submit_task
+    return run_memory_match_prompt_task(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 7467, in run_memory_match_prompt_task
+    records = generate_memory_match_shared_group_samples(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 7318, in generate_memory_match_shared_group_samples
+    parent_output = client.generate(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 571, in generate
+    return self._post("/generate", payload)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 470, in _post
+    response = self.session.post(
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 640, in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/sessions.py", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/requests/adapters.py", line 660, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2026-05-06 10:22:18,510 INFO [setup] Run aborted cleanly after 0:03:30. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02/memory_match_topup_shared2_shared4_fast/shard22/manifest.json.
+2026-05-06 10:23:51,365 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 10:23:51,365 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-06 10:23:53,875 INFO [setup] Restricted run to prompt indices: [812, 814, 831, 847]
+2026-05-06 10:23:56,353 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=79.25 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-06 10:23:56,416 INFO [setup] Starting the local SGLang server on 127.0.0.1:42222.
+2026-05-06 10:24:22,547 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-06 10:24:23,077 INFO [scheduler] Dispatching prompt 812 to DP rank 0.
+2026-05-06 10:24:23,079 INFO [scheduler] Dispatching prompt 814 to DP rank 1.
+2026-05-06 10:29:53,756 INFO [scheduler] Dispatching prompt 831 to DP rank 0.
+2026-05-06 10:31:44,745 INFO [scheduler] Dispatching prompt 847 to DP rank 1.
+2026-05-06 10:38:53,966 INFO [setup] Finished memory-match top-up in 0:15:04 (904.1s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02/memory_match_topup_shared2_shared4_fast/shard22/summary_memory_match.md.

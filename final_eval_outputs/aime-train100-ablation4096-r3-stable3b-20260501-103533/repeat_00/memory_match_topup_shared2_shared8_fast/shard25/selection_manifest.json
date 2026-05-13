@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "831",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Seven teams play a soccer tournament in which each team plays every other team exactly once. No ties occur, each team has a $50\\%$ chance of winning each game it plays, and the outcomes of the games are independent. In each game, the winner is awarded a point and the loser gets 0 points. The total points are accumulated to decide the ranks of the teams. In the first game of the tournament, team $A$ beats team $B.$ The probability that team $A$ finishes with more points than team $B$ is $m/n,$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$",
+      "problem_id": "aime-train-2006-II-10",
+      "problem_number": 10,
+      "prompt_index": 459,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 459,
+      "year": 2006
+    },
+    {
+      "aime_number": 2,
+      "answer": "15",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "How many integers $N$ less than $1000$ can be written as the sum of $j$ consecutive positive odd integers from exactly 5 values of $j\\ge 1$?",
+      "problem_id": "aime-train-2006-II-13",
+      "problem_number": 13,
+      "prompt_index": 462,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 462,
+      "year": 2006
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    459,
+    462
+  ],
+  "selection_seed": 4096
+}

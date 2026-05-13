@@ -1,0 +1,5 @@
+group_size,topup_generator,topup_group_size,prompt_index,problem_id,target_cost_tokens,target_correct,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,completed_at_unix
+2,fixed,2,865,aime-train-2020-I-11,246260.0,False,182677.0,246406.0,False,False,8,40,True,completed,,1778080547.8995488
+2,fixed,2,872,aime-train-2020-II-03,142192.0,True,76409.0,143992.0,True,True,15,47,True,completed,,1778080632.6659997
+2,fixed,2,910,aime-train-2021-II-11,246566.0,False,186142.0,250460.0,False,False,8,40,True,completed,,1778081796.9449248
+2,fixed,2,921,aime-train-2022-I-07,239638.0,True,180771.0,243886.0,True,True,10,42,True,completed,,1778081857.9647074

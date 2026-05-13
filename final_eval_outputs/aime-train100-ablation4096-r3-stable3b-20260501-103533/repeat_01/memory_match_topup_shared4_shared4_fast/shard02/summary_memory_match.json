@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": true,
+      "after_cost_tokens": 268237.0,
+      "before_correct": true,
+      "before_cost_tokens": 157096.0,
+      "completed_at_unix": 1778060591.9068716,
+      "effective_k": 56,
+      "group_size": 4,
+      "message": "",
+      "problem_id": "aime-train-1986-I-14",
+      "prompt_index": 58,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 256861.0,
+      "topup_count": 24,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 145281.0,
+      "before_correct": true,
+      "before_cost_tokens": 46406.0,
+      "completed_at_unix": 1778061194.9365308,
+      "effective_k": 104,
+      "group_size": 4,
+      "message": "",
+      "problem_id": "aime-train-1988-I-01",
+      "prompt_index": 75,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 141232.0,
+      "topup_count": 72,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 174036.0,
+      "before_correct": true,
+      "before_cost_tokens": 64928.0,
+      "completed_at_unix": 1778061979.8782692,
+      "effective_k": 84,
+      "group_size": 4,
+      "message": "",
+      "problem_id": "aime-train-1988-I-04",
+      "prompt_index": 78,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 167387.0,
+      "topup_count": 52,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": false,
+      "after_cost_tokens": 200627.0,
+      "before_correct": false,
+      "before_cost_tokens": 97100.0,
+      "completed_at_unix": 1778062373.8287997,
+      "effective_k": 68,
+      "group_size": 4,
+      "message": "",
+      "problem_id": "aime-train-1988-I-06",
+      "prompt_index": 80,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": false,
+      "target_cost_tokens": 190971.0,
+      "topup_count": 36,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T10:12:54.265089+00:00",
+    "finished_at_unix": 1778062374.2650886,
+    "started_at": "2026-05-06T09:25:55.221229+00:00",
+    "started_at_unix": 1778059555.2212293,
+    "wall_clock_hms": "0:46:59",
+    "wall_clock_seconds": 2819.043859243393
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 0.75,
+      "after_cost_tokens": 197045.25,
+      "before_accuracy": 0.75,
+      "before_cost_tokens": 91382.5,
+      "effective_k": 78.0,
+      "group_size": 4,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 189112.75,
+      "topup_count": 46.0
+    }
+  ]
+}

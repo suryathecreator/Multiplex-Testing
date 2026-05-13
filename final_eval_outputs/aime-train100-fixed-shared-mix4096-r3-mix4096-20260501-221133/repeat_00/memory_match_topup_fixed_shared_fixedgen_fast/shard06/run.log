@@ -1,0 +1,44 @@
+2026-05-05 00:22:37,882 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-05 00:22:37,882 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-05 00:22:37,883 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+2026-05-05 00:22:40,386 INFO [setup] Restricted run to prompt indices: [291, 292, 311, 343, 350]
+2026-05-05 00:22:42,863 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-05 00:22:42,863 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-05 00:22:42,942 INFO [setup] Starting the local SGLang server on 127.0.0.1:38006.
+2026-05-05 00:24:21,251 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-05 00:24:21,389 INFO [scheduler] Dispatching prompt 291 to DP rank 0.
+2026-05-05 00:24:21,391 INFO [scheduler] Dispatching prompt 292 to DP rank 1.
+2026-05-05 00:24:21,392 INFO [scheduler] Dispatching prompt 311 to DP rank 0.
+2026-05-05 00:24:21,393 INFO [scheduler] Dispatching prompt 343 to DP rank 1.
+2026-05-05 01:25:45,542 ERROR [setup] Run aborted to preserve fidelity: [Errno 122] Disk quota exceeded
+OSError: [Errno 122] Disk quota exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10704, in main
+    experiment_summary = run_mixed_memory_match_topup_experiment(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 8299, in run_mixed_memory_match_topup_experiment
+    scheduler_metadata = run_prompt_tasks_concurrently(
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 3077, in run_prompt_tasks_concurrently
+    handle_result(result)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 8284, in handle_result
+    append_records(samples_path, serialized)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 2727, in append_records
+    writer.append(compact_jsonl_record(record) if should_compact else record)
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 400, in append
+    with self.path.open("a", encoding="utf-8") as fp:
+OSError: [Errno 122] Disk quota exceeded
+2026-05-05 01:25:45,605 INFO [setup] Run aborted cleanly after 1:03:09. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/memory_match_topup_fixed_shared_fixedgen_fast/shard06/manifest.json.
+2026-05-05 01:27:57,188 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-05 01:27:57,189 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+2026-05-05 01:27:59,712 INFO [setup] Restricted run to prompt indices: [291, 292, 311, 343, 350]
+2026-05-05 01:28:02,082 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-05 01:28:02,175 INFO [setup] Starting the local SGLang server on 127.0.0.1:38006.
+2026-05-05 01:28:43,289 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-05 01:28:43,390 INFO [scheduler] Dispatching prompt 291 to DP rank 0.
+2026-05-05 01:28:43,392 INFO [scheduler] Dispatching prompt 292 to DP rank 1.
+2026-05-05 02:12:27,696 INFO [scheduler] Dispatching prompt 311 to DP rank 1.
+2026-05-05 02:21:03,627 INFO [scheduler] Dispatching prompt 343 to DP rank 0.
+2026-05-05 02:57:15,993 INFO [scheduler] Dispatching prompt 350 to DP rank 0.
+2026-05-05 03:31:53,628 INFO [setup] Finished mixed memory-match top-up in 2:03:58 (7438.0s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/memory_match_topup_fixed_shared_fixedgen_fast/shard06/summary_mixed_memory_match.md.

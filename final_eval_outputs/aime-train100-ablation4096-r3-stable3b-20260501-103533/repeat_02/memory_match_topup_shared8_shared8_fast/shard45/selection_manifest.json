@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "880",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "There are positive integers $x$ and $y$ that satisfy the system of equations \\begin{align*} \\log_{10} x + 2 \\log_{10} (\\text{gcd}(x,y)) &= 60\\\\ \\log_{10} y + 2 \\log_{10} (\\text{lcm}(x,y)) &= 570. \\end{align*} Let $m$ be the number of (not necessarily distinct) prime factors in the prime factorization of $x$, and let $n$ be the number of (not necessarily distinct) prime factors in the prime factorization of $y$. Find $3m+2n$.",
+      "problem_id": "aime-train-2019-I-07",
+      "problem_number": 7,
+      "prompt_index": 831,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 831,
+      "year": 2019
+    },
+    {
+      "aime_number": 2,
+      "answer": "53",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "The polynomial $f(z)=az^{2018}+bz^{2017}+cz^{2016}$ has real coefficients not exceeding $2019$, and $f\\left(\\tfrac{1+\\sqrt{3}i}{2}\\right)=2015+2019\\sqrt{3}i$. Find the remainder when $f(1)$ is divided by $1000$.",
+      "problem_id": "aime-train-2019-II-08",
+      "problem_number": 8,
+      "prompt_index": 847,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 847,
+      "year": 2019
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    831,
+    847
+  ],
+  "selection_seed": 4096
+}

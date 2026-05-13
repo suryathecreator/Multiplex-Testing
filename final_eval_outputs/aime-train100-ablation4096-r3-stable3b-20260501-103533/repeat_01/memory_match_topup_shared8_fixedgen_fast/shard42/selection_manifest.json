@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "168",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "A $10\\times10\\times10$ grid of points consists of all points in space of the form $(i,j,k)$, where $i$, $j$, and $k$ are integers between $1$ and $10$, inclusive. Find the number of different lines that contain exactly $8$ of these points.",
+      "problem_id": "aime-train-2017-II-14",
+      "problem_number": 14,
+      "prompt_index": 793,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 793,
+      "year": 2017
+    },
+    {
+      "aime_number": 1,
+      "answer": "4",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "The wheel shown below consists of two circles and five spokes, with a label at each point where a spoke meets a circle. A bug walks along the wheel, starting at point $A$. At every step of the process, the bug walks from one labeled point to an adjacent labeled point. Along the inner circle the bug only walks in a counterclockwise direction, and along the outer circle the bug only walks in a clockwise direction. For example, the bug could travel along the path $AJABCHCHIJA$, which has $10$ steps. Let $n$ be the number of paths with $15$ steps that begin and end at point $A$. Find the remainder when $n$ is divided by $1000.$\n[asy] unitsize(32); draw(unitcircle); draw(scale(2) * unitcircle); for(int d = 90; d < 360 + 90; d += 72){ draw(2 * dir(d) -- dir(d)); } real s = 4; dot(1 * dir( 90), linewidth(s)); dot(1 * dir(162), linewidth(s)); dot(1 * dir(234), linewidth(s)); dot(1 * dir(306), linewidth(s)); dot(1 * dir(378), linewidth(s)); dot(2 * dir(378), linewidth(s)); dot(2 * dir(306), linewidth(s)); dot(2 * dir(234), linewidth(s)); dot(2 * dir(162), linewidth(s)); dot(2 * dir( 90), linewidth(s)); defaultpen(fontsize(10pt)); real r = 0.05; label(\"$A$\", (1-r) * dir( 90), -dir( 90)); label(\"$B$\", (1-r) * dir(162), -dir(162)); label(\"$C$\", (1-r) * dir(234), -dir(234)); label(\"$D$\", (1-r) * dir(306), -dir(306)); label(\"$E$\", (1-r) * dir(378), -dir(378)); label(\"$F$\", (2+r) * dir(378), dir(378)); label(\"$G$\", (2+r) * dir(306), dir(306)); label(\"$H$\", (2+r) * dir(234), dir(234)); label(\"$I$\", (2+r) * dir(162), dir(162)); label(\"$J$\", (2+r) * dir( 90), dir( 90)); [/asy]",
+      "problem_id": "aime-train-2018-I-10",
+      "problem_number": 10,
+      "prompt_index": 804,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 804,
+      "year": 2018
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    793,
+    804
+  ],
+  "selection_seed": 4096
+}

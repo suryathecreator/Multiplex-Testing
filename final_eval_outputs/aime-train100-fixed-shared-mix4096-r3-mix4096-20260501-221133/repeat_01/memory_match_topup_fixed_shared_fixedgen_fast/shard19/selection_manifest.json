@@ -1,0 +1,84 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "289",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "Let $a,b,c,d,e,f,g,h,i$ be distinct integers from $1$ to $9.$ The minimum possible positive value of \\[\\dfrac{a \\cdot b \\cdot c - d \\cdot e \\cdot f}{g \\cdot h \\cdot i}\\] can be written as $\\frac{m}{n},$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$",
+      "problem_id": "aime-train-2022-I-07",
+      "problem_number": 7,
+      "prompt_index": 921,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 921,
+      "year": 2022
+    },
+    {
+      "aime_number": 1,
+      "answer": "378",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "Equilateral triangle $\\triangle ABC$ is inscribed in circle $\\omega$ with radius $18.$ Circle $\\omega_A$ is tangent to sides $\\overline{AB}$ and $\\overline{AC}$ and is internally tangent to $\\omega.$ Circles $\\omega_B$ and $\\omega_C$ are defined analogously. Circles $\\omega_A,$ $\\omega_B,$ and $\\omega_C$ meet in six points---two points for each pair of circles. The three intersection points closest to the vertices of $\\triangle ABC$ are the vertices of a large equilateral triangle in the interior of $\\triangle ABC,$ and the other three intersection points are the vertices of a smaller equilateral triangle in the interior of $\\triangle ABC.$ The side length of the smaller equilateral triangle can be written as $\\sqrt{a} - \\sqrt{b},$ where $a$ and $b$ are positive integers. Find $a+b.$\nDiagram\n[asy] /* Made by MRENTHUSIASM */ size(250); pair A, B, C, W, WA, WB, WC, X, Y, Z; A = 18*dir(90); B = 18*dir(210); C = 18*dir(330); W = (0,0); WA = 6*dir(270); WB = 6*dir(30); WC = 6*dir(150); X = (sqrt(117)-3)*dir(270); Y = (sqrt(117)-3)*dir(30); Z = (sqrt(117)-3)*dir(150); filldraw(X--Y--Z--cycle,green,dashed); draw(Circle(WA,12)^^Circle(WB,12)^^Circle(WC,12),blue); draw(Circle(W,18)^^A--B--C--cycle); dot(\"$A$\",A,1.5*dir(A),linewidth(4)); dot(\"$B$\",B,1.5*dir(B),linewidth(4)); dot(\"$C$\",C,1.5*dir(C),linewidth(4)); dot(\"$\\omega$\",W,1.5*dir(270),linewidth(4)); dot(\"$\\omega_A$\",WA,1.5*dir(-WA),linewidth(4)); dot(\"$\\omega_B$\",WB,1.5*dir(-WB),linewidth(4)); dot(\"$\\omega_C$\",WC,1.5*dir(-WC),linewidth(4)); [/asy] ~MRENTHUSIASM ~ihatemath123",
+      "problem_id": "aime-train-2022-I-08",
+      "problem_number": 8,
+      "prompt_index": 922,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 922,
+      "year": 2022
+    },
+    {
+      "aime_number": 2,
+      "answer": "140",
+      "difficulty": 6.0,
+      "order_index": 2,
+      "problem": "Two externally tangent circles $\\omega_1$ and $\\omega_2$ have centers $O_1$ and $O_2$, respectively. A third circle $\\Omega$ passing through $O_1$ and $O_2$ intersects $\\omega_1$ at $B$ and $C$ and $\\omega_2$ at $A$ and $D$, as shown. Suppose that $AB = 2$, $O_1O_2 = 15$, $CD = 16$, and $ABO_1CDO_2$ is a convex hexagon. Find the area of this hexagon. [asy] import geometry; size(10cm); point O1=(0,0),O2=(15,0),B=9*dir(30); circle w1=circle(O1,9),w2=circle(O2,6),o=circle(O1,O2,B); point A=intersectionpoints(o,w2)[1],D=intersectionpoints(o,w2)[0],C=intersectionpoints(o,w1)[0]; filldraw(A--B--O1--C--D--O2--cycle,0.2*red+white,black); draw(w1); draw(w2); draw(O1--O2,dashed); draw(o); dot(O1); dot(O2); dot(A); dot(D); dot(C); dot(B); label(\"$\\omega_1$\",8*dir(110),SW); label(\"$\\omega_2$\",5*dir(70)+(15,0),SE); label(\"$O_1$\",O1,W); label(\"$O_2$\",O2,E); label(\"$B$\",B,N+1/2*E); label(\"$A$\",A,N+1/2*W); label(\"$C$\",C,S+1/4*W); label(\"$D$\",D,S+1/4*E); label(\"$15$\",midpoint(O1--O2),N); label(\"$16$\",midpoint(C--D),N); label(\"$2$\",midpoint(A--B),S); label(\"$\\Omega$\",o.C+(o.r-1)*dir(270)); [/asy]",
+      "problem_id": "aime-train-2022-II-15",
+      "problem_number": 15,
+      "prompt_index": 944,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 944,
+      "year": 2022
+    },
+    {
+      "aime_number": 1,
+      "answer": "944",
+      "difficulty": 6.0,
+      "order_index": 3,
+      "problem": "There exists a unique positive integer $a$ for which the sum \\[U=\\sum_{n=1}^{2023}\\left\\lfloor\\dfrac{n^{2}-na}{5}\\right\\rfloor\\] is an integer strictly between $-1000$ and $1000$. For that unique $a$, find $a+U$.\n (Note that $\\lfloor x\\rfloor$ denotes the greatest integer that is less than or equal to $x$.)",
+      "problem_id": "aime-train-2023-I-10",
+      "problem_number": 10,
+      "prompt_index": 954,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 954,
+      "year": 2023
+    },
+    {
+      "aime_number": 2,
+      "answer": "024",
+      "difficulty": 6.0,
+      "order_index": 4,
+      "problem": "Let $\\omega = \\cos\\frac{2\\pi}{7} + i \\cdot \\sin\\frac{2\\pi}{7},$ where $i = \\sqrt{-1}.$ Find the value of the product\\[\\prod_{k=0}^6 \\left(\\omega^{3k} + \\omega^k + 1\\right).\\]",
+      "problem_id": "aime-train-2023-II-08",
+      "problem_number": 8,
+      "prompt_index": 967,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 967,
+      "year": 2023
+    }
+  ],
+  "selected_count": 5,
+  "selected_source_indices": [
+    921,
+    922,
+    944,
+    954,
+    967
+  ],
+  "selection_seed": 4096
+}

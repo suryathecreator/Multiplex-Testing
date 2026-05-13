@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "750",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "The shortest distances between an interior diagonal of a rectangular parallelepiped, $P$, and the edges it does not meet are $2\\sqrt{5}$, $\\frac{30}{\\sqrt{13}}$, and $\\frac{15}{\\sqrt{10}}$. Determine the volume of $P$.",
+      "problem_id": "aime-train-1986-I-14",
+      "problem_number": 14,
+      "prompt_index": 58,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 58,
+      "year": 1986
+    },
+    {
+      "aime_number": 1,
+      "answer": "770",
+      "difficulty": 3.0,
+      "order_index": 1,
+      "problem": "One commercially available ten-button lock may be opened by pressing -- in any order -- the correct five buttons. The sample shown below has $\\{1,2,3,6,9\\}$ as its combination. Suppose that these locks are redesigned so that sets of as many as nine buttons or as few as one button could serve as combinations. How many additional combinations would this allow?",
+      "problem_id": "aime-train-1988-I-01",
+      "problem_number": 1,
+      "prompt_index": 75,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 75,
+      "year": 1988
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    58,
+    75
+  ],
+  "selection_seed": 4096
+}

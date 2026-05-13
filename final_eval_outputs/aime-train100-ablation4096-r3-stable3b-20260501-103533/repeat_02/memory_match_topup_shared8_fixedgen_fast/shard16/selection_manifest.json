@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "101",
+      "difficulty": 4.25,
+      "order_index": 0,
+      "problem": "Given a triangle, its midpoint triangle is obtained by joining the midpoints of its sides. A sequence of polyhedra $P_{i}$ is defined recursively as follows: $P_{0}$ is a regular tetrahedron whose volume is 1. To obtain $P_{i + 1}$, replace the midpoint triangle of every face of $P_{i}$ by an outward-pointing regular tetrahedron that has the midpoint triangle as a face. The volume of $P_{3}$ is $\\frac {m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+      "problem_id": "aime-train-2001-II-12",
+      "problem_number": 12,
+      "prompt_index": 311,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 311,
+      "year": 2001
+    },
+    {
+      "aime_number": 2,
+      "answer": "98",
+      "difficulty": 5.75,
+      "order_index": 1,
+      "problem": "The perimeter of triangle $APM$ is $152$, and the angle $PAM$ is a right angle. A circle of radius $19$ with center $O$ on $\\overline{AP}$ is drawn so that it is tangent to $\\overline{AM}$ and $\\overline{PM}$. Given that $OP=m/n$ where $m$ and $n$ are relatively prime positive integers, find $m+n$.",
+      "problem_id": "aime-train-2002-II-14",
+      "problem_number": 14,
+      "prompt_index": 343,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 343,
+      "year": 2002
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    311,
+    343
+  ],
+  "selection_seed": 4096
+}

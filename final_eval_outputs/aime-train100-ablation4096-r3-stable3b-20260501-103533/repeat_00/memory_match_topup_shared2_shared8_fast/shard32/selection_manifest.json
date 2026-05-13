@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "37",
+      "difficulty": 3.25,
+      "order_index": 0,
+      "problem": "Gary purchased a large beverage, but only drank $m/n$ of it, where $m$ and $n$ are relatively prime positive integers. If he had purchased half as much and drunk twice as much, he would have wasted only $2/9$ as much beverage. Find $m+n$.",
+      "problem_id": "aime-train-2011-II-01",
+      "problem_number": 1,
+      "prompt_index": 600,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 600,
+      "year": 2011
+    },
+    {
+      "aime_number": 2,
+      "answer": "57",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "A circle with center $O$ has radius 25. Chord $\\overline{AB}$ of length 30 and chord $\\overline{CD}$ of length 14 intersect at point $P$. The distance between the midpoints of the two chords is 12. The quantity $OP^2$ can be represented as $\\frac{m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find the remainder when $m + n$ is divided by 1000.",
+      "problem_id": "aime-train-2011-II-10",
+      "problem_number": 10,
+      "prompt_index": 609,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 609,
+      "year": 2011
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    600,
+    609
+  ],
+  "selection_seed": 4096
+}

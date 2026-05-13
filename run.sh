@@ -1,13 +1,14 @@
 #!/bin/bash
 #SBATCH --job-name=run-gpu2
-#SBATCH --account=raivn
-#SBATCH --partition=gpu-a40
+#SBATCH --account=raivn-ckpt
+#SBATCH --partition=ckpt-all
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=128G
-#SBATCH --time=24:00:00
+#SBATCH --time=96:00:00
 #SBATCH --gres=gpu:2
+#SBATCH --constraint=a40|a100|l40|l40s|h200
 #SBATCH --output=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/slurm_logs/%x-%j.out
 #SBATCH --chdir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing
 
@@ -57,7 +58,8 @@ export TRANSFORMERS_CACHE="${HF_HOME}/transformers"
 export TORCH_HOME="${SCRATCH_CACHE_ROOT}/torch"
 export TRITON_CACHE_DIR="${SCRATCH_CACHE_ROOT}/triton"
 export SGLANG_CACHE_ROOT="${SCRATCH_CACHE_ROOT}/sglang"
-export FLASHINFER_WORKSPACE_BASE="${SCRATCH_CACHE_ROOT}/flashinfer"
+export FLASHINFER_WORKSPACE_BASE="${FLASHINFER_WORKSPACE_BASE:-${SCRATCH_CACHE_ROOT}/flashinfer}"
+export TORCH_EXTENSIONS_DIR="${TORCH_EXTENSIONS_DIR:-${SCRATCH_CACHE_ROOT}/torch_extensions}"
 export MPLCONFIGDIR="${SCRATCH_CACHE_ROOT}/matplotlib"
 export CUDA_CACHE_PATH="${SCRATCH_CACHE_ROOT}/cuda"
 export PYTHONPYCACHEPREFIX="${SCRATCH_CACHE_ROOT}/pycache"
@@ -77,6 +79,7 @@ mkdir -p \
   "$TRITON_CACHE_DIR" \
   "$SGLANG_CACHE_ROOT" \
   "$FLASHINFER_WORKSPACE_BASE" \
+  "$TORCH_EXTENSIONS_DIR" \
   "$MPLCONFIGDIR" \
   "$CUDA_CACHE_PATH" \
   "$PYTHONPYCACHEPREFIX"
@@ -85,16 +88,21 @@ unset NCCL_SOCKET_IFNAME || true
 unset NCCL_IB_HCA || true
 
 BOOTSTRAP_LOG="${SCRATCH_CACHE_ROOT}/bootstrap-runtime-${SLURM_JOB_ID:-local}.log"
+BOOTSTRAP_LOCK="${SCRATCH_CACHE_ROOT}/bootstrap-runtime.lock"
 echo "[setup] bootstrapping scratch-managed runtime"
 echo "[setup] bootstrap_log=${BOOTSTRAP_LOG}"
-"$PYTHON_BIN" scripts/bootstrap_runtime_overlay.py \
-  --python "$PYTHON_BIN" \
-  --runtime-root "$SCRATCH_RUNTIME_ROOT" \
-  --job-overlay-dir "$JOB_OVERLAY_DIR" \
-  --job-bin-dir "$JOB_BIN_DIR" \
-  --manifest-path "$SELECTED_RUNTIME_MANIFEST" \
-  --log-file "$BOOTSTRAP_LOG" \
-  --repair
+echo "[setup] bootstrap_lock=${BOOTSTRAP_LOCK}"
+(
+  flock -x 200
+  "$PYTHON_BIN" scripts/bootstrap_runtime_overlay.py \
+    --python "$PYTHON_BIN" \
+    --runtime-root "$SCRATCH_RUNTIME_ROOT" \
+    --job-overlay-dir "$JOB_OVERLAY_DIR" \
+    --job-bin-dir "$JOB_BIN_DIR" \
+    --manifest-path "$SELECTED_RUNTIME_MANIFEST" \
+    --log-file "$BOOTSTRAP_LOG" \
+    --repair
+) 200>"$BOOTSTRAP_LOCK"
 
 export SELECTED_RUNTIME_MANIFEST
 MANAGED_RUNTIME_SITE="$("$PYTHON_BIN" - <<'PY'
@@ -142,6 +150,7 @@ echo "[setup] job_overlay_dir=${JOB_OVERLAY_DIR}"
 echo "[setup] job_bin_dir=${JOB_BIN_DIR}"
 echo "[setup] lightweight_overlay_cache_dir=${LIGHTWEIGHT_OVERLAY_CACHE_DIR:-unset}"
 echo "[setup] flashinfer_workspace_base=${FLASHINFER_WORKSPACE_BASE}"
+echo "[setup] torch_extensions_dir=${TORCH_EXTENSIONS_DIR}"
 echo "[setup] job_overlay_bin=${JOB_OVERLAY_DIR}/bin"
 echo "[setup] lightweight_overlay_bin=${LIGHTWEIGHT_OVERLAY_CACHE_DIR:-unset}/bin"
 echo "[setup] ninja_path=$(command -v ninja || echo missing)"
@@ -173,47 +182,154 @@ if [[ -n "$RUN_TAG" ]]; then
 else
   RUN_STAMP="${SLURM_JOB_ID:-local}-$(date +%Y%m%d-%H%M%S)"
 fi
-OUTPUT_DIR="/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-shared-trace-passk-${RUN_STAMP}"
+OUTPUT_DIR="${OUTPUT_DIR:-/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-shared-trace-passk-${RUN_STAMP}}"
 mkdir -p "$OUTPUT_DIR"
 
+EXPERIMENT_MODE="${EXPERIMENT_MODE:-passk_sweep}"
+BENCHMARK="${BENCHMARK:-aime2024}"
+PORT="${PORT:-30000}"
 DP_SIZE="${DP_SIZE:-2}"
 TP_SIZE="${TP_SIZE:-1}"
-MAX_K="${MAX_K:-16}"
+MAX_K="${MAX_K:-64}"
 MAX_PROMPTS="${MAX_PROMPTS:-50}"
+SEED="${SEED:-1234}"
 MAX_NEW_TOKENS="${MAX_NEW_TOKENS:-8192}"
-REASONING_PREFIX_TOKEN_VALUES="${REASONING_PREFIX_TOKEN_VALUES:-512,1024,2048}"
+REASONING_PREFIX_TOKEN_VALUES="${REASONING_PREFIX_TOKEN_VALUES:-256,512,1024,2048,4096,6144}"
+BRANCH_ABLATION_REASONING_PREFIX_TOKENS="${BRANCH_ABLATION_REASONING_PREFIX_TOKENS:-1024}"
+BRANCH_ABLATION_GROUP_SIZES="${BRANCH_ABLATION_GROUP_SIZES-2,4,8,16}"
+BRANCH_ABLATION_NO_BASELINE="${BRANCH_ABLATION_NO_BASELINE:-0}"
+ADAPTIVE_ABLATION_SHARED_COUNTS="${ADAPTIVE_ABLATION_SHARED_COUNTS:-2,4,6,8,10,12,14,16}"
+ADAPTIVE_CONFIDENCE_THRESHOLD="${ADAPTIVE_CONFIDENCE_THRESHOLD:-0.75}"
+MEMORY_MATCH_SOURCE_ROOT="${MEMORY_MATCH_SOURCE_ROOT:-}"
+MEMORY_MATCH_SHARED_GROUPS="${MEMORY_MATCH_SHARED_GROUPS:-2,4,8,16,32}"
+MEMORY_MATCH_TOPUP_SHARED_GROUP_SIZE="${MEMORY_MATCH_TOPUP_SHARED_GROUP_SIZE:-0}"
+MEMORY_MATCH_CHECKPOINT_BEFORE_LABEL="${MEMORY_MATCH_CHECKPOINT_BEFORE_LABEL:-}"
+MEMORY_MATCH_CHECKPOINT_AFTER_LABEL="${MEMORY_MATCH_CHECKPOINT_AFTER_LABEL:-}"
+MEMORY_MATCH_CHECKPOINT_TITLE="${MEMORY_MATCH_CHECKPOINT_TITLE:-}"
+HYPERPARAM_REASONING_PREFIX_TOKENS="${HYPERPARAM_REASONING_PREFIX_TOKENS:-1024}"
+HYPERPARAM_TOP_P_VALUES="${HYPERPARAM_TOP_P_VALUES:-0.75,0.85,0.90,0.95,1.00}"
+HYPERPARAM_TEMPERATURE_VALUES="${HYPERPARAM_TEMPERATURE_VALUES:-0.4,0.6,0.8,1.0,1.2}"
 CHECKPOINT_MATCHED_PROMPTS_STEP="${CHECKPOINT_MATCHED_PROMPTS_STEP:-5}"
+COMPACT_JSONL="${COMPACT_JSONL:-0}"
+METHODS="${METHODS:-baseline,shared_trace}"
+PROMPT_INDICES="${PROMPT_INDICES:-}"
 REQUEST_BATCH_SIZE="${REQUEST_BATCH_SIZE:-}"
 RESOURCE_PROFILE="${RESOURCE_PROFILE:-auto}"
 REQUEST_BATCH_SIZE_DISPLAY="${REQUEST_BATCH_SIZE:-auto}"
+THROUGHPUT_PROFILE="${THROUGHPUT_PROFILE:-safe_auto}"
+MAX_CONCURRENT_PROMPTS="${MAX_CONCURRENT_PROMPTS:-}"
+PROMPTS_PER_RANK="${PROMPTS_PER_RANK:-1}"
+RANK_SCHEDULER="${RANK_SCHEDULER:-dynamic}"
+MAX_CONCURRENT_PROMPTS_DISPLAY="${MAX_CONCURRENT_PROMPTS:-auto}"
+SERVER_TIMEOUT_SECONDS="${SERVER_TIMEOUT_SECONDS:-900}"
+
+resolve_local_qwen3_model() {
+  local local_model_dir="${SCRATCH_CACHE_ROOT}/local-models/Qwen3-4B"
+  local metadata_snapshot="${TRANSFORMERS_CACHE}/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c"
+  local weights_snapshot="${HF_HOME}/hub/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c"
+
+  if [[ ! -f "${metadata_snapshot}/config.json" || ! -f "${weights_snapshot}/model.safetensors.index.json" ]]; then
+    return 1
+  fi
+
+  mkdir -p "$local_model_dir"
+  local snapshot entry resolved
+  for snapshot in "$metadata_snapshot" "$weights_snapshot"; do
+    for entry in "${snapshot}"/*; do
+      if [[ ! -e "$entry" && ! -L "$entry" ]]; then
+        continue
+      fi
+      resolved="$(readlink -f "$entry")"
+      ln -sfn "$resolved" "${local_model_dir}/$(basename "$entry")"
+    done
+  done
+  echo "$local_model_dir"
+}
+
+MODEL_PATH="${MODEL_PATH:-}"
+if [[ -z "$MODEL_PATH" ]]; then
+  if MODEL_PATH="$(resolve_local_qwen3_model)"; then
+    export HF_HUB_OFFLINE=1
+    export TRANSFORMERS_OFFLINE=1
+    export HF_DATASETS_OFFLINE=1
+    export HF_HUB_DISABLE_TELEMETRY=1
+  else
+    MODEL_PATH="Qwen/Qwen3-4B"
+  fi
+fi
 
 echo "[setup] scratch_cache_root=${SCRATCH_CACHE_ROOT}"
 echo "[setup] output_dir=${OUTPUT_DIR}"
 echo "[setup] run_tag=${RUN_STAMP}"
 echo "[setup] slurm_job_gpus=${SLURM_JOB_GPUS:-unset}"
 echo "[setup] cuda_visible_devices=${CUDA_VISIBLE_DEVICES:-unset}"
-echo "[setup] requested_launch_config dp_size=${DP_SIZE} tp_size=${TP_SIZE} max_k=${MAX_K} max_prompts=${MAX_PROMPTS} max_new_tokens=${MAX_NEW_TOKENS} reasoning_prefix_token_values=${REASONING_PREFIX_TOKEN_VALUES} checkpoint_matched_prompts_step=${CHECKPOINT_MATCHED_PROMPTS_STEP} request_batch_size=${REQUEST_BATCH_SIZE_DISPLAY} resource_profile=${RESOURCE_PROFILE}"
+echo "[setup] model_path=${MODEL_PATH}"
+echo "[setup] requested_launch_config experiment_mode=${EXPERIMENT_MODE} benchmark=${BENCHMARK} methods=${METHODS} seed=${SEED} port=${PORT} dp_size=${DP_SIZE} tp_size=${TP_SIZE} max_k=${MAX_K} max_prompts=${MAX_PROMPTS} prompt_indices=${PROMPT_INDICES:-all} max_new_tokens=${MAX_NEW_TOKENS} reasoning_prefix_token_values=${REASONING_PREFIX_TOKEN_VALUES} branch_ablation_reasoning_prefix_tokens=${BRANCH_ABLATION_REASONING_PREFIX_TOKENS} branch_ablation_group_sizes=${BRANCH_ABLATION_GROUP_SIZES} branch_ablation_no_baseline=${BRANCH_ABLATION_NO_BASELINE} adaptive_ablation_shared_counts=${ADAPTIVE_ABLATION_SHARED_COUNTS} adaptive_confidence_threshold=${ADAPTIVE_CONFIDENCE_THRESHOLD} memory_match_source_root=${MEMORY_MATCH_SOURCE_ROOT:-unset} memory_match_shared_groups=${MEMORY_MATCH_SHARED_GROUPS} hyperparam_reasoning_prefix_tokens=${HYPERPARAM_REASONING_PREFIX_TOKENS} hyperparam_top_p_values=${HYPERPARAM_TOP_P_VALUES} hyperparam_temperature_values=${HYPERPARAM_TEMPERATURE_VALUES} checkpoint_matched_prompts_step=${CHECKPOINT_MATCHED_PROMPTS_STEP} compact_jsonl=${COMPACT_JSONL} request_batch_size=${REQUEST_BATCH_SIZE_DISPLAY} resource_profile=${RESOURCE_PROFILE} throughput_profile=${THROUGHPUT_PROFILE} max_concurrent_prompts=${MAX_CONCURRENT_PROMPTS_DISPLAY} prompts_per_rank=${PROMPTS_PER_RANK} rank_scheduler=${RANK_SCHEDULER} server_timeout_seconds=${SERVER_TIMEOUT_SECONDS}"
 echo "[setup] starting compare_passk_aime.py"
 
 COMPARE_ARGS=(
-  --model Qwen/Qwen3-4B
-  --benchmark aime2024
+  --model "$MODEL_PATH"
+  --experiment-mode "$EXPERIMENT_MODE"
+  --benchmark "$BENCHMARK"
+  --port "$PORT"
   --max-k "$MAX_K"
   --max-prompts "$MAX_PROMPTS"
   --max-new-tokens "$MAX_NEW_TOKENS"
   --reasoning-prefix-token-values "$REASONING_PREFIX_TOKEN_VALUES"
+  --branch-ablation-reasoning-prefix-tokens "$BRANCH_ABLATION_REASONING_PREFIX_TOKENS"
+  --branch-ablation-group-sizes "$BRANCH_ABLATION_GROUP_SIZES"
+  --adaptive-ablation-shared-counts "$ADAPTIVE_ABLATION_SHARED_COUNTS"
+  --adaptive-confidence-threshold "$ADAPTIVE_CONFIDENCE_THRESHOLD"
+  --memory-match-shared-groups "$MEMORY_MATCH_SHARED_GROUPS"
+  --memory-match-topup-generator "${MEMORY_MATCH_TOPUP_GENERATOR:-fixed}"
+  --memory-match-topup-shared-group-size "$MEMORY_MATCH_TOPUP_SHARED_GROUP_SIZE"
+  --memory-match-checkpoint-family "${MEMORY_MATCH_CHECKPOINT_FAMILY:-}"
+  --memory-match-checkpoint-root "${MEMORY_MATCH_CHECKPOINT_ROOT:-}"
+  --memory-match-checkpoint-campaign "${MEMORY_MATCH_CHECKPOINT_CAMPAIGN:-}"
+  --memory-match-checkpoint-step "${MEMORY_MATCH_CHECKPOINT_STEP:-20}"
+  --memory-match-checkpoint-before-label "$MEMORY_MATCH_CHECKPOINT_BEFORE_LABEL"
+  --memory-match-checkpoint-after-label "$MEMORY_MATCH_CHECKPOINT_AFTER_LABEL"
+  --memory-match-checkpoint-title "$MEMORY_MATCH_CHECKPOINT_TITLE"
+  --hyperparam-reasoning-prefix-tokens "$HYPERPARAM_REASONING_PREFIX_TOKENS"
+  --hyperparam-top-p-values "$HYPERPARAM_TOP_P_VALUES"
+  --hyperparam-temperature-values "$HYPERPARAM_TEMPERATURE_VALUES"
   --checkpoint-matched-prompts-step "$CHECKPOINT_MATCHED_PROMPTS_STEP"
-  --methods baseline,shared_trace,standard_generation
-  --seed 1234
+  --methods "$METHODS"
+  --seed "$SEED"
   --output-dir "$OUTPUT_DIR"
   --dp-size "$DP_SIZE"
   --tp-size "$TP_SIZE"
   --resource-profile "$RESOURCE_PROFILE"
+  --throughput-profile "$THROUGHPUT_PROFILE"
+  --prompts-per-rank "$PROMPTS_PER_RANK"
+  --rank-scheduler "$RANK_SCHEDULER"
+  --server-timeout-seconds "$SERVER_TIMEOUT_SECONDS"
   --resume
 )
 
+if [[ "$BRANCH_ABLATION_NO_BASELINE" == "1" || "$BRANCH_ABLATION_NO_BASELINE" == "true" || "$BRANCH_ABLATION_NO_BASELINE" == "TRUE" || "$BRANCH_ABLATION_NO_BASELINE" == "yes" || "$BRANCH_ABLATION_NO_BASELINE" == "on" ]]; then
+  COMPARE_ARGS+=(--branch-ablation-no-baseline)
+fi
+
+if [[ -n "$MEMORY_MATCH_SOURCE_ROOT" ]]; then
+  COMPARE_ARGS+=(--memory-match-source-root "$MEMORY_MATCH_SOURCE_ROOT")
+fi
+
+if [[ "$COMPACT_JSONL" == "1" || "$COMPACT_JSONL" == "true" || "$COMPACT_JSONL" == "TRUE" || "$COMPACT_JSONL" == "yes" || "$COMPACT_JSONL" == "on" ]]; then
+  export MULTIPLEX_COMPACT_JSONL=1
+  COMPARE_ARGS+=(--compact-jsonl)
+fi
+
 if [[ -n "$REQUEST_BATCH_SIZE" ]]; then
   COMPARE_ARGS+=(--request-batch-size "$REQUEST_BATCH_SIZE")
+fi
+
+if [[ -n "$MAX_CONCURRENT_PROMPTS" ]]; then
+  COMPARE_ARGS+=(--max-concurrent-prompts "$MAX_CONCURRENT_PROMPTS")
+fi
+
+if [[ -n "$PROMPT_INDICES" ]]; then
+  COMPARE_ARGS+=(--prompt-indices "$PROMPT_INDICES")
 fi
 
 "$PYTHON_BIN" scripts/compare_passk_aime.py \

@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "53",
+      "difficulty": 4.125,
+      "order_index": 0,
+      "problem": "Anh read a book. On the first day she read $n$ pages in $t$ minutes, where $n$ and $t$ are positive integers. On the second day Anh read $n + 1$ pages in $t + 1$ minutes. Each day thereafter Anh read one more page than she read on the previous day, and it took her one more minute than on the previous day until she completely read the $374$ page book. It took her a total of $319$ minutes to read the book. Find $n + t$.",
+      "problem_id": "aime-train-2016-I-05",
+      "problem_number": 5,
+      "prompt_index": 739,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 739,
+      "year": 2016
+    },
+    {
+      "aime_number": 1,
+      "answer": "270",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Circles $\\omega_1$ and $\\omega_2$ intersect at points $X$ and $Y$. Line $\\ell$ is tangent to $\\omega_1$ and $\\omega_2$ at $A$ and $B$, respectively, with line $AB$ closer to point $X$ than to $Y$. Circle $\\omega$ passes through $A$ and $B$ intersecting $\\omega_1$ again at $D \\neq A$ and intersecting $\\omega_2$ again at $C \\neq B$. The three points $C$, $Y$, $D$ are collinear, $XC = 67$, $XY = 47$, and $XD = 37$. Find $AB^2$.",
+      "problem_id": "aime-train-2016-I-15",
+      "problem_number": 15,
+      "prompt_index": 749,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 749,
+      "year": 2016
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    739,
+    749
+  ],
+  "selection_seed": 4096
+}

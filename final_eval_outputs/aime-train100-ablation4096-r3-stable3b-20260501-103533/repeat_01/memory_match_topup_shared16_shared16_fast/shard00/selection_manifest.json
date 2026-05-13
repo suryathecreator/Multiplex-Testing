@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "12",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Find the minimum value of $\\frac{9x^2\\sin^2 x + 4}{x\\sin x}$ for $0 < x < \\pi$.",
+      "problem_id": "aime-train-1983-I-09",
+      "problem_number": 9,
+      "prompt_index": 8,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 8,
+      "year": 1983
+    },
+    {
+      "aime_number": 1,
+      "answer": "649",
+      "difficulty": 2.0,
+      "order_index": 1,
+      "problem": "Let $S$ be a list of positive integers--not necessarily distinct--in which the number $68$ appears. The average (arithmetic mean) of the numbers in $S$ is $56$. However, if $68$ is removed, the average of the remaining numbers drops to $55$. What is the largest number that can appear in $S$?",
+      "problem_id": "aime-train-1984-I-04",
+      "problem_number": 4,
+      "prompt_index": 18,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 18,
+      "year": 1984
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    8,
+    18
+  ],
+  "selection_seed": 4096
+}

@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "840",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Squares $ABCD$ and $EFGH$ have a common center and $\\overline{AB} || \\overline{EF}$. The area of $ABCD$ is 2016, and the area of $EFGH$ is a smaller positive integer. Square $IJKL$ is constructed so that each of its vertices lies on a side of $ABCD$ and each vertex of $EFGH$ lies on a side of $IJKL$. Find the difference between the largest and smallest positive integer values for the area of $IJKL$.",
+      "problem_id": "aime-train-2016-II-07",
+      "problem_number": 7,
+      "prompt_index": 756,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 756,
+      "year": 2016
+    },
+    {
+      "aime_number": 2,
+      "answer": "749",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "For positive integers $N$ and $k$, define $N$ to be $k$-nice if there exists a positive integer $a$ such that $a^{k}$ has exactly $N$ positive divisors. Find the number of positive integers less than $1000$ that are neither $7$-nice nor $8$-nice.",
+      "problem_id": "aime-train-2016-II-11",
+      "problem_number": 11,
+      "prompt_index": 760,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 760,
+      "year": 2016
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    756,
+    760
+  ],
+  "selection_seed": 4096
+}

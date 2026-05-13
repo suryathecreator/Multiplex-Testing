@@ -1,0 +1,13 @@
+method,k,num_prompts,pass_at_k,avg_cost_tokens,num_failures,condition,branch_group_size
+baseline_independent,1,25,0.4,7171.84,0,fixed_trace_independent,1
+baseline_independent,2,25,0.56,13396.88,0,fixed_trace_independent,1
+baseline_independent,4,25,0.64,26927.12,0,fixed_trace_independent,1
+baseline_independent,8,25,0.64,54096.84,0,fixed_trace_independent,1
+baseline_independent,16,25,0.72,108441.04,0,fixed_trace_independent,1
+baseline_independent,32,25,0.8,217595.52,0,fixed_trace_independent,1
+shared_trace_group_2,1,25,0.36,6753.92,0,shared_every_2,2
+shared_trace_group_2,2,25,0.4,9471.68,0,shared_every_2,2
+shared_trace_group_2,4,25,0.52,19269.96,0,shared_every_2,2
+shared_trace_group_2,8,25,0.68,38325.28,0,shared_every_2,2
+shared_trace_group_2,16,25,0.76,76318.72,0,shared_every_2,2
+shared_trace_group_2,32,25,0.8,151212.68,0,shared_every_2,2

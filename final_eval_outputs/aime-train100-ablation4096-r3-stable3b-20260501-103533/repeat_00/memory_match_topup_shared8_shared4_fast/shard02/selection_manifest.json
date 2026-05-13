@@ -1,0 +1,69 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "750",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "The shortest distances between an interior diagonal of a rectangular parallelepiped, $P$, and the edges it does not meet are $2\\sqrt{5}$, $\\frac{30}{\\sqrt{13}}$, and $\\frac{15}{\\sqrt{10}}$. Determine the volume of $P$.",
+      "problem_id": "aime-train-1986-I-14",
+      "problem_number": 14,
+      "prompt_index": 58,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 58,
+      "year": 1986
+    },
+    {
+      "aime_number": 1,
+      "answer": "770",
+      "difficulty": 3.0,
+      "order_index": 1,
+      "problem": "One commercially available ten-button lock may be opened by pressing -- in any order -- the correct five buttons. The sample shown below has $\\{1,2,3,6,9\\}$ as its combination. Suppose that these locks are redesigned so that sets of as many as nine buttons or as few as one button could serve as combinations. How many additional combinations would this allow?",
+      "problem_id": "aime-train-1988-I-01",
+      "problem_number": 1,
+      "prompt_index": 75,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 75,
+      "year": 1988
+    },
+    {
+      "aime_number": 1,
+      "answer": "20",
+      "difficulty": 4.0,
+      "order_index": 2,
+      "problem": "Suppose that $|x_i| < 1$ for $i = 1, 2, \\dots, n$. Suppose further that $|x_1| + |x_2| + \\dots + |x_n| = 19 + |x_1 + x_2 + \\dots + x_n|.$ What is the smallest possible value of $n$?",
+      "problem_id": "aime-train-1988-I-04",
+      "problem_number": 4,
+      "prompt_index": 78,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 78,
+      "year": 1988
+    },
+    {
+      "aime_number": 1,
+      "answer": "142",
+      "difficulty": 2.5,
+      "order_index": 3,
+      "problem": "It is possible to place positive integers into the vacant twenty-one squares of the $5 \\times 5$ square shown below so that the numbers in each row and column form arithmetic sequences. Find the number that must occupy the vacant square marked by the asterisk (*).",
+      "problem_id": "aime-train-1988-I-06",
+      "problem_number": 6,
+      "prompt_index": 80,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 80,
+      "year": 1988
+    }
+  ],
+  "selected_count": 4,
+  "selected_source_indices": [
+    58,
+    75,
+    78,
+    80
+  ],
+  "selection_seed": 4096
+}

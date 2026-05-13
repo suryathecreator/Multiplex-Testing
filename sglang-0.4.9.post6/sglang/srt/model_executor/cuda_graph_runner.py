@@ -314,8 +314,21 @@ class CudaGraphRunner:
             # ==========
             # begin of soft thinking
             # ==========
-            self.topk_probs = torch.zeros((self.max_bs, self.used_topk), dtype=self.model_runner.dtype) if self.enable_soft_thinking else None
-            self.topk_indices = torch.zeros((self.max_bs, self.used_topk), dtype=torch.int64) if self.enable_soft_thinking else None
+            self.topk_probs = (
+                torch.zeros((self.max_bs, self.used_topk), dtype=self.model_runner.dtype)
+                if self.enable_soft_thinking
+                else None
+            )
+            self.topk_indices = (
+                torch.zeros((self.max_bs, self.used_topk), dtype=torch.int64)
+                if self.enable_soft_thinking
+                else None
+            )
+            if self.enable_soft_thinking:
+                # CUDA graph capture runs with synthetic decode inputs. Keep the
+                # weighted embedding path faithful by using a valid one-hot top-k
+                # row instead of all-zero probabilities.
+                self.topk_probs[:, 0] = 1.0
             # ==========
             # end of soft thinking
             # ==========
@@ -589,7 +602,11 @@ class CudaGraphRunner:
         # begin of soft thinking
         # ==========
         if self.enable_soft_thinking:
-            self.capture_hidden_mode = CaptureHiddenMode.LAST
+            if self.capture_hidden_mode != CaptureHiddenMode.FULL:
+                self.capture_hidden_mode = max(
+                    self.capture_hidden_mode,
+                    CaptureHiddenMode.LAST,
+                )
         elif self.capture_hidden_mode != CaptureHiddenMode.FULL:
             self.capture_hidden_mode = (
                 spec_info.capture_hidden_mode if spec_info else CaptureHiddenMode.NULL
@@ -597,10 +614,6 @@ class CudaGraphRunner:
         # ==========
         # end of soft thinking
         # ==========
-        if self.capture_hidden_mode != CaptureHiddenMode.FULL:
-            self.capture_hidden_mode = (
-                spec_info.capture_hidden_mode if spec_info else CaptureHiddenMode.NULL
-            )
 
         if self.model_runner.server_args.enable_lora:
             # It is safe to capture CUDA graph using empty LoRA path, as the LoRA kernels will always be launched whenever
@@ -634,6 +647,8 @@ class CudaGraphRunner:
             num_token_non_padded=self.num_token_non_padded,
             global_forward_mode=self.capture_forward_mode,
             lora_paths=lora_paths,
+            topk_probs=topk_probs,
+            topk_indices=topk_indices,
         )
         self.tbo_plugin.capture_one_batch_size(forward_batch, num_tokens=num_tokens)
 
@@ -688,17 +703,7 @@ class CudaGraphRunner:
 
     def recapture_if_needed(self, forward_batch: ForwardBatch):
 
-        # If the required capture_hidden_mode changes, we need to recapture the graph
-        # ==========
-        # begin of soft thinking
-        # ==========
-        if self.enable_soft_thinking:
-            self.capture_hidden_mode = CaptureHiddenMode.LAST
-        else:
-            self.capture_hidden_mode = getattr(forward_batch.spec_info, "capture_hidden_mode", CaptureHiddenMode.NULL)
-        # ==========
-        # end of soft thinking
-        # ==========
+        # If the required capture_hidden_mode changes, we need to recapture the graph.
         # These are the different factors that can influence the capture_hidden_mode
         capture_hidden_mode_required_by_forward_batch = (
             forward_batch.capture_hidden_mode
@@ -720,6 +725,15 @@ class CudaGraphRunner:
             capture_hidden_mode_required_by_spec_info,
             capture_hidden_mode_required_for_returning_hidden_states,
         )
+        if self.enable_soft_thinking:
+            # Soft thinking feeds weighted top-k embeddings during decode, so
+            # the captured graph must keep at least LAST hidden state support.
+            # Treat LAST as the floor; otherwise NULL decode requests trigger
+            # a full recapture on every replay.
+            required_capture_hidden_mode = max(
+                required_capture_hidden_mode,
+                CaptureHiddenMode.LAST,
+            )
 
         # If the current hidden mode is no longer aligned with the required hidden mode, we need to set it to what is required and re-capture
         if self.capture_hidden_mode != required_capture_hidden_mode:
@@ -758,12 +772,23 @@ class CudaGraphRunner:
         # begin of soft thinking
         # ==========
         if self.enable_soft_thinking:
-            self.topk_probs[:raw_bs].copy_(
-                forward_batch.topk_probs
-            )
-            self.topk_indices[:raw_bs].copy_(
-                forward_batch.topk_indices
-            )
+            if forward_batch.topk_probs is not None and forward_batch.topk_indices is not None:
+                self.topk_probs[:raw_bs].copy_(forward_batch.topk_probs)
+                self.topk_indices[:raw_bs].copy_(forward_batch.topk_indices)
+            elif forward_batch.input_ids is not None:
+                # Discrete child continuations can opt out of soft thinking even
+                # when the server has the soft-thinking graph enabled. Represent
+                # those token ids as one-hot top-k rows so the captured weighted
+                # embedding path is equivalent to the normal embedding lookup.
+                self.topk_probs[:raw_bs].zero_()
+                self.topk_indices[:raw_bs].zero_()
+                self.topk_probs[:raw_bs, 0] = 1.0
+                self.topk_indices[:raw_bs, 0].copy_(forward_batch.input_ids[:raw_bs])
+            else:
+                raise RuntimeError(
+                    "soft-thinking CUDA graph replay requires either top-k tensors "
+                    "or discrete input_ids."
+                )
         else:
             self.input_ids[:raw_num_token].copy_(forward_batch.input_ids)
         # ==========

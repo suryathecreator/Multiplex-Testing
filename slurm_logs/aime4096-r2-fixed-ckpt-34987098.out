@@ -1,0 +1,616 @@
+[cuda-smoke] loaded compiler module gcc/13.2.0
+[cuda-smoke] gcc=/sw/gcc/13.2.0/bin/gcc
+gcc (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] g++=/sw/gcc/13.2.0/bin/g++
+g++ (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] nvcc=/sw/cuda/12.8.1/bin/nvcc
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+[cuda-smoke] CUDA_HOME=/sw/cuda/12.8.1
+[cuda-smoke] CUDAHOSTCXX=/sw/gcc/13.2.0/bin/g++
+[cuda-smoke] NVCC_PREPEND_FLAGS=--compiler-bindir=/sw/gcc/13.2.0/bin 
+[cuda-smoke] FLASHINFER_WORKSPACE_BASE=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/flashinfer
+[cuda-smoke] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02/bundle_fixed
+[cuda-smoke] fallback_configs=64:4:8:aggressive;48:3:6:aggressive;32:2:4:aggressive;16:1:2:aggressive
+[fallback] attempt=1 config=64:4:8:aggressive request_batch_size=64 prompts_per_rank=4 max_concurrent_prompts=8 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-34987098.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+[runtime] package=triton version=3.3.1 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton-3.3.1.dist-info
+[runtime] package=tensordict version=0.10.0 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict-0.10.0.dist-info
+[runtime] package=sgl-kernel version=0.2.8 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel-0.2.8.dist-info
+[runtime] package=flashinfer-python version=0.2.9rc2 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer_python-0.2.9rc2.dist-info
+[runtime] local_import=sglang origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[runtime] local_import=verl origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest/verl/__init__.py
+[runtime] local_import=transformers origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/runtime-manifest.json
+[bootstrap] runtime import preflight succeeded
+[runtime-tool] linked executable ninja from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja to /mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/bin/ninja
+[bootstrap] no additional lightweight packages were needed
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/runtime-manifest.json
+[setup] runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[setup] runtime_manifest=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/runtime-manifest.json
+[setup] runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[setup] job_overlay_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/job-overlay
+[setup] job_bin_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/bin
+[setup] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[setup] flashinfer_workspace_base=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/flashinfer
+[setup] torch_extensions_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/flashinfer/torch_extensions
+[setup] job_overlay_bin=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-34987098/job-overlay/bin
+[setup] lightweight_overlay_bin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin
+[setup] ninja_path=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja
+/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[setup] import=torch version=2.7.1+cu128 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py
+[setup] import=tensordict version=0.10.0 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py
+[setup] import=sglang version=0.4.9.post6 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[setup] import=transformers version=4.54.0 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[setup] optional_import=verl status=missing
+[setup] scratch_cache_root=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking
+[setup] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02/bundle_fixed
+[setup] run_tag=aime4096-r2-fixed-ckpt
+[setup] slurm_job_gpus=0,1
+[setup] cuda_visible_devices=0,1
+[setup] model_path=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B
+[setup] requested_launch_config experiment_mode=branch_ablation benchmark=deepscaler_aime_train methods=baseline,shared_trace seed=409602 port=31021 dp_size=2 tp_size=1 max_k=32 max_prompts=100 prompt_indices=all max_new_tokens=8192 reasoning_prefix_token_values=256,512,1024,2048,4096,6144 branch_ablation_reasoning_prefix_tokens=4096 branch_ablation_group_sizes=2 branch_ablation_no_baseline=0 adaptive_ablation_shared_counts=2,4,6,8,10,12,14,16 adaptive_confidence_threshold=0.75 memory_match_source_root=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_02 memory_match_shared_groups=2,4,8,16,32 hyperparam_reasoning_prefix_tokens=1024 hyperparam_top_p_values=0.75,0.85,0.90,0.95,1.00 hyperparam_temperature_values=0.4,0.6,0.8,1.0,1.2 checkpoint_matched_prompts_step=5 compact_jsonl=1 request_batch_size=64 resource_profile=auto throughput_profile=aggressive max_concurrent_prompts=8 prompts_per_rank=4 rank_scheduler=dynamic server_timeout_seconds=900
+[setup] starting compare_passk_aime.py
+2026-05-02 10:01:49,423 WARNING [setup] aggressive throughput profile allows request_batch_size=64 above the two_gpu_safe safety cap of 16
+2026-05-02 10:01:49,452 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=64 request_batch_size=64 resource_profile=two_gpu_safe cuda_graph_max_bs=64 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-02 10:01:49,452 INFO [setup] scheduler config: requested_max_concurrent_prompts=8 max_concurrent_prompts=8 prompts_per_rank=4 max_prompt_capacity=8 rank_scheduler=dynamic
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-05-02 10:01:54,345 WARNING [setup] aggressive throughput profile allows request_batch_size=64 above the two_gpu_safe safety cap of 16
+2026-05-02 10:01:54,345 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=64 request_batch_size=64 resource_profile=two_gpu_safe cuda_graph_max_bs=64 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-02 10:01:54,432 INFO [setup] Starting the local SGLang server on 127.0.0.1:31021.
+[2026-05-02 10:01:54] server_args=ServerArgs(model_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=False, context_length=None, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', host='127.0.0.1', port=31021, skip_server_warmup=True, warmups=None, nccl_port=None, dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', mem_fraction_static=0.778, max_running_requests=32, max_queued_requests=9223372036854775807, max_total_tokens=None, chunked_prefill_size=2048, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, hybrid_kvcache_ratio=None, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, device='cuda', tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=409602, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, sleep_on_idle=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, crash_dump_folder=None, show_time_cost=False, enable_metrics=False, enable_metrics_for_all_schedulers=False, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key='multiplex-local', served_model_name='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', chat_template=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser='qwen3', tool_call_parser=None, dp_size=2, load_balance_method='round_robin', dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, enable_lora=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend=None, decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='none', mm_attention_backend=None, speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, ep_size=1, enable_ep_moe=False, enable_deepep_moe=False, enable_flashinfer_cutlass_moe=False, enable_flashinfer_trtllm_moe=False, enable_flashinfer_allreduce_fusion=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm='static', init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through_selective', hicache_io_backend='', hicache_storage_backend=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, cuda_graph_max_bs=64, cuda_graph_bs=None, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=False, enable_mscclpp=False, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_two_batch_overlap=False, enable_torch_compile=False, torch_compile_max_bs=32, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, enable_soft_thinking=True, think_end_str='</think>', max_topk=3, used_topk=3, enable_entropy_mask=False, entropy_mask_threshold=0.0, early_stopping_entropy_threshold=0.0, early_stopping_length_threshold=256, dirichlet_alpha=1e+20, enable_gumbel=False, enable_max_topk=False, gumbel_tau=1.0, enable_replacement=True, enable_gumbel_after_thinking=False, enable_unweighting=False, after_thinking_temperature=0.6, after_thinking_top_p=0.95, after_thinking_top_k=-1, after_thinking_min_p=0.0, flashinfer_mla_disable_ragged=False, disable_shared_experts_fusion=False, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, enable_return_hidden_states=False, enable_triton_kernel_moe=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, debug_tensor_dump_prefill_only=False, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_decode_tp=None, disaggregation_decode_dp=None, disaggregation_prefill_pp=1, disaggregation_ib_device=None, num_reserved_decode_tokens=512, pdlb_url=None, custom_weight_loader=[], weight_loader_disable_mmap=False, enable_pdmux=False, sm_group_num=3)
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-02 10:02:01] Launch DP0 starting at GPU #0.
+[2026-05-02 10:02:01] Launch DP1 starting at GPU #1.
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-02 10:02:07 DP0] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-02 10:02:07 DP0] Init torch distributed begin.
+[2026-05-02 10:02:08 DP1] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-02 10:02:08 DP1] Init torch distributed begin.
+[2026-05-02 10:02:08 DP0] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-02 10:02:08 DP1] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-02 10:02:08 DP0] Load weight begin. avail mem=44.11 GB
+[2026-05-02 10:02:08 DP1] Load weight begin. avail mem=44.11 GB
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:05,  2.69s/it]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:05,  2.79s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.19s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.24s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.85s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.82s/it]
+
+[2026-05-02 10:02:14 DP1] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-02 10:02:14 DP1] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-02 10:02:14 DP1] Memory pool end. avail mem=9.65 GB
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.94s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.90s/it]
+
+[2026-05-02 10:02:14 DP1] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-02 10:02:14 DP0] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-02 10:02:14 DP1] Capture cuda graph bs [1, 2, 4, 8, 16, 24, 32]
+  0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):   0%|          | 0/7 [00:00<?, ?it/s][2026-05-02 10:02:14 DP0] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-02 10:02:14 DP0] Memory pool end. avail mem=9.65 GB
+[2026-05-02 10:02:14 DP0] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-02 10:02:14 DP0] Capture cuda graph bs [1, 2, 4, 8, 16, 24, 32]
+  0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):   0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):  14%|█▍        | 1/7 [00:01<00:10,  1.77s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  14%|█▍        | 1/7 [00:01<00:10,  1.77s/it]Capturing batches (bs=32 avail_mem=9.03 GB):  14%|█▍        | 1/7 [00:02<00:12,  2.01s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  14%|█▍        | 1/7 [00:02<00:12,  2.01s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  29%|██▊       | 2/7 [00:02<00:05,  1.01s/it]Capturing batches (bs=16 avail_mem=8.92 GB):  29%|██▊       | 2/7 [00:02<00:05,  1.01s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  29%|██▊       | 2/7 [00:02<00:04,  1.09it/s]Capturing batches (bs=16 avail_mem=8.92 GB):  29%|██▊       | 2/7 [00:02<00:04,  1.09it/s]Capturing batches (bs=16 avail_mem=8.92 GB):  43%|████▎     | 3/7 [00:02<00:02,  1.45it/s]Capturing batches (bs=8 avail_mem=8.90 GB):  43%|████▎     | 3/7 [00:02<00:02,  1.45it/s] Capturing batches (bs=16 avail_mem=8.92 GB):  43%|████▎     | 3/7 [00:02<00:02,  1.56it/s]Capturing batches (bs=8 avail_mem=8.90 GB):  43%|████▎     | 3/7 [00:02<00:02,  1.56it/s] Capturing batches (bs=8 avail_mem=8.90 GB):  57%|█████▋    | 4/7 [00:02<00:01,  1.86it/s]Capturing batches (bs=4 avail_mem=8.87 GB):  57%|█████▋    | 4/7 [00:02<00:01,  1.86it/s]Capturing batches (bs=8 avail_mem=8.90 GB):  57%|█████▋    | 4/7 [00:02<00:01,  1.96it/s]Capturing batches (bs=4 avail_mem=8.87 GB):  57%|█████▋    | 4/7 [00:02<00:01,  1.96it/s]Capturing batches (bs=4 avail_mem=8.87 GB):  71%|███████▏  | 5/7 [00:03<00:00,  2.20it/s]Capturing batches (bs=2 avail_mem=8.86 GB):  71%|███████▏  | 5/7 [00:03<00:00,  2.20it/s]Capturing batches (bs=4 avail_mem=8.87 GB):  71%|███████▏  | 5/7 [00:03<00:00,  2.29it/s]Capturing batches (bs=2 avail_mem=8.86 GB):  71%|███████▏  | 5/7 [00:03<00:00,  2.29it/s]Capturing batches (bs=2 avail_mem=8.86 GB):  86%|████████▌ | 6/7 [00:03<00:00,  2.47it/s]Capturing batches (bs=1 avail_mem=8.83 GB):  86%|████████▌ | 6/7 [00:03<00:00,  2.47it/s]Capturing batches (bs=2 avail_mem=8.86 GB):  86%|████████▌ | 6/7 [00:03<00:00,  2.55it/s]Capturing batches (bs=1 avail_mem=8.83 GB):  86%|████████▌ | 6/7 [00:03<00:00,  2.55it/s]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [00:03<00:00,  2.61it/s]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [00:03<00:00,  1.80it/s]
+[2026-05-02 10:02:18 DP1] Capture cuda graph end. Time elapsed: 3.93 s. mem usage=0.22 GB. avail mem=8.81 GB.
+Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [00:03<00:00,  2.69it/s]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [00:03<00:00,  1.91it/s]
+[2026-05-02 10:02:18 DP0] Capture cuda graph end. Time elapsed: 3.71 s. mem usage=0.22 GB. avail mem=8.81 GB.
+[2026-05-02 10:02:18 DP0] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.81 GB
+[2026-05-02 10:02:18 DP1] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.81 GB
+[2026-05-02 10:02:18] INFO:     Started server process [56950]
+[2026-05-02 10:02:18] INFO:     Waiting for application startup.
+[2026-05-02 10:02:18] The server is fired up and ready to roll!
+[2026-05-02 10:02:18] INFO:     Application startup complete.
+[2026-05-02 10:02:18] INFO:     Uvicorn running on http://127.0.0.1:31021 (Press CTRL+C to quit)
+[2026-05-02 10:02:18 DP0] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-02 10:02:19] INFO:     127.0.0.1:55170 - "GET /health_generate HTTP/1.1" 200 OK
+[2026-05-02 10:02:19 DP1] Cache flushed successfully!
+[2026-05-02 10:02:19 DP0] Cache flushed successfully!
+[2026-05-02 10:02:19] INFO:     127.0.0.1:55170 - "GET /flush_cache HTTP/1.1" 200 OK
+[2026-05-02 10:02:19] INFO:     127.0.0.1:55178 - "GET /get_server_info HTTP/1.1" 200 OK
+[2026-05-02 10:02:19 DP0] Prefill batch. #new-seq: 1, #new-token: 43, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-02 10:02:20] INFO:     127.0.0.1:55178 - "POST /generate HTTP/1.1" 200 OK
+2026-05-02 10:02:20,687 INFO [setup] multiplex self-check passed: attention_backend=auto finish_reason={'type': 'length', 'length': 8}
+2026-05-02 10:02:20,932 INFO [scheduler] Dispatching prompt 130 to DP rank 0.
+2026-05-02 10:02:21,015 INFO [baseline-fixed-prefix] Prompt 130: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,015 INFO [scheduler] Dispatching prompt 140 to DP rank 1.
+2026-05-02 10:02:21,015 INFO [baseline-fixed-prefix] Prompt 130: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:02:21,017 INFO [baseline-fixed-prefix] Prompt 140: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,017 INFO [scheduler] Dispatching prompt 150 to DP rank 0.
+2026-05-02 10:02:21,017 INFO [baseline-fixed-prefix] Prompt 140: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:02:21,019 INFO [baseline-fixed-prefix] Prompt 150: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,019 INFO [scheduler] Dispatching prompt 154 to DP rank 1.
+2026-05-02 10:02:21,019 INFO [baseline-fixed-prefix] Prompt 150: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:02:21,020 INFO [baseline-fixed-prefix] Prompt 154: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,020 INFO [scheduler] Dispatching prompt 173 to DP rank 0.
+2026-05-02 10:02:21,020 INFO [baseline-fixed-prefix] Prompt 154: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,021 INFO [baseline-fixed-prefix] Prompt 173: starting baseline generation for prefix=4096.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,022 INFO [scheduler] Dispatching prompt 180 to DP rank 1.
+2026-05-02 10:02:21,022 INFO [baseline-fixed-prefix] Prompt 173: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,025 INFO [baseline-fixed-prefix] Prompt 180: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,026 INFO [baseline-fixed-prefix] Prompt 180: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,026 INFO [scheduler] Dispatching prompt 187 to DP rank 0.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,028 INFO [baseline-fixed-prefix] Prompt 187: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,029 INFO [scheduler] Dispatching prompt 239 to DP rank 1.
+2026-05-02 10:02:21,029 INFO [baseline-fixed-prefix] Prompt 187: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+2026-05-02 10:02:21,031 INFO [baseline-fixed-prefix] Prompt 239: starting baseline generation for prefix=4096.
+2026-05-02 10:02:21,032 INFO [baseline-fixed-prefix] Prompt 239: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55190 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55192 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55208 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55220 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21 DP0] Prefill batch. #new-seq: 2, #new-token: 832, #cached-token: 18, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-02 10:02:21 DP1] Prefill batch. #new-seq: 5, #new-token: 560, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-02 10:02:21 DP1] Prefill batch. #new-seq: 27, #new-token: 27, #cached-token: 2997, token usage: 0.00, #running-req: 5, #queue-req: 32, 
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:21 DP0] Prefill batch. #new-seq: 30, #new-token: 30, #cached-token: 12720, token usage: 0.00, #running-req: 2, #queue-req: 32, 
+[2026-05-02 10:02:21] INFO:     127.0.0.1:55224 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:22] INFO:     127.0.0.1:55226 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:22] INFO:     127.0.0.1:55228 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:22] INFO:     127.0.0.1:55232 - "POST /open_session HTTP/1.1" 200 OK
+[2026-05-02 10:02:22 DP0] Decode batch. #running-req: 32, #token: 1481, token usage: 0.01, cuda graph: True, gen throughput (token/s): 274.30, #queue-req: 96, 
+[2026-05-02 10:02:23 DP1] Decode batch. #running-req: 32, #token: 1392, token usage: 0.01, cuda graph: True, gen throughput (token/s): 297.77, #queue-req: 96, 
+[2026-05-02 10:02:23 DP0] Decode batch. #running-req: 32, #token: 2761, token usage: 0.01, cuda graph: True, gen throughput (token/s): 1301.32, #queue-req: 96, 
+[2026-05-02 10:02:23 DP1] Decode batch. #running-req: 32, #token: 2672, token usage: 0.01, cuda graph: True, gen throughput (token/s): 1370.18, #queue-req: 96, 
+[2026-05-02 10:02:24 DP0] Decode batch. #running-req: 32, #token: 4041, token usage: 0.02, cuda graph: True, gen throughput (token/s): 1286.31, #queue-req: 96, 
+[2026-05-02 10:02:24 DP1] Decode batch. #running-req: 32, #token: 3952, token usage: 0.02, cuda graph: True, gen throughput (token/s): 1339.27, #queue-req: 96, 
+[2026-05-02 10:02:25 DP0] Decode batch. #running-req: 32, #token: 5321, token usage: 0.03, cuda graph: True, gen throughput (token/s): 1263.52, #queue-req: 96, 
+[2026-05-02 10:02:25 DP1] Decode batch. #running-req: 32, #token: 5232, token usage: 0.03, cuda graph: True, gen throughput (token/s): 1322.68, #queue-req: 96, 
+[2026-05-02 10:02:26 DP0] Decode batch. #running-req: 32, #token: 6601, token usage: 0.03, cuda graph: True, gen throughput (token/s): 1255.58, #queue-req: 96, 
+[2026-05-02 10:02:26 DP1] Decode batch. #running-req: 32, #token: 6512, token usage: 0.03, cuda graph: True, gen throughput (token/s): 1301.18, #queue-req: 96, 
+[2026-05-02 10:02:27 DP0] Decode batch. #running-req: 32, #token: 7881, token usage: 0.04, cuda graph: True, gen throughput (token/s): 1243.10, #queue-req: 96, 
+[2026-05-02 10:02:27 DP1] Decode batch. #running-req: 32, #token: 7792, token usage: 0.04, cuda graph: True, gen throughput (token/s): 1286.47, #queue-req: 96, 
+[2026-05-02 10:02:28 DP0] Decode batch. #running-req: 32, #token: 9161, token usage: 0.05, cuda graph: True, gen throughput (token/s): 1233.24, #queue-req: 96, 
+[2026-05-02 10:02:28 DP1] Decode batch. #running-req: 32, #token: 9072, token usage: 0.05, cuda graph: True, gen throughput (token/s): 1262.05, #queue-req: 96, 
+[2026-05-02 10:02:29 DP0] Decode batch. #running-req: 32, #token: 10441, token usage: 0.05, cuda graph: True, gen throughput (token/s): 1225.47, #queue-req: 96, 
+[2026-05-02 10:02:29 DP1] Decode batch. #running-req: 32, #token: 10352, token usage: 0.05, cuda graph: True, gen throughput (token/s): 1250.74, #queue-req: 96, 
+[2026-05-02 10:02:30 DP0] Decode batch. #running-req: 32, #token: 11721, token usage: 0.06, cuda graph: True, gen throughput (token/s): 1212.45, #queue-req: 96, 
+[2026-05-02 10:02:30 DP1] Decode batch. #running-req: 32, #token: 11632, token usage: 0.06, cuda graph: True, gen throughput (token/s): 1234.22, #queue-req: 96, 
+[2026-05-02 10:02:31 DP0] Decode batch. #running-req: 32, #token: 13001, token usage: 0.07, cuda graph: True, gen throughput (token/s): 1205.62, #queue-req: 96, 
+[2026-05-02 10:02:31 DP1] Decode batch. #running-req: 32, #token: 12912, token usage: 0.07, cuda graph: True, gen throughput (token/s): 1219.73, #queue-req: 96, 
+[2026-05-02 10:02:32 DP0] Decode batch. #running-req: 32, #token: 14281, token usage: 0.07, cuda graph: True, gen throughput (token/s): 1193.98, #queue-req: 96, 
+[2026-05-02 10:02:33 DP1] Decode batch. #running-req: 32, #token: 14192, token usage: 0.07, cuda graph: True, gen throughput (token/s): 1208.42, #queue-req: 96, 
+[2026-05-02 10:02:33 DP0] Decode batch. #running-req: 32, #token: 15561, token usage: 0.08, cuda graph: True, gen throughput (token/s): 1184.85, #queue-req: 96, 
+[2026-05-02 10:02:34 DP1] Decode batch. #running-req: 32, #token: 15472, token usage: 0.08, cuda graph: True, gen throughput (token/s): 1191.46, #queue-req: 96, 
+[2026-05-02 10:02:35 DP0] Decode batch. #running-req: 32, #token: 16841, token usage: 0.09, cuda graph: True, gen throughput (token/s): 1169.53, #queue-req: 96, 
+[2026-05-02 10:02:35 DP1] Decode batch. #running-req: 32, #token: 16752, token usage: 0.09, cuda graph: True, gen throughput (token/s): 1174.19, #queue-req: 96, 
+[2026-05-02 10:02:36 DP0] Decode batch. #running-req: 32, #token: 18121, token usage: 0.09, cuda graph: True, gen throughput (token/s): 1154.33, #queue-req: 96, 
+[2026-05-02 10:02:36 DP1] Decode batch. #running-req: 32, #token: 18032, token usage: 0.09, cuda graph: True, gen throughput (token/s): 1164.31, #queue-req: 96, 
+[2026-05-02 10:02:37 DP0] Decode batch. #running-req: 32, #token: 19401, token usage: 0.10, cuda graph: True, gen throughput (token/s): 1143.73, #queue-req: 96, 
+[2026-05-02 10:02:37 DP1] Decode batch. #running-req: 32, #token: 19312, token usage: 0.10, cuda graph: True, gen throughput (token/s): 1145.81, #queue-req: 96, 
+[2026-05-02 10:02:38 DP0] Decode batch. #running-req: 32, #token: 20681, token usage: 0.11, cuda graph: True, gen throughput (token/s): 1125.96, #queue-req: 96, 
+[2026-05-02 10:02:38 DP1] Decode batch. #running-req: 32, #token: 20592, token usage: 0.11, cuda graph: True, gen throughput (token/s): 1136.79, #queue-req: 96, 
+[2026-05-02 10:02:39 DP0] Decode batch. #running-req: 32, #token: 21961, token usage: 0.11, cuda graph: True, gen throughput (token/s): 1110.60, #queue-req: 96, 
+[2026-05-02 10:02:39 DP1] Decode batch. #running-req: 32, #token: 21872, token usage: 0.11, cuda graph: True, gen throughput (token/s): 1119.53, #queue-req: 96, 
+[2026-05-02 10:02:40 DP0] Decode batch. #running-req: 32, #token: 23241, token usage: 0.12, cuda graph: True, gen throughput (token/s): 1099.61, #queue-req: 96, 
+[2026-05-02 10:02:40 DP1] Decode batch. #running-req: 32, #token: 23152, token usage: 0.12, cuda graph: True, gen throughput (token/s): 1108.34, #queue-req: 96, 
+[2026-05-02 10:02:41 DP0] Decode batch. #running-req: 32, #token: 24521, token usage: 0.13, cuda graph: True, gen throughput (token/s): 1090.69, #queue-req: 96, 
+[2026-05-02 10:02:42 DP1] Decode batch. #running-req: 32, #token: 24432, token usage: 0.13, cuda graph: True, gen throughput (token/s): 1092.85, #queue-req: 96, 
+[2026-05-02 10:02:43 DP0] Decode batch. #running-req: 32, #token: 25801, token usage: 0.13, cuda graph: True, gen throughput (token/s): 1077.42, #queue-req: 96, 
+[2026-05-02 10:02:43 DP1] Decode batch. #running-req: 32, #token: 25712, token usage: 0.13, cuda graph: True, gen throughput (token/s): 1082.11, #queue-req: 96, 
+[2026-05-02 10:02:44 DP0] Decode batch. #running-req: 32, #token: 27081, token usage: 0.14, cuda graph: True, gen throughput (token/s): 1063.59, #queue-req: 96, 
+[2026-05-02 10:02:44 DP1] Decode batch. #running-req: 32, #token: 26992, token usage: 0.14, cuda graph: True, gen throughput (token/s): 1077.02, #queue-req: 96, 
+[2026-05-02 10:02:45 DP0] Decode batch. #running-req: 32, #token: 28361, token usage: 0.15, cuda graph: True, gen throughput (token/s): 1054.65, #queue-req: 96, 
+[2026-05-02 10:02:45 DP1] Decode batch. #running-req: 32, #token: 28272, token usage: 0.15, cuda graph: True, gen throughput (token/s): 1057.64, #queue-req: 96, 
+[2026-05-02 10:02:46 DP0] Decode batch. #running-req: 32, #token: 29641, token usage: 0.15, cuda graph: True, gen throughput (token/s): 1040.97, #queue-req: 96, 
+[2026-05-02 10:02:46 DP1] Decode batch. #running-req: 32, #token: 29552, token usage: 0.15, cuda graph: True, gen throughput (token/s): 1050.32, #queue-req: 96, 
+[2026-05-02 10:02:48 DP0] Decode batch. #running-req: 32, #token: 30921, token usage: 0.16, cuda graph: True, gen throughput (token/s): 1031.98, #queue-req: 96, 
+[2026-05-02 10:02:48 DP1] Decode batch. #running-req: 32, #token: 30832, token usage: 0.16, cuda graph: True, gen throughput (token/s): 1036.61, #queue-req: 96, 
+[2026-05-02 10:02:49 DP0] Decode batch. #running-req: 32, #token: 32201, token usage: 0.17, cuda graph: True, gen throughput (token/s): 1022.22, #queue-req: 96, 
+[2026-05-02 10:02:49 DP1] Decode batch. #running-req: 32, #token: 32112, token usage: 0.17, cuda graph: True, gen throughput (token/s): 1030.89, #queue-req: 96, 
+[2026-05-02 10:02:50 DP0] Decode batch. #running-req: 32, #token: 33481, token usage: 0.17, cuda graph: True, gen throughput (token/s): 1010.22, #queue-req: 96, 
+[2026-05-02 10:02:50 DP1] Decode batch. #running-req: 32, #token: 33392, token usage: 0.17, cuda graph: True, gen throughput (token/s): 1019.62, #queue-req: 96, 
+[2026-05-02 10:02:51 DP0] Decode batch. #running-req: 32, #token: 34761, token usage: 0.18, cuda graph: True, gen throughput (token/s): 997.78, #queue-req: 96, 
+[2026-05-02 10:02:51 DP1] Decode batch. #running-req: 32, #token: 34672, token usage: 0.18, cuda graph: True, gen throughput (token/s): 1008.71, #queue-req: 96, 
+[2026-05-02 10:02:53 DP1] Decode batch. #running-req: 32, #token: 35952, token usage: 0.18, cuda graph: True, gen throughput (token/s): 1000.43, #queue-req: 96, 
+[2026-05-02 10:02:53 DP0] Decode batch. #running-req: 32, #token: 36041, token usage: 0.19, cuda graph: True, gen throughput (token/s): 987.01, #queue-req: 96, 
+[2026-05-02 10:02:54 DP1] Decode batch. #running-req: 32, #token: 37232, token usage: 0.19, cuda graph: True, gen throughput (token/s): 989.41, #queue-req: 96, 
+[2026-05-02 10:02:54 DP0] Decode batch. #running-req: 32, #token: 37321, token usage: 0.19, cuda graph: True, gen throughput (token/s): 976.46, #queue-req: 96, 
+[2026-05-02 10:02:55 DP1] Decode batch. #running-req: 32, #token: 38512, token usage: 0.20, cuda graph: True, gen throughput (token/s): 979.00, #queue-req: 96, 
+[2026-05-02 10:02:55 DP0] Decode batch. #running-req: 32, #token: 38601, token usage: 0.20, cuda graph: True, gen throughput (token/s): 971.17, #queue-req: 96, 
+[2026-05-02 10:02:57 DP1] Decode batch. #running-req: 32, #token: 39792, token usage: 0.20, cuda graph: True, gen throughput (token/s): 970.67, #queue-req: 96, 
+[2026-05-02 10:02:57 DP0] Decode batch. #running-req: 32, #token: 39881, token usage: 0.20, cuda graph: True, gen throughput (token/s): 959.50, #queue-req: 96, 
+[2026-05-02 10:02:58 DP1] Decode batch. #running-req: 32, #token: 41072, token usage: 0.21, cuda graph: True, gen throughput (token/s): 960.39, #queue-req: 96, 
+[2026-05-02 10:02:58 DP0] Decode batch. #running-req: 32, #token: 41161, token usage: 0.21, cuda graph: True, gen throughput (token/s): 948.72, #queue-req: 96, 
+[2026-05-02 10:02:59 DP1] Decode batch. #running-req: 32, #token: 42352, token usage: 0.22, cuda graph: True, gen throughput (token/s): 950.45, #queue-req: 96, 
+[2026-05-02 10:02:59 DP0] Decode batch. #running-req: 32, #token: 42441, token usage: 0.22, cuda graph: True, gen throughput (token/s): 940.00, #queue-req: 96, 
+[2026-05-02 10:03:01 DP1] Decode batch. #running-req: 32, #token: 43632, token usage: 0.22, cuda graph: True, gen throughput (token/s): 941.48, #queue-req: 96, 
+[2026-05-02 10:03:01 DP0] Decode batch. #running-req: 32, #token: 43721, token usage: 0.22, cuda graph: True, gen throughput (token/s): 933.11, #queue-req: 96, 
+[2026-05-02 10:03:02 DP1] Decode batch. #running-req: 32, #token: 44912, token usage: 0.23, cuda graph: True, gen throughput (token/s): 932.09, #queue-req: 96, 
+[2026-05-02 10:03:02 DP0] Decode batch. #running-req: 32, #token: 45001, token usage: 0.23, cuda graph: True, gen throughput (token/s): 924.36, #queue-req: 96, 
+[2026-05-02 10:03:03 DP1] Decode batch. #running-req: 32, #token: 46192, token usage: 0.24, cuda graph: True, gen throughput (token/s): 927.91, #queue-req: 96, 
+[2026-05-02 10:03:03 DP0] Decode batch. #running-req: 32, #token: 46281, token usage: 0.24, cuda graph: True, gen throughput (token/s): 913.74, #queue-req: 96, 
+[2026-05-02 10:03:05 DP1] Decode batch. #running-req: 32, #token: 47472, token usage: 0.24, cuda graph: True, gen throughput (token/s): 914.37, #queue-req: 96, 
+[2026-05-02 10:03:05 DP0] Decode batch. #running-req: 32, #token: 47561, token usage: 0.24, cuda graph: True, gen throughput (token/s): 904.22, #queue-req: 96, 
+[2026-05-02 10:03:06 DP1] Decode batch. #running-req: 32, #token: 48752, token usage: 0.25, cuda graph: True, gen throughput (token/s): 906.42, #queue-req: 96, 
+[2026-05-02 10:03:06 DP0] Decode batch. #running-req: 32, #token: 48841, token usage: 0.25, cuda graph: True, gen throughput (token/s): 897.19, #queue-req: 96, 
+[2026-05-02 10:03:08 DP1] Decode batch. #running-req: 32, #token: 50032, token usage: 0.26, cuda graph: True, gen throughput (token/s): 899.09, #queue-req: 96, 
+[2026-05-02 10:03:08 DP0] Decode batch. #running-req: 32, #token: 50121, token usage: 0.26, cuda graph: True, gen throughput (token/s): 889.65, #queue-req: 96, 
+[2026-05-02 10:03:09 DP1] Decode batch. #running-req: 32, #token: 51312, token usage: 0.26, cuda graph: True, gen throughput (token/s): 888.19, #queue-req: 96, 
+[2026-05-02 10:03:09 DP0] Decode batch. #running-req: 32, #token: 51401, token usage: 0.26, cuda graph: True, gen throughput (token/s): 883.88, #queue-req: 96, 
+[2026-05-02 10:03:10 DP1] Decode batch. #running-req: 32, #token: 52592, token usage: 0.27, cuda graph: True, gen throughput (token/s): 884.65, #queue-req: 96, 
+[2026-05-02 10:03:11 DP0] Decode batch. #running-req: 32, #token: 52681, token usage: 0.27, cuda graph: True, gen throughput (token/s): 872.53, #queue-req: 96, 
+[2026-05-02 10:03:12 DP1] Decode batch. #running-req: 32, #token: 53872, token usage: 0.28, cuda graph: True, gen throughput (token/s): 874.65, #queue-req: 96, 
+[2026-05-02 10:03:12 DP0] Decode batch. #running-req: 32, #token: 53961, token usage: 0.28, cuda graph: True, gen throughput (token/s): 866.25, #queue-req: 96, 
+[2026-05-02 10:03:13 DP1] Decode batch. #running-req: 32, #token: 55152, token usage: 0.28, cuda graph: True, gen throughput (token/s): 865.53, #queue-req: 96, 
+[2026-05-02 10:03:14 DP0] Decode batch. #running-req: 32, #token: 55241, token usage: 0.28, cuda graph: True, gen throughput (token/s): 858.89, #queue-req: 96, 
+[2026-05-02 10:03:15 DP1] Decode batch. #running-req: 32, #token: 56432, token usage: 0.29, cuda graph: True, gen throughput (token/s): 860.61, #queue-req: 96, 
+[2026-05-02 10:03:15 DP0] Decode batch. #running-req: 32, #token: 56521, token usage: 0.29, cuda graph: True, gen throughput (token/s): 851.54, #queue-req: 96, 
+[2026-05-02 10:03:16 DP1] Decode batch. #running-req: 32, #token: 57712, token usage: 0.30, cuda graph: True, gen throughput (token/s): 851.71, #queue-req: 96, 
+[2026-05-02 10:03:17 DP0] Decode batch. #running-req: 32, #token: 57801, token usage: 0.30, cuda graph: True, gen throughput (token/s): 846.44, #queue-req: 96, 
+[2026-05-02 10:03:18 DP1] Decode batch. #running-req: 32, #token: 58992, token usage: 0.30, cuda graph: True, gen throughput (token/s): 846.53, #queue-req: 96, 
+[2026-05-02 10:03:18 DP0] Decode batch. #running-req: 32, #token: 59081, token usage: 0.30, cuda graph: True, gen throughput (token/s): 837.33, #queue-req: 96, 
+[2026-05-02 10:03:19 DP1] Decode batch. #running-req: 32, #token: 60272, token usage: 0.31, cuda graph: True, gen throughput (token/s): 835.94, #queue-req: 96, 
+[2026-05-02 10:03:20 DP0] Decode batch. #running-req: 32, #token: 60361, token usage: 0.31, cuda graph: True, gen throughput (token/s): 831.12, #queue-req: 96, 
+[2026-05-02 10:03:21 DP1] Decode batch. #running-req: 32, #token: 61552, token usage: 0.32, cuda graph: True, gen throughput (token/s): 829.90, #queue-req: 96, 
+[2026-05-02 10:03:21 DP0] Decode batch. #running-req: 32, #token: 61641, token usage: 0.32, cuda graph: True, gen throughput (token/s): 823.76, #queue-req: 96, 
+[2026-05-02 10:03:23 DP1] Decode batch. #running-req: 32, #token: 62832, token usage: 0.32, cuda graph: True, gen throughput (token/s): 821.42, #queue-req: 96, 
+[2026-05-02 10:03:23 DP0] Decode batch. #running-req: 32, #token: 62921, token usage: 0.32, cuda graph: True, gen throughput (token/s): 817.03, #queue-req: 96, 
+[2026-05-02 10:03:24 DP1] Decode batch. #running-req: 32, #token: 64112, token usage: 0.33, cuda graph: True, gen throughput (token/s): 815.53, #queue-req: 96, 
+[2026-05-02 10:03:24 DP0] Decode batch. #running-req: 32, #token: 64201, token usage: 0.33, cuda graph: True, gen throughput (token/s): 811.26, #queue-req: 96, 
+[2026-05-02 10:03:26 DP1] Decode batch. #running-req: 32, #token: 65392, token usage: 0.34, cuda graph: True, gen throughput (token/s): 812.00, #queue-req: 96, 
+[2026-05-02 10:03:26 DP0] Decode batch. #running-req: 32, #token: 65481, token usage: 0.34, cuda graph: True, gen throughput (token/s): 804.68, #queue-req: 96, 
+[2026-05-02 10:03:27 DP1] Decode batch. #running-req: 32, #token: 66672, token usage: 0.34, cuda graph: True, gen throughput (token/s): 802.84, #queue-req: 96, 
+[2026-05-02 10:03:28 DP0] Decode batch. #running-req: 32, #token: 66761, token usage: 0.34, cuda graph: True, gen throughput (token/s): 797.83, #queue-req: 96, 
+[2026-05-02 10:03:29 DP1] Decode batch. #running-req: 32, #token: 67952, token usage: 0.35, cuda graph: True, gen throughput (token/s): 794.20, #queue-req: 96, 
+[2026-05-02 10:03:29 DP0] Decode batch. #running-req: 32, #token: 68041, token usage: 0.35, cuda graph: True, gen throughput (token/s): 791.06, #queue-req: 96, 
+[2026-05-02 10:03:30 DP1] Decode batch. #running-req: 32, #token: 69232, token usage: 0.36, cuda graph: True, gen throughput (token/s): 789.33, #queue-req: 96, 
+[2026-05-02 10:03:31 DP0] Decode batch. #running-req: 32, #token: 69321, token usage: 0.36, cuda graph: True, gen throughput (token/s): 784.76, #queue-req: 96, 
+[2026-05-02 10:03:32 DP1] Decode batch. #running-req: 32, #token: 70512, token usage: 0.36, cuda graph: True, gen throughput (token/s): 783.00, #queue-req: 96, 
+[2026-05-02 10:03:32 DP0] Decode batch. #running-req: 32, #token: 70601, token usage: 0.36, cuda graph: True, gen throughput (token/s): 781.42, #queue-req: 96, 
+[2026-05-02 10:03:34 DP1] Decode batch. #running-req: 32, #token: 71792, token usage: 0.37, cuda graph: True, gen throughput (token/s): 780.40, #queue-req: 96, 
+[2026-05-02 10:03:34 DP0] Decode batch. #running-req: 32, #token: 71881, token usage: 0.37, cuda graph: True, gen throughput (token/s): 772.34, #queue-req: 96, 
+[2026-05-02 10:03:35 DP1] Decode batch. #running-req: 32, #token: 73072, token usage: 0.38, cuda graph: True, gen throughput (token/s): 770.20, #queue-req: 96, 
+[2026-05-02 10:03:36 DP0] Decode batch. #running-req: 32, #token: 73161, token usage: 0.38, cuda graph: True, gen throughput (token/s): 766.22, #queue-req: 96, 
+[2026-05-02 10:03:37 DP1] Decode batch. #running-req: 32, #token: 74352, token usage: 0.38, cuda graph: True, gen throughput (token/s): 765.83, #queue-req: 96, 
+[2026-05-02 10:03:37 DP0] Decode batch. #running-req: 32, #token: 74441, token usage: 0.38, cuda graph: True, gen throughput (token/s): 758.95, #queue-req: 96, 
+[2026-05-02 10:03:39 DP1] Decode batch. #running-req: 32, #token: 75632, token usage: 0.39, cuda graph: True, gen throughput (token/s): 758.14, #queue-req: 96, 
+[2026-05-02 10:03:39 DP0] Decode batch. #running-req: 32, #token: 75721, token usage: 0.39, cuda graph: True, gen throughput (token/s): 755.13, #queue-req: 96, 
+[2026-05-02 10:03:40 DP1] Decode batch. #running-req: 32, #token: 76912, token usage: 0.40, cuda graph: True, gen throughput (token/s): 753.20, #queue-req: 96, 
+[2026-05-02 10:03:41 DP0] Decode batch. #running-req: 32, #token: 77001, token usage: 0.40, cuda graph: True, gen throughput (token/s): 750.92, #queue-req: 96, 
+[2026-05-02 10:03:42 DP1] Decode batch. #running-req: 32, #token: 78192, token usage: 0.40, cuda graph: True, gen throughput (token/s): 750.02, #queue-req: 96, 
+[2026-05-02 10:03:43 DP0] Decode batch. #running-req: 32, #token: 78281, token usage: 0.40, cuda graph: True, gen throughput (token/s): 743.24, #queue-req: 96, 
+[2026-05-02 10:03:44 DP1] Decode batch. #running-req: 32, #token: 79472, token usage: 0.41, cuda graph: True, gen throughput (token/s): 740.12, #queue-req: 96, 
+[2026-05-02 10:03:44 DP0] Decode batch. #running-req: 32, #token: 79561, token usage: 0.41, cuda graph: True, gen throughput (token/s): 737.45, #queue-req: 96, 
+[2026-05-02 10:03:46 DP1] Decode batch. #running-req: 32, #token: 80752, token usage: 0.41, cuda graph: True, gen throughput (token/s): 735.89, #queue-req: 96, 
+[2026-05-02 10:03:46 DP0] Decode batch. #running-req: 32, #token: 80841, token usage: 0.42, cuda graph: True, gen throughput (token/s): 733.18, #queue-req: 96, 
+[2026-05-02 10:03:47 DP1] Decode batch. #running-req: 32, #token: 82032, token usage: 0.42, cuda graph: True, gen throughput (token/s): 731.25, #queue-req: 96, 
+[2026-05-02 10:03:48 DP0] Decode batch. #running-req: 32, #token: 82121, token usage: 0.42, cuda graph: True, gen throughput (token/s): 726.26, #queue-req: 96, 
+[2026-05-02 10:03:49 DP1] Decode batch. #running-req: 32, #token: 83312, token usage: 0.43, cuda graph: True, gen throughput (token/s): 725.98, #queue-req: 96, 
+[2026-05-02 10:03:50 DP0] Decode batch. #running-req: 32, #token: 83401, token usage: 0.43, cuda graph: True, gen throughput (token/s): 724.67, #queue-req: 96, 
+[2026-05-02 10:03:51 DP1] Decode batch. #running-req: 32, #token: 84592, token usage: 0.43, cuda graph: True, gen throughput (token/s): 722.59, #queue-req: 96, 
+[2026-05-02 10:03:51 DP0] Decode batch. #running-req: 32, #token: 84681, token usage: 0.44, cuda graph: True, gen throughput (token/s): 716.06, #queue-req: 96, 
+[2026-05-02 10:03:53 DP1] Decode batch. #running-req: 32, #token: 85872, token usage: 0.44, cuda graph: True, gen throughput (token/s): 714.71, #queue-req: 96, 
+[2026-05-02 10:03:53 DP0] Decode batch. #running-req: 32, #token: 85961, token usage: 0.44, cuda graph: True, gen throughput (token/s): 711.69, #queue-req: 96, 
+[2026-05-02 10:03:55 DP1] Decode batch. #running-req: 32, #token: 87152, token usage: 0.45, cuda graph: True, gen throughput (token/s): 708.90, #queue-req: 96, 
+[2026-05-02 10:03:55 DP0] Decode batch. #running-req: 32, #token: 87241, token usage: 0.45, cuda graph: True, gen throughput (token/s): 705.96, #queue-req: 96, 
+[2026-05-02 10:03:56 DP1] Decode batch. #running-req: 32, #token: 88432, token usage: 0.45, cuda graph: True, gen throughput (token/s): 704.59, #queue-req: 96, 
+[2026-05-02 10:03:57 DP0] Decode batch. #running-req: 32, #token: 88521, token usage: 0.45, cuda graph: True, gen throughput (token/s): 701.57, #queue-req: 96, 
+[2026-05-02 10:03:58 DP1] Decode batch. #running-req: 32, #token: 89712, token usage: 0.46, cuda graph: True, gen throughput (token/s): 701.30, #queue-req: 96, 
+[2026-05-02 10:03:59 DP0] Decode batch. #running-req: 32, #token: 89801, token usage: 0.46, cuda graph: True, gen throughput (token/s): 698.22, #queue-req: 96, 
+[2026-05-02 10:04:00 DP1] Decode batch. #running-req: 32, #token: 90992, token usage: 0.47, cuda graph: True, gen throughput (token/s): 697.15, #queue-req: 96, 
+[2026-05-02 10:04:01 DP0] Decode batch. #running-req: 32, #token: 91081, token usage: 0.47, cuda graph: True, gen throughput (token/s): 691.43, #queue-req: 96, 
+[2026-05-02 10:04:02 DP1] Decode batch. #running-req: 32, #token: 92272, token usage: 0.47, cuda graph: True, gen throughput (token/s): 689.84, #queue-req: 96, 
+[2026-05-02 10:04:02 DP0] Decode batch. #running-req: 32, #token: 92361, token usage: 0.47, cuda graph: True, gen throughput (token/s): 687.87, #queue-req: 96, 
+[2026-05-02 10:04:04 DP1] Decode batch. #running-req: 32, #token: 93552, token usage: 0.48, cuda graph: True, gen throughput (token/s): 685.02, #queue-req: 96, 
+[2026-05-02 10:04:04 DP0] Decode batch. #running-req: 32, #token: 93641, token usage: 0.48, cuda graph: True, gen throughput (token/s): 682.33, #queue-req: 96, 
+[2026-05-02 10:04:06 DP1] Decode batch. #running-req: 32, #token: 94832, token usage: 0.49, cuda graph: True, gen throughput (token/s): 681.11, #queue-req: 96, 
+[2026-05-02 10:04:06 DP0] Decode batch. #running-req: 32, #token: 94921, token usage: 0.49, cuda graph: True, gen throughput (token/s): 677.40, #queue-req: 96, 
+[2026-05-02 10:04:08 DP1] Decode batch. #running-req: 32, #token: 96112, token usage: 0.49, cuda graph: True, gen throughput (token/s): 675.40, #queue-req: 96, 
+[2026-05-02 10:04:08 DP0] Decode batch. #running-req: 32, #token: 96201, token usage: 0.49, cuda graph: True, gen throughput (token/s): 675.28, #queue-req: 96, 
+[2026-05-02 10:04:09 DP1] Decode batch. #running-req: 32, #token: 97392, token usage: 0.50, cuda graph: True, gen throughput (token/s): 673.32, #queue-req: 96, 
+[2026-05-02 10:04:10 DP0] Decode batch. #running-req: 32, #token: 97481, token usage: 0.50, cuda graph: True, gen throughput (token/s): 667.60, #queue-req: 96, 
+[2026-05-02 10:04:11 DP1] Decode batch. #running-req: 32, #token: 98672, token usage: 0.51, cuda graph: True, gen throughput (token/s): 665.50, #queue-req: 96, 
+[2026-05-02 10:04:12 DP0] Decode batch. #running-req: 32, #token: 98761, token usage: 0.51, cuda graph: True, gen throughput (token/s): 662.81, #queue-req: 96, 
+[2026-05-02 10:04:13 DP1] Decode batch. #running-req: 32, #token: 99952, token usage: 0.51, cuda graph: True, gen throughput (token/s): 662.12, #queue-req: 96, 
+[2026-05-02 10:04:14 DP0] Decode batch. #running-req: 32, #token: 100041, token usage: 0.51, cuda graph: True, gen throughput (token/s): 659.84, #queue-req: 96, 
+[2026-05-02 10:04:15 DP1] Decode batch. #running-req: 32, #token: 101232, token usage: 0.52, cuda graph: True, gen throughput (token/s): 658.37, #queue-req: 96, 
+[2026-05-02 10:04:16 DP0] Decode batch. #running-req: 32, #token: 101321, token usage: 0.52, cuda graph: True, gen throughput (token/s): 655.76, #queue-req: 96, 
+[2026-05-02 10:04:17 DP1] Decode batch. #running-req: 32, #token: 102512, token usage: 0.53, cuda graph: True, gen throughput (token/s): 653.11, #queue-req: 96, 
+[2026-05-02 10:04:18 DP0] Decode batch. #running-req: 32, #token: 102601, token usage: 0.53, cuda graph: True, gen throughput (token/s): 654.00, #queue-req: 96, 
+[2026-05-02T10:04:18.588] error: *** JOB 34987098 ON g3040 CANCELLED AT 2026-05-02T10:04:18 DUE to SIGNAL Terminated ***

@@ -1,0 +1,5 @@
+group_size,topup_generator,topup_group_size,prompt_index,problem_id,target_cost_tokens,target_correct,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,completed_at_unix
+4,shared_group,4,793,aime-train-2017-II-14,216571.0,False,128757.0,217539.0,False,False,20,52,True,completed,,1778058766.0275512
+4,shared_group,4,804,aime-train-2018-I-10,244249.0,False,149073.0,259013.0,False,False,24,56,True,completed,,1778058883.1869102
+4,shared_group,4,811,aime-train-2018-II-02,185576.0,True,101740.0,189890.0,True,True,32,64,True,completed,,1778059603.0993938
+4,shared_group,4,810,aime-train-2018-II-01,157812.0,True,59526.0,163767.0,True,True,44,76,True,completed,,1778059653.9036272

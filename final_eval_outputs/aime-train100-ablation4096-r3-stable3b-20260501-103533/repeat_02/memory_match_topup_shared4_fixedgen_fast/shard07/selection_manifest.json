@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "146",
+      "difficulty": 2.0,
+      "order_index": 0,
+      "problem": "Find $x^2+y^2_{}$ if $x_{}^{}$ and $y_{}^{}$ are positive integers such that \\begin{align*} xy+x+y&=71, \\\\ x^2y+xy^2&=880. \\end{align*}",
+      "problem_id": "aime-train-1991-I-01",
+      "problem_number": 1,
+      "prompt_index": 120,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 120,
+      "year": 1991
+    },
+    {
+      "aime_number": 1,
+      "answer": "159",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "How many real numbers $x^{}_{}$ satisfy the equation $\\frac{1}{5}\\log_2 x = \\sin (5\\pi x)$?",
+      "problem_id": "aime-train-1991-I-04",
+      "problem_number": 4,
+      "prompt_index": 123,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 123,
+      "year": 1991
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    120,
+    123
+  ],
+  "selection_seed": 4096
+}

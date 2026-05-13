@@ -1,0 +1,4 @@
+condition,mean_accuracy,std_accuracy,mean_cost_tokens,std_cost_tokens,num_repeats,mean_prompt_rows_per_repeat,total_prompt_rows,marker,color
+Fixed,0.8200000000000001,0.11313708498984763,209984.82,1375.7045270696815,2,60.0,120,o,#4C78A8
+Shared every 4,0.825,0.10606601717798214,111825.655,185.18419492494453,2,60.0,120,s,#F58518
+Shared every 4 + shared4 top-up,0.8400000000000001,0.08485281374238571,218030.215,1060.0449888801922,2,60.0,120,D,#E45756

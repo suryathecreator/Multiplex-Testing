@@ -1,0 +1,189 @@
+2026-05-02 02:23:42,893 INFO [scheduler] Dispatching prompt 459 to DP rank 0.
+2026-05-02 02:23:42,894 INFO [baseline-fixed-prefix] Prompt 459: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,895 INFO [scheduler] Dispatching prompt 462 to DP rank 1.
+2026-05-02 02:23:42,895 INFO [baseline-fixed-prefix] Prompt 459: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,895 INFO [baseline-fixed-prefix] Prompt 462: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,895 INFO [scheduler] Dispatching prompt 466 to DP rank 0.
+2026-05-02 02:23:42,898 INFO [baseline-fixed-prefix] Prompt 462: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,901 INFO [baseline-fixed-prefix] Prompt 466: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,901 INFO [scheduler] Dispatching prompt 467 to DP rank 1.
+2026-05-02 02:23:42,934 INFO [baseline-fixed-prefix] Prompt 466: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,937 INFO [baseline-fixed-prefix] Prompt 467: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,937 INFO [scheduler] Dispatching prompt 506 to DP rank 0.
+2026-05-02 02:23:42,938 INFO [baseline-fixed-prefix] Prompt 467: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,939 INFO [baseline-fixed-prefix] Prompt 506: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,939 INFO [scheduler] Dispatching prompt 509 to DP rank 1.
+2026-05-02 02:23:42,939 INFO [baseline-fixed-prefix] Prompt 506: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,940 INFO [baseline-fixed-prefix] Prompt 509: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,940 INFO [scheduler] Dispatching prompt 523 to DP rank 0.
+2026-05-02 02:23:42,941 INFO [baseline-fixed-prefix] Prompt 509: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,945 INFO [baseline-fixed-prefix] Prompt 523: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,945 INFO [scheduler] Dispatching prompt 527 to DP rank 1.
+2026-05-02 02:23:42,945 INFO [baseline-fixed-prefix] Prompt 523: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:23:42,947 INFO [baseline-fixed-prefix] Prompt 527: starting baseline generation for prefix=4096.
+2026-05-02 02:23:42,947 INFO [baseline-fixed-prefix] Prompt 527: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 02:40:26,124 INFO [baseline-fixed-prefix] Prompt 459: produced 32/32 usable continuations.
+2026-05-02 02:40:26,157 INFO [scheduler] Dispatching prompt 550 to DP rank 0.
+2026-05-02 02:40:26,157 INFO [baseline-fixed-prefix] Prompt 550: starting baseline generation for prefix=4096.
+2026-05-02 02:40:26,157 INFO [baseline-fixed-prefix] Prompt 550: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,948 INFO [scheduler] Dispatching prompt 462 to DP rank 0.
+2026-05-02 10:05:57,977 INFO [baseline-fixed-prefix] Prompt 462: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,977 INFO [scheduler] Dispatching prompt 466 to DP rank 1.
+2026-05-02 10:05:57,977 INFO [baseline-fixed-prefix] Prompt 462: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,978 INFO [baseline-fixed-prefix] Prompt 466: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,978 INFO [scheduler] Dispatching prompt 467 to DP rank 0.
+2026-05-02 10:05:57,979 INFO [baseline-fixed-prefix] Prompt 466: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,980 INFO [baseline-fixed-prefix] Prompt 467: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,981 INFO [scheduler] Dispatching prompt 506 to DP rank 1.
+2026-05-02 10:05:57,981 INFO [baseline-fixed-prefix] Prompt 467: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,986 INFO [baseline-fixed-prefix] Prompt 506: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,986 INFO [scheduler] Dispatching prompt 509 to DP rank 0.
+2026-05-02 10:05:57,986 INFO [baseline-fixed-prefix] Prompt 506: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,990 INFO [baseline-fixed-prefix] Prompt 509: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,990 INFO [scheduler] Dispatching prompt 523 to DP rank 1.
+2026-05-02 10:05:57,990 INFO [baseline-fixed-prefix] Prompt 509: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,991 INFO [baseline-fixed-prefix] Prompt 523: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,991 INFO [baseline-fixed-prefix] Prompt 523: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,992 INFO [scheduler] Dispatching prompt 527 to DP rank 0.
+2026-05-02 10:05:57,997 INFO [baseline-fixed-prefix] Prompt 527: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,997 INFO [scheduler] Dispatching prompt 550 to DP rank 1.
+2026-05-02 10:05:57,997 INFO [baseline-fixed-prefix] Prompt 527: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:05:57,998 INFO [baseline-fixed-prefix] Prompt 550: starting baseline generation for prefix=4096.
+2026-05-02 10:05:57,999 INFO [baseline-fixed-prefix] Prompt 550: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:20:23,992 INFO [baseline-fixed-prefix] Prompt 467: produced 32/32 usable continuations.
+2026-05-02 10:20:24,133 INFO [scheduler] Dispatching prompt 551 to DP rank 0.
+2026-05-02 10:20:24,133 INFO [baseline-fixed-prefix] Prompt 551: starting baseline generation for prefix=4096.
+2026-05-02 10:20:24,133 INFO [baseline-fixed-prefix] Prompt 551: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:22:33,927 INFO [baseline-fixed-prefix] Prompt 466: produced 32/32 usable continuations.
+2026-05-02 10:22:34,001 INFO [scheduler] Dispatching prompt 557 to DP rank 1.
+2026-05-02 10:22:34,001 INFO [baseline-fixed-prefix] Prompt 557: starting baseline generation for prefix=4096.
+2026-05-02 10:22:34,001 INFO [baseline-fixed-prefix] Prompt 557: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,128 INFO [scheduler] Dispatching prompt 462 to DP rank 0.
+2026-05-02 10:29:15,129 INFO [baseline-fixed-prefix] Prompt 462: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,129 INFO [scheduler] Dispatching prompt 506 to DP rank 1.
+2026-05-02 10:29:15,129 INFO [baseline-fixed-prefix] Prompt 462: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,130 INFO [baseline-fixed-prefix] Prompt 506: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,130 INFO [scheduler] Dispatching prompt 509 to DP rank 0.
+2026-05-02 10:29:15,163 INFO [baseline-fixed-prefix] Prompt 506: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,165 INFO [baseline-fixed-prefix] Prompt 509: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,165 INFO [scheduler] Dispatching prompt 523 to DP rank 1.
+2026-05-02 10:29:15,165 INFO [baseline-fixed-prefix] Prompt 509: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,166 INFO [baseline-fixed-prefix] Prompt 523: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,166 INFO [scheduler] Dispatching prompt 527 to DP rank 0.
+2026-05-02 10:29:15,166 INFO [baseline-fixed-prefix] Prompt 523: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,170 INFO [baseline-fixed-prefix] Prompt 527: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,170 INFO [baseline-fixed-prefix] Prompt 527: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:29:15,170 INFO [scheduler] Dispatching prompt 550 to DP rank 1.
+2026-05-02 10:29:15,171 INFO [baseline-fixed-prefix] Prompt 550: starting baseline generation for prefix=4096.
+2026-05-02 10:29:15,172 INFO [baseline-fixed-prefix] Prompt 550: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:47:42,615 INFO [baseline-fixed-prefix] Prompt 527: produced 32/32 usable continuations.
+2026-05-02 10:48:29,927 INFO [baseline-fixed-prefix] Prompt 462: produced 32/32 usable continuations.
+2026-05-02 10:52:26,633 INFO [baseline-fixed-prefix] Prompt 550: produced 32/32 usable continuations.
+2026-05-02 10:54:59,921 INFO [scheduler] Dispatching prompt 462 to DP rank 0.
+2026-05-02 10:54:59,941 INFO [baseline-fixed-prefix] Prompt 462: starting baseline generation for prefix=4096.
+2026-05-02 10:54:59,941 INFO [scheduler] Dispatching prompt 506 to DP rank 1.
+2026-05-02 10:54:59,941 INFO [baseline-fixed-prefix] Prompt 462: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:54:59,942 INFO [baseline-fixed-prefix] Prompt 506: starting baseline generation for prefix=4096.
+2026-05-02 10:54:59,943 INFO [scheduler] Dispatching prompt 509 to DP rank 0.
+2026-05-02 10:54:59,943 INFO [baseline-fixed-prefix] Prompt 506: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:54:59,963 INFO [baseline-fixed-prefix] Prompt 509: starting baseline generation for prefix=4096.
+2026-05-02 10:54:59,963 INFO [scheduler] Dispatching prompt 523 to DP rank 1.
+2026-05-02 10:54:59,963 INFO [baseline-fixed-prefix] Prompt 509: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 10:54:59,964 INFO [baseline-fixed-prefix] Prompt 523: starting baseline generation for prefix=4096.
+2026-05-02 10:54:59,964 INFO [baseline-fixed-prefix] Prompt 523: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:00:56,092 INFO [baseline-fixed-prefix] Prompt 506: produced 32/32 usable continuations.
+2026-05-02 11:10:25,121 INFO [baseline-fixed-prefix] Prompt 462: produced 32/32 usable continuations.
+2026-05-02 11:11:01,429 INFO [baseline-fixed-prefix] Prompt 509: produced 32/32 usable continuations.
+2026-05-02 11:13:49,903 INFO [scheduler] Dispatching prompt 462 to DP rank 0.
+2026-05-02 11:13:49,928 INFO [baseline-fixed-prefix] Prompt 462: starting baseline generation for prefix=4096.
+2026-05-02 11:13:49,928 INFO [scheduler] Dispatching prompt 506 to DP rank 1.
+2026-05-02 11:13:49,928 INFO [baseline-fixed-prefix] Prompt 462: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:13:49,930 INFO [baseline-fixed-prefix] Prompt 506: starting baseline generation for prefix=4096.
+2026-05-02 11:13:49,930 INFO [baseline-fixed-prefix] Prompt 506: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:21:30,371 INFO [baseline-fixed-prefix] Prompt 506: produced 32/32 usable continuations.
+2026-05-02 11:21:30,465 INFO [scheduler] Dispatching prompt 509 to DP rank 1.
+2026-05-02 11:21:30,466 INFO [baseline-fixed-prefix] Prompt 509: starting baseline generation for prefix=4096.
+2026-05-02 11:21:30,466 INFO [baseline-fixed-prefix] Prompt 509: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:21:35,749 INFO [baseline-fixed-prefix] Prompt 462: produced 32/32 usable continuations.
+2026-05-02 11:21:38,275 INFO [scheduler] Dispatching prompt 523 to DP rank 0.
+2026-05-02 11:21:38,276 INFO [baseline-fixed-prefix] Prompt 523: starting baseline generation for prefix=4096.
+2026-05-02 11:21:38,276 INFO [baseline-fixed-prefix] Prompt 523: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:29:55,010 INFO [baseline-fixed-prefix] Prompt 509: produced 32/32 usable continuations.
+2026-05-02 11:29:56,748 INFO [scheduler] Dispatching prompt 527 to DP rank 1.
+2026-05-02 11:29:56,748 INFO [baseline-fixed-prefix] Prompt 527: starting baseline generation for prefix=4096.
+2026-05-02 11:29:56,748 INFO [baseline-fixed-prefix] Prompt 527: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:30:28,702 INFO [baseline-fixed-prefix] Prompt 523: produced 32/32 usable continuations.
+2026-05-02 11:30:30,113 INFO [scheduler] Dispatching prompt 550 to DP rank 0.
+2026-05-02 11:30:30,114 INFO [baseline-fixed-prefix] Prompt 550: starting baseline generation for prefix=4096.
+2026-05-02 11:30:30,114 INFO [baseline-fixed-prefix] Prompt 550: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:33:40,266 INFO [baseline-fixed-prefix] Prompt 527: produced 32/32 usable continuations.
+2026-05-02 11:33:41,749 INFO [scheduler] Dispatching prompt 551 to DP rank 1.
+2026-05-02 11:33:41,750 INFO [baseline-fixed-prefix] Prompt 551: starting baseline generation for prefix=4096.
+2026-05-02 11:33:41,750 INFO [baseline-fixed-prefix] Prompt 551: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:39:13,182 INFO [baseline-fixed-prefix] Prompt 550: produced 32/32 usable continuations.
+2026-05-02 11:39:14,844 INFO [scheduler] Dispatching prompt 557 to DP rank 0.
+2026-05-02 11:39:14,845 INFO [baseline-fixed-prefix] Prompt 557: starting baseline generation for prefix=4096.
+2026-05-02 11:39:14,845 INFO [baseline-fixed-prefix] Prompt 557: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:41:11,079 INFO [baseline-fixed-prefix] Prompt 551: produced 32/32 usable continuations.
+2026-05-02 11:41:14,004 INFO [scheduler] Dispatching prompt 581 to DP rank 1.
+2026-05-02 11:41:14,005 INFO [baseline-fixed-prefix] Prompt 581: starting baseline generation for prefix=4096.
+2026-05-02 11:41:14,005 INFO [baseline-fixed-prefix] Prompt 581: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:43:13,816 INFO [baseline-fixed-prefix] Prompt 557: produced 32/32 usable continuations.
+2026-05-02 11:43:16,733 INFO [scheduler] Dispatching prompt 582 to DP rank 0.
+2026-05-02 11:43:16,734 INFO [baseline-fixed-prefix] Prompt 582: starting baseline generation for prefix=4096.
+2026-05-02 11:43:16,734 INFO [baseline-fixed-prefix] Prompt 582: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:49:47,781 INFO [baseline-fixed-prefix] Prompt 581: produced 32/32 usable continuations.
+2026-05-02 11:49:51,220 INFO [scheduler] Dispatching prompt 590 to DP rank 1.
+2026-05-02 11:49:51,220 INFO [baseline-fixed-prefix] Prompt 590: starting baseline generation for prefix=4096.
+2026-05-02 11:49:51,220 INFO [baseline-fixed-prefix] Prompt 590: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:51:11,773 INFO [baseline-fixed-prefix] Prompt 582: produced 32/32 usable continuations.
+2026-05-02 11:51:14,648 INFO [scheduler] Dispatching prompt 600 to DP rank 0.
+2026-05-02 11:51:14,649 INFO [baseline-fixed-prefix] Prompt 600: starting baseline generation for prefix=4096.
+2026-05-02 11:51:14,649 INFO [baseline-fixed-prefix] Prompt 600: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:55:05,576 INFO [baseline-fixed-prefix] Prompt 600: produced 32/32 usable continuations.
+2026-05-02 11:55:08,522 INFO [scheduler] Dispatching prompt 609 to DP rank 0.
+2026-05-02 11:55:08,523 INFO [baseline-fixed-prefix] Prompt 609: starting baseline generation for prefix=4096.
+2026-05-02 11:55:08,523 INFO [baseline-fixed-prefix] Prompt 609: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 11:55:43,067 INFO [baseline-fixed-prefix] Prompt 590: produced 32/32 usable continuations.
+2026-05-02 11:55:47,671 INFO [scheduler] Dispatching prompt 617 to DP rank 1.
+2026-05-02 11:55:47,672 INFO [baseline-fixed-prefix] Prompt 617: starting baseline generation for prefix=4096.
+2026-05-02 11:55:47,672 INFO [baseline-fixed-prefix] Prompt 617: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:03:32,444 INFO [baseline-fixed-prefix] Prompt 609: produced 32/32 usable continuations.
+2026-05-02 12:03:36,762 INFO [scheduler] Dispatching prompt 622 to DP rank 0.
+2026-05-02 12:03:36,763 INFO [baseline-fixed-prefix] Prompt 622: starting baseline generation for prefix=4096.
+2026-05-02 12:03:36,763 INFO [baseline-fixed-prefix] Prompt 622: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:04:08,347 INFO [baseline-fixed-prefix] Prompt 617: produced 32/32 usable continuations.
+2026-05-02 12:04:12,547 INFO [scheduler] Dispatching prompt 623 to DP rank 1.
+2026-05-02 12:04:12,548 INFO [baseline-fixed-prefix] Prompt 623: starting baseline generation for prefix=4096.
+2026-05-02 12:04:12,548 INFO [baseline-fixed-prefix] Prompt 623: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:11:42,841 INFO [baseline-fixed-prefix] Prompt 622: produced 32/32 usable continuations.
+2026-05-02 12:11:47,702 INFO [scheduler] Dispatching prompt 627 to DP rank 0.
+2026-05-02 12:11:47,736 INFO [baseline-fixed-prefix] Prompt 627: starting baseline generation for prefix=4096.
+2026-05-02 12:11:47,736 INFO [baseline-fixed-prefix] Prompt 627: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:12:04,926 INFO [baseline-fixed-prefix] Prompt 623: produced 32/32 usable continuations.
+2026-05-02 12:12:09,189 INFO [scheduler] Dispatching prompt 632 to DP rank 1.
+2026-05-02 12:12:09,190 INFO [baseline-fixed-prefix] Prompt 632: starting baseline generation for prefix=4096.
+2026-05-02 12:12:09,190 INFO [baseline-fixed-prefix] Prompt 632: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:19:03,909 INFO [baseline-fixed-prefix] Prompt 632: produced 32/32 usable continuations.
+2026-05-02 12:19:09,474 INFO [scheduler] Dispatching prompt 634 to DP rank 1.
+2026-05-02 12:19:09,475 INFO [baseline-fixed-prefix] Prompt 634: starting baseline generation for prefix=4096.
+2026-05-02 12:19:09,475 INFO [baseline-fixed-prefix] Prompt 634: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:20:44,345 INFO [baseline-fixed-prefix] Prompt 627: produced 32/32 usable continuations.
+2026-05-02 12:20:50,167 INFO [scheduler] Dispatching prompt 636 to DP rank 0.
+2026-05-02 12:20:50,167 INFO [baseline-fixed-prefix] Prompt 636: starting baseline generation for prefix=4096.
+2026-05-02 12:20:50,167 INFO [baseline-fixed-prefix] Prompt 636: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:25:33,957 INFO [baseline-fixed-prefix] Prompt 634: produced 32/32 usable continuations.
+2026-05-02 12:25:39,333 INFO [scheduler] Dispatching prompt 641 to DP rank 1.
+2026-05-02 12:25:39,333 INFO [baseline-fixed-prefix] Prompt 641: starting baseline generation for prefix=4096.
+2026-05-02 12:25:39,333 INFO [baseline-fixed-prefix] Prompt 641: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 1, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:29:13,799 INFO [baseline-fixed-prefix] Prompt 636: produced 32/32 usable continuations.
+2026-05-02 12:29:19,539 INFO [scheduler] Dispatching prompt 646 to DP rank 0.
+2026-05-02 12:29:19,540 INFO [baseline-fixed-prefix] Prompt 646: starting baseline generation for prefix=4096.
+2026-05-02 12:29:19,540 INFO [baseline-fixed-prefix] Prompt 646: generating 32/32 missing independent traces with 4096 multiplex prefix tokens on DP rank 0, then switching to discrete decoding for 4096 tokens.
+2026-05-02 12:33:35,414 INFO [baseline-fixed-prefix] Prompt 641: produced 32/32 usable continuations.
+2026-05-02 12:33:48,564 INFO [baseline-fixed-prefix] Prompt 646: produced 32/32 usable continuations.
+2026-05-02 12:33:56,807 INFO [setup] Prefix 4096 finished in 1:20:06 (4805.7s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/fixed32_shard02/fixed_trace_independent/summary.md.
+2026-05-02 13:48:24,899 INFO [setup] Prefix 4096 finished in 0:00:00 (0.1s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/fixed32_shard02/fixed_trace_independent/summary.md.
+2026-05-02 13:53:56,020 INFO [setup] Prefix 4096 finished in 0:00:00 (0.1s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/fixed32_shard02/fixed_trace_independent/summary.md.
+2026-05-02 13:59:29,143 INFO [setup] Prefix 4096 finished in 0:00:00 (0.2s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/fixed32_shard02/fixed_trace_independent/summary.md.
+2026-05-02 14:09:38,238 INFO [setup] Prefix 4096 finished in 0:00:00 (0.3s). Summary written to /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-fixed-shared-mix4096-r3-mix4096-20260501-221133/repeat_00/fixed32_shard02/fixed_trace_independent/summary.md.

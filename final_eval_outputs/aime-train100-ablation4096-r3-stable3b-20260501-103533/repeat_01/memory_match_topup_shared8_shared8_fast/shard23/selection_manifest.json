@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "125",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Let $x=\\frac{4}{(\\sqrt{5}+1)(\\sqrt[4]{5}+1)(\\sqrt[8]{5}+1)(\\sqrt[16]{5}+1)}.$ Find $(x+1)^{48}$.",
+      "problem_id": "aime-train-2005-II-07",
+      "problem_number": 7,
+      "prompt_index": 426,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 426,
+      "year": 2005
+    },
+    {
+      "aime_number": 2,
+      "answer": "250",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "For how many positive integers $n$ less than or equal to $1000$ is $(\\sin t + i \\cos t)^n = \\sin nt + i \\cos nt$ true for all real $t$?",
+      "problem_id": "aime-train-2005-II-09",
+      "problem_number": 9,
+      "prompt_index": 428,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 428,
+      "year": 2005
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    426,
+    428
+  ],
+  "selection_seed": 4096
+}

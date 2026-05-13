@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "7",
+      "difficulty": 6.0,
+      "order_index": 0,
+      "problem": "Let $a$ and $b$ be positive real numbers with $a\\ge b$. Let $\\rho$ be the maximum possible value of $\\frac {a}{b}$ for which the system of equations \\[a^2 + y^2 = b^2 + x^2 = (a - x)^2 + (b - y)^2\\] has a solution in $(x,y)$ satisfying $0\\le x < a$ and $0\\le y < b$. Then $\\rho^2$ can be expressed as a fraction $\\frac {m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+      "problem_id": "aime-train-2008-II-14",
+      "problem_number": 14,
+      "prompt_index": 523,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 523,
+      "year": 2008
+    },
+    {
+      "aime_number": 1,
+      "answer": "11",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "A coin that comes up heads with probability $p > 0$ and tails with probability $1 - p > 0$ independently on each flip is flipped $8$ times. Suppose that the probability of three heads and five tails is equal to $\\frac {1}{25}$ of the probability of five heads and three tails. Let $p = \\frac {m}{n}$, where $m$ and $n$ are relatively prime positive integers. Find $m + n$.",
+      "problem_id": "aime-train-2009-I-03",
+      "problem_number": 3,
+      "prompt_index": 527,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 527,
+      "year": 2009
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    523,
+    527
+  ],
+  "selection_seed": 4096
+}

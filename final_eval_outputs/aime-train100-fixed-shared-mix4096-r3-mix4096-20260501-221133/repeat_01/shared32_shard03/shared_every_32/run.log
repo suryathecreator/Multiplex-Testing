@@ -1,0 +1,78 @@
+2026-05-02 08:34:46,662 INFO [scheduler] Dispatching prompt 665 to DP rank 0.
+2026-05-02 08:34:46,663 INFO [branch-ablation] Prompt 665: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:34:46,664 INFO [scheduler] Dispatching prompt 671 to DP rank 1.
+2026-05-02 08:34:46,665 INFO [branch-ablation] Prompt 671: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:34:46,666 INFO [scheduler] Dispatching prompt 711 to DP rank 0.
+2026-05-02 08:34:46,672 INFO [branch-ablation] Prompt 711: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:34:46,672 INFO [scheduler] Dispatching prompt 739 to DP rank 1.
+2026-05-02 08:34:46,690 INFO [branch-ablation] Prompt 739: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:34:46,691 INFO [scheduler] Dispatching prompt 749 to DP rank 0.
+2026-05-02 08:34:46,692 INFO [branch-ablation] Prompt 749: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:34:46,692 INFO [scheduler] Dispatching prompt 751 to DP rank 1.
+2026-05-02 08:34:46,693 INFO [branch-ablation] Prompt 751: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:38:57,337 INFO [scheduler] Dispatching prompt 755 to DP rank 1.
+2026-05-02 08:38:57,416 INFO [branch-ablation] Prompt 755: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:39:05,921 INFO [scheduler] Dispatching prompt 756 to DP rank 1.
+2026-05-02 08:39:05,922 INFO [branch-ablation] Prompt 756: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:42:07,281 INFO [scheduler] Dispatching prompt 665 to DP rank 0.
+2026-05-02 08:42:07,282 INFO [branch-ablation] Prompt 665: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:42:07,282 INFO [scheduler] Dispatching prompt 711 to DP rank 1.
+2026-05-02 08:42:07,284 INFO [branch-ablation] Prompt 711: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:42:07,284 INFO [scheduler] Dispatching prompt 749 to DP rank 0.
+2026-05-02 08:42:07,286 INFO [branch-ablation] Prompt 749: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:42:07,286 INFO [scheduler] Dispatching prompt 751 to DP rank 1.
+2026-05-02 08:42:07,293 INFO [branch-ablation] Prompt 751: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:46:31,351 INFO [scheduler] Dispatching prompt 755 to DP rank 0.
+2026-05-02 08:46:31,352 INFO [branch-ablation] Prompt 755: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:46:48,529 INFO [scheduler] Dispatching prompt 756 to DP rank 1.
+2026-05-02 08:46:48,530 INFO [branch-ablation] Prompt 756: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:49:35,895 INFO [scheduler] Dispatching prompt 749 to DP rank 0.
+2026-05-02 08:49:35,896 INFO [branch-ablation] Prompt 749: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:49:35,896 INFO [scheduler] Dispatching prompt 751 to DP rank 1.
+2026-05-02 08:49:35,899 INFO [branch-ablation] Prompt 751: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:49:35,899 INFO [scheduler] Dispatching prompt 755 to DP rank 0.
+2026-05-02 08:49:35,900 INFO [branch-ablation] Prompt 755: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:49:35,901 INFO [scheduler] Dispatching prompt 756 to DP rank 1.
+2026-05-02 08:49:35,902 INFO [branch-ablation] Prompt 756: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:51:34,234 INFO [scheduler] Dispatching prompt 760 to DP rank 1.
+2026-05-02 08:51:34,234 INFO [branch-ablation] Prompt 760: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:52:10,239 INFO [scheduler] Dispatching prompt 793 to DP rank 0.
+2026-05-02 08:52:10,240 INFO [branch-ablation] Prompt 793: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:56:24,215 INFO [scheduler] Dispatching prompt 749 to DP rank 0.
+2026-05-02 08:56:24,216 INFO [branch-ablation] Prompt 749: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:56:24,216 INFO [scheduler] Dispatching prompt 756 to DP rank 1.
+2026-05-02 08:56:24,218 INFO [branch-ablation] Prompt 756: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 08:59:42,835 INFO [scheduler] Dispatching prompt 760 to DP rank 0.
+2026-05-02 08:59:42,836 INFO [branch-ablation] Prompt 760: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:00:56,974 INFO [scheduler] Dispatching prompt 793 to DP rank 1.
+2026-05-02 09:00:56,975 INFO [branch-ablation] Prompt 793: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:01:53,617 INFO [scheduler] Dispatching prompt 804 to DP rank 0.
+2026-05-02 09:01:53,617 INFO [branch-ablation] Prompt 804: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:04:24,314 INFO [scheduler] Dispatching prompt 810 to DP rank 1.
+2026-05-02 09:04:24,315 INFO [branch-ablation] Prompt 810: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:05:49,420 INFO [scheduler] Dispatching prompt 811 to DP rank 0.
+2026-05-02 09:05:49,421 INFO [branch-ablation] Prompt 811: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:07:26,089 INFO [scheduler] Dispatching prompt 812 to DP rank 1.
+2026-05-02 09:07:26,089 INFO [branch-ablation] Prompt 812: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:07:49,467 INFO [scheduler] Dispatching prompt 814 to DP rank 0.
+2026-05-02 09:07:49,468 INFO [branch-ablation] Prompt 814: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:11:41,791 INFO [scheduler] Dispatching prompt 831 to DP rank 0.
+2026-05-02 09:11:41,796 INFO [branch-ablation] Prompt 831: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:11:50,939 INFO [scheduler] Dispatching prompt 847 to DP rank 1.
+2026-05-02 09:11:50,940 INFO [branch-ablation] Prompt 847: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:14:05,315 INFO [scheduler] Dispatching prompt 865 to DP rank 1.
+2026-05-02 09:14:05,315 INFO [branch-ablation] Prompt 865: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:16:18,496 INFO [scheduler] Dispatching prompt 872 to DP rank 0.
+2026-05-02 09:16:18,497 INFO [branch-ablation] Prompt 872: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:18:01,656 INFO [scheduler] Dispatching prompt 910 to DP rank 0.
+2026-05-02 09:18:01,657 INFO [branch-ablation] Prompt 910: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:18:40,625 INFO [scheduler] Dispatching prompt 921 to DP rank 1.
+2026-05-02 09:18:40,625 INFO [branch-ablation] Prompt 921: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:21:06,351 INFO [scheduler] Dispatching prompt 922 to DP rank 1.
+2026-05-02 09:21:06,351 INFO [branch-ablation] Prompt 922: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:22:43,033 INFO [scheduler] Dispatching prompt 944 to DP rank 0.
+2026-05-02 09:22:43,033 INFO [branch-ablation] Prompt 944: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:25:50,436 INFO [scheduler] Dispatching prompt 954 to DP rank 1.
+2026-05-02 09:25:50,437 INFO [branch-ablation] Prompt 954: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.
+2026-05-02 09:27:27,986 INFO [scheduler] Dispatching prompt 967 to DP rank 0.
+2026-05-02 09:27:27,987 INFO [branch-ablation] Prompt 967: repairing shared traces every 32 samples at prefix=4096 with 0/32 existing samples.

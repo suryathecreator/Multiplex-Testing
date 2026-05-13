@@ -1,0 +1,6 @@
+group_size,prompt_index,problem_id,target_cost_tokens,target_correct,before_cost_tokens,after_cost_tokens,before_correct,after_correct,topup_count,effective_k,reached_target,status,message,completed_at_unix
+2,550,aime-train-2009-II-11,257438.0,False,193468.0,265289.0,False,True,12,44,True,completed,,1777950828.4913185
+2,509,aime-train-2008-I-15,243034.0,False,180090.0,247955.0,False,False,12,44,True,completed,,1777950833.2836113
+2,523,aime-train-2008-II-14,262176.0,False,196624.0,270358.0,False,False,12,44,True,completed,,1777950839.7347982
+2,527,aime-train-2009-I-03,146722.0,True,88978.0,150489.0,True,True,26,58,True,completed,,1777951018.1957505
+2,551,aime-train-2009-II-12,215866.0,False,148180.0,225214.0,False,False,16,48,True,completed,,1777951966.673667

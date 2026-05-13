@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "258",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "A teacher was leading a class of four perfectly logical students. The teacher chose a set $S$ of four integers and gave a different number in $S$ to each student. Then the teacher announced to the class that the numbers in $S$ were four consecutive two-digit positive integers, that some number in $S$ was divisible by $6$, and a different number in $S$ was divisible by $7$. The teacher then asked if any of the students could deduce what $S$ is, but in unison, all of the students replied no.\n However, upon hearing that all four students replied no, each student was able to determine the elements of $S$. Find the sum of all possible values of the greatest element of $S$.",
+      "problem_id": "aime-train-2021-II-11",
+      "problem_number": 11,
+      "prompt_index": 910,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 910,
+      "year": 2021
+    },
+    {
+      "aime_number": 1,
+      "answer": "289",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Let $a,b,c,d,e,f,g,h,i$ be distinct integers from $1$ to $9.$ The minimum possible positive value of \\[\\dfrac{a \\cdot b \\cdot c - d \\cdot e \\cdot f}{g \\cdot h \\cdot i}\\] can be written as $\\frac{m}{n},$ where $m$ and $n$ are relatively prime positive integers. Find $m+n.$",
+      "problem_id": "aime-train-2022-I-07",
+      "problem_number": 7,
+      "prompt_index": 921,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 921,
+      "year": 2022
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    910,
+    921
+  ],
+  "selection_seed": 4096
+}

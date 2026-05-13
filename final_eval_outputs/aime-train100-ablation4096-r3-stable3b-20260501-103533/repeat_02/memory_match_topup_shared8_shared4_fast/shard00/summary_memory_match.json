@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": true,
+      "after_cost_tokens": 233430.0,
+      "before_correct": true,
+      "before_cost_tokens": 82930.0,
+      "completed_at_unix": 1778072585.9303613,
+      "effective_k": 80,
+      "group_size": 8,
+      "message": "",
+      "problem_id": "aime-train-1983-I-09",
+      "prompt_index": 8,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 232248.0,
+      "topup_count": 48,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 169014.0,
+      "before_correct": true,
+      "before_cost_tokens": 41621.0,
+      "completed_at_unix": 1778072686.454995,
+      "effective_k": 104,
+      "group_size": 8,
+      "message": "",
+      "problem_id": "aime-train-1984-I-04",
+      "prompt_index": 18,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 164423.0,
+      "topup_count": 72,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 185688.0,
+      "before_correct": true,
+      "before_cost_tokens": 61487.0,
+      "completed_at_unix": 1778073440.0918958,
+      "effective_k": 88,
+      "group_size": 8,
+      "message": "",
+      "problem_id": "aime-train-1985-I-05",
+      "prompt_index": 34,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 180052.0,
+      "topup_count": 56,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 148043.0,
+      "before_correct": true,
+      "before_cost_tokens": 25331.0,
+      "completed_at_unix": 1778073501.8810785,
+      "effective_k": 112,
+      "group_size": 8,
+      "message": "",
+      "problem_id": "aime-train-1984-I-05",
+      "prompt_index": 19,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 144115.0,
+      "topup_count": 80,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T13:18:23.165074+00:00",
+    "finished_at_unix": 1778073503.1650743,
+    "started_at": "2026-05-06T12:48:36.400370+00:00",
+    "started_at_unix": 1778071716.40037,
+    "wall_clock_hms": "0:29:47",
+    "wall_clock_seconds": 1786.764704465866
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 1.0,
+      "after_cost_tokens": 184043.75,
+      "before_accuracy": 1.0,
+      "before_cost_tokens": 52842.25,
+      "effective_k": 96.0,
+      "group_size": 8,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 180209.5,
+      "topup_count": 64.0
+    }
+  ]
+}

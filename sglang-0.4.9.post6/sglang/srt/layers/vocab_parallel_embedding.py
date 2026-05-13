@@ -53,6 +53,13 @@ def validate_weighted_topk_inputs(
     """
 
     prob_sums = topk_probs.sum(dim=-1, keepdim=True)
+    try:
+        is_capturing = bool(topk_probs.is_cuda and torch.cuda.is_current_stream_capturing())
+    except Exception:
+        is_capturing = False
+    if is_capturing:
+        return topk_probs / torch.clamp(prob_sums, min=1e-8)
+
     invalid_rows = (
         ~torch.isfinite(topk_probs).all(dim=-1)
         | ~torch.isfinite(prob_sums.squeeze(-1))

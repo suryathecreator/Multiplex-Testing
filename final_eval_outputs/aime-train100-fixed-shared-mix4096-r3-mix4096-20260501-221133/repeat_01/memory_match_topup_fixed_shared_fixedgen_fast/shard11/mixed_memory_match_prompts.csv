@@ -1,0 +1,6 @@
+prompt_index,problem_id,target_cost_tokens,target_correct,shared_before_cost_tokens,shared_before_correct,mixed_before_cost_tokens,mixed_before_correct,shared_after_cost_tokens,shared_after_correct,mixed_after_cost_tokens,mixed_after_correct,shared_topup_count,mixed_topup_count,shared_effective_k,mixed_effective_k,generated_topup_count,shared_reached_target,mixed_reached_target,status,message,completed_at_unix
+523,aime-train-2008-II-14,260310.0,True,135169.0,False,200721.0,False,262545.0,True,264795.0,True,16,8,48,40,16,True,True,completed,,1777992112.4124553
+509,aime-train-2008-I-15,249561.0,False,106613.0,False,181238.0,False,251719.0,False,250036.0,False,20,10,52,42,20,True,True,completed,,1777992479.0811918
+527,aime-train-2009-I-03,145986.0,True,28824.0,True,88172.0,True,147726.0,True,149933.0,True,25,13,57,45,25,True,True,completed,,1777994460.6102126
+550,aime-train-2009-II-11,260124.0,True,135169.0,False,199506.0,True,266257.0,False,265050.0,True,16,8,48,40,16,True,True,completed,,1777995058.570556
+551,aime-train-2009-II-12,215851.0,False,135169.0,False,176662.0,False,218079.0,False,216076.0,False,11,5,43,37,11,True,True,completed,,1777996091.1068652

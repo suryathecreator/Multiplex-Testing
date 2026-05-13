@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "104",
+      "difficulty": 2.0,
+      "order_index": 0,
+      "problem": "Evaluate the product \\[\\left(\\sqrt{5}+\\sqrt{6}+\\sqrt{7}\\right)\\left(\\sqrt{5}+\\sqrt{6}-\\sqrt{7}\\right)\\left(\\sqrt{5}-\\sqrt{6}+\\sqrt{7}\\right)\\left(-\\sqrt{5}+\\sqrt{6}+\\sqrt{7}\\right).\\]",
+      "problem_id": "aime-train-1986-I-02",
+      "problem_number": 2,
+      "prompt_index": 46,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 46,
+      "year": 1986
+    },
+    {
+      "aime_number": 1,
+      "answer": "358",
+      "difficulty": 2.125,
+      "order_index": 1,
+      "problem": "In a parlor game, the magician asks one of the participants to think of a three digit number $(abc)$ where $a$, $b$, and $c$ represent digits in base $10$ in the order indicated. The magician then asks this person to form the numbers $(acb)$, $(bca)$, $(bac)$, $(cab)$, and $(cba)$, to add these five numbers, and to reveal their sum, $N$. If told the value of $N$, the magician can identify the original number, $(abc)$. Play the role of the magician and determine $(abc)$ if $N= 3194$.",
+      "problem_id": "aime-train-1986-I-10",
+      "problem_number": 10,
+      "prompt_index": 54,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 54,
+      "year": 1986
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    46,
+    54
+  ],
+  "selection_seed": 4096
+}

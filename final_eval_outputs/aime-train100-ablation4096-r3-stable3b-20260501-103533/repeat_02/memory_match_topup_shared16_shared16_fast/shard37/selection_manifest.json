@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "200",
+      "difficulty": 2.0,
+      "order_index": 0,
+      "problem": "Find the number of five-digit positive integers, $n$, that satisfy the following conditions:\n (a) the number $n$ is divisible by $5,$\n (b) the first and last digits of $n$ are equal, and\n (c) the sum of the digits of $n$ is divisible by $5.$",
+      "problem_id": "aime-train-2013-I-02",
+      "problem_number": 2,
+      "prompt_index": 646,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 646,
+      "year": 2013
+    },
+    {
+      "aime_number": 2,
+      "answer": "282",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "Find the least positive integer $N$ such that the set of $1000$ consecutive integers beginning with $1000\\cdot N$ contains no square of an integer.",
+      "problem_id": "aime-train-2013-II-06",
+      "problem_number": 6,
+      "prompt_index": 665,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 665,
+      "year": 2013
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    646,
+    665
+  ],
+  "selection_seed": 4096
+}

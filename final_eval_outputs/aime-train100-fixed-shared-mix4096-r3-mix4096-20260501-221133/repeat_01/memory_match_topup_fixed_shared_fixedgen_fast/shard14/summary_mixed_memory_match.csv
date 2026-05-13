@@ -1,0 +1,6 @@
+condition,num_prompts,accuracy,cost_tokens,topup_count,reached_target_rate
+Fixed,5,0.8,204958.2,0.0,1.0
+Shared,5,0.6,56739.6,0.0,1.0
+Fixed + Shared,5,0.8,135187.6,0.0,1.0
+Shared + fixed top-up,5,0.8,207169.2,25.2,1.0
+Fixed + Shared + fixed top-up,5,0.8,208643.2,12.8,1.0

@@ -1,0 +1,69 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "529",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Suppose that $y = \\frac34x$ and $x^y = y^x$. The quantity $x + y$ can be expressed as a rational number $\\frac {r}{s}$, where $r$ and $s$ are relatively prime positive integers. Find $r + s$.",
+      "problem_id": "aime-train-2010-I-03",
+      "problem_number": 3,
+      "prompt_index": 557,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 557,
+      "year": 2010
+    },
+    {
+      "aime_number": 2,
+      "answer": "676",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "Two noncongruent integer-sided isosceles triangles have the same perimeter and the same area. The ratio of the lengths of the bases of the two triangles is $8: 7$. Find the minimum possible value of their common perimeter.",
+      "problem_id": "aime-train-2010-II-12",
+      "problem_number": 12,
+      "prompt_index": 581,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 581,
+      "year": 2010
+    },
+    {
+      "aime_number": 2,
+      "answer": "263",
+      "difficulty": 6.0,
+      "order_index": 2,
+      "problem": "The $52$ cards in a deck are numbered $1, 2, \\cdots, 52$. Alex, Blair, Corey, and Dylan each picks a card from the deck without replacement and with each card being equally likely to be picked, The two persons with lower numbered cards form a team, and the two persons with higher numbered cards form another team. Let $p(a)$ be the probability that Alex and Dylan are on the same team, given that Alex picks one of the cards $a$ and $a+9$, and Dylan picks the other of these two cards. The minimum value of $p(a)$ for which $p(a)\\ge\\frac{1}{2}$ can be written as $\\frac{m}{n}$. where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+      "problem_id": "aime-train-2010-II-13",
+      "problem_number": 13,
+      "prompt_index": 582,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 582,
+      "year": 2010
+    },
+    {
+      "aime_number": 1,
+      "answer": "11",
+      "difficulty": 4.0,
+      "order_index": 3,
+      "problem": "Suppose that a parabola has vertex $\\left(\\frac{1}{4},-\\frac{9}{8}\\right)$ and equation $y = ax^2 + bx + c$, where $a > 0$ and $a + b + c$ is an integer. The minimum possible value of $a$ can be written in the form $\\frac{p}{q}$, where $p$ and $q$ are relatively prime positive integers. Find $p + q$.",
+      "problem_id": "aime-train-2011-I-06",
+      "problem_number": 6,
+      "prompt_index": 590,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 590,
+      "year": 2011
+    }
+  ],
+  "selected_count": 4,
+  "selected_source_indices": [
+    557,
+    581,
+    582,
+    590
+  ],
+  "selection_seed": 4096
+}

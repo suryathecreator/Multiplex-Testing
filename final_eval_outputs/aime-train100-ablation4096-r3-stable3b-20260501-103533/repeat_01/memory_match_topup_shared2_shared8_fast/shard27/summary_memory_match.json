@@ -1,0 +1,64 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": false,
+      "after_cost_tokens": 244595.0,
+      "before_correct": false,
+      "before_cost_tokens": 180090.0,
+      "completed_at_unix": 1778127725.2824154,
+      "effective_k": 48,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2008-I-15",
+      "prompt_index": 509,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": false,
+      "target_cost_tokens": 243034.0,
+      "topup_count": 16,
+      "topup_generator": "shared_group",
+      "topup_group_size": 8
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 210781.0,
+      "before_correct": true,
+      "before_cost_tokens": 146736.0,
+      "completed_at_unix": 1778127801.0639875,
+      "effective_k": 56,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-2008-I-12",
+      "prompt_index": 506,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 202522.0,
+      "topup_count": 24,
+      "topup_generator": "shared_group",
+      "topup_group_size": 8
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-07T04:23:21.194988+00:00",
+    "finished_at_unix": 1778127801.194988,
+    "started_at": "2026-05-07T04:14:30.308832+00:00",
+    "started_at_unix": 1778127270.3088317,
+    "wall_clock_hms": "0:08:51",
+    "wall_clock_seconds": 530.8861563205719
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 0.5,
+      "after_cost_tokens": 227688.0,
+      "before_accuracy": 0.5,
+      "before_cost_tokens": 163413.0,
+      "effective_k": 52.0,
+      "group_size": 2,
+      "num_prompts": 2,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 222778.0,
+      "topup_count": 20.0
+    }
+  ]
+}

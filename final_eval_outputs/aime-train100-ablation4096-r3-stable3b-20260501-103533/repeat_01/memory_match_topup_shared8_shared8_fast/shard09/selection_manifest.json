@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "728",
+      "difficulty": 2.0,
+      "order_index": 0,
+      "problem": "How many even integers between 4000 and 7000 have four different digits?",
+      "problem_id": "aime-train-1993-I-01",
+      "problem_number": 1,
+      "prompt_index": 150,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 150,
+      "year": 1993
+    },
+    {
+      "aime_number": 1,
+      "answer": "763",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "Let $P_0(x) = x^3 + 313x^2 - 77x - 8\\,$. For integers $n \\ge 1\\,$, define $P_n(x) = P_{n - 1}(x - n)\\,$. What is the coefficient of $x\\,$ in $P_{20}(x)\\,$?",
+      "problem_id": "aime-train-1993-I-05",
+      "problem_number": 5,
+      "prompt_index": 154,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 154,
+      "year": 1993
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    150,
+    154
+  ],
+  "selection_seed": 4096
+}

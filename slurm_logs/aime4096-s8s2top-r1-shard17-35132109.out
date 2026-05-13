@@ -1,0 +1,637 @@
+[cuda-smoke] loaded compiler module gcc/13.2.0
+[cuda-smoke] gcc=/sw/gcc/13.2.0/bin/gcc
+gcc (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] g++=/sw/gcc/13.2.0/bin/g++
+g++ (GCC) 13.2.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[cuda-smoke] nvcc=/sw/cuda/12.8.1/bin/nvcc
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93
+Build cuda_12.8.r12.8/compiler.35583870_0
+[cuda-smoke] CUDA_HOME=/sw/cuda/12.8.1
+[cuda-smoke] CUDAHOSTCXX=/sw/gcc/13.2.0/bin/g++
+[cuda-smoke] NVCC_PREPEND_FLAGS=--compiler-bindir=/sw/gcc/13.2.0/bin 
+[cuda-smoke] FLASHINFER_WORKSPACE_BASE=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/flashinfer
+[cuda-smoke] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared8_shared2_fast/shard17
+[cuda-smoke] fallback_configs=32:2:4:aggressive;16:1:2:aggressive
+[fallback] attempt=1 config=32:2:4:aggressive request_batch_size=32 prompts_per_rank=2 max_concurrent_prompts=4 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-35132109.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+[runtime] package=triton version=3.3.1 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton-3.3.1.dist-info
+[runtime] package=tensordict version=0.10.0 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict-0.10.0.dist-info
+[runtime] package=sgl-kernel version=0.2.8 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel-0.2.8.dist-info
+[runtime] package=flashinfer-python version=0.2.9rc2 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer_python-0.2.9rc2.dist-info
+[runtime] local_import=sglang origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[runtime] local_import=verl origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest/verl/__init__.py
+[runtime] local_import=transformers origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[bootstrap] runtime import preflight succeeded
+[runtime-tool] linked executable ninja from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja to /mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/bin/ninja
+[bootstrap] no additional lightweight packages were needed
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[setup] runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[setup] runtime_manifest=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[setup] runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[setup] job_overlay_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay
+[setup] job_bin_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/bin
+[setup] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[setup] flashinfer_workspace_base=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/flashinfer
+[setup] torch_extensions_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/flashinfer/torch_extensions
+[setup] job_overlay_bin=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay/bin
+[setup] lightweight_overlay_bin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin
+[setup] ninja_path=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja
+/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[setup] import=torch version=2.7.1+cu128 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py
+[setup] import=tensordict version=0.10.0 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py
+[setup] import=sglang version=0.4.9.post6 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[setup] import=transformers version=4.54.0 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[setup] optional_import=verl status=missing
+[setup] scratch_cache_root=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking
+[setup] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared8_shared2_fast/shard17
+[setup] run_tag=aime4096-s8s2top-r1-shard17
+[setup] slurm_job_gpus=3,5
+[setup] cuda_visible_devices=0,1
+[setup] model_path=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B
+[setup] requested_launch_config experiment_mode=memory_match_topup benchmark=deepscaler_aime_train methods=baseline,shared_trace seed=409601 port=45117 dp_size=2 tp_size=1 max_k=32 max_prompts=100 prompt_indices=350,353 max_new_tokens=8192 reasoning_prefix_token_values=256,512,1024,2048,4096,6144 branch_ablation_reasoning_prefix_tokens=4096 branch_ablation_group_sizes=8 branch_ablation_no_baseline=1 adaptive_ablation_shared_counts=2,4,6,8,10,12,14,16 adaptive_confidence_threshold=0.75 memory_match_source_root=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533 memory_match_shared_groups=8 hyperparam_reasoning_prefix_tokens=1024 hyperparam_top_p_values=0.75,0.85,0.90,0.95,1.00 hyperparam_temperature_values=0.4,0.6,0.8,1.0,1.2 checkpoint_matched_prompts_step=5 compact_jsonl=1 request_batch_size=32 resource_profile=auto throughput_profile=aggressive max_concurrent_prompts=4 prompts_per_rank=2 rank_scheduler=dynamic server_timeout_seconds=900
+[setup] starting compare_passk_aime.py
+2026-05-09 21:57:03,047 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-09 21:57:03,048 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-09 21:57:03,050 INFO [setup] scheduler config: requested_max_concurrent_prompts=4 max_concurrent_prompts=4 prompts_per_rank=2 max_prompt_capacity=4 rank_scheduler=dynamic
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-05-09 21:57:06,109 INFO [setup] Restricted run to prompt indices: [350, 353]
+2026-05-09 21:57:09,593 WARNING [setup] aggressive throughput profile allows request_batch_size=32 above the two_gpu_safe safety cap of 16
+2026-05-09 21:57:09,593 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=32 request_batch_size=32 resource_profile=two_gpu_safe cuda_graph_max_bs=32 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-09 21:57:09,678 INFO [setup] Starting the local SGLang server on 127.0.0.1:45117.
+[2026-05-09 21:57:25] server_args=ServerArgs(model_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=False, context_length=None, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', host='127.0.0.1', port=45117, skip_server_warmup=True, warmups=None, nccl_port=None, dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', mem_fraction_static=0.778, max_running_requests=32, max_queued_requests=9223372036854775807, max_total_tokens=None, chunked_prefill_size=2048, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, hybrid_kvcache_ratio=None, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, device='cuda', tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=409601, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, sleep_on_idle=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, crash_dump_folder=None, show_time_cost=False, enable_metrics=False, enable_metrics_for_all_schedulers=False, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key='multiplex-local', served_model_name='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', chat_template=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser='qwen3', tool_call_parser=None, dp_size=2, load_balance_method='round_robin', dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, enable_lora=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend=None, decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='none', mm_attention_backend=None, speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, ep_size=1, enable_ep_moe=False, enable_deepep_moe=False, enable_flashinfer_cutlass_moe=False, enable_flashinfer_trtllm_moe=False, enable_flashinfer_allreduce_fusion=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm='static', init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through_selective', hicache_io_backend='', hicache_storage_backend=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, cuda_graph_max_bs=32, cuda_graph_bs=None, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=False, enable_mscclpp=False, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_two_batch_overlap=False, enable_torch_compile=False, torch_compile_max_bs=32, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, enable_soft_thinking=True, think_end_str='</think>', max_topk=3, used_topk=3, enable_entropy_mask=False, entropy_mask_threshold=0.0, early_stopping_entropy_threshold=0.0, early_stopping_length_threshold=256, dirichlet_alpha=1e+20, enable_gumbel=False, enable_max_topk=False, gumbel_tau=1.0, enable_replacement=True, enable_gumbel_after_thinking=False, enable_unweighting=False, after_thinking_temperature=0.6, after_thinking_top_p=0.95, after_thinking_top_k=-1, after_thinking_min_p=0.0, flashinfer_mla_disable_ragged=False, disable_shared_experts_fusion=False, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, enable_return_hidden_states=False, enable_triton_kernel_moe=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, debug_tensor_dump_prefill_only=False, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_decode_tp=None, disaggregation_decode_dp=None, disaggregation_prefill_pp=1, disaggregation_ib_device=None, num_reserved_decode_tokens=512, pdlb_url=None, custom_weight_loader=[], weight_loader_disable_mmap=False, enable_pdmux=False, sm_group_num=3)
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-09 21:59:12] Launch DP0 starting at GPU #0.
+[2026-05-09 21:59:12] Launch DP1 starting at GPU #1.
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-09 21:59:36 DP1] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-09 21:59:36 DP1] Init torch distributed begin.
+[2026-05-09 21:59:36 DP1] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-09 21:59:37 DP1] Load weight begin. avail mem=44.11 GB
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:05<00:11,  5.88s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:06<00:02,  2.73s/it]
+[2026-05-09 21:59:43 DP0] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-09 21:59:43 DP0] Init torch distributed begin.
+[2026-05-09 21:59:44 DP0] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-09 21:59:44 DP0] Load weight begin. avail mem=44.11 GB
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:04,  2.08s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:00,  1.05it/s]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:14<00:00,  4.99s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:06<00:00,  2.68s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:14<00:00,  4.69s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:06<00:00,  2.32s/it]
+
+[2026-05-09 21:59:51 DP1] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-09 21:59:51 DP0] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-09 21:59:51 DP1] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-09 21:59:51 DP1] Memory pool end. avail mem=9.65 GB
+[2026-05-09 21:59:51 DP0] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-09 21:59:51 DP0] Memory pool end. avail mem=9.65 GB
+[2026-05-09 21:59:51 DP1] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-09 21:59:51 DP0] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-09 21:59:51 DP1] Capture cuda graph bs [1, 2, 4, 8, 16, 24, 32]
+  0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):   0%|          | 0/7 [00:00<?, ?it/s][2026-05-09 21:59:52 DP0] Capture cuda graph bs [1, 2, 4, 8, 16, 24, 32]
+  0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):   0%|          | 0/7 [00:00<?, ?it/s]Capturing batches (bs=32 avail_mem=9.03 GB):  14%|█▍        | 1/7 [05:37<33:47, 337.86s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  14%|█▍        | 1/7 [05:37<33:47, 337.86s/it]Capturing batches (bs=32 avail_mem=9.03 GB):  14%|█▍        | 1/7 [05:37<33:47, 337.90s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  14%|█▍        | 1/7 [05:37<33:47, 337.90s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  29%|██▊       | 2/7 [05:38<11:36, 139.32s/it]Capturing batches (bs=16 avail_mem=8.92 GB):  29%|██▊       | 2/7 [05:38<11:36, 139.32s/it]Capturing batches (bs=24 avail_mem=8.96 GB):  29%|██▊       | 2/7 [05:38<11:36, 139.32s/it]Capturing batches (bs=16 avail_mem=8.92 GB):  29%|██▊       | 2/7 [05:38<11:36, 139.32s/it]Capturing batches (bs=16 avail_mem=8.92 GB):  43%|████▎     | 3/7 [05:38<05:03, 75.85s/it] Capturing batches (bs=8 avail_mem=8.90 GB):  43%|████▎     | 3/7 [05:38<05:03, 75.85s/it] Capturing batches (bs=16 avail_mem=8.92 GB):  43%|████▎     | 3/7 [05:38<05:03, 75.87s/it] Capturing batches (bs=8 avail_mem=8.90 GB):  43%|████▎     | 3/7 [05:38<05:03, 75.87s/it] Capturing batches (bs=8 avail_mem=8.90 GB):  57%|█████▋    | 4/7 [05:38<02:18, 46.04s/it]Capturing batches (bs=4 avail_mem=8.87 GB):  57%|█████▋    | 4/7 [05:38<02:18, 46.04s/it]Capturing batches (bs=8 avail_mem=8.90 GB):  57%|█████▋    | 4/7 [05:38<02:18, 46.06s/it]Capturing batches (bs=4 avail_mem=8.87 GB):  57%|█████▋    | 4/7 [05:38<02:18, 46.06s/it]Capturing batches (bs=4 avail_mem=8.87 GB):  71%|███████▏  | 5/7 [05:39<00:59, 29.55s/it]Capturing batches (bs=2 avail_mem=8.86 GB):  71%|███████▏  | 5/7 [05:39<00:59, 29.55s/it]Capturing batches (bs=4 avail_mem=8.87 GB):  71%|███████▏  | 5/7 [05:39<00:59, 29.58s/it]Capturing batches (bs=2 avail_mem=8.86 GB):  71%|███████▏  | 5/7 [05:39<00:59, 29.58s/it]Capturing batches (bs=2 avail_mem=8.86 GB):  86%|████████▌ | 6/7 [05:39<00:19, 19.63s/it]Capturing batches (bs=1 avail_mem=8.83 GB):  86%|████████▌ | 6/7 [05:39<00:19, 19.63s/it]Capturing batches (bs=2 avail_mem=8.86 GB):  86%|████████▌ | 6/7 [05:39<00:19, 19.65s/it]Capturing batches (bs=1 avail_mem=8.83 GB):  86%|████████▌ | 6/7 [05:39<00:19, 19.65s/it]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [05:39<00:00, 13.32s/it]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [05:39<00:00, 48.56s/it]
+[2026-05-09 22:05:31 DP1] Capture cuda graph end. Time elapsed: 339.94 s. mem usage=0.22 GB. avail mem=8.81 GB.
+Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [05:40<00:00, 13.34s/it]Capturing batches (bs=1 avail_mem=8.83 GB): 100%|██████████| 7/7 [05:40<00:00, 48.57s/it]
+[2026-05-09 22:05:32 DP0] Capture cuda graph end. Time elapsed: 340.07 s. mem usage=0.22 GB. avail mem=8.81 GB.
+[2026-05-09 22:05:32 DP1] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.81 GB
+[2026-05-09 22:05:32 DP0] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.81 GB
+[2026-05-09 22:05:32] INFO:     Started server process [84755]
+[2026-05-09 22:05:32] INFO:     Waiting for application startup.
+[2026-05-09 22:05:32] The server is fired up and ready to roll!
+[2026-05-09 22:05:32] INFO:     Application startup complete.
+[2026-05-09 22:05:32] INFO:     Uvicorn running on http://127.0.0.1:45117 (Press CTRL+C to quit)
+[2026-05-09 22:05:32 DP0] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-09 22:05:52] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:22:59. last_heartbeat time: 16:00:00
+[2026-05-09 22:05:52] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:05:54 DP1] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-09 22:06:14] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:23:21. last_heartbeat time: 16:00:00
+[2026-05-09 22:06:14] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:06:36] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:23:43. last_heartbeat time: 16:00:00
+[2026-05-09 22:06:36] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:06:58] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:24:05. last_heartbeat time: 16:00:00
+[2026-05-09 22:06:58] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:07:20] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:24:27. last_heartbeat time: 16:00:00
+[2026-05-09 22:07:20] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:07:42] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:24:49. last_heartbeat time: 16:00:00
+[2026-05-09 22:07:42] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:08:04] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:25:11. last_heartbeat time: 16:00:00
+[2026-05-09 22:08:04] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:08:08] Task exception was never retrieved
+future: <Task finished name='Task-89' coro=<health_generate.<locals>.gen() done, defined at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py:266> exception=ValueError("Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778389664.8705683'")>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 761, in _wait_one_response
+    await asyncio.wait_for(state.event.wait(), timeout=4)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py", line 267, in gen
+    async for _ in _global_state.tokenizer_manager.generate_request(gri, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 508, in generate_request
+    async for response in self._wait_one_response(obj, state, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 767, in _wait_one_response
+    raise ValueError(
+ValueError: Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778389664.8705683'
+[2026-05-09 22:08:26] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:25:33. last_heartbeat time: 16:00:00
+[2026-05-09 22:08:26] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:08:48] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:25:55. last_heartbeat time: 16:00:00
+[2026-05-09 22:08:48] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:09:10] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:26:17. last_heartbeat time: 16:00:00
+[2026-05-09 22:09:10] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:09:32] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:26:39. last_heartbeat time: 16:00:00
+[2026-05-09 22:09:32] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:09:54] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:27:01. last_heartbeat time: 16:00:00
+[2026-05-09 22:09:54] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:10:16] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:27:23. last_heartbeat time: 16:00:00
+[2026-05-09 22:10:16] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:10:38] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:27:45. last_heartbeat time: 16:00:00
+[2026-05-09 22:10:38] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:10:42] Task exception was never retrieved
+future: <Task finished name='Task-192' coro=<health_generate.<locals>.gen() done, defined at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py:266> exception=ValueError("Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778389818.9447162'")>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 761, in _wait_one_response
+    await asyncio.wait_for(state.event.wait(), timeout=4)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py", line 267, in gen
+    async for _ in _global_state.tokenizer_manager.generate_request(gri, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 508, in generate_request
+    async for response in self._wait_one_response(obj, state, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 767, in _wait_one_response
+    raise ValueError(
+ValueError: Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778389818.9447162'
+[2026-05-09 22:11:00] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:28:07. last_heartbeat time: 16:00:00
+[2026-05-09 22:11:00] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:11:22] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:28:29. last_heartbeat time: 16:00:00
+[2026-05-09 22:11:22] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:11:44] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:28:51. last_heartbeat time: 16:00:00
+[2026-05-09 22:11:44] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:12:06] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:29:13. last_heartbeat time: 16:00:00
+[2026-05-09 22:12:06] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:12:28] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:29:35. last_heartbeat time: 16:00:00
+[2026-05-09 22:12:28] INFO:     127.0.0.1:38848 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+2026-05-09 22:12:30,997 ERROR [setup] Run aborted to preserve fidelity: Timed out waiting for the SGLang server to become healthy.
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10582, in main
+    server_handle.start()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 591, in start
+    self._wait_healthy()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 628, in _wait_healthy
+    raise TimeoutError("Timed out waiting for the SGLang server to become healthy.")
+TimeoutError: Timed out waiting for the SGLang server to become healthy.
+2026-05-09 22:12:44,106 INFO [setup] Run aborted cleanly after 0:15:30. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared8_shared2_fast/shard17/manifest.json.
+[2026-05-09 22:12:44] Child process unexpectedly failed with exitcode=9. pid=85922
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 11006, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10582, in main
+    server_handle.start()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 591, in start
+    self._wait_healthy()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 628, in _wait_healthy
+    raise TimeoutError("Timed out waiting for the SGLang server to become healthy.")
+TimeoutError: Timed out waiting for the SGLang server to become healthy.
+[fallback] attempt=1 failed with exit_status=1; trying next fallback config if available
+[fallback] attempt=2 config=16:1:2:aggressive request_batch_size=16 prompts_per_rank=1 max_concurrent_prompts=2 throughput_profile=aggressive server_timeout_seconds=900
+[setup] bootstrapping scratch-managed runtime
+[setup] bootstrap_log=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime-35132109.log
+[setup] bootstrap_lock=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/bootstrap-runtime.lock
+[runtime] runtime_root_base=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs
+[runtime] selected_runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] selected_runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[runtime] selected_runtime_key=e97e9d3f4ecd
+[runtime] job_overlay_dir=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay
+[bootstrap] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[bootstrap] lightweight_overlay_key=66cc093d09b2
+[runtime] manifest_output_path=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[bootstrap] lightweight_constraint_count=52
+[bootstrap] compatibility_pins={"datasets": "datasets>=2.15.0", "huggingface_hub": "huggingface-hub>=0.34.0,<1.0", "regex": "regex!=2019.12.17", "tokenizers": "tokenizers>=0.21,<0.22", "urllib3": "urllib3<2.0.0"}
+[runtime] ignoring legacy overlay at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/python-overlay
+[bootstrap-cache] using reusable lightweight overlay directly via PYTHONPATH from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[runtime] managed runtime validated successfully at /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[runtime] sys_path_head=["/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages", "/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay", "/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest", "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python310.zip", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10", "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/lib-dynload"]
+[runtime] package=torch version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch-2.7.1+cu128.dist-info
+[runtime] package=torchvision version=0.22.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchvision-0.22.1+cu128.dist-info
+[runtime] package=torchaudio version=2.7.1+cu128 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torchaudio-2.7.1+cu128.dist-info
+[runtime] package=triton version=3.3.1 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/triton-3.3.1.dist-info
+[runtime] package=tensordict version=0.10.0 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict-0.10.0.dist-info
+[runtime] package=sgl-kernel version=0.2.8 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/sgl_kernel-0.2.8.dist-info
+[runtime] package=flashinfer-python version=0.2.9rc2 origin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer/__init__.py dist_info=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/flashinfer_python-0.2.9rc2.dist-info
+[runtime] local_import=sglang origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[runtime] local_import=verl origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/verl-latest/verl/__init__.py
+[runtime] local_import=transformers origin=/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[bootstrap] runtime import preflight succeeded
+[runtime-tool] linked executable ninja from /mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja to /mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/bin/ninja
+[bootstrap] no additional lightweight packages were needed
+[runtime] manifest_written=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/runtime-manifest.json
+[runtime] selected_manifest_written=/mmfs1/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[setup] runtime_root=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd
+[setup] runtime_manifest=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/runtime-manifest.json
+[setup] runtime_site=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages
+[setup] job_overlay_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay
+[setup] job_bin_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/bin
+[setup] lightweight_overlay_cache_dir=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2
+[setup] flashinfer_workspace_base=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/flashinfer
+[setup] torch_extensions_dir=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/flashinfer/torch_extensions
+[setup] job_overlay_bin=/gscratch/scrubbed/suryadv/tmp/multiplex-thinking-35132109/job-overlay/bin
+[setup] lightweight_overlay_bin=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin
+[setup] ninja_path=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/lightweight-overlays/66cc093d09b2/bin/ninja
+/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[setup] import=torch version=2.7.1+cu128 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/torch/__init__.py
+[setup] import=tensordict version=0.10.0 file=/mmfs1/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/runtime-envs/py310-torch2_7_1_cu128-e97e9d3f4ecd/site-packages/tensordict/__init__.py
+[setup] import=sglang version=0.4.9.post6 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/__init__.py
+[setup] import=transformers version=4.54.0 file=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/__init__.py
+[setup] optional_import=verl status=missing
+[setup] scratch_cache_root=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking
+[setup] output_dir=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared8_shared2_fast/shard17
+[setup] run_tag=aime4096-s8s2top-r1-shard17
+[setup] slurm_job_gpus=3,5
+[setup] cuda_visible_devices=0,1
+[setup] model_path=/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B
+[setup] requested_launch_config experiment_mode=memory_match_topup benchmark=deepscaler_aime_train methods=baseline,shared_trace seed=409601 port=45117 dp_size=2 tp_size=1 max_k=32 max_prompts=100 prompt_indices=350,353 max_new_tokens=8192 reasoning_prefix_token_values=256,512,1024,2048,4096,6144 branch_ablation_reasoning_prefix_tokens=4096 branch_ablation_group_sizes=8 branch_ablation_no_baseline=1 adaptive_ablation_shared_counts=2,4,6,8,10,12,14,16 adaptive_confidence_threshold=0.75 memory_match_source_root=/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533 memory_match_shared_groups=8 hyperparam_reasoning_prefix_tokens=1024 hyperparam_top_p_values=0.75,0.85,0.90,0.95,1.00 hyperparam_temperature_values=0.4,0.6,0.8,1.0,1.2 checkpoint_matched_prompts_step=5 compact_jsonl=1 request_batch_size=16 resource_profile=auto throughput_profile=aggressive max_concurrent_prompts=2 prompts_per_rank=1 rank_scheduler=dynamic server_timeout_seconds=900
+[setup] starting compare_passk_aime.py
+2026-05-09 22:15:01,439 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-09 22:15:01,464 INFO [setup] scheduler config: requested_max_concurrent_prompts=2 max_concurrent_prompts=2 prompts_per_rank=1 max_prompt_capacity=2 rank_scheduler=dynamic
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-05-09 22:15:08,877 INFO [setup] Restricted run to prompt indices: [350, 353]
+2026-05-09 22:15:11,635 INFO [setup] runtime config: visible_gpus=2 per_gpu_memory_gb=44.42 requested_dp_size=2 effective_dp_size=2 requested_tp_size=1 effective_tp_size=1 requested_request_batch_size=16 request_batch_size=16 resource_profile=two_gpu_safe cuda_graph_max_bs=16 chunked_prefill_size=2048 max_running_requests=32 nvcc_path=/sw/cuda/12.8.1/bin/nvcc attention_backend=auto sampling_backend=auto disable_cuda_graph=False disable_radix_cache=False
+2026-05-09 22:15:11,715 INFO [setup] Starting the local SGLang server on 127.0.0.1:45117.
+[2026-05-09 22:15:26] server_args=ServerArgs(model_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_path='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', tokenizer_mode='auto', skip_tokenizer_init=False, load_format='auto', model_loader_extra_config='{}', trust_remote_code=False, context_length=None, is_embedding=False, enable_multimodal=None, revision=None, model_impl='auto', host='127.0.0.1', port=45117, skip_server_warmup=True, warmups=None, nccl_port=None, dtype='auto', quantization=None, quantization_param_path=None, kv_cache_dtype='auto', mem_fraction_static=0.778, max_running_requests=32, max_queued_requests=9223372036854775807, max_total_tokens=None, chunked_prefill_size=2048, max_prefill_tokens=16384, schedule_policy='fcfs', schedule_conservativeness=1.0, cpu_offload_gb=0, page_size=1, hybrid_kvcache_ratio=None, swa_full_tokens_ratio=0.8, disable_hybrid_swa_memory=False, device='cuda', tp_size=1, pp_size=1, max_micro_batch_size=None, stream_interval=1, stream_output=False, random_seed=409601, constrained_json_whitespace_pattern=None, watchdog_timeout=300, dist_timeout=None, download_dir=None, base_gpu_id=0, gpu_id_step=1, sleep_on_idle=False, log_level='info', log_level_http=None, log_requests=False, log_requests_level=0, crash_dump_folder=None, show_time_cost=False, enable_metrics=False, enable_metrics_for_all_schedulers=False, bucket_time_to_first_token=None, bucket_inter_token_latency=None, bucket_e2e_request_latency=None, collect_tokens_histogram=False, decode_log_interval=40, enable_request_time_stats_logging=False, kv_events_config=None, api_key='multiplex-local', served_model_name='/gscratch/scrubbed/suryadv/.cache/multiplex-thinking/local-models/Qwen3-4B', chat_template=None, completion_template=None, file_storage_path='sglang_storage', enable_cache_report=False, reasoning_parser='qwen3', tool_call_parser=None, dp_size=2, load_balance_method='round_robin', dist_init_addr=None, nnodes=1, node_rank=0, json_model_override_args='{}', preferred_sampling_params=None, enable_lora=None, max_lora_rank=None, lora_target_modules=None, lora_paths=None, max_loras_per_batch=8, lora_backend='triton', attention_backend=None, decode_attention_backend=None, prefill_attention_backend=None, sampling_backend='flashinfer', grammar_backend='none', mm_attention_backend=None, speculative_algorithm=None, speculative_draft_model_path=None, speculative_num_steps=None, speculative_eagle_topk=None, speculative_num_draft_tokens=None, speculative_accept_threshold_single=1.0, speculative_accept_threshold_acc=1.0, speculative_token_map=None, ep_size=1, enable_ep_moe=False, enable_deepep_moe=False, enable_flashinfer_cutlass_moe=False, enable_flashinfer_trtllm_moe=False, enable_flashinfer_allreduce_fusion=False, deepep_mode='auto', ep_num_redundant_experts=0, ep_dispatch_algorithm='static', init_expert_location='trivial', enable_eplb=False, eplb_algorithm='auto', eplb_rebalance_num_iterations=1000, eplb_rebalance_layers_per_chunk=None, expert_distribution_recorder_mode=None, expert_distribution_recorder_buffer_size=1000, enable_expert_distribution_metrics=False, deepep_config=None, moe_dense_tp_size=None, enable_hierarchical_cache=False, hicache_ratio=2.0, hicache_size=0, hicache_write_policy='write_through_selective', hicache_io_backend='', hicache_storage_backend=None, enable_double_sparsity=False, ds_channel_config_path=None, ds_heavy_channel_num=32, ds_heavy_token_num=256, ds_heavy_channel_type='qk', ds_sparse_decode_threshold=4096, disable_radix_cache=False, cuda_graph_max_bs=16, cuda_graph_bs=None, disable_cuda_graph=False, disable_cuda_graph_padding=False, enable_profile_cuda_graph=False, enable_nccl_nvls=False, enable_tokenizer_batch_encode=False, disable_outlines_disk_cache=False, disable_custom_all_reduce=False, enable_mscclpp=False, disable_overlap_schedule=True, enable_mixed_chunk=False, enable_dp_attention=False, enable_dp_lm_head=False, enable_two_batch_overlap=False, enable_torch_compile=False, torch_compile_max_bs=32, torchao_config='', enable_nan_detection=False, enable_p2p_check=False, triton_attention_reduce_in_fp32=False, triton_attention_num_kv_splits=8, num_continuous_decode_steps=1, delete_ckpt_after_loading=False, enable_memory_saver=False, allow_auto_truncate=False, enable_custom_logit_processor=False, enable_soft_thinking=True, think_end_str='</think>', max_topk=3, used_topk=3, enable_entropy_mask=False, entropy_mask_threshold=0.0, early_stopping_entropy_threshold=0.0, early_stopping_length_threshold=256, dirichlet_alpha=1e+20, enable_gumbel=False, enable_max_topk=False, gumbel_tau=1.0, enable_replacement=True, enable_gumbel_after_thinking=False, enable_unweighting=False, after_thinking_temperature=0.6, after_thinking_top_p=0.95, after_thinking_top_k=-1, after_thinking_min_p=0.0, flashinfer_mla_disable_ragged=False, disable_shared_experts_fusion=False, disable_chunked_prefix_cache=False, disable_fast_image_processor=False, enable_return_hidden_states=False, enable_triton_kernel_moe=False, debug_tensor_dump_output_folder=None, debug_tensor_dump_input_file=None, debug_tensor_dump_inject=False, debug_tensor_dump_prefill_only=False, disaggregation_mode='null', disaggregation_transfer_backend='mooncake', disaggregation_bootstrap_port=8998, disaggregation_decode_tp=None, disaggregation_decode_dp=None, disaggregation_prefill_pp=1, disaggregation_ib_device=None, num_reserved_decode_tokens=512, pdlb_url=None, custom_weight_loader=[], weight_loader_disable_mmap=False, enable_pdmux=False, sm_group_num=3)
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-09 22:16:12] Launch DP0 starting at GPU #0.
+[2026-05-09 22:16:12] Launch DP1 starting at GPU #1.
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/utils/hub.py:111: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+[2026-05-09 22:16:24 DP1] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-09 22:16:24 DP1] Init torch distributed begin.
+[2026-05-09 22:16:24 DP0] Attention backend not explicitly specified. Use flashinfer backend by default.
+[2026-05-09 22:16:24 DP0] Init torch distributed begin.
+[2026-05-09 22:16:25 DP1] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-09 22:16:25 DP0] Init torch distributed ends. mem usage=0.00 GB
+[2026-05-09 22:16:25 DP0] Load weight begin. avail mem=44.11 GB
+[2026-05-09 22:16:25 DP1] Load weight begin. avail mem=44.11 GB
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+🚨 `topk_probs` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaModel.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_indices` is part of LlamaForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/llama/modeling_llama.py.
+🚨 `topk_probs` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2Model.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_probs` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+🚨 `topk_indices` is part of Qwen2ForCausalLM.forward's signature, but not documented. Make sure to add it to the docstring of the function in /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/transformers-4.54.0/src/transformers/models/qwen2/modeling_qwen2.py.
+Loading safetensors checkpoint shards:   0% Completed | 0/3 [00:00<?, ?it/s]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:04,  2.47s/it]
+Loading safetensors checkpoint shards:  33% Completed | 1/3 [00:02<00:04,  2.45s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.11s/it]
+Loading safetensors checkpoint shards:  67% Completed | 2/3 [00:02<00:01,  1.11s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.77s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.77s/it]
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.73s/it]
+
+Loading safetensors checkpoint shards: 100% Completed | 3/3 [00:05<00:00,  1.72s/it]
+
+[2026-05-09 22:16:30 DP0] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-09 22:16:30 DP1] Load weight end. type=Qwen3ForCausalLM, dtype=torch.bfloat16, avail mem=36.53 GB, mem usage=7.58 GB.
+[2026-05-09 22:16:31 DP0] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-09 22:16:31 DP0] Memory pool end. avail mem=9.65 GB
+[2026-05-09 22:16:31 DP1] KV Cache is allocated. #tokens: 194613, K size: 13.36 GB, V size: 13.36 GB
+[2026-05-09 22:16:31 DP1] Memory pool end. avail mem=9.65 GB
+[2026-05-09 22:16:31 DP0] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-09 22:16:31 DP1] Capture cuda graph begin. This can take up to several minutes. avail mem=9.03 GB
+[2026-05-09 22:16:31 DP0] Capture cuda graph bs [1, 2, 4, 8, 16]
+  0%|          | 0/5 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=9.03 GB):   0%|          | 0/5 [00:00<?, ?it/s][2026-05-09 22:16:31 DP1] Capture cuda graph bs [1, 2, 4, 8, 16]
+  0%|          | 0/5 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=9.03 GB):   0%|          | 0/5 [00:00<?, ?it/s]Capturing batches (bs=16 avail_mem=9.03 GB):  20%|██        | 1/5 [00:01<00:05,  1.48s/it]Capturing batches (bs=8 avail_mem=8.97 GB):  20%|██        | 1/5 [00:01<00:05,  1.48s/it] Capturing batches (bs=16 avail_mem=9.03 GB):  20%|██        | 1/5 [00:01<00:06,  1.52s/it]Capturing batches (bs=8 avail_mem=8.97 GB):  20%|██        | 1/5 [00:01<00:06,  1.52s/it] Capturing batches (bs=8 avail_mem=8.97 GB):  40%|████      | 2/5 [00:01<00:02,  1.23it/s]Capturing batches (bs=4 avail_mem=8.94 GB):  40%|████      | 2/5 [00:01<00:02,  1.23it/s]Capturing batches (bs=8 avail_mem=8.97 GB):  40%|████      | 2/5 [00:01<00:02,  1.21it/s]Capturing batches (bs=4 avail_mem=8.94 GB):  40%|████      | 2/5 [00:01<00:02,  1.21it/s]Capturing batches (bs=4 avail_mem=8.94 GB):  60%|██████    | 3/5 [00:02<00:01,  1.66it/s]Capturing batches (bs=2 avail_mem=8.93 GB):  60%|██████    | 3/5 [00:02<00:01,  1.66it/s]Capturing batches (bs=4 avail_mem=8.94 GB):  60%|██████    | 3/5 [00:02<00:01,  1.67it/s]Capturing batches (bs=2 avail_mem=8.93 GB):  60%|██████    | 3/5 [00:02<00:01,  1.67it/s]Capturing batches (bs=2 avail_mem=8.93 GB):  80%|████████  | 4/5 [00:02<00:00,  2.02it/s]Capturing batches (bs=1 avail_mem=8.89 GB):  80%|████████  | 4/5 [00:02<00:00,  2.02it/s]Capturing batches (bs=2 avail_mem=8.93 GB):  80%|████████  | 4/5 [00:02<00:00,  2.00it/s]Capturing batches (bs=1 avail_mem=8.89 GB):  80%|████████  | 4/5 [00:02<00:00,  2.00it/s]Capturing batches (bs=1 avail_mem=8.89 GB): 100%|██████████| 5/5 [00:02<00:00,  2.25it/s]Capturing batches (bs=1 avail_mem=8.89 GB): 100%|██████████| 5/5 [00:02<00:00,  1.74it/s]
+[2026-05-09 22:16:34 DP0] Capture cuda graph end. Time elapsed: 2.93 s. mem usage=0.15 GB. avail mem=8.88 GB.
+Capturing batches (bs=1 avail_mem=8.89 GB): 100%|██████████| 5/5 [00:02<00:00,  2.19it/s]Capturing batches (bs=1 avail_mem=8.89 GB): 100%|██████████| 5/5 [00:02<00:00,  1.72it/s]
+[2026-05-09 22:16:34 DP1] Capture cuda graph end. Time elapsed: 2.95 s. mem usage=0.15 GB. avail mem=8.88 GB.
+[2026-05-09 22:16:34 DP0] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.88 GB
+[2026-05-09 22:16:34 DP1] max_total_num_tokens=194613, chunked_prefill_size=2048, max_prefill_tokens=16384, max_running_requests=32, context_len=40960, available_gpu_mem=8.88 GB
+[2026-05-09 22:16:37] INFO:     Started server process [24951]
+[2026-05-09 22:16:37] INFO:     Waiting for application startup.
+[2026-05-09 22:16:37] The server is fired up and ready to roll!
+[2026-05-09 22:16:37] INFO:     Application startup complete.
+[2026-05-09 22:16:37] INFO:     Uvicorn running on http://127.0.0.1:45117 (Press CTRL+C to quit)
+[2026-05-09 22:16:38 DP0] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-09 22:16:58] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:34:04. last_heartbeat time: 16:00:00
+[2026-05-09 22:16:58] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:17:00 DP1] Prefill batch. #new-seq: 1, #new-token: 1, #cached-token: 0, token usage: 0.00, #running-req: 0, #queue-req: 0, 
+[2026-05-09 22:17:20] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:34:26. last_heartbeat time: 16:00:00
+[2026-05-09 22:17:20] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:17:42] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:34:48. last_heartbeat time: 16:00:00
+[2026-05-09 22:17:42] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:18:04] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:35:10. last_heartbeat time: 16:00:00
+[2026-05-09 22:18:04] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:18:26] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:35:32. last_heartbeat time: 16:00:00
+[2026-05-09 22:18:26] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:18:48] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:35:54. last_heartbeat time: 16:00:00
+[2026-05-09 22:18:48] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:19:10] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:36:16. last_heartbeat time: 16:00:00
+[2026-05-09 22:19:10] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:19:32] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:36:38. last_heartbeat time: 16:00:00
+[2026-05-09 22:19:32] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:19:54] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:37:00. last_heartbeat time: 16:00:00
+[2026-05-09 22:19:54] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:20:16] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:37:22. last_heartbeat time: 16:00:00
+[2026-05-09 22:20:16] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:20:20] Task exception was never retrieved
+future: <Task finished name='Task-128' coro=<health_generate.<locals>.gen() done, defined at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py:266> exception=ValueError("Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390396.2812717'")>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 761, in _wait_one_response
+    await asyncio.wait_for(state.event.wait(), timeout=4)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py", line 267, in gen
+    async for _ in _global_state.tokenizer_manager.generate_request(gri, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 508, in generate_request
+    async for response in self._wait_one_response(obj, state, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 767, in _wait_one_response
+    raise ValueError(
+ValueError: Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390396.2812717'
+[2026-05-09 22:20:38] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:37:44. last_heartbeat time: 16:00:00
+[2026-05-09 22:20:38] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:21:00] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:38:06. last_heartbeat time: 16:00:00
+[2026-05-09 22:21:00] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:21:22] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:38:28. last_heartbeat time: 16:00:00
+[2026-05-09 22:21:22] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:21:44] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:38:50. last_heartbeat time: 16:00:00
+[2026-05-09 22:21:44] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:22:06] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:39:12. last_heartbeat time: 16:00:00
+[2026-05-09 22:22:06] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:22:28] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:39:34. last_heartbeat time: 16:00:00
+[2026-05-09 22:22:28] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:22:50] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:39:56. last_heartbeat time: 16:00:00
+[2026-05-09 22:22:50] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:23:12] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:40:18. last_heartbeat time: 16:00:00
+[2026-05-09 22:23:12] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:23:34] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:40:40. last_heartbeat time: 16:00:00
+[2026-05-09 22:23:34] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:23:56] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:41:02. last_heartbeat time: 16:00:00
+[2026-05-09 22:23:56] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:24:04 DP0] self.cur_batch.batch_size()=1, self.cur_batch.reqs=[Req(rid=HEALTH_CHECK_1778390198.2004876, input_ids=[0], output_ids=[], self.grammar=None, self.sampling_params=<sglang.srt.sampling.sampling_params.SamplingParams object at 0x7f29443ad930>)], available_size=194612, evictable_size=0, 
+[2026-05-09 22:24:04 DP1] self.cur_batch.batch_size()=1, self.cur_batch.reqs=[Req(rid=HEALTH_CHECK_1778390220.2063792, input_ids=[0], output_ids=[], self.grammar=None, self.sampling_params=<sglang.srt.sampling.sampling_params.SamplingParams object at 0x7f1105d9ac50>)], available_size=194612, evictable_size=0, 
+[2026-05-09 22:24:18] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:41:24. last_heartbeat time: 16:00:00
+[2026-05-09 22:24:18] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:24:19 DP0] Pyspy failed to dump PID 27073. Error: /bin/sh: py-spy: command not found
+
+[2026-05-09 22:24:19 DP1] Pyspy failed to dump PID 27072. Error: /bin/sh: py-spy: command not found
+
+[2026-05-09 22:24:19 DP0] Watchdog timeout (self.watchdog_timeout=300)
+[2026-05-09 22:24:19 DP1] Watchdog timeout (self.watchdog_timeout=300)
+
+
+
+
+[2026-05-09 22:24:28] Child process unexpectedly failed with exitcode=131. pid=26116
+[2026-05-09 22:24:40] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:41:46. last_heartbeat time: 16:00:00
+[2026-05-09 22:24:40] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:25:02] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:42:08. last_heartbeat time: 16:00:00
+[2026-05-09 22:25:02] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:25:24] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:42:30. last_heartbeat time: 16:00:00
+[2026-05-09 22:25:24] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:25:46] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:42:52. last_heartbeat time: 16:00:00
+[2026-05-09 22:25:46] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:25:50] Task exception was never retrieved
+future: <Task finished name='Task-339' coro=<health_generate.<locals>.gen() done, defined at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py:266> exception=ValueError("Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390726.421795'")>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 761, in _wait_one_response
+    await asyncio.wait_for(state.event.wait(), timeout=4)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py", line 267, in gen
+    async for _ in _global_state.tokenizer_manager.generate_request(gri, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 508, in generate_request
+    async for response in self._wait_one_response(obj, state, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 767, in _wait_one_response
+    raise ValueError(
+ValueError: Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390726.421795'
+[2026-05-09 22:26:08] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:43:14. last_heartbeat time: 16:00:00
+[2026-05-09 22:26:08] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:26:30] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:43:36. last_heartbeat time: 16:00:00
+[2026-05-09 22:26:30] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:26:34] Task exception was never retrieved
+future: <Task finished name='Task-369' coro=<health_generate.<locals>.gen() done, defined at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py:266> exception=ValueError("Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390770.4683373'")>
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/locks.py", line 214, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 456, in wait_for
+    return fut.result()
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 761, in _wait_one_response
+    await asyncio.wait_for(state.event.wait(), timeout=4)
+  File "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking/lib/python3.10/asyncio/tasks.py", line 458, in wait_for
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/entrypoints/http_server.py", line 267, in gen
+    async for _ in _global_state.tokenizer_manager.generate_request(gri, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 508, in generate_request
+    async for response in self._wait_one_response(obj, state, request):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/sglang-0.4.9.post6/sglang/srt/managers/tokenizer_manager.py", line 767, in _wait_one_response
+    raise ValueError(
+ValueError: Request is disconnected from the client side (type 1). Abort request obj.rid='HEALTH_CHECK_1778390770.4683373'
+[2026-05-09 22:26:52] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:43:58. last_heartbeat time: 16:00:00
+[2026-05-09 22:26:52] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:27:14] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:44:20. last_heartbeat time: 16:00:00
+[2026-05-09 22:27:14] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:27:36] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:44:42. last_heartbeat time: 16:00:00
+[2026-05-09 22:27:36] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:27:58] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:45:04. last_heartbeat time: 16:00:00
+[2026-05-09 22:27:58] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:28:20] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:45:26. last_heartbeat time: 16:00:00
+[2026-05-09 22:28:20] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:28:42] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:45:48. last_heartbeat time: 16:00:00
+[2026-05-09 22:28:42] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:29:04] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:46:10. last_heartbeat time: 16:00:00
+[2026-05-09 22:29:04] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:29:26] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:46:32. last_heartbeat time: 16:00:00
+[2026-05-09 22:29:26] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:29:48] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:46:54. last_heartbeat time: 16:00:00
+[2026-05-09 22:29:48] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+[2026-05-09 22:30:10] Health check failed. Server couldn't get a response from detokenizer for last 20 seconds. tic start time: 15:47:16. last_heartbeat time: 16:00:00
+[2026-05-09 22:30:10] INFO:     127.0.0.1:45460 - "GET /health_generate HTTP/1.1" 503 Service Unavailable
+2026-05-09 22:30:12,555 ERROR [setup] Run aborted to preserve fidelity: Timed out waiting for the SGLang server to become healthy.
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10582, in main
+    server_handle.start()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 591, in start
+    self._wait_healthy()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 628, in _wait_healthy
+    raise TimeoutError("Timed out waiting for the SGLang server to become healthy.")
+TimeoutError: Timed out waiting for the SGLang server to become healthy.
+2026-05-09 22:30:12,608 INFO [setup] Run aborted cleanly after 0:15:13. Manifest updated at /mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/final_eval_outputs/aime-train100-ablation4096-r3-stable3b-20260501-103533/repeat_01/memory_match_topup_shared8_shared2_fast/shard17/manifest.json.
+Traceback (most recent call last):
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 11006, in <module>
+    main()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 10582, in main
+    server_handle.start()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 591, in start
+    self._wait_healthy()
+  File "/mmfs1/gscratch/scrubbed/suryadv/repos/Multiplex-Testing/scripts/compare_passk_aime.py", line 628, in _wait_healthy
+    raise TimeoutError("Timed out waiting for the SGLang server to become healthy.")
+TimeoutError: Timed out waiting for the SGLang server to become healthy.
+[fallback] attempt=2 failed with exit_status=1; trying next fallback config if available
+[fallback] all configs failed; final_exit_status=1

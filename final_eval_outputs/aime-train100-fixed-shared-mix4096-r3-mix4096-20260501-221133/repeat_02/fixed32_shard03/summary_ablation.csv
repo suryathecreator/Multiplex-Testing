@@ -1,0 +1,7 @@
+method,k,num_prompts,pass_at_k,avg_cost_tokens,num_failures,condition,branch_group_size
+baseline_independent,1,25,0.4,7019.16,0,fixed_trace_independent,1
+baseline_independent,2,25,0.44,13591.64,0,fixed_trace_independent,1
+baseline_independent,4,25,0.44,27158.2,0,fixed_trace_independent,1
+baseline_independent,8,25,0.56,54653.24,0,fixed_trace_independent,1
+baseline_independent,16,25,0.6,109166.68,0,fixed_trace_independent,1
+baseline_independent,32,25,0.6,219309.44,0,fixed_trace_independent,1

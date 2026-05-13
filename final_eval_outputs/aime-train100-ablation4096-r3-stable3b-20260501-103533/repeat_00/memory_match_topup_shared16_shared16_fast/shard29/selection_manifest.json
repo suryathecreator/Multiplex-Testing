@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "125",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "For certain pairs $(m,n)$ of positive integers with $m\\geq n$ there are exactly $50$ distinct positive integers $k$ such that $|\\log m - \\log k| < \\log n$. Find the sum of all possible values of the product $mn$.",
+      "problem_id": "aime-train-2009-II-11",
+      "problem_number": 11,
+      "prompt_index": 550,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 550,
+      "year": 2009
+    },
+    {
+      "aime_number": 2,
+      "answer": "803",
+      "difficulty": 6.0,
+      "order_index": 1,
+      "problem": "From the set of integers $\\{1,2,3,\\dots,2009\\}$, choose $k$ pairs $\\{a_i,b_i\\}$ with $a_i<b_i$ so that no two pairs have a common element. Suppose that all the sums $a_i+b_i$ are distinct and less than or equal to $2009$. Find the maximum possible value of $k$.",
+      "problem_id": "aime-train-2009-II-12",
+      "problem_number": 12,
+      "prompt_index": 551,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 551,
+      "year": 2009
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    550,
+    551
+  ],
+  "selection_seed": 4096
+}

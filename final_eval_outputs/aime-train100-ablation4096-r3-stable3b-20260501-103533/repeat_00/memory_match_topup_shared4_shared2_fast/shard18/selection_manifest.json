@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "28",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "In a regular tetrahedron the centers of the four faces are the vertices of a smaller tetrahedron. The ratio of the volume of the smaller tetrahedron to that of the larger is $m/n$, where $m$ and $n$ are relatively prime positive integers. Find $m+n$.",
+      "problem_id": "aime-train-2003-II-04",
+      "problem_number": 4,
+      "prompt_index": 363,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 363,
+      "year": 2003
+    },
+    {
+      "aime_number": 2,
+      "answer": "112",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "In triangle $ABC,$ $AB = 13,$ $BC = 14,$ $AC = 15,$ and point $G$ is the intersection of the medians. Points $A',$ $B',$ and $C',$ are the images of $A,$ $B,$ and $C,$ respectively, after a $180^\\circ$ rotation about $G.$ What is the area of the union of the two regions enclosed by the triangles $ABC$ and $A'B'C'?$",
+      "problem_id": "aime-train-2003-II-06",
+      "problem_number": 6,
+      "prompt_index": 365,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 365,
+      "year": 2003
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    363,
+    365
+  ],
+  "selection_seed": 4096
+}

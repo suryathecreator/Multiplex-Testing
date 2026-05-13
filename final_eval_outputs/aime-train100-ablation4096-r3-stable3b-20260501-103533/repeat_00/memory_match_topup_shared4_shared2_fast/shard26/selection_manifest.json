@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "52",
+      "difficulty": 3.375,
+      "order_index": 0,
+      "problem": "A 100 foot long moving walkway moves at a constant rate of 6 feet per second. Al steps onto the start of the walkway and stands. Bob steps onto the start of the walkway two seconds later and strolls forward along the walkway at a constant rate of 4 feet per second. Two seconds after that, Cy reaches the start of the walkway and walks briskly forward beside the walkway at a constant rate of 8 feet per second. At a certain time, one of these three persons is exactly halfway between the other two. At that time, find the distance in feet between the start of the walkway and the middle person.",
+      "problem_id": "aime-train-2007-I-02",
+      "problem_number": 2,
+      "prompt_index": 466,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 466,
+      "year": 2007
+    },
+    {
+      "aime_number": 1,
+      "answer": "15",
+      "difficulty": 4.0,
+      "order_index": 1,
+      "problem": "The complex number $z$ is equal to $9+bi$, where $b$ is a positive real number and $i^{2}=-1$. Given that the imaginary parts of $z^{2}$ and $z^{3}$ are the same, what is $b$ equal to?",
+      "problem_id": "aime-train-2007-I-03",
+      "problem_number": 3,
+      "prompt_index": 467,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 467,
+      "year": 2007
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    466,
+    467
+  ],
+  "selection_seed": 4096
+}

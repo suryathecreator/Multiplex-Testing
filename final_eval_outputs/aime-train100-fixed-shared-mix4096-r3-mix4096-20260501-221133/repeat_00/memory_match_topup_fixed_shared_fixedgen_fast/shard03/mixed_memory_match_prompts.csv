@@ -1,0 +1,6 @@
+prompt_index,problem_id,target_cost_tokens,target_correct,shared_before_cost_tokens,shared_before_correct,mixed_before_cost_tokens,mixed_before_correct,shared_after_cost_tokens,shared_after_correct,mixed_after_cost_tokens,mixed_after_correct,shared_topup_count,mixed_topup_count,shared_effective_k,mixed_effective_k,generated_topup_count,shared_reached_target,mixed_reached_target,status,message,completed_at_unix
+123,aime-train-1991-I-04,201344.0,True,96460.0,True,153223.0,True,204491.0,True,203257.0,True,19,9,51,41,19,True,True,completed,,1777969943.2815168
+130,aime-train-1991-I-11,244206.0,True,135169.0,False,192836.0,True,245552.0,True,247428.0,True,14,7,46,39,14,True,True,completed,,1777969989.3366075
+140,aime-train-1992-I-06,239520.0,False,135169.0,False,192553.0,False,242130.0,True,243167.0,True,17,8,49,40,17,True,True,completed,,1777972025.1768756
+150,aime-train-1993-I-01,180710.0,True,25751.0,True,113900.0,True,182991.0,True,185567.0,True,28,13,60,45,28,True,True,completed,,1777973058.0857468
+154,aime-train-1993-I-05,173816.0,True,30003.0,True,103166.0,True,175355.0,True,175680.0,True,27,14,59,46,27,True,True,completed,,1777974854.8899407

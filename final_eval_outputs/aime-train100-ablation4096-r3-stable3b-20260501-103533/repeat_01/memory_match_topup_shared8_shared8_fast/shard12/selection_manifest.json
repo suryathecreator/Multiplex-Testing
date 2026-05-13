@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 1,
+      "answer": "489",
+      "difficulty": 4.875,
+      "order_index": 0,
+      "problem": "Ten points in the plane are given, with no three collinear. Four distinct segments joining pairs of these points are chosen at random, all such segments being equally likely. The probability that some three of the segments form a triangle whose vertices are among the ten given points is $m/n,$ where $m_{}$ and $n_{}$ are relatively prime positive integers. Find $m+n.$",
+      "problem_id": "aime-train-1999-I-10",
+      "problem_number": 10,
+      "prompt_index": 249,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 249,
+      "year": 1999
+    },
+    {
+      "aime_number": 1,
+      "answer": "21",
+      "difficulty": 2.375,
+      "order_index": 1,
+      "problem": "Let $u$ and $v$ be integers satisfying $0 < v < u$. Let $A = (u,v)$, let $B$ be the reflection of $A$ across the line $y = x$, let $C$ be the reflection of $B$ across the y-axis, let $D$ be the reflection of $C$ across the x-axis, and let $E$ be the reflection of $D$ across the y-axis. The area of pentagon $ABCDE$ is $451$. Find $u + v$.",
+      "problem_id": "aime-train-2000-I-02",
+      "problem_number": 2,
+      "prompt_index": 256,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 256,
+      "year": 2000
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    249,
+    256
+  ],
+  "selection_seed": 4096
+}

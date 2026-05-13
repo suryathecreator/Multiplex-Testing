@@ -1,0 +1,65 @@
+{
+  "checkpoint_prompt_rows": 280,
+  "summary_rows": [
+    {
+      "color": "#4C78A8",
+      "condition": "Fixed",
+      "marker": "o",
+      "mean_accuracy": 0.7781631427999733,
+      "mean_cost_tokens": 211802.1761748075,
+      "mean_prompt_rows_per_repeat": 93.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.045012022546553204,
+      "std_cost_tokens": 1220.1082805058797,
+      "total_prompt_rows": 280
+    },
+    {
+      "color": "#54A24B",
+      "condition": "Shared",
+      "marker": "^",
+      "mean_accuracy": 0.6287749097727088,
+      "mean_cost_tokens": 83889.06645076344,
+      "mean_prompt_rows_per_repeat": 93.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.02765794395210905,
+      "std_cost_tokens": 6821.519898848549,
+      "total_prompt_rows": 280
+    },
+    {
+      "color": "#E45756",
+      "condition": "Fixed + Shared",
+      "marker": "D",
+      "mean_accuracy": 0.7511542423501337,
+      "mean_cost_tokens": 149830.24952014643,
+      "mean_prompt_rows_per_repeat": 93.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.05086400240457905,
+      "std_cost_tokens": 3826.5053535967163,
+      "total_prompt_rows": 280
+    },
+    {
+      "color": "#72B7B2",
+      "condition": "Shared + fixed top-up",
+      "marker": "v",
+      "mean_accuracy": 0.7608970606035903,
+      "mean_cost_tokens": 215112.03549310667,
+      "mean_prompt_rows_per_repeat": 93.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.01469334945104665,
+      "std_cost_tokens": 1327.4061489503365,
+      "total_prompt_rows": 280
+    },
+    {
+      "color": "#B279A2",
+      "condition": "Fixed + Shared + fixed top-up",
+      "marker": "P",
+      "mean_accuracy": 0.7758311903579695,
+      "mean_cost_tokens": 215110.16476824987,
+      "mean_prompt_rows_per_repeat": 93.33333333333333,
+      "num_repeats": 3,
+      "std_accuracy": 0.03591870926121608,
+      "std_cost_tokens": 1194.7295384722854,
+      "total_prompt_rows": 280
+    }
+  ]
+}

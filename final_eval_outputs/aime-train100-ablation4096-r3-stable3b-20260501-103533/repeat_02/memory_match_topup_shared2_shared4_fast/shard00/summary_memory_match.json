@@ -1,0 +1,102 @@
+{
+  "prompt_rows": [
+    {
+      "after_correct": true,
+      "after_cost_tokens": 182681.0,
+      "before_correct": true,
+      "before_cost_tokens": 109897.0,
+      "completed_at_unix": 1778087074.7614105,
+      "effective_k": 60,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1985-I-05",
+      "prompt_index": 34,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 180052.0,
+      "topup_count": 28,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 144735.0,
+      "before_correct": true,
+      "before_cost_tokens": 82201.0,
+      "completed_at_unix": 1778087189.4177911,
+      "effective_k": 72,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1984-I-05",
+      "prompt_index": 19,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 144115.0,
+      "topup_count": 40,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 168798.0,
+      "before_correct": true,
+      "before_cost_tokens": 94910.0,
+      "completed_at_unix": 1778087195.4506512,
+      "effective_k": 68,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1984-I-04",
+      "prompt_index": 18,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 164423.0,
+      "topup_count": 36,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    },
+    {
+      "after_correct": true,
+      "after_cost_tokens": 247125.0,
+      "before_correct": true,
+      "before_cost_tokens": 148863.0,
+      "completed_at_unix": 1778087322.4712985,
+      "effective_k": 68,
+      "group_size": 2,
+      "message": "",
+      "problem_id": "aime-train-1983-I-09",
+      "prompt_index": 8,
+      "reached_target": true,
+      "status": "completed",
+      "target_correct": true,
+      "target_cost_tokens": 232248.0,
+      "topup_count": 36,
+      "topup_generator": "shared_group",
+      "topup_group_size": 4
+    }
+  ],
+  "run_timing": {
+    "finished_at": "2026-05-06T17:08:42.625659+00:00",
+    "finished_at_unix": 1778087322.6256585,
+    "started_at": "2026-05-06T16:47:39.273040+00:00",
+    "started_at_unix": 1778086059.27304,
+    "wall_clock_hms": "0:21:03",
+    "wall_clock_seconds": 1263.3526184558868
+  },
+  "summary_rows": [
+    {
+      "after_accuracy": 1.0,
+      "after_cost_tokens": 185834.75,
+      "before_accuracy": 1.0,
+      "before_cost_tokens": 108967.75,
+      "effective_k": 67.0,
+      "group_size": 2,
+      "num_prompts": 4,
+      "reached_target_rate": 1.0,
+      "target_cost_tokens": 180209.5,
+      "topup_count": 35.0
+    }
+  ]
+}

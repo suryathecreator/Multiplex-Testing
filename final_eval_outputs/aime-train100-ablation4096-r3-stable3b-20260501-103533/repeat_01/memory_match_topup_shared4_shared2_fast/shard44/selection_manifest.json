@@ -1,0 +1,39 @@
+{
+  "benchmark": "deepscaler_aime_train",
+  "examples": [
+    {
+      "aime_number": 2,
+      "answer": "371",
+      "difficulty": 4.0,
+      "order_index": 0,
+      "problem": "Find the sum of all positive integers $b < 1000$ such that the base-$b$ integer $36_{b}$ is a perfect square and the base-$b$ integer $27_{b}$ is a perfect cube.",
+      "problem_id": "aime-train-2018-II-03",
+      "problem_number": 3,
+      "prompt_index": 812,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 812,
+      "year": 2018
+    },
+    {
+      "aime_number": 2,
+      "answer": "74",
+      "difficulty": 4.875,
+      "order_index": 1,
+      "problem": "Suppose that $x$, $y$, and $z$ are complex numbers such that $xy = -80 - 320i$, $yz = 60$, and $zx = -96 + 24i$, where $i$ $=$ $\\sqrt{-1}$. Then there are real numbers $a$ and $b$ such that $x + y + z = a + bi$. Find $a^2 + b^2$.",
+      "problem_id": "aime-train-2018-II-05",
+      "problem_number": 5,
+      "prompt_index": 814,
+      "selection_seed": 4096,
+      "source_dataset": "deepscaler/deepscaler/data/train/aime.json",
+      "source_index": 814,
+      "year": 2018
+    }
+  ],
+  "selected_count": 2,
+  "selected_source_indices": [
+    812,
+    814
+  ],
+  "selection_seed": 4096
+}
