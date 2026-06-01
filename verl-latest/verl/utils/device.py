@@ -9,6 +9,7 @@
 # This source code is licensed under the BSD-style license in https://github.com/pytorch/torchtune/blob/main/LICENSE
 
 import logging
+import os
 
 import torch
 
@@ -92,4 +93,6 @@ def set_expandable_segments(enable: bool) -> None:
         enable (bool): Whether to enable expandable segments. Used to avoid OOM.
     """
     if is_cuda_available:
+        if enable and os.environ.get("VERL_DISABLE_EXPANDABLE_SEGMENTS", "").lower() in {"1", "true", "yes", "on"}:
+            enable = False
         torch.cuda.memory._set_allocator_settings(f"expandable_segments:{enable}")

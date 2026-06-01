@@ -97,6 +97,21 @@ logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
 device_name = get_device_name()
 
 
+def _get_or_create_event_loop():
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError as exc:
+        if "There is no current event loop" not in str(exc):
+            raise
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop
+
+
+def _uses_actor_module_rollout(rollout_name: str) -> bool:
+    return rollout_name in {"soft_hf"}
+
+
 def create_device_mesh(world_size, fsdp_size):
     if fsdp_size < 0 or fsdp_size >= world_size:
         device_mesh = init_device_mesh(device_name, mesh_shape=(world_size,), mesh_dim_names=["fsdp"])
@@ -298,8 +313,9 @@ class ActorRolloutRefWorker(Worker, DistProfilerExtension):
             torch_dtype = PrecisionType.to_dtype(torch_dtype)
 
         # override model kwargs
+        attn_implementation = override_model_config.get("attn_implementation", "flash_attention_2")
         actor_model_config = AutoConfig.from_pretrained(
-            local_path, trust_remote_code=trust_remote_code, attn_implementation="flash_attention_2"
+            local_path, trust_remote_code=trust_remote_code, attn_implementation=attn_implementation
         )
         # TODO: VL models use VisionAttention, which directly uses flash_attention in transformers>=4.53
         # which will be patched by _ulysses_flash_attention_forward, but errorly misses position_ids
@@ -546,7 +562,7 @@ class ActorRolloutRefWorker(Worker, DistProfilerExtension):
         )
         rollout_name = self.config.rollout.name
 
-        if rollout_name == "hf":
+        if rollout_name == "hf" or _uses_actor_module_rollout(rollout_name):
             self._register_dispatch_collect_info("rollout", dp_rank=self.rank, is_collect=True)
         else:
             is_collect = rollout_device_mesh["infer_tp"].get_local_rank() == 0
@@ -563,9 +579,16 @@ class ActorRolloutRefWorker(Worker, DistProfilerExtension):
 
         # 4. build rollout model
         log_gpu_memory_usage(f"Before building {self.config.rollout.name} rollout", logger=logger)
-        self.rollout = get_rollout_class(rollout_config.name, rollout_config.mode)(
-            config=rollout_config, model_config=model_config, device_mesh=rollout_device_mesh
-        )
+        rollout_cls = get_rollout_class(rollout_config.name, rollout_config.mode)
+        if _uses_actor_module_rollout(rollout_config.name):
+            self.rollout = rollout_cls(
+                config=rollout_config,
+                model_config=model_config,
+                device_mesh=rollout_device_mesh,
+                module=self.actor_module_fsdp,
+            )
+        else:
+            self.rollout = rollout_cls(config=rollout_config, model_config=model_config, device_mesh=rollout_device_mesh)
         log_gpu_memory_usage(f"After building {self.config.rollout.name} rollout", logger=logger)
 
         # Full params
@@ -589,8 +612,8 @@ class ActorRolloutRefWorker(Worker, DistProfilerExtension):
         # NOTE: It's critical that hybrid engine in trainer mode initially to load checkpoint.
         # For sync mode, we directly switch to trainer mode here.
         # For async mode, we can't call run_until_complete here, so we will switch to trainer mode in AgentLoopManager.
-        if rollout_config.mode == "sync" and self._is_actor:
-            loop = asyncio.get_event_loop()
+        if rollout_config.mode == "sync" and self._is_actor and not _uses_actor_module_rollout(rollout_config.name):
+            loop = _get_or_create_event_loop()
             loop.run_until_complete(self.trainer_mode())
 
     async def rollout_mode(self):
@@ -844,17 +867,36 @@ class ActorRolloutRefWorker(Worker, DistProfilerExtension):
         prompts.meta_info.update(meta_info)
 
         timing_generate = {}
+        actor_module_rollout = _uses_actor_module_rollout(self.config.rollout.name)
         if self._is_actor:  # For rollout only, we do not switch context.
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(self.rollout_mode())
-            log_gpu_memory_usage("After switch to rollout mode", logger=logger)
+            if actor_module_rollout:
+                aggressive_empty_cache(force_sync=True)
+                if self._is_offload_param:
+                    load_fsdp_model_to_gpu(self.actor_module_fsdp)
+                self.torch_random_states = get_torch_device().get_rng_state()
+                get_torch_device().set_rng_state(self.gen_random_states)
+                self.actor_module_fsdp.eval()
+                log_gpu_memory_usage("After switch to actor-module rollout mode", logger=logger)
+            else:
+                loop = asyncio.get_event_loop()
+                loop.run_until_complete(self.rollout_mode())
+                log_gpu_memory_usage("After switch to rollout mode", logger=logger)
 
         with simple_timer("generate_sequences", timing_generate):
             output = self.rollout.generate_sequences(prompts=prompts)
 
         if self._is_actor:
-            loop.run_until_complete(self.trainer_mode())
-            log_gpu_memory_usage("After switch to trainer mode", logger=logger)
+            if actor_module_rollout:
+                self.gen_random_states = get_torch_device().get_rng_state()
+                get_torch_device().set_rng_state(self.torch_random_states)
+                self.actor_module_fsdp.train()
+                if self._is_offload_param:
+                    offload_fsdp_model_to_cpu(self.actor_module_fsdp)
+                aggressive_empty_cache(force_sync=True)
+                log_gpu_memory_usage("After switch from actor-module rollout mode", logger=logger)
+            else:
+                loop.run_until_complete(self.trainer_mode())
+                log_gpu_memory_usage("After switch to trainer mode", logger=logger)
 
         # We calculate the average timing across all ranks
         # to make sure meta_info["timing"] is the same

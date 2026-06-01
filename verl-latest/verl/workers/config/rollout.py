@@ -60,6 +60,11 @@ class SamplingConfig(BaseConfig):
     think_end_str: str = "</think>"
     mem_fraction_static: float = 0.8
     enable_sleep_hack: bool = False
+    branch_rollout: bool = False
+    branch_rollout_thinking_traces: int = 4
+    branch_rollout_answers_per_trace: int = 4
+    branch_rollout_thinking_tokens: int = 0
+    branch_rollout_continuation_tokens: int = 0
 
 
 @dataclass
@@ -137,6 +142,7 @@ class RolloutConfig(BaseConfig):
     enforce_eager: bool = True
     cudagraph_capture_sizes: Optional[list] = None
     free_cache_engine: bool = True
+    enable_memory_saver: bool = True
     tensor_model_parallel_size: int = 2
     max_num_batched_tokens: int = 8192
 
@@ -217,3 +223,8 @@ class RolloutConfig(BaseConfig):
     think_end_str: str = "</think>"
     mem_fraction_static: float = 0.8
     enable_sleep_hack: bool = False
+    branch_rollout: bool = False
+    branch_rollout_thinking_traces: int = 4
+    branch_rollout_answers_per_trace: int = 4
+    branch_rollout_thinking_tokens: int = 0
+    branch_rollout_continuation_tokens: int = 0

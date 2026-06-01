@@ -1,0 +1,182 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+
+\title{Shared4 Multiplex Objective}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Setup and Notation}
+
+Let \(x_i\) denote prompt \(i\). For each prompt, the policy samples
+\(M=4\) multiplex thinking traces
+\[
+  z_{i1}, z_{i2}, z_{i3}, z_{i4}.
+\]
+From each thinking trace \(z_{im}\), the policy samples \(K=4\) answer
+continuations
+\[
+  y_{im1}, y_{im2}, y_{im3}, y_{im4}.
+\]
+Thus each prompt produces \(MK=16\) scored answers. Let
+\[
+  r_{imj} = R(x_i, z_{im}, y_{imj})
+\]
+be the scalar reward assigned to the \(j\)-th answer continuation from the
+\(m\)-th thinking trace. Let \(T_{im}\) be the set of token positions belonging
+to the multiplex thinking trace, and let \(S_{imj}\) be the set of token
+positions belonging to the final answer continuation.
+
+\section{Thinking-Trace Reward and Advantage}
+
+The reward assigned to a thinking trace is the average reward of its four
+answer continuations:
+\[
+  \bar r^T_{im}
+  =
+  \frac{1}{K}\sum_{j=1}^{K} r_{imj}.
+\]
+For each prompt, the thinking-trace baseline and scale are computed over the
+four trace-level rewards:
+\[
+  \mu_i^T = \frac{1}{M}\sum_{m=1}^{M} \bar r^T_{im},
+  \qquad
+  (\sigma_i^T)^2
+  =
+  \frac{1}{M-1}\sum_{m=1}^{M}(\bar r^T_{im}-\mu_i^T)^2.
+\]
+The normalized thinking advantage is
+\[
+  A^T_{im}
+  =
+  \frac{\bar r^T_{im}-\mu_i^T}{\sigma_i^T+\epsilon}.
+\]
+
+\section{Answer Reward and Advantage}
+
+The answer-level baseline and scale are computed across all sixteen answers for
+the same prompt:
+\[
+  \mu_i^A = \frac{1}{MK}\sum_{m=1}^{M}\sum_{j=1}^{K} r_{imj},
+  \qquad
+  (\sigma_i^A)^2
+  =
+  \frac{1}{MK-1}
+  \sum_{m=1}^{M}\sum_{j=1}^{K}(r_{imj}-\mu_i^A)^2.
+\]
+The normalized answer advantage is
+\[
+  A^A_{imj}
+  =
+  \frac{r_{imj}-\mu_i^A}{\sigma_i^A+\epsilon}.
+\]
+
+\section{PPO Token Loss}
+
+For a sampled token or soft-thinking candidate \(a\) at position \(t\), define
+the importance ratio
+\[
+  \rho_t(a)
+  =
+  \exp\left(
+    \log \pi_\theta(a \mid h_t)
+    -
+    \log \pi_{\theta_{\mathrm{old}}}(a \mid h_t)
+  \right),
+\]
+where \(h_t\) is the generation history at position \(t\). The clipped PPO loss
+for advantage \(A\) is
+\[
+  \ell(\rho, A)
+  =
+  \max\left(
+    -A\rho,\,
+    -A\,\mathrm{clip}(\rho, 1-\eta_{\mathrm{low}}, 1+\eta_{\mathrm{high}})
+  \right).
+\]
+The implementation also supports the existing dual-clip lower bound for
+negative advantages, matching the local VERL PPO code path.
+
+\section{Thinking Loss}
+
+For multiplex thinking tokens, let \(\mathcal Q_{imt}\) be the top-\(q\)
+candidate support used by the soft-thinking rollout at token position \(t\).
+The thinking loss is
+\[
+  L_T(\theta)
+  =
+  \frac{1}{B}
+  \sum_{i=1}^{B}
+  \frac{1}{M}
+  \sum_{m=1}^{M}
+  \frac{1}{|T_{im}|}
+  \sum_{t\in T_{im}}
+  \sum_{a\in \mathcal Q_{imt}}
+  \ell\left(\rho_t(a), A^T_{im}\right).
+\]
+In the code path for this experiment, the soft-thinking top-\(q\) candidate
+slots are optimized for thinking tokens, while final answer tokens use the
+single realized answer token.
+
+\section{Answer Loss}
+
+For final answer tokens, the loss uses the per-answer advantage:
+\[
+  L_A(\theta)
+  =
+  \frac{1}{B}
+  \sum_{i=1}^{B}
+  \frac{1}{MK}
+  \sum_{m=1}^{M}
+  \sum_{j=1}^{K}
+  \frac{1}{|S_{imj}|}
+  \sum_{t\in S_{imj}}
+  \ell\left(\rho_t(y_{imj,t}), A^A_{imj}\right).
+\]
+
+\section{Objective Variants}
+
+The joint shared4 objective optimizes both the shared thinking trace and the
+final answers:
+\[
+  L_{\mathrm{joint}}(\theta)
+  =
+  \lambda_T L_T(\theta) + \lambda_A L_A(\theta).
+\]
+For the submitted run, \(\lambda_T=\lambda_A=1\).
+
+The thinking-only variant is
+\[
+  L_{\mathrm{thinking}}(\theta) = L_T(\theta).
+\]
+The answer-only variant is
+\[
+  L_{\mathrm{answer}}(\theta) = L_A(\theta).
+\]
+
+\section{Code Mapping}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Mathematical object & Implementation location \\
+\midrule
+\(A^T_{im}\), \(A^A_{imj}\) &
+\texttt{verl/trainer/ppo/core\_algos.py::compute\_shared4\_outcome\_advantage} \\
+Shared trace grouping metadata &
+\texttt{verl/trainer/ppo/ray\_trainer.py::attach\_shared4\_rollout\_metadata} \\
+\(L_{\mathrm{joint}}\) &
+\texttt{shared4\_joint} policy loss \\
+\(L_{\mathrm{thinking}}\) &
+\texttt{shared4\_thinking\_only} policy loss \\
+\(L_{\mathrm{answer}}\) &
+\texttt{shared4\_answer\_only} policy loss \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}

@@ -40,6 +40,10 @@ RUNTIME_EXECUTABLE_REQUIREMENTS = {
         "requirement": "ninja",
         "module_name": "ninja",
     },
+    "ray": {
+        "requirement": "ray[default]>=2.41.0",
+        "module_name": "ray",
+    },
 }
 DEFAULT_IMPORT_TARGETS = [
     "requests",
@@ -48,6 +52,11 @@ DEFAULT_IMPORT_TARGETS = [
     "transformers",
     "sglang.srt.entrypoints.http_server",
     "sglang.srt.managers.tokenizer_manager",
+    "xgrammar",
+    "verl.trainer.main_ppo",
+    "verl.workers.fsdp_workers",
+    "verl.workers.actor.dp_actor",
+    "torch_memory_saver",
     # Keep eval preflight lightweight; the driver scores directly with math_verify.
     "math_verify",
 ]
@@ -56,6 +65,7 @@ LIGHTWEIGHT_STATIC_REQUIREMENTS = [
     "requests",
     "datasets",
     "pyarrow>=19.0.0",
+    "pandas==2.2.3",
     "matplotlib==3.10.6",
     "pynvml==12.0.0",
     "latex2sympy2",
@@ -88,6 +98,10 @@ LIGHTWEIGHT_STATIC_REQUIREMENTS = [
     "scipy",
     "uvicorn",
     "uvloop",
+    # SGLang initializes this grammar backend even when the experiment does not
+    # use constrained decoding.
+    "xgrammar==0.1.21",
+    "torch_memory_saver==0.0.8",
 ]
 
 TRANSFORMERS_COMPATIBILITY_KEYS = [
@@ -116,9 +130,11 @@ SPECIAL_MODULE_REQUIREMENT_KEYS = {
     "prometheus_client": "prometheus_client",
     "dateutil": "python_dateutil",
     "antlr4": "antlr4_python3_runtime",
+    "hydra": "hydra_core",
 }
 
 BLOCKED_REQUIREMENT_KEYS = {
+    "flash_attn",
     "flashinfer",
     "flashinfer_python",
     "sgl_kernel",
@@ -134,6 +150,7 @@ BLOCKED_REQUIREMENT_KEYS = {
 }
 
 COPYABLE_RUNTIME_DISTRIBUTIONS = {
+    "flash_attn",
     "flashinfer-python",
     "sgl-kernel",
     "tensordict",
@@ -143,11 +160,14 @@ COPYABLE_RUNTIME_DISTRIBUTIONS = {
 MANAGED_RUNTIME_SUPPORT_REQUIREMENTS = [
     "cloudpickle",
     "importlib_metadata",
+    "ninja",
     "packaging",
+    "psutil",
     "pyvers<0.2.0,>=0.1.0",
 ]
 
 MANAGED_RUNTIME_FALLBACK_VERSIONS = {
+    "flash-attn": "2.8.2",
     "flashinfer-python": "0.2.9rc2",
     "sgl-kernel": "0.2.8",
     "tensordict": "0.10.0",
@@ -178,7 +198,14 @@ NON_INSTALLABLE_REQUIREMENT_KEYS = {"python"}
 ISOLATED_HELPER_TIMEOUT_SECONDS = int(os.environ.get("BOOTSTRAP_HELPER_TIMEOUT_SECONDS", "900"))
 DIST_INFO_NAME_RE = re.compile(r"^(?P<name>.+?)-\d")
 LIGHTWEIGHT_OVERLAY_DIRNAME = "lightweight-overlays"
-OVERLAY_NO_DEPS_REQUIREMENT_KEYS = {"compressed_tensors"}
+OVERLAY_NO_DEPS_REQUIREMENT_KEYS = {
+    "accelerate",
+    "compressed_tensors",
+    "peft",
+    "torch_memory_saver",
+    "torchdata",
+    "trl",
+}
 BLOCKED_OVERLAY_PREFIX_KEYS = ("cuda", "nvidia")
 OVERLAY_CACHE_MAX_COPY_BYTES = int(
     os.environ.get("BOOTSTRAP_OVERLAY_CACHE_MAX_COPY_BYTES", str(256 * 1024 * 1024))
@@ -303,6 +330,10 @@ class RuntimePackageSpec:
     index_url: Optional[str] = None
     find_links: Optional[str] = None
     no_deps: bool = False
+    no_build_isolation: bool = False
+    build_env_uses_target: bool = False
+    no_binary: Optional[str] = None
+    no_cache_dir: bool = False
 
 
 @dataclass
@@ -446,6 +477,7 @@ def collect_requirement_index() -> Dict[str, str]:
         REPO_ROOT / "transformers-4.54.0" / "src" / "transformers" / "dependency_versions_table.py"
     )
     requirement_index.update(transformer_constraints)
+    requirement_index["pandas"] = "pandas==2.2.3"
     return requirement_index
 
 
@@ -614,6 +646,17 @@ def build_managed_runtime_specs(
             install_requirement=f"sgl-kernel=={public_version(version_for('sgl-kernel'))}",
             no_deps=True,
         ),
+        "flash-attn": RuntimePackageSpec(
+            distribution_name="flash_attn",
+            import_name="flash_attn",
+            expected_version=version_for("flash-attn"),
+            install_requirement=f"flash-attn=={public_version(version_for('flash-attn'))}",
+            no_deps=True,
+            no_build_isolation=True,
+            build_env_uses_target=True,
+            no_binary=":all:",
+            no_cache_dir=True,
+        ),
         "flashinfer-python": RuntimePackageSpec(
             distribution_name="flashinfer-python",
             import_name="flashinfer",
@@ -730,6 +773,36 @@ def build_isolated_pythonpath(
     return ":".join(entries)
 
 
+def managed_runtime_library_paths(runtime_site: Path) -> List[Path]:
+    """Return library directories needed to import pip CUDA/PyTorch wheels."""
+    candidates: List[Path] = [
+        runtime_site / "torch" / "lib",
+        runtime_site / "nvidia",
+    ]
+    if (runtime_site / "nvidia").exists():
+        candidates.extend(sorted((runtime_site / "nvidia").glob("*/lib")))
+
+    library_paths: List[Path] = []
+    seen: set[str] = set()
+    for candidate in candidates:
+        if not candidate.exists() or not candidate.is_dir():
+            continue
+        resolved = str(candidate.resolve())
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        library_paths.append(candidate)
+    return library_paths
+
+
+def prepend_env_path(env: Dict[str, str], name: str, entries: Sequence[Path]) -> None:
+    resolved_entries = [str(entry.resolve()) for entry in entries if entry.exists()]
+    if not resolved_entries:
+        return
+    existing = env.get(name)
+    env[name] = ":".join(resolved_entries + ([existing] if existing else []))
+
+
 def prepend_sys_path_entries(entries: Sequence[Path]) -> None:
     normalized = [str(entry.resolve()) for entry in entries if entry.exists()]
     for entry in reversed(normalized):
@@ -787,6 +860,7 @@ def run_isolated_helper(
         reusable_overlay_dirs,
         local_import_paths,
     )
+    prepend_env_path(env, "LD_LIBRARY_PATH", managed_runtime_library_paths(runtime_site))
     env["BOOTSTRAP_HELPER_PAYLOAD"] = json.dumps(payload)
 
     timeout_target: Optional[str] = None
@@ -1121,6 +1195,10 @@ def run_pip_install(
     index_url: Optional[str] = None,
     find_links: Optional[str] = None,
     no_deps: bool = False,
+    no_build_isolation: bool = False,
+    build_env_uses_target: bool = False,
+    no_binary: Optional[str] = None,
+    no_cache_dir: bool = False,
 ) -> None:
     command = [
         python_executable,
@@ -1133,6 +1211,12 @@ def run_pip_install(
     ]
     if no_deps:
         command.append("--no-deps")
+    if no_build_isolation:
+        command.append("--no-build-isolation")
+    if no_binary:
+        command.extend(["--no-binary", no_binary])
+    if no_cache_dir:
+        command.append("--no-cache-dir")
     if index_url:
         command.extend(["--index-url", index_url])
     if find_links:
@@ -1140,7 +1224,19 @@ def run_pip_install(
     command.extend(requirements)
 
     log(f"[runtime] pip_install={' '.join(requirements)}")
-    subprocess.run(command, check=True)
+    env = None
+    if build_env_uses_target:
+        env = os.environ.copy()
+        existing_pythonpath = env.get("PYTHONPATH")
+        env["PYTHONPATH"] = (
+            f"{target_dir}:{existing_pythonpath}" if existing_pythonpath else str(target_dir)
+        )
+        env["PATH"] = f"{target_dir / 'bin'}:{env.get('PATH', '')}"
+        prepend_env_path(env, "LD_LIBRARY_PATH", managed_runtime_library_paths(target_dir))
+        env.setdefault("MAX_JOBS", os.environ.get("SLURM_CPUS_PER_TASK", "4"))
+        env.setdefault("FLASH_ATTENTION_FORCE_BUILD", "TRUE")
+        env.setdefault("FLASH_ATTN_CUDA_ARCHS", "90")
+    subprocess.run(command, check=True, env=env)
 
 
 def install_runtime_group_with_fallback(
@@ -1156,6 +1252,10 @@ def install_runtime_group_with_fallback(
     group_index_url = specs[0].index_url
     group_find_links = specs[0].find_links
     group_no_deps = specs[0].no_deps
+    group_no_build_isolation = specs[0].no_build_isolation
+    group_build_env_uses_target = specs[0].build_env_uses_target
+    group_no_binary = specs[0].no_binary
+    group_no_cache_dir = specs[0].no_cache_dir
     requirements = [spec.install_requirement for spec in specs]
 
     try:
@@ -1167,6 +1267,10 @@ def install_runtime_group_with_fallback(
             index_url=group_index_url,
             find_links=group_find_links,
             no_deps=group_no_deps,
+            no_build_isolation=group_no_build_isolation,
+            build_env_uses_target=group_build_env_uses_target,
+            no_binary=group_no_binary,
+            no_cache_dir=group_no_cache_dir,
         )
         return
     except subprocess.CalledProcessError as exc:
@@ -1185,6 +1289,10 @@ def install_runtime_group_with_fallback(
                 index_url=spec.index_url,
                 find_links=spec.find_links,
                 no_deps=spec.no_deps,
+                no_build_isolation=spec.no_build_isolation,
+                build_env_uses_target=spec.build_env_uses_target,
+                no_binary=spec.no_binary,
+                no_cache_dir=spec.no_cache_dir,
             )
         except subprocess.CalledProcessError as exc:
             if maybe_copy_distribution_from_current_env(spec, runtime_site, log):
@@ -1217,6 +1325,7 @@ def provision_managed_runtime(
 
     torch_family = [runtime_specs[name] for name in ("torch", "torchvision", "torchaudio") if name in runtime_specs]
     extras = [runtime_specs[name] for name in ("triton", "tensordict", "sgl-kernel") if name in runtime_specs]
+    flash_attn_specs = [runtime_specs[name] for name in ("flash-attn",) if name in runtime_specs]
     flashinfer_specs = [runtime_specs[name] for name in ("flashinfer-python",) if name in runtime_specs]
 
     try:
@@ -1236,6 +1345,12 @@ def provision_managed_runtime(
             python_executable=python_executable,
             target_dir=runtime_site,
             requirements=MANAGED_RUNTIME_SUPPORT_REQUIREMENTS,
+            log=log,
+        )
+        install_runtime_group_with_fallback(
+            python_executable=python_executable,
+            runtime_site=runtime_site,
+            specs=flash_attn_specs,
             log=log,
         )
         install_runtime_group_with_fallback(
@@ -1673,7 +1788,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--job-overlay-dir", required=True, help="Per-job lightweight overlay directory.")
     parser.add_argument("--job-bin-dir", default=None, help="Per-job executable wrapper directory.")
     parser.add_argument("--manifest-path", required=True, help="Output path for the selected runtime manifest.")
-    parser.add_argument("--max-rounds", type=int, default=24)
+    parser.add_argument("--max-rounds", type=int, default=80)
     parser.add_argument("--log-file", default=None)
     parser.add_argument("--validation-only", action="store_true")
     parser.add_argument("--repair", action="store_true")
@@ -1910,6 +2025,12 @@ candidates = [Path(path) for path in {candidate_path_strings!r}]
 for candidate in candidates:
     if candidate.exists() and os.access(candidate, os.X_OK):
         os.execv(str(candidate), [str(candidate), *sys.argv[1:]])
+
+if {command_name!r} == "ray":
+    from ray.scripts.scripts import main
+
+    sys.argv[0] = "ray"
+    raise SystemExit(main())
 
 os.execv(sys.executable, [sys.executable, "-m", {spec["module_name"]!r}, *sys.argv[1:]])
 """

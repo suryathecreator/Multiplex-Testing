@@ -99,7 +99,9 @@ class BootstrapRuntimeOverlayTests(unittest.TestCase):
     def test_managed_runtime_support_requirements_cover_tensordict_import_deps(self):
         self.assertIn("cloudpickle", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
         self.assertIn("importlib_metadata", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
+        self.assertIn("ninja", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
         self.assertIn("packaging", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
+        self.assertIn("psutil", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
         self.assertIn("pyvers<0.2.0,>=0.1.0", MANAGED_RUNTIME_SUPPORT_REQUIREMENTS)
 
     def test_build_managed_runtime_specs_uses_repo_versions_and_indexes(self):
@@ -109,6 +111,14 @@ class BootstrapRuntimeOverlayTests(unittest.TestCase):
         self.assertEqual(runtime_specs["torch"].install_requirement, "torch==2.7.1")
         self.assertEqual(runtime_specs["torch"].index_url, "https://download.pytorch.org/whl/cu128")
         self.assertEqual(runtime_specs["sgl-kernel"].expected_version, "0.2.8")
+        self.assertEqual(runtime_specs["flash-attn"].distribution_name, "flash_attn")
+        self.assertEqual(runtime_specs["flash-attn"].expected_version, "2.8.2")
+        self.assertEqual(runtime_specs["flash-attn"].install_requirement, "flash-attn==2.8.2")
+        self.assertTrue(runtime_specs["flash-attn"].no_deps)
+        self.assertTrue(runtime_specs["flash-attn"].no_build_isolation)
+        self.assertTrue(runtime_specs["flash-attn"].build_env_uses_target)
+        self.assertEqual(runtime_specs["flash-attn"].no_binary, ":all:")
+        self.assertTrue(runtime_specs["flash-attn"].no_cache_dir)
         self.assertTrue(
             runtime_specs["flashinfer-python"].find_links.endswith("/cu128/torch2.7/flashinfer-python")
         )

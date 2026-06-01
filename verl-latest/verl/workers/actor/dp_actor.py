@@ -606,7 +606,23 @@ class DataParallelPPOActor(BasePPOActor):
 
         temperature = data.meta_info["temperature"]  # temperature must be in the data.meta_info to avoid silent error
 
-        select_keys = ["responses", "response_mask", "input_ids", "attention_mask", "position_ids", "old_log_probs", "advantages"] if "soft_thinking_topk_indices" not in data.batch.keys() else ["responses", "response_mask", "input_ids", "attention_mask", "position_ids", "old_log_probs", "advantages", "soft_thinking_topk_indices", "soft_thinking_topk_probs"]
+        if "soft_thinking_topk_indices" not in data.batch.keys():
+            select_keys = ["responses", "response_mask", "input_ids", "attention_mask", "position_ids", "old_log_probs", "advantages"]
+        else:
+            select_keys = [
+                "responses",
+                "response_mask",
+                "input_ids",
+                "attention_mask",
+                "position_ids",
+                "old_log_probs",
+                "advantages",
+                "soft_thinking_topk_indices",
+                "soft_thinking_topk_probs",
+            ]
+        for optional_key in ("thinking_advantages", "answer_advantages"):
+            if optional_key in data.batch.keys():
+                select_keys.append(optional_key)
         # if multi_turn:
         #     select_keys.append("loss_mask")
         if self.config.use_kl_loss:
@@ -669,22 +685,18 @@ class DataParallelPPOActor(BasePPOActor):
                     calculate_entropy = False
                     if entropy_coeff != 0:
                         calculate_entropy = True
-                    entropy, log_prob = self._forward_micro_batch(
-                        model_inputs, temperature=temperature, calculate_entropy=calculate_entropy
-                    )
-
+                    # without soft thinking, all return: (bsz, response_length) 
+                    # with soft thinking, log_prob return: (bsz, response_length, topk), entropy return: (bsz, response_length)
+                    entropy, log_prob = self._forward_micro_batch(micro_batch=model_inputs, temperature=temperature, calculate_entropy=calculate_entropy)
                     if on_policy:
                         old_log_prob = log_prob.detach()
                     else:
                         old_log_prob = model_inputs["old_log_probs"]
 
-                    
-                    
-                    # without soft thinking, all return: (bsz, response_length) 
-                    # with soft thinking, log_prob return: (bsz, response_length, topk), entropy return: (bsz, response_length)
-                    entropy, log_prob = self._forward_micro_batch(micro_batch=model_inputs, temperature=temperature, calculate_entropy=calculate_entropy)
                     loss_mode = self.config.policy_loss.get("loss_mode", "vanilla")
                     policy_loss_fn = get_policy_loss_fn(loss_mode)
+                    answer_token_ratio = None
+                    response_mask_ratio = None
                     if loss_mode == "vanilla":
                         assert not self.config.enable_soft_thinking, "enable_soft_thinking is not supported for vanilla loss mode"
                         pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower = policy_loss_fn(
@@ -696,9 +708,8 @@ class DataParallelPPOActor(BasePPOActor):
                             config=self.config,
                             rollout_log_probs=rollout_log_probs,
                         )
-                        answer_token_ratio = None
-                    elif loss_mode == "multiplex_thinking":
-                        assert self.config.enable_soft_thinking, "enable_soft_thinking is required for multiplex_thinking loss mode"
+                    elif loss_mode in {"multiplex_thinking", "shared4_joint", "shared4_thinking_only", "shared4_answer_only"}:
+                        assert self.config.enable_soft_thinking, f"enable_soft_thinking is required for {loss_mode} loss mode"
                         pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower, answer_token_ratio, response_mask_ratio = policy_loss_fn(old_log_prob=old_log_prob,
                             log_prob=log_prob,
                             advantages=advantages,
@@ -709,9 +720,10 @@ class DataParallelPPOActor(BasePPOActor):
                             clip_ratio_c=clip_ratio_c,
                             loss_agg_mode=loss_agg_mode,
                             topk_probs=soft_thinking_topk_probs,
+                            thinking_advantages=model_inputs.get("thinking_advantages", None),
+                            answer_advantages=model_inputs.get("answer_advantages", None),
                             enable_low_logprob_mask=self.config.optim.enable_low_logprob_mask,
                             recompute_topk_probs=self.config.optim.recompute_topk_probs,)
-                        answer_token_ratio = None
                     else:
                         raise ValueError(f"Loss mode to be double checked under soft thinking mode: {self.config.policy_loss.loss_mode}")
                             
@@ -755,6 +767,8 @@ class DataParallelPPOActor(BasePPOActor):
                         # Handle both tensor and float types
                         ratio_value = answer_token_ratio.item() if isinstance(answer_token_ratio, torch.Tensor) else answer_token_ratio
                         micro_batch_metrics.update({"actor/answer_token_ratio": ratio_value})
+                    if response_mask_ratio is not None:
+                        micro_batch_metrics.update({"actor/response_mask_ratio": response_mask_ratio})
                     append_to_dict(metrics, micro_batch_metrics)
 
                 grad_norm = self._optimizer_step()
@@ -762,4 +776,3 @@ class DataParallelPPOActor(BasePPOActor):
                 append_to_dict(metrics, mini_batch_metrics)
         self.actor_optimizer.zero_grad()
         return metrics
-

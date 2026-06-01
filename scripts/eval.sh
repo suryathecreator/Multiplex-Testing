@@ -348,6 +348,13 @@ echo $OMPI_COMM_WORLD_RANK
 export NCCL_TIMEOUT=72000
 # Force GPU cache cleanup (helps reduce OOM flakiness between runs)
 # export CUDA_LAUNCH_BLOCKING=1
+if [ -z "$SGLANG_PORT_BASE" ] && [ -n "${SLURM_JOB_ID:-}" ]; then
+    export SGLANG_PORT_BASE=$((40000 + (SLURM_JOB_ID % 20000)))
+fi
+echo "[sglang] port_base=${SGLANG_PORT_BASE:-30000}"
+
+export FORCE_THINK_END_AT_LENGTH="${FORCE_THINK_END_AT_LENGTH:-1}"
+echo "[sglang] force_think_end_at_length=${FORCE_THINK_END_AT_LENGTH}"
 # Avoid multi-process GPU contention
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 
@@ -467,10 +474,12 @@ python3 -m verl.trainer.main_ppo \
     trainer.resume_from_path=$RESUME_FROM_PATH \
     reward_model.reward_manager=hf_math_verify \
     actor_rollout_ref.rollout.enforce_eager=True \
-    actor_rollout_ref.rollout.free_cache_engine=True \
-    actor_rollout_ref.rollout.enable_sleep_hack=True \
+    actor_rollout_ref.rollout.free_cache_engine=${FREE_CACHE_ENGINE:-True} \
+    actor_rollout_ref.rollout.enable_sleep_hack=${ENABLE_SLEEP_HACK:-True} \
+    +actor_rollout_ref.rollout.enable_memory_saver=${ENABLE_MEMORY_SAVER:-True} \
     actor_rollout_ref.rollout.enable_prefix_caching=False \
+    ++actor_rollout_ref.rollout.engine_kwargs.sglang.disable_overlap_schedule=${SGLANG_DISABLE_OVERLAP_SCHEDULE:-True} \
+    ++actor_rollout_ref.rollout.engine_kwargs.sglang.sampling_backend=${SGLANG_SAMPLING_BACKEND:-flashinfer} \
     actor_rollout_ref.rollout.max_num_seqs=512 \
     reward_model.enable=False \
     trainer.default_local_dir=./${WANDB_PROJECT}/${EXP_NAME}
-

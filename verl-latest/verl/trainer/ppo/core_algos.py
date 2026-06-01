@@ -325,6 +325,86 @@ def compute_grpo_outcome_advantage(
     return scores, scores
 
 
+def compute_shared4_outcome_advantage(
+    token_level_rewards: torch.Tensor,
+    response_mask: torch.Tensor,
+    index: np.ndarray,
+    trace_index: np.ndarray,
+    epsilon: float = 1e-6,
+    norm_adv_by_std_in_grpo: bool = True,
+    config: Optional[AlgoConfig] = None,
+) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Compute separate prompt-local advantages for shared thinking and answers.
+
+    ``index`` groups all completions for the same prompt. ``trace_index`` groups
+    the answers branched from the same shared thinking trace. For shared4 runs,
+    each prompt has 4 trace groups with 4 answers each, so the answer advantage is
+    normalized over 16 rewards and the thinking advantage is normalized over the
+    4 trace-mean rewards.
+    """
+    scores = token_level_rewards.sum(dim=-1)
+
+    prompt2scores = defaultdict(list)
+    trace2scores = defaultdict(list)
+    prompt2traces = defaultdict(list)
+
+    with torch.no_grad():
+        bsz = scores.shape[0]
+        for i in range(bsz):
+            prompt_id = index[i]
+            trace_id = trace_index[i]
+            prompt2scores[prompt_id].append(scores[i])
+            trace2scores[trace_id].append(scores[i])
+            if trace_id not in prompt2traces[prompt_id]:
+                prompt2traces[prompt_id].append(trace_id)
+
+        prompt2mean = {}
+        prompt2std = {}
+        for prompt_id, prompt_scores in prompt2scores.items():
+            if len(prompt_scores) == 1:
+                prompt2mean[prompt_id] = torch.tensor(0.0, dtype=scores.dtype, device=scores.device)
+                prompt2std[prompt_id] = torch.tensor(1.0, dtype=scores.dtype, device=scores.device)
+            else:
+                prompt_tensor = torch.stack(prompt_scores)
+                prompt2mean[prompt_id] = torch.mean(prompt_tensor)
+                prompt2std[prompt_id] = torch.std(prompt_tensor)
+
+        trace2mean = {}
+        for trace_id, trace_scores in trace2scores.items():
+            trace2mean[trace_id] = torch.mean(torch.stack(trace_scores))
+
+        prompt2trace_mean = {}
+        prompt2trace_std = {}
+        for prompt_id, trace_ids in prompt2traces.items():
+            trace_means = [trace2mean[trace_id] for trace_id in trace_ids]
+            if len(trace_means) == 1:
+                prompt2trace_mean[prompt_id] = torch.tensor(0.0, dtype=scores.dtype, device=scores.device)
+                prompt2trace_std[prompt_id] = torch.tensor(1.0, dtype=scores.dtype, device=scores.device)
+            else:
+                trace_tensor = torch.stack(trace_means)
+                prompt2trace_mean[prompt_id] = torch.mean(trace_tensor)
+                prompt2trace_std[prompt_id] = torch.std(trace_tensor)
+
+        answer_scores = scores.clone()
+        thinking_scores = scores.clone()
+        for i in range(bsz):
+            prompt_id = index[i]
+            trace_id = trace_index[i]
+            if norm_adv_by_std_in_grpo:
+                answer_scores[i] = (scores[i] - prompt2mean[prompt_id]) / (prompt2std[prompt_id] + epsilon)
+                thinking_scores[i] = (
+                    trace2mean[trace_id] - prompt2trace_mean[prompt_id]
+                ) / (prompt2trace_std[prompt_id] + epsilon)
+            else:
+                answer_scores[i] = scores[i] - prompt2mean[prompt_id]
+                thinking_scores[i] = trace2mean[trace_id] - prompt2trace_mean[prompt_id]
+
+        answer_advantages = answer_scores.unsqueeze(-1) * response_mask
+        thinking_advantages = thinking_scores.unsqueeze(-1) * response_mask
+
+    return thinking_advantages, answer_advantages, thinking_advantages, answer_advantages
+
+
 @register_adv_est(AdvantageEstimator.GRPO_PASSK)  # or simply: @register_adv_est("grpo_passk")
 def compute_grpo_passk_outcome_advantage(
     token_level_rewards: torch.Tensor,
@@ -915,6 +995,8 @@ def compute_multiplex_thinking_policy_loss(
     loss_agg_mode: str = "token-mean",
     # topk_indices=None,
     topk_probs=None,
+    thinking_advantages=None,
+    answer_advantages=None,
     enable_low_logprob_mask=False,
     recompute_topk_probs=False,
 ):
@@ -987,6 +1069,171 @@ def compute_multiplex_thinking_policy_loss(
     response_mask_ratio =torch.sum(response_mask).item() / response_mask.numel()
         
     return pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower, answer_token_ratio, response_mask_ratio
+
+
+def _shared4_masked_ppo_loss(
+    old_log_prob,
+    log_prob,
+    advantages,
+    slot_mask,
+    token_mask,
+    cliprange,
+    cliprange_low,
+    cliprange_high,
+    clip_ratio_c,
+    loss_agg_mode,
+):
+    if torch.sum(slot_mask) == 0:
+        zero = log_prob.sum() * 0.0
+        return zero, zero, zero, zero
+
+    negative_approx_kl = log_prob - old_log_prob
+    negative_approx_kl = torch.clamp(negative_approx_kl, min=-20.0, max=20.0)
+    ratio = torch.exp(negative_approx_kl)
+    ppo_kl = verl_F.masked_mean(-negative_approx_kl, slot_mask)
+
+    advantages_3d = advantages.detach().unsqueeze(-1).repeat(1, 1, log_prob.shape[-1])
+    pg_losses1 = -advantages_3d * ratio
+
+    if cliprange_low is None:
+        cliprange_low = cliprange
+    if cliprange_high is None:
+        cliprange_high = cliprange
+
+    pg_losses2 = -advantages_3d * torch.clamp(ratio, 1 - cliprange_low, 1 + cliprange_high)
+    clip_pg_losses1 = torch.maximum(pg_losses1, pg_losses2)
+    pg_clipfrac = verl_F.masked_mean(torch.gt(pg_losses2, pg_losses1).float(), slot_mask)
+    pg_losses3 = -advantages_3d * clip_ratio_c
+    clip_pg_losses2 = torch.min(pg_losses3, clip_pg_losses1)
+    pg_clipfrac_lower = verl_F.masked_mean(
+        torch.gt(clip_pg_losses1, pg_losses3) * (advantages_3d < 0).float(),
+        slot_mask,
+    )
+    pg_losses = torch.where(advantages_3d < 0, clip_pg_losses2, clip_pg_losses1)
+
+    pg_losses_summed = (pg_losses * slot_mask.float()).sum(dim=-1)
+    pg_loss = agg_loss(loss_mat=pg_losses_summed, loss_mask=token_mask.float(), loss_agg_mode=loss_agg_mode)
+    return pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower
+
+
+def _compute_shared4_policy_loss(
+    old_log_prob,
+    log_prob,
+    advantages,
+    response_mask,
+    cliprange=None,
+    cliprange_low=None,
+    cliprange_high=None,
+    clip_ratio_c=3.0,
+    loss_agg_mode: str = "token-mean",
+    topk_probs=None,
+    thinking_advantages=None,
+    answer_advantages=None,
+    include_thinking=True,
+    include_answer=True,
+    enable_low_logprob_mask=False,
+    recompute_topk_probs=False,
+):
+    if topk_probs is None:
+        raise ValueError("shared4 loss modes require soft_thinking_topk_probs")
+
+    response_mask_bool = response_mask.bool()
+    is_answer_token = (topk_probs[:, :, 0] == 1.0) & (topk_probs[:, :, 1:].sum(dim=-1) == 0.0)
+    num_answer_tokens_per_seq = is_answer_token.sum(dim=-1)
+    total_tokens_per_seq = response_mask.sum(dim=-1)
+    answer_token_ratio = (num_answer_tokens_per_seq.float() / total_tokens_per_seq.float().clamp(min=1.0)).mean()
+    response_mask_ratio = torch.sum(response_mask).item() / response_mask.numel()
+
+    topk_support_mask = topk_probs > 1e-20
+    full_topk_mask = torch.ones_like(topk_support_mask, dtype=torch.bool)
+
+    thinking_slot_mask = response_mask_bool.unsqueeze(-1) & (~is_answer_token).unsqueeze(-1) & full_topk_mask
+    answer_slot_mask = response_mask_bool.unsqueeze(-1) & is_answer_token.unsqueeze(-1) & topk_support_mask
+    thinking_token_mask = response_mask_bool & (~is_answer_token)
+    answer_token_mask = response_mask_bool & is_answer_token
+
+    if thinking_advantages is None:
+        thinking_advantages = advantages
+    if answer_advantages is None:
+        answer_advantages = advantages
+
+    losses = []
+    metric_masks = []
+    metric_advantages = []
+    if include_thinking:
+        thinking_loss, _, _, _ = _shared4_masked_ppo_loss(
+            old_log_prob=old_log_prob,
+            log_prob=log_prob,
+            advantages=thinking_advantages,
+            slot_mask=thinking_slot_mask,
+            token_mask=thinking_token_mask,
+            cliprange=cliprange,
+            cliprange_low=cliprange_low,
+            cliprange_high=cliprange_high,
+            clip_ratio_c=clip_ratio_c,
+            loss_agg_mode=loss_agg_mode,
+        )
+        losses.append(thinking_loss)
+        metric_masks.append(thinking_slot_mask)
+        metric_advantages.append(torch.where(thinking_token_mask, thinking_advantages, torch.zeros_like(thinking_advantages)))
+    if include_answer:
+        answer_loss, _, _, _ = _shared4_masked_ppo_loss(
+            old_log_prob=old_log_prob,
+            log_prob=log_prob,
+            advantages=answer_advantages,
+            slot_mask=answer_slot_mask,
+            token_mask=answer_token_mask,
+            cliprange=cliprange,
+            cliprange_low=cliprange_low,
+            cliprange_high=cliprange_high,
+            clip_ratio_c=clip_ratio_c,
+            loss_agg_mode=loss_agg_mode,
+        )
+        losses.append(answer_loss)
+        metric_masks.append(answer_slot_mask)
+        metric_advantages.append(torch.where(answer_token_mask, answer_advantages, torch.zeros_like(answer_advantages)))
+
+    if not losses:
+        raise ValueError("At least one of include_thinking/include_answer must be True")
+    pg_loss = sum(losses)
+
+    combined_slot_mask = metric_masks[0]
+    combined_advantages = metric_advantages[0]
+    for mask in metric_masks[1:]:
+        combined_slot_mask = combined_slot_mask | mask
+    for adv in metric_advantages[1:]:
+        combined_advantages = combined_advantages + adv
+
+    _, pg_clipfrac, ppo_kl, pg_clipfrac_lower = _shared4_masked_ppo_loss(
+        old_log_prob=old_log_prob,
+        log_prob=log_prob,
+        advantages=combined_advantages,
+        slot_mask=combined_slot_mask,
+        token_mask=combined_slot_mask.any(dim=-1),
+        cliprange=cliprange,
+        cliprange_low=cliprange_low,
+        cliprange_high=cliprange_high,
+        clip_ratio_c=clip_ratio_c,
+        loss_agg_mode=loss_agg_mode,
+    )
+
+    return pg_loss, pg_clipfrac, ppo_kl, pg_clipfrac_lower, answer_token_ratio, response_mask_ratio
+
+
+@register_policy_loss("shared4_joint")
+def compute_shared4_joint_policy_loss(*args, **kwargs):
+    return _compute_shared4_policy_loss(*args, include_thinking=True, include_answer=True, **kwargs)
+
+
+@register_policy_loss("shared4_thinking_only")
+def compute_shared4_thinking_only_policy_loss(*args, **kwargs):
+    return _compute_shared4_policy_loss(*args, include_thinking=True, include_answer=False, **kwargs)
+
+
+@register_policy_loss("shared4_answer_only")
+def compute_shared4_answer_only_policy_loss(*args, **kwargs):
+    return _compute_shared4_policy_loss(*args, include_thinking=False, include_answer=True, **kwargs)
+
 
 @register_policy_loss("gspo")
 def compute_policy_loss_gspo(

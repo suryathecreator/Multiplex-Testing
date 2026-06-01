@@ -34,6 +34,7 @@ TODO(lmzheng): ModelWorkerBatch seems a bit redundant and we consider removing i
 import copy
 import dataclasses
 import logging
+import os
 import threading
 from enum import Enum, auto
 from http import HTTPStatus
@@ -114,6 +115,10 @@ GLOBAL_SERVER_ARGS_KEYS = [
 global_server_args_dict = {k: getattr(ServerArgs, k) for k in GLOBAL_SERVER_ARGS_KEYS}
 
 logger = logging.getLogger(__name__)
+
+
+def _truthy_env(name: str) -> bool:
+    return os.environ.get(name, "").lower() in {"1", "true", "yes", "on"}
 
 
 class BaseFinishReason:
@@ -822,7 +827,19 @@ class Req:
                     self.sampling_params.think_end_str, add_special_tokens=False
                 )[-1]
 
-            if self.sampling_params.think_end_str_id == self.output_ids[-1]:
+            force_after_tokens = getattr(
+                self.sampling_params, "early_stopping_length_threshold", None
+            )
+            force_think_end = (
+                _truthy_env("FORCE_THINK_END_AT_LENGTH")
+                and force_after_tokens is not None
+                and force_after_tokens > 0
+                and len(self.output_ids) > force_after_tokens
+            )
+            if force_think_end:
+                self.output_ids[-1] = self.sampling_params.think_end_str_id
+
+            if force_think_end or self.sampling_params.think_end_str_id == self.output_ids[-1]:
                 # Exit soft thinking mode — set one-hot
                 self.sampling_params.soft_thinking_mode = False
                 self.topk_prob[1:].fill_(0.)
@@ -1037,7 +1054,7 @@ class ScheduleBatch(ScheduleBatchDisaggregationDecodeMixin):
     gumbel_tau: Optional[float] = None
     enable_replacement: Optional[bool] = None
     enable_gumbel_after_thinking: Optional[bool] = None
-    enable_unweighting: Optional[bool] = None,
+    enable_unweighting: Optional[bool] = None
     topk_probs: Optional[torch.Tensor] = None
     topk_indices: Optional[torch.Tensor] = None
     enable_overlap: bool = False

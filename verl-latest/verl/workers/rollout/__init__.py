@@ -15,5 +15,6 @@
 from .base import BaseRollout, get_rollout_class
 from .hf_rollout import HFRollout
 from .naive import NaiveRollout
+from .soft_hf_rollout import SoftHFRollout
 
-__all__ = ["BaseRollout", "NaiveRollout", "HFRollout", "get_rollout_class"]
+__all__ = ["BaseRollout", "NaiveRollout", "HFRollout", "SoftHFRollout", "get_rollout_class"]

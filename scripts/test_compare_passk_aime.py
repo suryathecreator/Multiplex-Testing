@@ -17,6 +17,8 @@ if str(SCRIPT_DIR) not in sys.path:
 
 from compare_passk_aime import (
     ASSISTANT_THINK_PREFILL,
+    AIME_2024_LOCAL_PATH,
+    BENCHMARK_AIME_2024,
     Example,
     FIXED_PREFIX_NEVER_SWITCH_THINK_END,
     MultiplexSelfCheckResult,
@@ -149,12 +151,30 @@ class ComparePassKAimeTests(unittest.TestCase):
         self.assertEqual(examples[0].metadata["source_index"], 8)
         self.assertTrue(examples[0].problem_id.startswith("aime-train-"))
 
+    def test_load_aime2024_prefers_local_deepscaler_test_file(self):
+        class FakeTokenizer:
+            def apply_chat_template(self, messages, tokenize, add_generation_prompt=False):
+                return [1, 2, 3] if tokenize else "prompt"
+
+        examples, _ = load_examples(
+            FakeTokenizer(),
+            BENCHMARK_AIME_2024,
+            max_prompts=2,
+        )
+        self.assertEqual([example.prompt_index for example in examples], [0, 1])
+        self.assertEqual(
+            examples[0].metadata["source_dataset"],
+            str(AIME_2024_LOCAL_PATH.relative_to(SCRIPT_DIR.parent)),
+        )
+        self.assertEqual(examples[0].metadata["year"], 2024)
+
     def test_memory_match_prompt_row_counts_boundary_crossing_sample(self):
         row = build_memory_match_prompt_row(
             group_size=8,
             prompt_index=17,
             problem_id="p17",
             target_cost_tokens=100.0,
+            target_correct=False,
             before_cost_tokens=80.0,
             before_correct=False,
             topup_records=[
@@ -499,8 +519,11 @@ class ComparePassKAimeTests(unittest.TestCase):
             ]
         )
 
-        with mock.patch.dict(sys.modules, {"datasets": fake_datasets}):
-            examples, prompt_build_info = load_examples(fake_tokenizer, "aime2024", None)
+        with tempfile.TemporaryDirectory() as tmpdir:
+            missing_local_path = Path(tmpdir) / "missing_aime.json"
+            with mock.patch("compare_passk_aime.AIME_2024_LOCAL_PATH", missing_local_path):
+                with mock.patch.dict(sys.modules, {"datasets": fake_datasets}):
+                    examples, prompt_build_info = load_examples(fake_tokenizer, "aime2024", None)
 
         self.assertEqual(len(examples), 1)
         self.assertEqual(examples[0].problem_id, "2024-II-4")

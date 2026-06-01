@@ -104,6 +104,7 @@ BENCHMARK_CHOICES = (
     BENCHMARK_AIME_2024,
     BENCHMARK_DEEPSCALER_AIME_TRAIN,
 )
+AIME_2024_LOCAL_PATH = REPO_ROOT / "deepscaler" / "deepscaler" / "data" / "test" / "aime.json"
 DEEPSCALER_AIME_TRAIN_PATH = REPO_ROOT / "deepscaler" / "deepscaler" / "data" / "train" / "aime.json"
 DEEPSCALER_AIME_TRAIN_SELECTION_SEED = 4096
 DEEPSCALER_AIME_TRAIN_SELECTED_INDICES = (
@@ -830,6 +831,11 @@ def parse_args() -> argparse.Namespace:
         help="Write summary checkpoints after every N prompts where both methods have full usable k data.",
     )
     parser.add_argument("--mem-fraction-static", type=float, default=None)
+    parser.add_argument(
+        "--disable-cuda-graph",
+        action="store_true",
+        help="Disable SGLang CUDA graph capture during eval startup.",
+    )
     return parser.parse_args()
 
 
@@ -1215,6 +1221,12 @@ def resolve_runtime_config(
             clamp_messages.append(
                 "nvcc was not found on this node; forcing Triton attention and disabling CUDA graph so the run stays on the real multiplex path without FlashInfer JIT compilation"
             )
+    if args.disable_cuda_graph:
+        disable_cuda_graph = True
+        cuda_graph_max_bs = None
+        clamp_messages.append(
+            "CUDA graph capture disabled by --disable-cuda-graph for a more robust eval startup"
+        )
 
     return RuntimeConfig(
         requested_dp_size=requested_dp_size,
@@ -1845,9 +1857,12 @@ def load_examples(
     if benchmark not in BENCHMARK_CHOICES:
         raise ValueError(f"Unsupported benchmark: {benchmark}")
     if benchmark == BENCHMARK_AIME_2024:
-        from datasets import load_dataset
+        if AIME_2024_LOCAL_PATH.exists():
+            dataset = json.loads(AIME_2024_LOCAL_PATH.read_text(encoding="utf-8"))
+        else:
+            from datasets import load_dataset
 
-        dataset = list(load_dataset("Maxwell-Jia/AIME_2024", split="train"))
+            dataset = list(load_dataset("Maxwell-Jia/AIME_2024", split="train"))
         source_indices = list(range(len(dataset)))
     else:
         if not DEEPSCALER_AIME_TRAIN_PATH.exists():
@@ -1883,11 +1898,23 @@ def load_examples(
         metadata: Dict[str, Any] = {
             "source_index": idx,
             "source_dataset": (
-                "Maxwell-Jia/AIME_2024"
+                str(AIME_2024_LOCAL_PATH.relative_to(REPO_ROOT))
+                if benchmark == BENCHMARK_AIME_2024 and AIME_2024_LOCAL_PATH.exists()
+                else "Maxwell-Jia/AIME_2024"
                 if benchmark == BENCHMARK_AIME_2024
                 else str(DEEPSCALER_AIME_TRAIN_PATH.relative_to(REPO_ROOT))
             ),
         }
+        if benchmark == BENCHMARK_AIME_2024 and AIME_2024_LOCAL_PATH.exists():
+            metadata.update(
+                {
+                    "year": row.get("year"),
+                    "aime_number": row.get("aime_number"),
+                    "problem_number": row.get("problem_number"),
+                    "difficulty": row.get("difficulty"),
+                    "solution": row.get("solution"),
+                }
+            )
         if benchmark == BENCHMARK_DEEPSCALER_AIME_TRAIN:
             metadata.update(
                 {

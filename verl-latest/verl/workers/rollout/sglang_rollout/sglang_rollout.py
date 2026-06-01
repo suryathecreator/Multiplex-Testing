@@ -88,6 +88,14 @@ except ImportError:
 logger = logging.getLogger(__file__)
 logger.setLevel(os.getenv("VERL_LOGGING_LEVEL", "WARN"))
 
+FIXED_PREFIX_NEVER_SWITCH_THINK_END = "<|fixed_prefix_never_switch|>"
+
+
+def _truthy(value: Any) -> bool:
+    if isinstance(value, str):
+        return value.strip().lower() in {"1", "true", "yes", "on"}
+    return bool(value)
+
 
 # patch to avoid issue https://github.com/sgl-project/sglang/issues/6723
 def _set_envs_and_config(server_args: ServerArgs):
@@ -218,7 +226,22 @@ def _post_process_outputs(processing_class, output):
         topk_probs = resp["meta_info"].get("output_topk_probs_list", None)
         topk_indices = resp["meta_info"].get("output_topk_indices_list", None)
         if topk_probs is not None:
-            assert len(topk_probs) == len(output_token_logprobs), f"topk_probs and output_token_logprobs have different lengths: {len(topk_probs)} != {len(output_token_logprobs)}"
+            if len(topk_probs) < len(output_token_logprobs):
+                pad_len = len(output_token_logprobs) - len(topk_probs)
+                topk = len(topk_probs[0]) if topk_probs else 1
+                topk_probs = list(topk_probs) + [[0.0] * topk for _ in range(pad_len)]
+                if topk_indices is not None:
+                    topk_indices = list(topk_indices) + [[0] * topk for _ in range(pad_len)]
+            elif len(topk_probs) > len(output_token_logprobs):
+                topk_probs = topk_probs[: len(output_token_logprobs)]
+                if topk_indices is not None:
+                    topk_indices = topk_indices[: len(output_token_logprobs)]
+        if topk_probs is not None and topk_indices is not None and len(topk_indices) != len(topk_probs):
+            if len(topk_indices) > len(topk_probs):
+                topk_indices = topk_indices[: len(topk_probs)]
+            else:
+                topk = len(topk_probs[0]) if topk_probs else 1
+                topk_indices = list(topk_indices) + [[0] * topk for _ in range(len(topk_probs) - len(topk_indices))]
 
         
         return torch.tensor(output_token_ids), torch.tensor(log_probs), topk_probs, topk_indices
@@ -465,8 +488,16 @@ class SGLangRollout(BaseRollout):
         engine_kwargs = self.config.get("engine_kwargs", {}).get("sglang", {}) or {}
         engine_kwargs = {key: val for key, val in engine_kwargs.items() if val is not None}
 
-        # attention backend will be changed to fa3 if not specified
-        attention_backend = engine_kwargs.pop("attention_backend", None)
+        attention_backend = engine_kwargs.pop("attention_backend", None) or os.environ.get("SGLANG_ATTENTION_BACKEND")
+        decode_attention_backend = engine_kwargs.pop("decode_attention_backend", None) or os.environ.get(
+            "SGLANG_DECODE_ATTENTION_BACKEND"
+        )
+        prefill_attention_backend = engine_kwargs.pop("prefill_attention_backend", None) or os.environ.get(
+            "SGLANG_PREFILL_ATTENTION_BACKEND"
+        )
+        mm_attention_backend = engine_kwargs.pop("mm_attention_backend", None) or os.environ.get(
+            "SGLANG_MM_ATTENTION_BACKEND"
+        )
         max_running_requests = self.config.get("max_num_seqs", None)
 
         try:
@@ -477,12 +508,13 @@ class SGLangRollout(BaseRollout):
 
         if effective_first:
             rank = dist.get_rank()
+            port_base = int(os.environ.get("SGLANG_PORT_BASE", "30000"))
             os.environ["SGLANG_BLOCK_NONZERO_RANK_CHILDREN"] = "0"
             args = {
                 "model_path": actor_module,
                 "dtype": self.config.dtype,
                 "mem_fraction_static": self.config.gpu_memory_utilization,
-                "enable_memory_saver": True,
+                "enable_memory_saver": self.config.get("enable_memory_saver", True),
                 "base_gpu_id": 0,
                 "gpu_id_step": 1,
                 "tp_size": self._tp_size,
@@ -492,27 +524,44 @@ class SGLangRollout(BaseRollout):
                 "nnodes": nnodes,
                 "trust_remote_code": trust_remote_code,
                 "max_running_requests": max_running_requests,
-                "port": 30000 + rank,
+                "port": port_base + rank,
                 "log_level": "info",
-                "mm_attention_backend": "fa3",
-                "attention_backend": attention_backend if attention_backend is not None else "fa3",
                 "skip_tokenizer_init": self.config.mode == "async",
             }
+            if attention_backend is not None:
+                args["attention_backend"] = attention_backend
+            if decode_attention_backend is not None:
+                args["decode_attention_backend"] = decode_attention_backend
+            if prefill_attention_backend is not None:
+                args["prefill_attention_backend"] = prefill_attention_backend
+            if mm_attention_backend is not None:
+                args["mm_attention_backend"] = mm_attention_backend
             
             if self.enable_soft_thinking:
                 args["enable_soft_thinking"] = True
-                if hasattr(self.config, 'max_topk'):
-                    args["max_topk"] = self.config.max_topk
-                if hasattr(self.config, 'used_topk'):
-                    args["used_topk"] = self.config.used_topk
-                if hasattr(self.config, 'enable_entropy_mask'):
-                    args["enable_entropy_mask"] = self.config.enable_entropy_mask
-                if hasattr(self.config, 'entropy_mask_threshold'):
-                    args["entropy_mask_threshold"] = self.config.entropy_mask_threshold
-                if hasattr(self.config, 'think_end_str'):
-                    args["think_end_str"] = self.config.think_end_str
-                else:
-                    args["think_end_str"] = "</think>"
+                soft_arg_names = (
+                    "max_topk",
+                    "used_topk",
+                    "enable_entropy_mask",
+                    "entropy_mask_threshold",
+                    "early_stopping_entropy_threshold",
+                    "early_stopping_length_threshold",
+                    "dirichlet_alpha",
+                    "enable_gumbel",
+                    "enable_max_topk",
+                    "gumbel_tau",
+                    "enable_replacement",
+                    "enable_gumbel_after_thinking",
+                    "enable_unweighting",
+                    "after_thinking_temperature",
+                    "after_thinking_top_p",
+                    "after_thinking_top_k",
+                    "after_thinking_min_p",
+                )
+                for soft_arg_name in soft_arg_names:
+                    if hasattr(self.config, soft_arg_name):
+                        args[soft_arg_name] = getattr(self.config, soft_arg_name)
+                args["think_end_str"] = getattr(self.config, "think_end_str", "</think>")
                     
                 sglang_config = self.config.get("engine_kwargs", {}).get("sglang", {})
                 if 'disable_overlap_schedule' in sglang_config:
@@ -523,6 +572,12 @@ class SGLangRollout(BaseRollout):
                 
                 if 'mem_fraction_static' in sglang_config:
                     args["mem_fraction_static"] = sglang_config['mem_fraction_static']
+
+                if 'grammar_backend' in sglang_config:
+                    args["grammar_backend"] = sglang_config['grammar_backend']
+
+                if 'watchdog_timeout' in sglang_config:
+                    args["watchdog_timeout"] = sglang_config['watchdog_timeout']
                 
             else:
                 args["enable_soft_thinking"] = False
@@ -532,6 +587,19 @@ class SGLangRollout(BaseRollout):
                 args["disable_cuda_graph"] = self.config.disable_cuda_graph
             elif hasattr(self.config, 'enforce_eager') and self.config.enforce_eager:
                 args["disable_cuda_graph"] = True
+
+            if _truthy(os.environ.get("VERL_ROLLOUT_DEBUG", False)):
+                print(
+                    "[sglang_rollout] engine "
+                    f"rank={rank} tp_rank={self._tp_rank} "
+                    f"attention_backend={args.get('attention_backend', None)} "
+                    f"decode_attention_backend={args.get('decode_attention_backend', None)} "
+                    f"prefill_attention_backend={args.get('prefill_attention_backend', None)} "
+                    f"sampling_backend={args.get('sampling_backend', None)} "
+                    f"enable_soft_thinking={args.get('enable_soft_thinking', None)} "
+                    f"disable_cuda_graph={args.get('disable_cuda_graph', None)}",
+                    flush=True,
+                )
 
             if is_server_mode:
                 # add server specific args
@@ -588,6 +656,188 @@ class SGLangRollout(BaseRollout):
             kwargs['think_end_str'] = self.config.think_end_str
 
         self.sampling_params = kwargs
+
+    def _think_end_token_id(self) -> int:
+        tokenizer = getattr(self.processing_class, "tokenizer", self.processing_class)
+        return tokenizer.encode("</think>", add_special_tokens=False)[-1]
+
+    @staticmethod
+    def _pad_3d_sequence(tensor: torch.Tensor, target_len: int, value: float | int) -> torch.Tensor:
+        if tensor.shape[1] >= target_len:
+            return tensor[:, :target_len, :]
+        return F.pad(tensor, (0, 0, 0, target_len - tensor.shape[1]), "constant", value)
+
+    def _branch_rollout_enabled(self, do_sample: bool, is_validate: bool, batch_size: int) -> bool:
+        if is_validate or not do_sample or not self.enable_soft_thinking:
+            return False
+        if not _truthy(self.config.get("branch_rollout", False)):
+            return False
+
+        traces = int(self.config.get("branch_rollout_thinking_traces", 4))
+        answers = int(self.config.get("branch_rollout_answers_per_trace", 4))
+        rollout_n = int(self.config.get("n", traces * answers))
+        if traces <= 0 or answers <= 0:
+            raise ValueError("branch_rollout requires positive thinking traces and answers per trace")
+        if rollout_n != traces * answers:
+            raise ValueError(
+                "branch_rollout expects rollout.n == "
+                f"branch_rollout_thinking_traces * branch_rollout_answers_per_trace "
+                f"({traces * answers}), got {rollout_n}"
+            )
+        if batch_size % rollout_n != 0:
+            raise ValueError(
+                f"branch_rollout got batch_size={batch_size}, which is not divisible by rollout.n={rollout_n}"
+            )
+        return True
+
+    async def _generate_branched_outputs_rank0(
+        self,
+        idx_list: list[list[int]],
+        image_list: list[Any],
+        request_sampling_params: dict[str, Any],
+    ):
+        """Generate 4x4-style rollouts: shared soft prefix, then discrete continuations."""
+        traces = int(self.config.get("branch_rollout_thinking_traces", 4))
+        answers = int(self.config.get("branch_rollout_answers_per_trace", 4))
+        rollout_n = int(self.config.get("n", traces * answers))
+        prompt_count = len(idx_list) // rollout_n
+        response_length = int(self.config.response_length)
+        thinking_tokens = int(
+            self.config.get("branch_rollout_thinking_tokens", 0)
+            or request_sampling_params.get("early_stopping_length_threshold", 0)
+        )
+        if thinking_tokens <= 0:
+            raise ValueError("branch_rollout requires branch_rollout_thinking_tokens or early_stopping_length_threshold")
+        continuation_tokens = int(
+            self.config.get("branch_rollout_continuation_tokens", 0)
+            or (response_length - thinking_tokens - 1)
+        )
+        if continuation_tokens <= 0:
+            raise ValueError(
+                "branch_rollout leaves no continuation budget: "
+                f"response_length={response_length}, thinking_tokens={thinking_tokens}"
+            )
+        if thinking_tokens + 1 + continuation_tokens > response_length:
+            raise ValueError(
+                "branch_rollout token budget exceeds response length: "
+                f"{thinking_tokens}+1+{continuation_tokens}>{response_length}"
+            )
+
+        prompt_inputs = [idx_list[prompt_idx * rollout_n] for prompt_idx in range(prompt_count)]
+        prompt_images = [image_list[prompt_idx * rollout_n] for prompt_idx in range(prompt_count)]
+
+        prefix_inputs = []
+        prefix_images = []
+        for prompt_idx in range(prompt_count):
+            for _ in range(traces):
+                prefix_inputs.append(prompt_inputs[prompt_idx])
+                prefix_images.append(prompt_images[prompt_idx])
+
+        prefix_params = request_sampling_params.copy()
+        prefix_params["max_new_tokens"] = thinking_tokens + 1
+        prefix_params["early_stopping_length_threshold"] = thinking_tokens
+        prefix_params["think_end_str"] = self.config.get("think_end_str", "</think>")
+        prefix_params["ignore_eos"] = True
+        prefix_params.pop("stop", None)
+
+        print(
+            "[branch_rollout] prefix begin "
+            f"prompts={prompt_count} traces={traces} rows={len(prefix_inputs)} "
+            f"thinking_tokens={thinking_tokens} max_new_tokens={prefix_params['max_new_tokens']}",
+            flush=True,
+        )
+        prefix_output = await self._engine.async_generate(
+            prompt=None,
+            sampling_params=prefix_params,
+            return_logprob=True,
+            input_ids=prefix_inputs,
+            image_data=prefix_images,
+        )
+        print("[branch_rollout] prefix end", flush=True)
+        prefix_response, prefix_logprobs, prefix_topk_probs, prefix_topk_indices = _post_process_outputs(
+            self.processing_class, prefix_output
+        )
+        if prefix_topk_probs is None or prefix_topk_indices is None:
+            raise RuntimeError("branch_rollout prefix generation did not return soft-thinking top-k tensors")
+
+        prefix_len = thinking_tokens + 1
+        prefix_response = pad_sequence_to_length(prefix_response, prefix_len, self.pad_token_id)[:, :prefix_len]
+        prefix_logprobs = pad_sequence_to_length(prefix_logprobs, prefix_len, 0.0)[:, :prefix_len]
+        prefix_topk_probs = self._pad_3d_sequence(prefix_topk_probs, prefix_len, 0.0)
+        prefix_topk_indices = self._pad_3d_sequence(prefix_topk_indices, prefix_len, self.pad_token_id)
+
+        prefix_rows = prefix_response.shape[0]
+        topk = prefix_topk_probs.shape[-1]
+        think_end_id = self._think_end_token_id()
+        prefix_response[:, thinking_tokens] = think_end_id
+        prefix_logprobs[:, thinking_tokens] = 0.0
+        prefix_topk_probs[:, thinking_tokens, :] = 0.0
+        prefix_topk_indices[:, thinking_tokens, :] = 0
+        prefix_topk_probs[:, thinking_tokens, 0] = 1.0
+        prefix_topk_indices[:, thinking_tokens, 0] = think_end_id
+
+        continuation_inputs = []
+        continuation_images = []
+        continuation_prefix_rows = []
+        for prompt_idx, prompt_ids in enumerate(prompt_inputs):
+            for trace_idx in range(traces):
+                prefix_row = prompt_idx * traces + trace_idx
+                prefix_tokens = prefix_response[prefix_row].tolist()
+                branch_input_ids = list(prompt_ids) + prefix_tokens
+                for _ in range(answers):
+                    continuation_inputs.append(branch_input_ids)
+                    continuation_images.append(prompt_images[prompt_idx])
+                    continuation_prefix_rows.append(prefix_row)
+
+        continuation_params = request_sampling_params.copy()
+        continuation_params["max_new_tokens"] = continuation_tokens
+        continuation_params["temperature"] = request_sampling_params.get("after_thinking_temperature", 1.0)
+        continuation_params["top_p"] = request_sampling_params.get("after_thinking_top_p", 1.0)
+        continuation_params["top_k"] = request_sampling_params.get("after_thinking_top_k", -1)
+        continuation_params["min_p"] = request_sampling_params.get("after_thinking_min_p", 0.0)
+        continuation_params["custom_params"] = {"__disable_soft_thinking__": True}
+
+        print(
+            "[branch_rollout] continuation begin "
+            f"rows={len(continuation_inputs)} continuation_tokens={continuation_tokens}",
+            flush=True,
+        )
+        continuation_output = await self._engine.async_generate(
+            prompt=None,
+            sampling_params=continuation_params,
+            return_logprob=True,
+            input_ids=continuation_inputs,
+            image_data=continuation_images,
+        )
+        print("[branch_rollout] continuation end", flush=True)
+        continuation_response, continuation_logprobs, _, _ = _post_process_outputs(
+            self.processing_class, continuation_output
+        )
+
+        response_rows = []
+        logprob_rows = []
+        topk_prob_rows = []
+        topk_index_rows = []
+        for continuation_idx, prefix_row in enumerate(continuation_prefix_rows):
+            cont_response = continuation_response[continuation_idx]
+            cont_logprobs = continuation_logprobs[continuation_idx]
+            cont_len = cont_response.shape[0]
+            cont_topk_probs = torch.zeros((cont_len, topk), dtype=prefix_topk_probs.dtype)
+            cont_topk_indices = torch.zeros((cont_len, topk), dtype=prefix_topk_indices.dtype)
+            if cont_len > 0:
+                cont_topk_probs[:, 0] = 1.0
+                cont_topk_indices[:, 0] = cont_response.to(cont_topk_indices.dtype)
+
+            response_rows.append(torch.cat([prefix_response[prefix_row], cont_response], dim=0))
+            logprob_rows.append(torch.cat([prefix_logprobs[prefix_row], cont_logprobs], dim=0))
+            topk_prob_rows.append(torch.cat([prefix_topk_probs[prefix_row], cont_topk_probs], dim=0))
+            topk_index_rows.append(torch.cat([prefix_topk_indices[prefix_row], cont_topk_indices], dim=0))
+
+        response = pad_sequence(response_rows, batch_first=True, padding_value=self.pad_token_id)
+        batched_logprobs = pad_sequence(logprob_rows, batch_first=True, padding_value=0.0)
+        topk_probs_t = pad_sequence(topk_prob_rows, batch_first=True, padding_value=0.0)
+        topk_indices_t = pad_sequence(topk_index_rows, batch_first=True, padding_value=self.pad_token_id)
+        return response, batched_logprobs, topk_probs_t, topk_indices_t
 
     def _initialize_tools(self, config, processing_class):
         """Initialize tools from configuration.
@@ -675,6 +925,14 @@ class SGLangRollout(BaseRollout):
             responses:     |<- LLM generation ->|<- tool_calls ->|<- LLM generation ->|<- padding ->|
             response_mask: | 1, 1, 1, ..., 1, 1 | 0, 0, .., 0, 0 | 1, 1, 1, ..., 1, 1 | 0, 0, ..., 0|
         """
+
+        if _truthy(os.environ.get("VERL_ROLLOUT_DEBUG", False)):
+            print(
+                "[sglang_rollout] generate_sequences "
+                f"rank={getattr(self, '_rank', None)} tp_rank={getattr(self, '_tp_rank', None)} "
+                f"batch={prompts.batch['input_ids'].shape[0]} multi_turn={self.config.multi_turn.enable}",
+                flush=True,
+            )
 
         if self.config.multi_turn.enable:
             return self._req_level_generate_sequences(prompts, **kwargs)
@@ -846,17 +1104,35 @@ class SGLangRollout(BaseRollout):
 
         if self._tp_rank == 0:
             loop = asyncio.get_event_loop()
-            output = loop.run_until_complete(
-                self._engine.async_generate(
-                    prompt=None,  # because we have already convert it to prompt token id
-                    sampling_params=request_sampling_params,
-                    return_logprob=True,
-                    input_ids=idx_list,
-                    image_data=image_list,
-                )
+            branch_enabled = self._branch_rollout_enabled(do_sample, is_validate, batch_size)
+            print(
+                "[branch_rollout] check "
+                f"enabled={branch_enabled} do_sample={do_sample} "
+                f"is_validate={is_validate} batch_size={batch_size} rollout_n={self.config.get('n', None)}",
+                flush=True,
             )
+            if branch_enabled:
+                out = loop.run_until_complete(
+                    self._generate_branched_outputs_rank0(
+                        idx_list=idx_list,
+                        image_list=image_list,
+                        request_sampling_params=request_sampling_params,
+                    )
+                )
+            else:
+                output = loop.run_until_complete(
+                    self._engine.async_generate(
+                        prompt=None,  # because we have already convert it to prompt token id
+                        sampling_params=request_sampling_params,
+                        return_logprob=True,
+                        input_ids=idx_list,
+                        image_data=image_list,
+                    )
+                )
+                # Post-process on rank 0 to get clean tensors before broadcast
+                out = _post_process_outputs(self.processing_class, output)
         else:
-            output = None
+            out = None
 
         # Broadcast rollout results: use tensor broadcast for large data instead of pyobj pickle
         tp_group = self._device_mesh_cpu["tp"].get_group()
@@ -865,8 +1141,6 @@ class SGLangRollout(BaseRollout):
         dist.barrier(group=tp_group)
 
         if self._tp_rank == 0:
-            # Post-process on rank 0 to get clean tensors before broadcast
-            out = _post_process_outputs(self.processing_class, output)
             response = out[0]                # [B, T] int64
             batched_logprobs = out[1]        # [B, T] float
             topk_probs_t = out[2]            # [B, T, K] bfloat16 or None

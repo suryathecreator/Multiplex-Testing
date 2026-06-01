@@ -244,15 +244,34 @@ def compute_advantage(
     elif adv_estimator == AdvantageEstimator.GRPO:
         # Initialize the mask for GRPO calculation
         grpo_calculation_mask = data.batch["response_mask"]
-        # Call compute_grpo_outcome_advantage with parameters matching its definition
-        advantages, returns = core_algos.compute_grpo_outcome_advantage(
-            token_level_rewards=data.batch["token_level_rewards"],
-            response_mask=grpo_calculation_mask,
-            index=data.non_tensor_batch["uid"],
-            norm_adv_by_std_in_grpo=norm_adv_by_std_in_grpo,
-        )
-        data.batch["advantages"] = advantages
-        data.batch["returns"] = returns
+        if config is not None and config.get("shared4_advantage", False):
+            if "shared_trace_uid" not in data.non_tensor_batch:
+                raise ValueError("algorithm.shared4_advantage=True requires shared_trace_uid metadata")
+            thinking_advantages, answer_advantages, thinking_returns, answer_returns = (
+                core_algos.compute_shared4_outcome_advantage(
+                    token_level_rewards=data.batch["token_level_rewards"],
+                    response_mask=grpo_calculation_mask,
+                    index=data.non_tensor_batch["uid"],
+                    trace_index=data.non_tensor_batch["shared_trace_uid"],
+                    norm_adv_by_std_in_grpo=norm_adv_by_std_in_grpo,
+                    config=config,
+                )
+            )
+            data.batch["thinking_advantages"] = thinking_advantages
+            data.batch["answer_advantages"] = answer_advantages
+            data.batch["advantages"] = answer_advantages
+            data.batch["thinking_returns"] = thinking_returns
+            data.batch["returns"] = answer_returns
+        else:
+            # Call compute_grpo_outcome_advantage with parameters matching its definition
+            advantages, returns = core_algos.compute_grpo_outcome_advantage(
+                token_level_rewards=data.batch["token_level_rewards"],
+                response_mask=grpo_calculation_mask,
+                index=data.non_tensor_batch["uid"],
+                norm_adv_by_std_in_grpo=norm_adv_by_std_in_grpo,
+            )
+            data.batch["advantages"] = advantages
+            data.batch["returns"] = returns
     else:
         # handle all other adv estimator type other than GAE and GRPO
         adv_estimator_fn = core_algos.get_adv_estimator_fn(adv_estimator)
@@ -271,6 +290,36 @@ def compute_advantage(
         data.batch["advantages"] = advantages
         data.batch["returns"] = returns
     return data
+
+
+def attach_shared4_rollout_metadata(
+    batch: DataProto,
+    prompt_uids: np.ndarray,
+    rollout_n: int,
+    thinking_rollouts: int,
+    answers_per_trace: int,
+) -> DataProto:
+    """Attach prompt-local trace ids for shared4 advantage grouping."""
+    expected_rollouts = thinking_rollouts * answers_per_trace
+    if rollout_n != expected_rollouts:
+        raise ValueError(
+            "shared4 advantage grouping expects rollout.n == "
+            f"thinking_rollouts * answers_per_trace ({expected_rollouts}), got {rollout_n}"
+        )
+
+    prompt_count = len(prompt_uids)
+    sample_offsets = np.tile(np.arange(rollout_n, dtype=np.int64), prompt_count)
+    prompt_offsets = np.repeat(np.arange(prompt_count, dtype=np.int64), rollout_n)
+    trace_ids = sample_offsets // answers_per_trace
+    answer_ids = sample_offsets % answers_per_trace
+    trace_uids = np.array(
+        [f"{prompt_uids[prompt_offsets[i]]}::trace{trace_ids[i]}" for i in range(prompt_count * rollout_n)],
+        dtype=object,
+    )
+    batch.non_tensor_batch["shared_trace_uid"] = trace_uids
+    batch.non_tensor_batch["shared_trace_id"] = trace_ids
+    batch.non_tensor_batch["shared_answer_id"] = answer_ids
+    return batch
 
 
 class RayPPOTrainer:
@@ -925,6 +974,18 @@ class RayPPOTrainer:
         # load checkpoint before doing anything
         self._load_checkpoint()
 
+        stop_at_step = self.config.trainer.get("stop_at_step", self.total_training_steps)
+        if stop_at_step is None:
+            stop_at_step = self.total_training_steps
+        stop_at_step = int(stop_at_step)
+        if stop_at_step > self.total_training_steps:
+            raise ValueError(
+                f"trainer.stop_at_step={stop_at_step} exceeds total_training_steps={self.total_training_steps}"
+            )
+        if self.global_steps >= stop_at_step:
+            print(f"Checkpoint is already at global_step={self.global_steps}; stop_at_step={stop_at_step}.")
+            return
+
         # perform validation before training
         # currently, we only support validation using the reward_function.
         if self.val_reward_fn is not None and self.config.trainer.get("val_before_train", True):
@@ -944,7 +1005,7 @@ class RayPPOTrainer:
             rollout_skip.wrap_generate_sequences()
 
         # add tqdm
-        progress_bar = tqdm(total=self.total_training_steps, initial=self.global_steps, desc="Training Progress")
+        progress_bar = tqdm(total=stop_at_step, initial=self.global_steps, desc="Training Progress")
 
         # we start from step 1
         self.global_steps += 1
@@ -983,7 +1044,7 @@ class RayPPOTrainer:
                 gen_batch.meta_info["global_steps"] = self.global_steps
                 gen_batch = gen_batch.repeat(repeat_times=self.config.actor_rollout_ref.rollout.n, interleave=True)
 
-                is_last_step = self.global_steps >= self.total_training_steps
+                is_last_step = self.global_steps >= stop_at_step
 
                 with marked_timer("step", timing_raw):
                     # generate a batch
@@ -1023,9 +1084,19 @@ class RayPPOTrainer:
                     if self.config.actor_rollout_ref.rollout.shuffle_before_dispatch:
                         pass
                     else:
-                        batch.non_tensor_batch["uid"] = np.array([str(uuid.uuid4()) for _ in range(len(batch.batch))], dtype=object)
+                        prompt_uids = np.array([str(uuid.uuid4()) for _ in range(len(batch.batch))], dtype=object)
+                        batch.non_tensor_batch["uid"] = prompt_uids
                         # repeat to align with repeated responses in rollout
-                        batch = batch.repeat(repeat_times=self.config.actor_rollout_ref.rollout.n, interleave=True)
+                        rollout_n = self.config.actor_rollout_ref.rollout.n
+                        batch = batch.repeat(repeat_times=rollout_n, interleave=True)
+                        if self.config.algorithm.get("shared4_advantage", False):
+                            batch = attach_shared4_rollout_metadata(
+                                batch=batch,
+                                prompt_uids=prompt_uids,
+                                rollout_n=rollout_n,
+                                thinking_rollouts=self.config.algorithm.get("shared4_thinking_rollouts", 4),
+                                answers_per_trace=self.config.algorithm.get("shared4_answers_per_trace", 4),
+                            )
                     batch = batch.union(gen_batch_output)
 
                     if "response_mask" not in batch.batch.keys():
