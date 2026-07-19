@@ -1,0 +1,22 @@
+{
+  "environment_prefix": "/mmfs1/home/suryadv/.conda/envs/multiplex-thinking",
+  "exported_at_utc": "2026-07-19T07:11:49Z",
+  "platform": "linux-64",
+  "python": "3.10.20",
+  "repository": {
+    "commit": "d630cfda1e8903cfea3ea1a77f5fe23c0910a1b6",
+    "remote": "git@github.com:suryathecreator/Multiplex-Testing.git"
+  },
+  "editable_installs": [
+    {
+      "package": "sglang",
+      "subdirectory": "sglang-0.4.9.post6",
+      "commit": "d630cfda1e8903cfea3ea1a77f5fe23c0910a1b6"
+    },
+    {
+      "package": "transformers",
+      "subdirectory": "transformers-4.54.0",
+      "commit": "d630cfda1e8903cfea3ea1a77f5fe23c0910a1b6"
+    }
+  ]
+}
